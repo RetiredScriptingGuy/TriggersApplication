@@ -1,0 +1,341 @@
+﻿body { color: #000000; }
+
+/*.navbar-header {
+		  background:white !important;
+		  background-image:url("/SiteAssets/Images/triggers_1a_dropshadow.png") !important;
+		  background-repeat:no-repeat!important;
+		  background-color: white !important;
+		  min-height:156px !important;
+		 }*/
+
+/*suite links*/
+
+.ms-core-brandingText, .ms-core-suiteLink-a,
+.ms-core-brandingText:visited, .ms-core-suiteLink-a:visited { color: #ffffff; }
+
+#siteIcon, .ms-core-navigation { DISPLAY: none }
+
+#contentBox {
+    margin-left: 35px;
+    margin-right: 35px;
+}
+
+#s4-leftpanel-content { display: none !important; }
+
+.ms-cui-tt-span, .ms-core-defaultFont {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding-bottom: 8px;
+}
+
+.section {
+    margin-top: 15px;
+    width: 100%;
+    padding-left: 25px;
+}
+
+.section2 {
+    margin-bottom: 15px;
+    width: 100%;
+    padding-left: 25px;
+}
+
+
+div#link1, div#link2, div#link3, div#link4, div#link5, div#link6, div#link7, div#link8, div#link9, div#link10, div#link11 {
+    cursor: pointer;
+    float: left;
+    padding-right: 10px;
+    margin: 2px;
+}
+
+/*.Button  {
+		  font-family: arial;
+		  font-weight: bold;
+		  color: #FFFFFF !important;
+		  font-size: 12px;
+		  padding: 10px 25px;
+		  -moz-border-radius: 10px;
+		  -webkit-border-radius: 10px;
+		  border-radius: 10px;
+		  border: 2px solid #3866A3;
+		  background: #63B8EE;
+		  background: linear-gradient(top,  #63B8EE,  #468CCF);
+		  background: -ms-linear-gradient(top,  #63B8EE,  #468CCF);
+		  background: -webkit-gradient(linear, left top, left bottom, from(#63B8EE), to(#468CCF));
+		  background: -moz-linear-gradient(top,  #63B8EE,  #468CCF);
+		  display: block;
+		  width: 90px;
+		  text-align: center;
+		}*/
+
+/*.Button:hover {
+		  color: #FFFFFF !important;
+		  background: #468CCF;
+		  background: linear-gradient(top,  #468CCF,  #63B8EE);
+		  background: -ms-linear-gradient(top,  #468CCF,  #63B8EE);
+		  background: -webkit-gradient(linear, left top, left bottom, from(#468CCF), to(#63B8EE));
+		  background: -moz-linear-gradient(top,  #468CCF,  #63B8EE);
+		  display: block;
+		  width: 90px;
+		  text-align: center;
+		}*/
+
+#titleAreaRow { display: none; }
+
+#sideNavBox { display: none; }
+
+#login {
+	
+    float: right;
+    margin-right: 100px;
+}
+
+#navpills { margin-left: 5px; }
+
+#issuedrafts { border: 1px black solid; }
+
+#riskdrafts { border: 1px black solid; }
+
+
+#sustainmentlabel { padding: 20px; }
+
+#taFeedback {
+	
+    width: 500px;
+    height: 200px;
+}
+
+.outer {
+    padding-top: 20px;
+    margin: 20px;
+}
+
+.outer H2 {
+    text-align: center;
+    color: black;
+    width: 100%;
+    background-color: #C0C0C0;
+    border: 1px solid #808080;
+    border-radius: 3px;
+}
+
+.fullTopHalf {
+    position: relative;
+    z-index: 1;
+    width: 95%;
+    height: 500px;
+    background-color: #F0F0F0;
+    border: 1px solid #808080;
+    border-radius: 3px;
+}
+
+.fullBottomHalf {
+    width: 95%;
+    height: 500px;
+    background-color: white;
+}
+
+.quadrant1 {
+    position: relative;
+    width: 49%;
+    height: 400px;
+    color: black;
+}
+
+.quadrant2 {
+    position: relative;
+    left: 51%;
+    top: -374px;
+    margin-right: 0px;
+    width: 49%;
+    height: 375px;
+    color: black;
+}
+ 
+.quadrant3 {
+    position: relative;
+    top: 25px;
+    width: 49%;
+    height: 500px;
+    background-color: #F0F0F0;
+    border: 1px solid #808080;
+    border-radius: 3px;
+}
+
+.quadrant4 {
+    position: relative;
+    top: -475px;
+    left: 51%;
+    border: 1px;
+    margin-right: 0px;
+    width: 49%;
+    height: 500px;
+    background-color: #F0F0F0;
+    border: 1px solid #808080;
+    border-radius: 3px;
+}
+
+.gridView {
+	 
+    background-color: white;
+    height: 85%;
+    width: 95%;
+    margin-top: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid #808080;
+    overflow-x: auto;
+}
+
+.custom-selected { background-color: yellow; }
+
+.cube {
+    height: 350px;
+    width: 500px;
+    margin-top: 5px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.cube td {
+    font-family: verdana;
+    font-size: large;
+    font-weight: bold;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    border: 1px solid #808080;
+}
+
+.IssueRow td { cursor: pointer !important; } 
+
+body { color: #000000; }
+
+/*.navbar-header {
+		  background:white !important;
+		  background-image:url("/SiteAssets/Images/triggers_1a_dropshadow.png") !important;
+		  background-repeat:no-repeat!important;
+		  background-color: white !important;
+		  min-height:156px !important;
+		 }*/
+
+/*suite links*/
+
+.ms-core-brandingText, .ms-core-suiteLink-a,
+.ms-core-brandingText:visited, .ms-core-suiteLink-a:visited { color: #ffffff; }
+
+#siteIcon, .ms-core-navigation { DISPLAY: none }
+
+#contentBox {
+    margin-left: 35px;
+    margin-right: 35px;
+}
+
+#s4-leftpanel-content { display: none !important; }
+
+.ms-cui-tt-span, .ms-core-defaultFont {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding-bottom: 8px;
+}
+
+.section {
+    margin-top: 15px;
+    width: 100%;
+    padding-left: 25px;
+}
+
+.section2 {
+    margin-bottom: 15px;
+    width: 100%;
+    padding-left: 25px;
+}
+
+
+div#link1, div#link2, div#link3, div#link4, div#link5, div#link6, div#link7, div#link8, div#link9, div#link10, div#link11 {
+    cursor: pointer;
+    float: left;
+    padding-right: 10px;
+    margin: 2px;
+}
+
+/*.Button  {
+		  font-family: arial;
+		  font-weight: bold;
+		  color: #FFFFFF !important;
+		  font-size: 12px;
+		  padding: 10px 25px;
+		  -moz-border-radius: 10px;
+		  -webkit-border-radius: 10px;
+		  border-radius: 10px;
+		  border: 2px solid #3866A3;
+		  background: #63B8EE;
+		  background: linear-gradient(top,  #63B8EE,  #468CCF);
+		  background: -ms-linear-gradient(top,  #63B8EE,  #468CCF);
+		  background: -webkit-gradient(linear, left top, left bottom, from(#63B8EE), to(#468CCF));
+		  background: -moz-linear-gradient(top,  #63B8EE,  #468CCF);
+		  display: block;
+		  width: 90px;
+		  text-align: center;
+		}*/
+
+/*.Button:hover {
+		  color: #FFFFFF !important;
+		  background: #468CCF;
+		  background: linear-gradient(top,  #468CCF,  #63B8EE);
+		  background: -ms-linear-gradient(top,  #468CCF,  #63B8EE);
+		  background: -webkit-gradient(linear, left top, left bottom, from(#468CCF), to(#63B8EE));
+		  background: -moz-linear-gradient(top,  #468CCF,  #63B8EE);
+		  display: block;
+		  width: 90px;
+		  text-align: center;
+		}*/
+
+#titleAreaRow { display: none; }
+
+#sideNavBox { display: none; }
+
+#login {
+	
+    float: right;
+    margin-right: 100px;
+}
+
+#navpills { margin-left: 5px; }
+
+#issuedrafts { border: 1px black solid; }
+
+#riskdrafts { border: 1px black solid; }
+
+
+#sustainmentlabel { padding: 20px; }
+
+#taFeedback {
+	
+    width: 500px;
+    height: 200px;
+}
+
+
+
+
+
+
+
+
+
+
+
+	
+
+ 
+
+
+
+
+
+
+
+
+
+

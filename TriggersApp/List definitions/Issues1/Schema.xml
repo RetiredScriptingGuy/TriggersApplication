@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<List xmlns:ows="Microsoft SharePoint" Title="Issues" FolderCreation="FALSE" Direction="$Resources:Direction;" Url="Lists/Issues" BaseType="0" xmlns="http://schemas.microsoft.com/sharepoint/">
+  <MetaData>
+    <ContentTypes>
+      
+      
+    <ContentType ID="0x0100d3b70875a1dd4cb292ba615aa4ed3d23" Name="ListFieldsContentType"><FieldRefs><FieldRef ID="{fa564e0f-0c70-4ab9-b863-0177e6ddd247}" Name="Title" /><FieldRef ID="{8e6004a0-4eac-4df2-9548-f87a569450b7}" Name="Category1" /><FieldRef ID="{d8c32720-26a4-435a-b877-9593a97a724a}" Name="Issue" /><FieldRef ID="{639e7aa7-05da-4da7-8bc4-9ce93336eac7}" Name="Description1" /><FieldRef ID="{eb1317f6-2c47-4f0b-ae44-c12d089d99fd}" Name="Mitigation6_x002e_6" /><FieldRef ID="{7be70b16-8852-4dc9-a40a-9dcca6efcffe}" Name="Mitigation6_x002e_7" /><FieldRef ID="{4ea5ec7c-3d18-4987-b776-d1f2d8cfb708}" Name="Mitigation6_x002e_8" /><FieldRef ID="{a462d755-922b-4e33-8a4f-f032206bf1cb}" Name="Mitigation6_x002e_9" /></FieldRefs></ContentType><ContentTypeRef ID="0x01">
+        <Folder TargetName="Item" />
+      </ContentTypeRef><ContentTypeRef ID="0x0120" /></ContentTypes>
+    <Fields>
+      
+    <Field ID="{fa564e0f-0c70-4ab9-b863-0177e6ddd247}" Type="Text" Name="Title" DisplayName="$Resources:core,Title;" Required="TRUE" SourceID="http://schemas.microsoft.com/sharepoint/v3" StaticName="Title" MaxLength="255" /><Field Name="Category1" ID="{8e6004a0-4eac-4df2-9548-f87a569450b7}" DisplayName="Category" Type="Choice" Required="TRUE" /><Field Name="Issue" ID="{d8c32720-26a4-435a-b877-9593a97a724a}" DisplayName="Issue" Type="Text" /><Field Name="Description1" ID="{639e7aa7-05da-4da7-8bc4-9ce93336eac7}" DisplayName="Description" Type="Note" /><Field Name="Mitigation6_x002e_6" ID="{eb1317f6-2c47-4f0b-ae44-c12d089d99fd}" DisplayName="Mitigation 6.6" Type="Note" /><Field Name="Mitigation6_x002e_7" ID="{7be70b16-8852-4dc9-a40a-9dcca6efcffe}" DisplayName="Mitigation 6.7" Type="Note" /><Field Name="Mitigation6_x002e_8" ID="{4ea5ec7c-3d18-4987-b776-d1f2d8cfb708}" DisplayName="Mitigation 6.8" Type="Note" /><Field Name="Mitigation6_x002e_9" ID="{a462d755-922b-4e33-8a4f-f032206bf1cb}" DisplayName="Mitigation 6.0d" Type="Note" /></Fields>
+    <Views>
+      
+      
+    <View BaseViewID="0" Type="HTML" MobileView="TRUE" TabularView="FALSE">
+        <Toolbar Type="Standard" />
+        <XslLink Default="TRUE">main.xsl</XslLink>
+        <RowLimit Paged="TRUE">30</RowLimit>
+        <ViewFields>
+          
+        <FieldRef Name="LinkTitleNoMenu"></FieldRef></ViewFields>
+        <Query>
+          <OrderBy>
+            
+          <FieldRef Name="Modified" Ascending="FALSE"></FieldRef></OrderBy>
+        </Query>
+        <ParameterBindings>
+          <ParameterBinding Name="AddNewAnnouncement" Location="Resource(wss,addnewitem)" />
+          <ParameterBinding Name="NoAnnouncements" Location="Resource(wss,noXinviewofY_LIST)" />
+          <ParameterBinding Name="NoAnnouncementsHowTo" Location="Resource(wss,noXinviewofY_ONET_HOME)" />
+        </ParameterBindings>
+      </View><View BaseViewID="1" Type="HTML" WebPartZoneID="Main" DisplayName="$Resources:core,objectiv_schema_mwsidcamlidC24;" DefaultView="TRUE" MobileView="TRUE" MobileDefaultView="TRUE" SetupPath="pages\viewpage.aspx" ImageUrl="/_layouts/15/images/generic.png?rev=23" Url="AllItems.aspx">
+        <Toolbar Type="Standard" />
+        <XslLink Default="TRUE">main.xsl</XslLink>
+        <JSLink>clienttemplates.js</JSLink>
+        <RowLimit Paged="TRUE">30</RowLimit>
+        <ViewFields>
+          
+        <FieldRef Name="LinkTitle"></FieldRef><FieldRef Name="Category1" /><FieldRef Name="Issue" /><FieldRef Name="Description1" /><FieldRef Name="Mitigation6_x002e_6" /><FieldRef Name="Mitigation6_x002e_7" /><FieldRef Name="Mitigation6_x002e_8" /><FieldRef Name="Mitigation6_x002e_9" /></ViewFields>
+        <Query>
+          <OrderBy>
+            
+          <FieldRef Name="ID"></FieldRef></OrderBy>
+        </Query>
+        <ParameterBindings>
+          <ParameterBinding Name="NoAnnouncements" Location="Resource(wss,noXinviewofY_LIST)" />
+          <ParameterBinding Name="NoAnnouncementsHowTo" Location="Resource(wss,noXinviewofY_DEFAULT)" />
+        </ParameterBindings>
+      </View></Views>
+    <Forms>
+      <Form Type="DisplayForm" Url="DispForm.aspx" SetupPath="pages\form.aspx" WebPartZoneID="Main" />
+      <Form Type="EditForm" Url="EditForm.aspx" SetupPath="pages\form.aspx" WebPartZoneID="Main" />
+      <Form Type="NewForm" Url="NewForm.aspx" SetupPath="pages\form.aspx" WebPartZoneID="Main" />
+    </Forms>
+  </MetaData>
+</List>

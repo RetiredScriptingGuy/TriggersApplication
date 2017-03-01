@@ -1,0 +1,259 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:mso="urn:schemas-microsoft-com:office:office" xmlns:msdt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+
+    <!--[if gte mso 9]><xml>
+    <mso:CustomDocumentProperties>
+    <mso:_dlc_DocId msdt:dt="string">XCD4ME7X7URU-1497597693-5</mso:_dlc_DocId>
+    <mso:_dlc_DocIdItemGuid msdt:dt="string">51d164b7-0fbc-4bea-a13c-24b56ef4a09f</mso:_dlc_DocIdItemGuid>
+    <mso:_dlc_DocIdUrl msdt:dt="string">http://dev/sites/Trigger/_layouts/15/DocIdRedir.aspx?ID=XCD4ME7X7URU-1497597693-5, XCD4ME7X7URU-1497597693-5</mso:_dlc_DocIdUrl>
+    </mso:CustomDocumentProperties>
+    </xml><![endif]-->
+</head>
+<body>
+    <div class="container-fluid">
+        <img src="../SiteAssets/TriggerApp/images/triggers_1a_dropshadow.png" />
+    </div>
+
+    <script src="../SiteAssets/TriggersApp/js/jquery.min.js"></script>
+    <script src="../SiteAssets/TriggersApp/js/bootstrap.min.js"></script>
+
+    <script src="../SiteAssets/TriggersApp/js/jquery.min.js"></script>
+    <script src="../SiteAssets/TriggersApp/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="../SiteAssets/TriggersApp/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="../SiteAssets/TriggersApp/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="../SiteAssets/TriggersApp/css/triggers.css" />
+
+    <script>
+        $(document).ready(function () {
+            var dataSet1 = [
+		            ["Over-Flying", "Spares Shortfall", "High", "Cost"],
+                    ["Over-Flying", "Depot Throughput", "High", "Schedule"],
+                    ["Over-Flying", "SLEP", "High", "Performance"]
+
+
+            ];
+
+                   var dataSet2 = [
+		             ["Over-Flying", "Spares Shortfall", "High", "Cost"],
+                    ["Over-Flying", "Depot Throughput", "High", "Schedule"],
+                    ["Over-Flying", "SLEP", "High", "Performance"]
+            ];
+
+                   var dataSet3 = [
+		            ["ILA", "1-16-17", "Complete", "1-2-2017"],
+		            ["DAB", "1-16-17", "Complete", "1-2-2017"],
+		            ["SRR", "1-16-17", "Complete", "1-2-2017"]
+
+
+            ];
+
+
+
+    $('#events')
+                .DataTable({
+                    data:dataSet1,
+                    columns:[
+                       {title: "Trigger"},
+                       {title: "Issue"},
+                       {title: "Severity"},
+                       {title: "Type"}
+                    ],
+                    "searching" : false,
+                    "paging": false,
+                    "info": false,
+                    "initComplete": function () {
+                        var api = this.api();
+                        api.$('td').click(function () {
+                            api.search(this.innerHTML).draw();
+                        });
+                    }
+
+    //                initComplete: function() {
+
+    //    this.api().columns().every( function () {
+    //        var column = this;
+    //        var select = $('<select><option value=""></option></select>')
+    //            .appendTo( $(column.footer()).empty() )
+    //            .on( 'change', function () {
+    //                var val = $.fn.dataTable.util.escapeRegex(
+    //                    $(this).val()
+    //                    );
+    //                column
+    //                    .search( val ? '^'+val+'$': '', true, false )
+    //                    .draw();
+    //                } );
+
+
+
+    //        column.data().unique().sort().each( function ( d, j ) {
+
+    //            select.append('<option value="' + d + '">' + d + '</option>');
+
+    //        } );
+
+    //    } );
+
+    //}  //end of init
+
+        });
+
+           var table1 = $('#events').DataTable();
+
+
+
+                $('#events tbody').on('click', 'tr', function(){
+                   if($(this).hasClass('selected')){
+                      $(this).removeClass('selected');
+                   }
+                   else
+                   {
+                      table1.$('tr selected').removeClass('selected');
+                      $(this).addClass('selected');
+                   }
+
+                });
+
+
+
+                $('#risks')
+                .DataTable({
+                     data:dataSet2,
+                     columns:[
+                     	{title: "Trigger"},
+                     	{title: "Issue"},
+                     	{title: "Severity"},
+                     	{title: "Type"}
+                     	],
+                       "searching" : false,
+                       "paging": false,
+                       "info": false
+
+                });
+
+                $('#risks tbody').on('click', 'tr', function () {
+                    if ($(this).hasClass('selected')) {
+                        $(this).removeClass('selected');
+                    }
+                    else {
+                        table1.$('tr selected').removeClass('selected');
+                        $(this).addClass('selected');
+                    }
+
+                });
+
+
+				$('#reviews')
+                .DataTable({
+                     data:dataSet3,
+                     columns:[
+                     	{title: "Event/Review"},
+                     	{title: "Due Date"},
+                     	{title: "Status"},
+                     	{title: "Date Completed"}
+                     	],
+                        "searching" : false,
+                        "paging": false,
+                        "info": false
+
+                });
+
+				$('#reviews tbody').on('click', 'tr', function () {
+				    if ($(this).hasClass('selected')) {
+				        $(this).removeClass('selected');
+				    }
+				    else {
+				        table1.$('tr selected').removeClass('selected');
+				        $(this).addClass('selected');
+				    }
+
+				});
+
+	  	 //getMyIssues();
+	  	 //getRisks();
+	  	 //getEvents();
+
+	  });
+
+    </script>
+
+
+    <div class='outer'>
+        <div class='fullTopHalf'>
+            <div class='fullTopHalf'>
+                <H2>Add Program Specific Event</H2>
+                <div class='quadrant1'>
+
+                    <form action="" method="post">
+                        <fieldset name="Group1" style="height: 326px">
+                            <legend>Group box</legend>
+                            <label id="Label1">
+                                Title:<br/>
+                                <br/>
+                                <input name="Text1" type="text"/><br/>
+                                <br/>
+                                Due Date:<br/>
+                                <br/>
+                                <input name="Text2" type="text"/><br/>
+                                <br/>
+                                Comments /Actions:<br/>
+                                <br/>
+                                <textarea name="TextArea1" style="width: 472px; height: 114px"></textarea><br/>
+                            </label>
+                            <!-- Multiple Radios -->
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="radioStatus">Status:</label>
+                                <div class="col-md-4">
+                                    <div class="radio">
+                                        <label for="radioStatus-0">
+                                            <input name="radioStatus" id="radioStatus-0" type="radio" checked="checked" value="Complete">
+                                            Complete
+                                        </label>
+                                    </div>
+                                    <div class="radio">
+                                        <label for="radioStatus-1">
+                                            <input name="radioStatus" id="radioStatus-1" type="radio" value="NotComplete">
+                                            Not Complete
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Button (Double) -->
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="button1id"></label>
+                                <div class="col-md-8">
+                                    <button name="button1id" class="btn btn-success" id="button1id">Add</button>
+                                    <button name="button2id" class="btn btn-default" id="button2id">Cancel</button>
+                                </div>
+                            </div>
+
+
+                        </fieldset>
+                       
+                    </form>
+
+                </div>
+
+
+
+
+
+            </div>
+
+
+
+
+
+        </div>
+
+      
+
+    </div>
+
+
+
+</html>

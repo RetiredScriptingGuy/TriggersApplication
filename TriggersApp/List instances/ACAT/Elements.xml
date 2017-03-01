@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+	<ListInstance Title="ACAT" OnQuickLaunch="TRUE" TemplateType="100" Url="Lists/ACAT" Description="ACAT List Instance" xmlns="http://schemas.microsoft.com/sharepoint/">
+    <Data>
+      <Rows>
+        <Row>
+          <Field Name="ACAT">ACAT 1: Major Defense Aquisition Programs(MDAP)</Field>
+          <Field Name="ACAT Definition">ACAT 1 Definition Here...ACAT 1 Definition Here...ACAT 1 Definition Here...ACAT 1 Definition Here...ACAT 1 Definition Here...ACAT 1 Definition Here... </Field>
+        </Row>
+        <Row>
+          <Field Name="ACAT">ACAT ID</Field>
+          <Field Name="ACAT Definition">ACAT 1 Definition Here...ACAT 1 Definition Here...ACAT 1 Definition Here...ACAT 1 Definition Here...ACAT 1 Definition Here...ACAT 1 Definition Here... </Field>
+        </Row>
+        <Row>
+          <Field Name="ACAT">ACAT IC</Field>
+          <Field Name="ACAT Definition">ACAT 1 Definition Here...ACAT 1 Definition Here...ACAT 1 Definition Here...ACAT 1 Definition Here...ACAT 1 Definition Here...ACAT 1 Definition Here... </Field>
+        </Row>
+        <Row>
+          <Field Name="ACAT">ACAT IAC</Field>
+          <Field Name="ACAT Definition">A MAIS is a DoD Acquisition Program Definition Here...ACAT 1 Definition Here...ACAT 1 Definition Here...ACAT 1 Definition Here...ACAT 1 Definition Here...ACAT 1 Definition Here... </Field>
+        </Row>
+      </Rows>
+    </Data>
+  </ListInstance>
+</Elements>

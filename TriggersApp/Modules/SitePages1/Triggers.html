@@ -1,0 +1,329 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:mso="urn:schemas-microsoft-com:office:office" xmlns:msdt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+
+    <!--[if gte mso 9]><xml>
+    <mso:CustomDocumentProperties>
+    <mso:_dlc_DocId msdt:dt="string">XCD4ME7X7URU-961093073-1641</mso:_dlc_DocId>
+    <mso:_dlc_DocIdItemGuid msdt:dt="string">df85f623-b306-4822-ae3e-588949b65317</mso:_dlc_DocIdItemGuid>
+    <mso:_dlc_DocIdUrl msdt:dt="string">http://dev/sites/Trigger/_layouts/15/DocIdRedir.aspx?ID=XCD4ME7X7URU-961093073-1641, XCD4ME7X7URU-961093073-1641</mso:_dlc_DocIdUrl>
+    </mso:CustomDocumentProperties>
+    </xml><![endif]-->
+    <script type="text/javascript" src="/_layouts/15/MicrosoftAjax.js"></script>
+    <script type="text/javascript" src="/_layouts/15/sp.runtime.js"></script>
+    <script type="text/javascript" src="/_layouts/15/sp.js"></script>
+
+    <script src="../SiteAssets/TriggersApp/js/bootstrap.min.js"></script>
+
+    <script src="../SiteAssets/TriggersApp/js/jquery.min.js"></script>
+    <script src="../SiteAssets/TriggersApp/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="../SiteAssets/TriggersApp/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="../SiteAssets/TriggersApp/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="../SiteAssets/TriggersApp/css/triggers.css" />
+    <link rel="stylesheet" type="text/css" href="../SiteAssets/TriggersApp/css/custom.css" />
+
+
+
+    <div class="container-fluid">
+        <img src="../SiteAssets/TriggersApp/images/triggers_1a_dropshadow.png" />
+    </div>
+    <div class="section">
+        <a id="login" href="Profile.html">My Profile</a>
+        <div id="navpills" class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="nav nav-pills">
+                        <li>
+                            <a href="Home.html">Home</a>
+                        </li>
+                        <li class="active"><a href="Triggers.aspx">Triggers</a></li>
+
+                        <li><a href="../SitePages/Events.aspx">Events /Reviews</a></li>
+                        <li><a href="../SitePages/Reports.aspx">Reports</a></li>
+                        <li><a href="../SitePages/Drafts.aspx">Drafts</a></li>
+                        <li><a href="../SitePages/Mitigation.aspx">Mitigation</a></li>
+                        <li><a href="../SitePages/Feedback.aspx">Feedback</a></li>
+                        <li><a href="../SitePages/Print.aspx">Print </a></li>
+                        <li><a href="../SitePages/Acronyms.aspx">Acronyms</a></li>
+                        <li><a href="../SitePages/References.aspx">References </a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</head>
+<body>
+    <script>
+        $(document).ready(function () {
+            var dataSet1 = [
+		            ["Over-Flying", "Spares Shortfall", "High", "Cost"],
+                    ["Over-Flying", "Depot Throughput", "High", "Schedule"],
+                    ["Over-Flying", "SLEP", "High", "Performance"]
+
+
+            ];
+
+                   var dataSet2 = [
+		             ["Over-Flying", "Spares Shortfall", "High", "Cost"],
+                    ["Over-Flying", "Depot Throughput", "High", "Schedule"],
+                    ["Over-Flying", "SLEP", "High", "Performance"]
+            ];
+
+                   var dataSet3 = [
+		            ["ILA", "1-16-17", "Complete", "1-2-2017"],
+		            ["DAB", "1-16-17", "Complete", "1-2-2017"],
+		            ["SRR", "1-16-17", "Complete", "1-2-2017"]
+
+
+            ];
+
+
+
+    $('#events')
+                .DataTable({
+                    data:dataSet1,
+                    columns:[
+                       {title: "Trigger"},
+                       {title: "Issue"},
+                       {title: "Severity"},
+                       {title: "Type"}
+                    ],
+                    "searching" : false,
+                    "paging": false,
+                    "info": false,
+                    "initComplete": function () {
+                        var api = this.api();
+                        api.$('td').click(function () {
+                            api.search(this.innerHTML).draw();
+                        });
+                    }
+
+    //                initComplete: function() {
+
+    //    this.api().columns().every( function () {
+    //        var column = this;
+    //        var select = $('<select><option value=""></option></select>')
+    //            .appendTo( $(column.footer()).empty() )
+    //            .on( 'change', function () {
+    //                var val = $.fn.dataTable.util.escapeRegex(
+    //                    $(this).val()
+    //                    );
+    //                column
+    //                    .search( val ? '^'+val+'$': '', true, false )
+    //                    .draw();
+    //                } );
+
+
+
+    //        column.data().unique().sort().each( function ( d, j ) {
+
+    //            select.append('<option value="' + d + '">' + d + '</option>');
+
+    //        } );
+
+    //    } );
+
+    //}  //end of init
+
+        });
+
+                var clientContext;
+        var web;
+        var list;
+        var currentUser;
+
+        clientContext = SP.ClientContext.get_current();
+        web = clientContext.get_web();
+        clientContext.load(web);
+        currentUser = web.get_currentUser();
+		clientContext.load(currentUser);
+
+
+        clientContext.executeQueryAsync(
+           function(){
+              currentUser = web.get_currentUser();
+              var longUserName = currentUser.get_loginName();
+			 // var startIndex = longUserName.lastIndexOf('\\');
+			//  var thisUser = longUserName.substr(startIndex + 1);
+             var $element = $("#login") ;
+             if($element){
+                 $element.html(longUserName);
+                 $element.attr('href','../SitePages/Profile.html?Name=' + longUserName);
+             }
+           },
+           function(){alert("Request failed")}
+           );
+
+
+           var table1 = $('#events').DataTable();
+
+
+
+                $('#events tbody').on('click', 'tr', function(){
+                   if($(this).hasClass('selected')){
+                      $(this).removeClass('selected');
+                   }
+                   else
+                   {
+                      table1.$('tr selected').removeClass('selected');
+                      $(this).addClass('selected');
+                   }
+
+                });
+
+
+
+                $('#risks')
+                .DataTable({
+                     data:dataSet2,
+                     columns:[
+                     	{title: "Trigger"},
+                     	{title: "Issue"},
+                     	{title: "Severity"},
+                     	{title: "Type"}
+                     	],
+                       "searching" : false,
+                       "paging": false,
+                       "info": false
+
+                });
+
+                $('#risks tbody').on('click', 'tr', function () {
+                    if ($(this).hasClass('selected')) {
+                        $(this).removeClass('selected');
+                    }
+                    else {
+                        table1.$('tr selected').removeClass('selected');
+                        $(this).addClass('selected');
+                    }
+
+                });
+
+
+				$('#reviews')
+                .DataTable({
+                     data:dataSet3,
+                     columns:[
+                     	{title: "Event/Review"},
+                     	{title: "Due Date"},
+                     	{title: "Status"},
+                     	{title: "Date Completed"}
+                     	],
+                        "searching" : false,
+                        "paging": false,
+                        "info": false
+
+                });
+
+				$('#reviews tbody').on('click', 'tr', function () {
+				    if ($(this).hasClass('selected')) {
+				        $(this).removeClass('selected');
+				    }
+				    else {
+				        table1.$('tr selected').removeClass('selected');
+				        $(this).addClass('selected');
+				    }
+
+				});
+
+	  	 //getMyIssues();
+	  	 //getRisks();
+	  	 //getEvents();
+
+	  });
+
+    </script>
+    <div>
+        <label id="sustainmentlabel" for="sustainmentselect">Phase:</label>
+        <select id="sustainmentselect">
+            <option value="selectvalue" selected="selected">Select Value</option>
+            <option value="Sustainment">Sustainment</option>
+            <option value="Development">Development</option>
+            <option value="Test">Test</option>
+            <option value="Production">Production</option>
+            <option value="FleetIntroduction">Fllet Introduction</option>
+        </select>
+    </div>
+    <div class='outer'>
+        <div class='fullTopHalf'>
+            <div class='quadrant1'>
+                <h4 style="padding-top:35px;">Triggers</h4>
+                <div class='gridView'>
+                    <ul>
+                        <li>AcQuisition Process</li>
+                        <li>AcQuisition Process2</li>
+                        <li>AcQuisition Process3</li>
+                        <li>AcQuisition Process4</li>
+                        <li>AcQuisition Process5</li>
+                        <li>AcQuisition Process</li>
+                        <li>AcQuisition Process</li>
+                        <li>AcQuisition Process</li>
+                        <li>AcQuisition Process</li>
+                        <li>AcQuisition Process</li>
+                        <li>AcQuisition Process</li>
+                        <li>AcQuisition Process</li>
+                        <li>AcQuisition Process</li>
+                        <li>AcQuisition Process</li>
+                        <li>AcQuisition Process</li>
+                        <li>AcQuisition Process2</li>
+                        <li>AcQuisition Process3</li>
+                        <li>AcQuisition Process4</li>
+                        <li>AcQuisition Process5</li>
+                        <li>AcQuisition Process</li>
+                        <li>AcQuisition Process</li>
+                        <li>AcQuisition Process</li>
+                        <li>AcQuisition Process</li>
+                        <li>AcQuisition Process</li>
+                        <li>AcQuisition Process</li>
+                        <li>AcQuisition Process</li>
+                        <li>AcQuisition Process</li>
+                        <li>AcQuisition Process</li>
+                        <li>AcQuisition Process</li>
+                    </ul>
+                </div>
+                <div>
+                    <label>Your trigger not listed? Add another Triggter here"</label>
+                    <a href="../SitePages/AddTrigger.html">Add New Trigger</a>
+                </div>
+            </div>
+            <div class='quadrant2'>
+                <h4>Trigger Description</h4>
+                <div class='gridView'>
+                    <ul>
+                        <li>Trigger Description Here</li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class='fullBottomHalf'>
+            <div class='quadrant3'>
+                <H2>Issues</H2>
+                <div class='gridView'>
+                    Issues list goes here
+                </div>
+
+
+            </div>
+            <div class='quadrant4'>
+                <H2>Issue Description</H2>
+                <div class='gridView'>
+                    Issue Description
+                </div>
+
+            </div>
+        </div>
+
+
+
+    </div>
+
+
+
+</html>

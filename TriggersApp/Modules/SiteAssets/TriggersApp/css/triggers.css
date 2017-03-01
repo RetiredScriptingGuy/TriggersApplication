@@ -1,0 +1,162 @@
+﻿ #titleAreaRow {
+		  display:none;
+  }
+    
+ #sideNavBox{
+	    display:none;
+  }
+
+ #login{
+	
+	float:right;
+	margin-right:100px;
+}
+
+#navpills{
+   margin-left:5px;
+	
+}
+
+#issuedrafts{
+	
+	 border:1px black solid;
+}
+
+#riskdrafts{
+	
+	 border:1px black solid;
+
+}
+
+
+#sustainmentlabel{
+	
+	padding: 20px;
+}
+
+#taFeedback{
+	
+	width:500px;
+	height: 200px;
+}
+     
+	 .outer {
+	     padding-top:20px;
+
+	 }
+	 	 
+	 .outer H2
+	 {
+	 	text-align: center;
+	 	color: black;
+	    width: 100%;
+	    background-color:#C0C0C0;
+	    border: 1px solid #808080;
+	    border-radius: 3px;
+	 }
+	 
+	 .fullTopHalf
+	 {
+	    position: relative;
+	    z-index: 1;
+	 	width:95%;
+	    height:500px;
+	    background-color: #F0F0F0;
+		border: 1px solid #808080;
+	    border-radius: 3px;
+
+	 }
+	 
+	 .fullBottomHalf
+	 {
+	 	width:95%;
+	    height:420px;
+	    background-color: white;
+	 }
+	 
+	 .quadrant1
+	 {
+	    position:relative;
+	 	width:49%;
+	    height:400px;
+        color: black;
+
+	 }
+	 
+	 .quadrant2{
+	    position:relative;
+	    left: 51%;
+	    top: -374px;
+	    margin-right: 0px;
+	 	width:49%;	
+	    height:375px;
+	    color: black;
+
+	 }
+	
+
+ 
+	 .quadrant3{
+	    position:relative;
+	    top:25px;
+	 	width:49%;
+	    height:400px;
+	    background-color: #F0F0F0;
+	    border: 1px solid #808080;
+	    border-radius: 3px;
+
+	 }
+	 
+	 .quadrant4{
+	    position:relative;
+	    top:-375px;
+	    left: 51%;
+	    border: 1px;	    
+	    margin-right: 0px;
+	 	width:49%;	
+	    height:400px;
+	    background-color: #F0F0F0;
+	    border: 1px solid #808080;
+	    border-radius: 3px;
+
+	 }
+	 
+	 .gridView{
+	 
+	 	background-color:white;
+	 	height: 85%;
+	 	width: 95%;
+        margin-top: 5px;
+	 	margin-left: auto;
+	 	margin-right: auto;
+	    border: 1px solid #808080;	 
+        overflow-x: auto;
+	 }
+
+     .custom-selected {
+         background-color: yellow;
+     }
+	 
+	 .cube{
+	 	height: 350px;
+	 	width: 500px;
+        margin-top: 5px;
+	 	margin-left: auto;
+	 	margin-right: auto;
+
+	 }
+
+    .cube td{
+    	font-family: verdana;
+	    font-size: large;
+	    font-weight: bold;
+        width: 50px;
+        height: 50px;
+        text-align: center;
+        border: 1px solid #808080;
+    }
+	 	 
+	.IssueRow td{
+        cursor:pointer !important;
+	} 	 
+	 	 

@@ -1,0 +1,205 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:mso="urn:schemas-microsoft-com:office:office" xmlns:msdt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+
+    <!--[if gte mso 9]><xml>
+    <mso:CustomDocumentProperties>
+    <mso:_dlc_DocId msdt:dt="string">XCD4ME7X7URU-961093073-1680</mso:_dlc_DocId>
+    <mso:_dlc_DocIdItemGuid msdt:dt="string">d9715af4-4790-427c-929e-d98fa7caaca2</mso:_dlc_DocIdItemGuid>
+    <mso:_dlc_DocIdUrl msdt:dt="string">http://dev/sites/Trigger/_layouts/15/DocIdRedir.aspx?ID=XCD4ME7X7URU-961093073-1680, XCD4ME7X7URU-961093073-1680</mso:_dlc_DocIdUrl>
+    </mso:CustomDocumentProperties>
+    </xml><![endif]-->
+    <script type="text/javascript" src="/_layouts/15/MicrosoftAjax.js"></script>
+    <script type="text/javascript" src="/_layouts/15/sp.runtime.js"></script>
+    <script type="text/javascript" src="/_layouts/15/sp.js"></script>
+
+
+    <script src="../SiteAssets/TriggersApp/js/jquery.min.js"></script>
+    <script src="../SiteAssets/TriggersApp/js/bootstrap.min.js"></script>
+
+    <script src="../SiteAssets/TriggersApp/js/jquery.min.js"></script>
+    <script src="../SiteAssets/TriggersApp/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="../SiteAssets/TriggersApp/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="../SiteAssets/TriggersApp/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="../SiteAssets/TriggersApp/css/triggers.css" />
+    <link rel="stylesheet" type="text/css" href="../SiteAssets/TriggersApp/css/custom.css" />
+
+
+
+    <div class="container-fluid">
+        <img src="../SiteAssets/TriggersApp/images/triggers_1a_dropshadow.png" />
+    </div>
+    <div class="section">
+        <a id="login" href="../SitePages/Profile.html">My Profile</a>
+        <div id="navpills" class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="nav nav-pills">
+                        <li class="active">
+                            <a href="../SitePages/Home.html">Home</a>
+                        </li>
+                        <li><a href="../SitePages/Home.html">Triggers</a></li>
+                        <li><a href="../SitePages/Events.html">Events /Reviews</a></li>
+                        <li><a href="../SitePages/Reports.html">Reports</a></li>
+                        <li><a href="../SitePages/Drafts.html">Drafts</a></li>
+                        <li><a href="../SitePages/Mitigation.html">Mitigation</a></li>
+                        <li><a href="../SitePages/Feedback.html" ">Feedback</a></li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</head>
+<body>
+    <script>
+        $(document).ready(function () {
+
+
+
+            $('#events')
+                .DataTable({
+
+                });
+
+	    GetCurrentUser()
+
+
+
+	  	 //getMyIssues();
+	  	 //getRisks();
+	  	 //getEvents();
+
+	  });
+
+	  	function GetCurrentUser(){
+
+	  	var querystring = window.location.search;
+	  	var name = querystring.split('=');
+	  	var currentuser = name[1];
+
+        var userlabelelement = $('#currentUserLabel') ;
+             if(userlabelelement ){
+                 userlabelelement .html(currentuser );
+                // $element.attr('href','../SitePages/Profile.html?Name=' + currentuser );
+             }
+
+      	 var loginelement = $('#login') ;
+             if(loginelement ){
+                 loginelement.html(currentuser);
+                 loginelement.attr('href','../SitePages/Profile.html?Name=' + currentuser );
+             }
+
+        }
+
+
+	  function UpdateProfile(){
+	     alert("Your profile has been updated");
+	  }
+
+	   function CancelProfile(){
+	     alert("Your changes have been cancelled");
+	  }
+
+
+    </script>
+
+
+    <div class='outer'>
+        <div class='fullTopHalf'>
+            <H2>My Profile </H2>
+
+            <div class='profile'>
+                <form class="form-horizontal">
+                    <fieldset>
+
+                        <!-- Form Name -->
+                        <legend><label id="currentUserLabel">User Name Here</label></legend>
+
+                        <!-- Select Basic -->
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="PMA">PMA</label>
+                            <div class="col-md-4">
+                                <select name="PMA" class="form-control" id="PMA">
+                                    <option value="PEO">PEO(T)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Select Basic -->
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="pma">PMA</label>
+                            <div class="col-md-4">
+                                <select name="pma" class="form-control" id="pma">
+                                    <option value="PMA-265">PMA-265</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Select Basic -->
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="planetype">Type</label>
+                            <div class="col-md-4">
+                                <select name="planetype" class="form-control" id="planetype">
+                                    <option value="F-18">F-18</option>
+                                    <option value="F-22">F-22</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Select Basic -->
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="acat">ACAT</label>
+                            <div class="col-md-4">
+                                <select name="acat" class="form-control" id="acat">
+                                    <option value="Acat">ACAT</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Select Basic -->
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="phasesustainment">Phase Sustainment</label>
+                            <div class="col-md-4">
+                                <select name="phasesustainment" class="form-control" id="phasesustainment">
+                                    <option value="Sustainment">Option one</option>
+                                    <option value="">Option two</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Button (Double) -->
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="btnCancel"></label>
+                            <div class="col-md-8">
+                                <button name="Update" class="btn btn-primary" id="btnUpdate" onclick="UpdateProfile()">Update</button>
+                                <button name="Cancel" class="btn btn-default" id="btnCancel" onclick="CancelProfile()">Cancel</button>
+                            </div>
+                        </div>
+
+
+                    </fieldset>
+                </form>
+
+            </div>
+
+
+
+
+
+
+
+        </div>
+
+
+
+    </div>
+
+
+
+</html>

@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+	<ListInstance Title="Phases" OnQuickLaunch="TRUE" TemplateType="100" Url="Lists/Phases" Description="Phases List Instance" xmlns="http://schemas.microsoft.com/sharepoint/">
+    <Data>
+      <Rows>
+        <Row>
+          <Field Name="Title">Test</Field>
+          <Field Name="Title">Production</Field>
+          <Field Name="Title">Development</Field>
+          <Field Name="Title">Fleet Introduction</Field>
+          <Field Name="Title">Post Production</Field>
+          <Field Name="Title">Sustainment</Field>
+        </Row>
+      </Rows>
+    </Data>
+  </ListInstance>
+</Elements>

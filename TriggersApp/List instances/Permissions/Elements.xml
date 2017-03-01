@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+	<ListInstance Title="Permissions" OnQuickLaunch="TRUE" TemplateType="100" Url="Lists/Permissions" Description="Permission Groups&#xD;&#xA;" xmlns="http://schemas.microsoft.com/sharepoint/">
+    <Data>
+      <Rows>
+        <Row>
+          <Field Name="Group">Navigate Admin</Field>
+          <Field Name="Group">Nav Systems Manager</Field>
+          <Field Name="Group">Nav Systems Member</Field>
+          <Field Name="Group">Training Systems Manager</Field>
+          <Field Name="Group">Training Systems Member</Field>
+          <Field Name="Group">AC Systems Member</Field>
+          <Field Name="Group">AC Systems Manager</Field>
+          <Field Name="Group">AIR 6.0d Manager</Field>
+          <Field Name="Group">AIR 6.0d Member</Field>
+        </Row>
+      </Rows>
+    </Data>
+  </ListInstance>
+</Elements>

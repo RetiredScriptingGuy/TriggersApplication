@@ -1,0 +1,137 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:mso="urn:schemas-microsoft-com:office:office" xmlns:msdt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+
+    <!--[if gte mso 9]><xml>
+    <mso:CustomDocumentProperties>
+    <mso:_dlc_DocId msdt:dt="string">XCD4ME7X7URU-961093073-1656</mso:_dlc_DocId>
+    <mso:_dlc_DocIdItemGuid msdt:dt="string">4851d093-deaa-438d-b5e9-171e4dab0fdd</mso:_dlc_DocIdItemGuid>
+    <mso:_dlc_DocIdUrl msdt:dt="string">http://dev/sites/Trigger/_layouts/15/DocIdRedir.aspx?ID=XCD4ME7X7URU-961093073-1656, XCD4ME7X7URU-961093073-1656</mso:_dlc_DocIdUrl>
+    </mso:CustomDocumentProperties>
+    </xml><![endif]-->
+    <script type="text/javascript" src="/_layouts/15/MicrosoftAjax.js"></script>
+    <script type="text/javascript" src="/_layouts/15/sp.runtime.js"></script>
+    <script type="text/javascript" src="/_layouts/15/sp.js"></script>
+
+    <script src="../SiteAssets/TriggersApp/js/jquery.min.js"></script>
+    <script src="../SiteAssets/TriggersApp/js/bootstrap.min.js"></script>
+
+    <script src="../SiteAssets/TriggersApp/js/jquery.min.js"></script>
+    <script src="../SiteAssets/TriggersApp/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="../SiteAssets/TriggersApp/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="../SiteAssets/TriggersApp/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="../SiteAssets/TriggersApp/css/triggers.css" />
+    <link rel="stylesheet" type="text/css" href="../SiteAssets/TriggersApp/css/custom.css" />
+
+
+
+    <div class="container-fluid">
+        <img src="../SiteAssets/TriggersApp/images/triggers_1a_dropshadow.png" />
+    </div>
+    <div class="section">
+        <a id="login" href="../SitePages/Profile.html">My Profile</a>
+        <div id="navpills" class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="nav nav-pills">
+                        <li><a href="../SitePages/Home.aspx">Home</a></li>
+                        <li><a href="../SitePages/Triggers.aspx">Triggers</a></li>
+                        <li><a href="../SitePages/Events.aspx">Events /Reviews</a></li>
+                        <li><a href="../SitePages/Reports.aspx">Reports</a></li>
+                        <li><a href="../SitePages/Drafts.aspx">Drafts</a></li>
+                        <li><a href="../SitePages/Mitigation.aspx">Mitigation</a></li>
+                        <li class="active"><a href="../SitePages/Feedback.aspx">Feedback</a></li>
+                        <li><a href="../SitePages/Print.aspx">Print </a></li>
+                        <li><a href="../SitePages/Acronyms.aspx">Acronyms</a></li>
+                        <li><a href="../SitePages/References.aspx">References </a></li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</head>
+<body>
+
+    <script>
+        $(document).ready(function () {
+
+            $('#events')
+                .DataTable({
+
+                });
+	  	 //getMyIssues();
+	  	 //getRisks();
+	  	 //getEvents();
+
+	  });
+
+    </script>
+
+
+    <div class='outer' style="height:600px;">
+        <div class='fullTopHalf'>
+            <H2>Provide Feedback</H2>
+            <div class='quadrant1'>
+
+                <form class="form-horizontal" style="width:500px;height:600px;">
+                    <fieldset>
+
+                        <!-- Form Name -->
+
+                        <br />
+
+                        <label>Please share your thoughts on ways we could improve things</label>
+                        <br />
+                        <!-- Select Basic -->
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="feedbackselect">Category</label>
+                            <div class="col-md-4">
+                                <select name="feedbackselect" class="form-control" id="feedbackselect">
+                                    <option value="1">Select value</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Textarea -->
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="taFeedback">Feedback</label>
+                            <div class="col-md-4">
+                                <textarea name="taFeedback" class="form-control" id="taFeedback"></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Button (Double) -->
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="btnCancel"></label>
+                            <div class="col-md-8">
+                                <button name="btnCancel" class="btn btn-primary" id="btnCancel">Send Feedback</button>
+                                <button name="Cancel" class="btn btn-default" id="Cancel">Cancel</button>
+                            </div>
+                        </div>
+
+                    </fieldset>
+                </form>
+
+
+            </div>
+
+
+
+
+
+
+        </div>
+
+
+
+    </div>
+
+
+
+</html>

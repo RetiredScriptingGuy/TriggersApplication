@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ProjectItem Type="Microsoft.VisualStudio.SharePoint.Module" SupportedTrustLevels="All" SupportedDeploymentScopes="Web, Site" xmlns="http://schemas.microsoft.com/VisualStudio/2010/SharePointTools/SharePointProjectItemModel">
+  <Files>
+    <ProjectItemFile Source="Triggers.html" Target="SitePages\" Type="ElementFile" />
+    <ProjectItemFile Source="Reports.html" Target="SitePages\" Type="ElementFile" />
+    <ProjectItemFile Source="References.html" Target="SitePages\" Type="ElementFile" />
+    <ProjectItemFile Source="Profile.html" Target="SitePages\" Type="ElementFile" />
+    <ProjectItemFile Source="Print.html" Target="SitePages\" Type="ElementFile" />
+    <ProjectItemFile Source="MyDashboard.html" Target="SitePages\" Type="ElementFile" />
+    <ProjectItemFile Source="Mitigation.html" Target="SitePages\" Type="ElementFile" />
+    <ProjectItemFile Source="Home.html" Target="SitePages\" Type="ElementFile" />
+    <ProjectItemFile Source="Header.html" Target="SitePages\" Type="ElementFile" />
+    <ProjectItemFile Source="Feedback.html" Target="SitePages\" Type="ElementFile" />
+    <ProjectItemFile Source="Events.html" Target="SitePages\" Type="ElementFile" />
+    <ProjectItemFile Source="Drafts.html" Target="SitePages\" Type="ElementFile" />
+    <ProjectItemFile Source="AddTrigger.html" Target="SitePages\" Type="ElementFile" />
+    <ProjectItemFile Source="AddProgram.html" Target="SitePages\" Type="ElementFile" />
+    <ProjectItemFile Source="Acronyms.html" Target="SitePages\" Type="ElementFile" />
+    <ProjectItemFile Source="Elements.xml" Target="SitePages\" Type="ElementManifest" />
+  </Files>
+</ProjectItem>

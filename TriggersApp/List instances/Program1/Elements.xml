@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+	<ListInstance Title="Program" OnQuickLaunch="TRUE" TemplateType="100" Url="Lists/Program" Description="My List Instance" xmlns="http://schemas.microsoft.com/sharepoint/">
+    <Data>
+      <Rows>
+        <Row>
+          <Field Name="PEO">PEO(1.0)</Field>
+          <Field Name="PMA">PMA-170</Field>
+          <Field Name="Program">Nav Systems</Field>
+        </Row>
+        <Row>
+          <Field Name="PEO">PEO(A)</Field>
+          <Field Name="PMA">PMA-207</Field>
+          <Field Name="Program">Tact Airlift</Field>
+        </Row>
+      </Rows>
+    </Data>
+    
+  </ListInstance>
+</Elements>

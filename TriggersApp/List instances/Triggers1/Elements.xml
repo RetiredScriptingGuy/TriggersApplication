@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+	<ListInstance Title="Triggers" OnQuickLaunch="TRUE" TemplateType="100" Url="Lists/Triggers" Description="Trigger List Instance" xmlns="http://schemas.microsoft.com/sharepoint/">
+    <Data>
+      <Rows>
+        <Row>
+          <Field Name="Trigger">Aquisition Process</Field>
+          <Field Name="Description">No known ability to adapt business rules to percuilar aquisition requirements; Aquisition Advice Codes assigned as J; Demand cannot meet Key Performance Parameters and metrics to drive procurements, yet single points of failure and down equipment.</Field>
+        </Row>
+        <Row>
+          <Field Name="Trigger">APN-1</Field>
+          <Field Name="Description">No Plan in place to address APN-1 draw-down and Program Related Logistics requirements</Field>
+        </Row>
+        <Row>
+          <Field Name="Trigger">CDR Readiness</Field>
+          <Field Name="Description">Proceeding into CDR (and other SETR milestones) without all supporting documentation&gt;</Field>
+        </Row>
+        
+      </Rows>
+    </Data>
+  </ListInstance>
+</Elements>
