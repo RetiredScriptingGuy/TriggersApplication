@@ -34,5 +34,9 @@
     <ProjectItemFile Source="TriggersApp\css\buttons.dataTables.min.css" Target="SiteAssets\TriggersApp\css\" Type="ElementFile" />
     <ProjectItemFile Source="TriggersApp\css\buttons.jqueryui.min.css" Target="SiteAssets\TriggersApp\css\" Type="ElementFile" />
     <ProjectItemFile Source="Elements.xml" Target="SiteAssets\" Type="ElementManifest" />
+    <ProjectItemFile Source="TriggersApp\js\buttons.bootstrap.js" Target="SiteAssets\TriggersApp\js\" Type="ElementFile" />
+    <ProjectItemFile Source="TriggersApp\js\buttons.jqueryui.js" Target="SiteAssets\TriggersApp\js\" Type="ElementFile" />
+    <ProjectItemFile Source="TriggersApp\css\buttons.bootstrap.min.css" Target="SiteAssets\TriggersApp\css\" Type="ElementFile" />
+    <ProjectItemFile Source="TriggersApp\css\buttons.jqueryui.css" Target="SiteAssets\TriggersApp\css\" Type="ElementFile" />
   </Files>
 </ProjectItem>

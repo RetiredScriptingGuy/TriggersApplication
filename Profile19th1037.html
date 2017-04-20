@@ -1,0 +1,255 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:mso="urn:schemas-microsoft-com:office:office" xmlns:msdt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+
+    <!--[if gte mso 9]><xml>
+        <mso:CustomDocumentProperties>
+            <mso:_dlc_DocId msdt:dt="string">XCD4ME7X7URU-1497597693-75</mso:_dlc_DocId>
+            <mso:_dlc_DocIdItemGuid msdt:dt="string">7baa7835-ff28-434d-895c-92dd00e31704</mso:_dlc_DocIdItemGuid>
+            <mso:_dlc_DocIdUrl msdt:dt="string">http://dev/sites/Trigger/_layouts/15/DocIdRedir.aspx?ID=XCD4ME7X7URU-1497597693-75, XCD4ME7X7URU-1497597693-75</mso:_dlc_DocIdUrl>
+        </mso:CustomDocumentProperties>
+    </xml><![endif]-->
+
+    <script type="text/javascript" src="/_layouts/15/MicrosoftAjax.js"></script>
+    <script type="text/javascript" src="/_layouts/15/sp.runtime.js"></script>
+    <script type="text/javascript" src="/_layouts/15/sp.js"></script>
+    <script type="text/javascript" src="/_layouts/15/sp.requestexecutor.js"></script>
+
+
+    <script src="../SiteAssets/TriggersApp/js/vendor/jquery.min.js"></script>
+    <script src="../SiteAssets/TriggersApp/js/vendor/bootstrap.min.js"></script>
+    <script src="../SiteAssets/TriggersApp/js/vendor/jquery.min.js"></script>
+    <script src="../SiteAssets/TriggersApp/js/vendor/jquery.dataTables.min.js"></script>
+    <script src="../SiteAssets/TriggersApp/js/custom/Profile.js"></script>
+
+    <link rel="stylesheet" href="../SiteAssets/TriggersApp/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="../SiteAssets/TriggersApp/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="../SiteAssets/TriggersApp/css/triggers.css" />
+    <link rel="stylesheet" type="text/css" href="../SiteAssets/TriggersApp/css/custom.css" />
+    <div id="triggerbanner" class="container-fluid">
+        <img src="../SiteAssets/TriggersApp/images/triggers_new logo.png" width="100%" />
+    </div>
+    <div class="section">
+        <a id="login" class="active" href="Profile.aspx" style="float: right; margin-right: 20px;">My Profile</a>
+        <div id="navpills" class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="nav nav-pills">
+                        <ul class="nav nav-pills">
+                            <li>
+                                <a href="MyDashboard.aspx">Home</a>
+                            </li>
+                            <li>
+                                <a href="Triggers.aspx">Triggers</a>
+                            </li>
+                            <li>
+                                <a href="Events.aspx">Events /Reviews</a>
+                            </li>
+                            <li>
+                                <a href="Reports.aspx">Reports</a>
+                            </li>
+                            <li>
+                                <a href="Drafts.aspx">Drafts</a>
+                            </li>
+                            <li>
+                                <a href="Mitigation.aspx">Mitigation</a>
+                            </li>
+                            <li>
+                                <a href="Feedback.aspx">Feedback</a>
+                            </li>
+                            <li>
+                                <a href="Print.aspx">Print </a>
+                            </li>
+                            <li>
+                                <a href="Acronyms.aspx">Acronyms</a>
+                            </li>
+                            <li>
+                                <a href="References.aspx">References </a>
+                            </li>
+                        </ul>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</head>
+<body>
+    <div class="outer">
+        <div class="profileFullTopHalf">
+            <H2>My Profile </H2>
+
+            <div class="profile">
+                <div class="form-horizontal">
+                    <div>
+
+                        <!-- Form Name -->
+                        <div>
+                            <span id="currentUserLabel">User Name Here</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="ddlUser">User</label>
+                            <div class="col-md-4">
+                                <label name="user" class="form-control" id="ddlUser">First.Last</label>
+                            </div>
+                        </div>
+
+                        <!-- Select Basic -->
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="ddlLeadership">Please select if your PEO or Competency</label>
+                            <div class="col-md-4">
+                                <select name="PEO" class="form-control" id="ddlLeadership">
+                                    <option selected="selected">Select Value</option>
+                                    <option selected="selected">PEO</option>
+                                    <option>Competency</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Select ddlTD/POC-->
+                        <div id="leadershipcontrols">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="ddlCompetency">Competency</label>
+                                <div class="col-md-4">
+                                    <select name="PEO" class="form-control" id="ddlCompetency">
+                                        <option selected="selected">Select Value</option>
+                                        <option value="1">6.0D </option>
+                                        <option value="2">6.6  </option>
+                                        <option value="3">6.7  </option>
+                                        <option value="4">6.8  </option>
+                                    </select>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="ddlTD">Are you a TD/POC?</label>
+                                <div class="col-md-4">
+                                    <select name="acat" class="form-control" id="ddlTD">
+                                        <option selected="selected">Select Value</option>
+                                        <option>Yes</option>
+                                        <option>No</option>
+                                    </select>
+                                </div>
+                            </div>
+
+
+
+                            <!-- Select ddlTierThree-->
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="ddlTier3">Tier Three</label>
+                                <div class="col-md-4">
+                                    <select name="ddlTier3" class="form-control" id="ddlTier3"></select>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!-- Select Basic -->
+                        <div id="peocontrols">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="ddlPEO">PEO</label>
+                                <div class="col-md-4">
+                                    <select name="PEO" class="form-control" id="ddlPEO">
+                                        <option>Select value</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Select ddlPSM-->
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="ddlPSM">Are you a PSM/PEO(L)?</label>
+                                <div class="col-md-4">
+                                    <select name="acat" class="form-control" id="ddlPSM">
+                                        <option>Yes</option>
+                                        <option>No</option>
+                                    </select>
+                                </div>
+                            </div>
+
+
+
+                            <!-- Select Basic -->
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="ddlPMA">PMA</label>
+                                <div class="col-md-4">
+                                    <select name="pma" class="form-control" id="ddlPMA">
+                                        <option>Select value</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Select Basic -->
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="ddlProgram">Program</label>
+                                <div class="col-md-4">
+                                    <select name="planetype" class="form-control" id="ddlProgram">
+                                        <option>Select value</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Select Basic -->
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="ddlACAT">ACAT</label>
+                                <div class="col-md-4">
+                                    <select name="acat" class="form-control" id="ddlACAT">
+                                        <option>Select value</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Select Basic -->
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="ddlPhase">Phase</label>
+                                <div class="col-md-4">
+                                    <select name="phasesustainment" class="form-control" id="ddlPhase">
+                                        <option value="development">EMD</option>
+                                        <option value="test">TMRR</option>
+                                        <option value="production">Production P&amp;D</option>
+                                        <option value="fleetintroduction">Fleet Introduction P&amp;D</option>
+                                        <option value="postproduction">Post Production P&amp;D</option>
+                                        <option value="sustainment">O&amp;S</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Button (Double) -->
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="btnCancel"></label>
+                            <div class="col-md-8">
+                                <button name="Update" class="btn btn-primary" id="btnUpdate" onclick="UpdateProfile()">Update</button>
+                                <button name="Cancel" class="btn btn-default" id="btnCancel" onclick="CancelProfile()">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--HTML user profile data-->
+    <div id="currentuserprofile">
+        <div>
+            <input type="text" id="userID" title="user ID goes here" readonly="readonly">
+        </div>
+        <div>
+            <input type="text" id="userName" title="user name goes here" readonly="readonly">
+        </div>
+        <div>
+            <input type="text" id="userProgram" title="user program goes here" readonly="readonly">
+        </div>
+        <div>
+            <input type="text" id="digestmsg" title="list digest goes here" readonly="readonly">
+        </div>
+        <div>
+            <input type="text" id="error" title="error message goes here" readonly="readonly">
+        </div>
+    </div>
+    <div id="overlay"></div>
+</body>
+
+</html>

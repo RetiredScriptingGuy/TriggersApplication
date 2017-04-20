@@ -7,9 +7,9 @@
 
     <!--[if gte mso 9]><xml>
     <mso:CustomDocumentProperties>
-    <mso:_dlc_DocId msdt:dt="string">XCD4ME7X7URU-961093073-1680</mso:_dlc_DocId>
-    <mso:_dlc_DocIdItemGuid msdt:dt="string">d9715af4-4790-427c-929e-d98fa7caaca2</mso:_dlc_DocIdItemGuid>
-    <mso:_dlc_DocIdUrl msdt:dt="string">http://dev/sites/Trigger/_layouts/15/DocIdRedir.aspx?ID=XCD4ME7X7URU-961093073-1680, XCD4ME7X7URU-961093073-1680</mso:_dlc_DocIdUrl>
+    <mso:_dlc_DocId msdt:dt="string">XCD4ME7X7URU-1497597693-44</mso:_dlc_DocId>
+    <mso:_dlc_DocIdItemGuid msdt:dt="string">85855d27-11b0-4939-b45b-033225407d2e</mso:_dlc_DocIdItemGuid>
+    <mso:_dlc_DocIdUrl msdt:dt="string">http://dev/sites/Trigger/_layouts/15/DocIdRedir.aspx?ID=XCD4ME7X7URU-1497597693-44, XCD4ME7X7URU-1497597693-44</mso:_dlc_DocIdUrl>
     </mso:CustomDocumentProperties>
     </xml><![endif]-->
     <script type="text/javascript" src="/_layouts/15/MicrosoftAjax.js"></script>
@@ -29,24 +29,28 @@
 
 
 
-    <div class="container-fluid">
-        <img src="../SiteAssets/TriggersApp/images/triggers_1a_dropshadow.png" />
+    <div id="triggerbanner" class="container-fluid">
+        <img src="../SiteAssets/TriggersApp/images/triggers_new logo.png" width="100%" />
     </div>
     <div class="section">
-        <a id="login" href="../SitePages/Profile.html">My Profile</a>
+        <a id="login" class="active" href="../SitePages/Profile.html">My Profile</a>
         <div id="navpills" class="container">
             <div class="row">
                 <div class="col-md-12">
                     <ul class="nav nav-pills">
-                        <li class="active">
-                            <a href="../SitePages/Home.html">Home</a>
-                        </li>
-                        <li><a href="../SitePages/Home.html">Triggers</a></li>
-                        <li><a href="../SitePages/Events.html">Events /Reviews</a></li>
-                        <li><a href="../SitePages/Reports.html">Reports</a></li>
-                        <li><a href="../SitePages/Drafts.html">Drafts</a></li>
-                        <li><a href="../SitePages/Mitigation.html">Mitigation</a></li>
-                        <li><a href="../SitePages/Feedback.html" ">Feedback</a></li>
+                        <ul class="nav nav-pills">
+                            <li><a href="MyDashboard.aspx">Home</a></li>
+                            <li><a href="Triggers.aspx">Triggers</a></li>
+                            <li><a href="Events.aspx">Events /Reviews</a></li>
+                            <li><a href="Reports.aspx">Reports</a></li>
+                            <li><a href="Drafts.aspx">Drafts</a></li>
+                            <li><a href="Mitigation.aspx">Mitigation</a></li>
+                            <li><a href="Feedback.aspx">Feedback</a></li>
+                            <li><a href="Print.aspx">Print </a></li>
+                            <li><a href="Acronyms.aspx">Acronyms</a></li>
+                            <li><a href="References.aspx">References </a></li>
+
+                        </ul>
 
                     </ul>
                 </div>
@@ -67,44 +71,137 @@
 
                 });
 
-	    GetCurrentUser()
+            //  GetCurrentUser()
 
 
 
-	  	 //getMyIssues();
-	  	 //getRisks();
-	  	 //getEvents();
+            //getMyIssues();
+            //getRisks();
+            //getEvents();
 
-	  });
+            var clientContext;
+            var web;
+            var list;
+            var currentUser;
 
-	  	function GetCurrentUser(){
+            clientContext = SP.ClientContext.get_current();
+            web = clientContext.get_web();
+            clientContext.load(web);
+            currentUser = web.get_currentUser();
+            clientContext.load(currentUser);
 
-	  	var querystring = window.location.search;
-	  	var name = querystring.split('=');
-	  	var currentuser = name[1];
 
-        var userlabelelement = $('#currentUserLabel') ;
-             if(userlabelelement ){
-                 userlabelelement .html(currentuser );
+            clientContext.executeQueryAsync(
+                function(){
+                    currentUser = web.get_currentUser();
+                    var longUserName = currentUser.get_loginName();
+                    // var startIndex = longUserName.lastIndexOf('\\');
+                    //  var thisUser = longUserName.substr(startIndex + 1);
+                    var $element = $("#login") ;
+                    if($element){
+                        $element.attr('href','../SitePages/Profile.html?Name=' + longUserName);
+                    }
+                },
+                function(){alert("Request failed")}
+            );
+
+
+
+        });
+
+        function GetCurrentUser(){
+
+            var querystring = window.location.search;
+            var name = querystring.split('=');
+            var currentuser = name[1];
+
+            var userlabelelement = $('#currentUserLabel') ;
+            if(userlabelelement ){
+                userlabelelement .html(currentuser );
                 // $element.attr('href','../SitePages/Profile.html?Name=' + currentuser );
-             }
+            }
 
-      	 var loginelement = $('#login') ;
-             if(loginelement ){
-                 loginelement.html(currentuser);
-                 loginelement.attr('href','../SitePages/Profile.html?Name=' + currentuser );
-             }
+            var loginelement = $('#currentUserLabel') ;
+            if(loginelement ){
+                loginelement.html(currentuser);
+                loginelement.attr('href','../SitePages/Profile.aspx?Name=' + currentuser );
+            }
 
         }
 
 
-	  function UpdateProfile(){
-	     alert("Your profile has been updated");
-	  }
+        function UpdateProfile(){
+            alert("Your profile has been updated");
+        }
 
-	   function CancelProfile(){
-	     alert("Your changes have been cancelled");
-	  }
+        function CancelProfile(){
+            alert("Your changes have been cancelled");
+        }
+
+
+        var profiles = [
+
+            ["Lyndsey Stephens","ACAT II","","PEO","PEO (1.0)","PMA-205","Training Systems","Development"  ],
+            ["Melissa Soper","ACAT II","","PEO","PEO (1.0)","PMA-205","Training Systems","Test"  ],
+            ["Kris White","ACAT IV","","PEO","PEO(A)","PMA-207 ","Tact Airlift","Production"  ],
+            ["Teresa Fazio","","AIR 6.6","Competency","","","",""  ],
+            ["Pam Howland","","AIR 6.6","Competency","","","",""  ],
+            ["Jennifer Stailey","ACAT IV","","PEO","PEO(JSF)","PMA-235 ","JSF","Sustainment"  ],
+            ["Tonia Marable","","AIR 6.7","Competency","","","",""  ],
+            ["Shane Malamphy","Abbreviated Acquisition Programs (AAPS)","","PEO","PEO(T)","PMA-101 ","MIDS","Production"  ],
+            ["Beth Trent","ACAT IV","","PEO","PEO (A) L","","",""  ]
+
+        ];
+
+
+        var programs = [
+            
+              
+                ["PEO(1.0)", "PMA-170 ", "Nav. Systems"],
+                ["PEO(1.0)", "PMA-202 ", "A/C Systems"],
+                ["PEO(1.0)", "PMA-205 ", "Training Systems"],
+                ["PEO(1.0)", "PMA-209 ", "Air Combat Electronics"],
+                ["PEO(1.0)", "PMA-226 ", "H-46"],
+                ["PEO(1.0)", "PMA-260 ", "Support Equipment"],
+                ["PEO(A)", "PMA-207 ", "Tact Airlift"],
+                ["PEO(A)", "PMA-261 ", "H-53"],
+                ["PEO(A)", "PMA-264 ", "AIR ASW"],
+                ["PEO(A)", "PMA-274 ", "VH"],
+                ["PEO(A)", "PMA-275 ", "V-22"],
+                ["PEO(A)", "PMA-276 ", "H-1"],
+                ["PEO(A)", "PMA-290 ", "MP A/C"],
+                ["PEO(A)", "PMA-299 ", "H-60"],
+                ["PEO(JSF)", "PMA-235 ", "JSF"],
+                ["PEO(T)", "PMA-101 ", "MIDS"],
+                ["PEO(T)", "PMA-213 ", "ATC Mgmt"],
+                ["PEO(T)", "PMA-231 ", "E-2/C-2"],
+                ["PEO(T)", "PMA-234 ", "EA-6B"],
+                ["PEO(T)", "PMA-251 ", "ALRE"],
+                ["PEO(T)", "PMA-257 ", "AV-8B"],
+                ["PEO(T)", "PMA-259 ", "Air-to-Air Misl"],
+                ["PEO(T)", "PMA-265", "F-18"],
+                ["PEO(T)", "PMA-271", "E-6B"],
+                ["PEO(T)", "PMA-272 ", "Adv Tac A/C"],
+                ["PEO(T)", "PMA-273 ", "NUFTS"],
+                ["PEO(T)", "PMA-298 ", "FTA"],
+                ["PEO(U)", "PMA-262 ", "MRTM UAS"],
+                ["PEO(U)", "PMA-263 ", "Sm Tact UAS"],
+                ["PEO(U)", "PMA-266 ", "MM Tac UAS"],
+                ["PEO(U)", "PMA-268 ", "Carrier Based UAS"],
+                ["PEO(W)", "PMA-201 ", "STRK Weapons"],
+                ["PEO(W)", "PMA-208 ", "Targets & Decoys"],
+                ["PEO(W)", "PMA-242 ", "Dirc/TM Senstv STRK"],
+                ["PEO(W)", "PMA-280 ", "TOMAHAWK"],
+                ["PEO(W)", "PMA-281 ", "STRK Planning & Exec"],
+                ["PEO (1.0) L", "", ""],
+                ["PEO (A) L", "", ""],
+                ["PEO (JSF) L", "", ""],
+                ["PEO (T) L", "", ""],
+                ["PEO (U) L", "", ""],
+                ["PEO (W) L", "", ""]
+            
+
+        ];
 
 
     </script>
@@ -115,60 +212,70 @@
             <H2>My Profile </H2>
 
             <div class='profile'>
-                <form class="form-horizontal">
-                    <fieldset>
+                <div class="form-horizontal">
+                    <div>
 
                         <!-- Form Name -->
-                        <legend><label id="currentUserLabel">User Name Here</label></legend>
+                        <div><label id="currentUserLabel">User Name Here</label>
+                        </div>
 
                         <!-- Select Basic -->
                         <div class="form-group">
-                            <label class="col-md-4 control-label" for="PMA">PMA</label>
+                            <label class="col-md-4 control-label" for="ddlUser">User</label>
                             <div class="col-md-4">
-                                <select name="PMA" class="form-control" id="PMA">
-                                    <option value="PEO">PEO(T)</option>
+                                <select name="user" class="form-control" id="ddlUser">
+                                    <option >Select...</option>
                                 </select>
                             </div>
                         </div>
 
                         <!-- Select Basic -->
                         <div class="form-group">
-                            <label class="col-md-4 control-label" for="pma">PMA</label>
+                            <label class="col-md-4 control-label" for="ddlPEO">PEO</label>
                             <div class="col-md-4">
-                                <select name="pma" class="form-control" id="pma">
-                                    <option value="PMA-265">PMA-265</option>
+                                <select name="PEO" class="form-control" id="ddlPEO">
+                                    <option >Select...</option>
                                 </select>
                             </div>
                         </div>
 
                         <!-- Select Basic -->
                         <div class="form-group">
-                            <label class="col-md-4 control-label" for="planetype">Type</label>
+                            <label class="col-md-4 control-label" for="ddlPMA">PMA</label>
                             <div class="col-md-4">
-                                <select name="planetype" class="form-control" id="planetype">
-                                    <option value="F-18">F-18</option>
-                                    <option value="F-22">F-22</option>
+                                <select name="pma" class="form-control" id="ddlPMA">
+                                
                                 </select>
                             </div>
                         </div>
 
                         <!-- Select Basic -->
                         <div class="form-group">
-                            <label class="col-md-4 control-label" for="acat">ACAT</label>
+                            <label class="col-md-4 control-label" for="ddlProgram">Program</label>
                             <div class="col-md-4">
-                                <select name="acat" class="form-control" id="acat">
-                                    <option value="Acat">ACAT</option>
+                                <select name="planetype" class="form-control" id="ddlProgram">
+                                   
                                 </select>
                             </div>
                         </div>
 
                         <!-- Select Basic -->
                         <div class="form-group">
-                            <label class="col-md-4 control-label" for="phasesustainment">Phase Sustainment</label>
+                            <label class="col-md-4 control-label" for="ddlACAT">ACAT</label>
                             <div class="col-md-4">
-                                <select name="phasesustainment" class="form-control" id="phasesustainment">
-                                    <option value="Sustainment">Option one</option>
-                                    <option value="">Option two</option>
+                                <select name="acat" class="form-control" id="ddlACAT">
+                                   
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Select Basic -->
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="ddlPhase">Phase</label>
+                            <div class="col-md-4">
+                                <select name="phasesustainment" class="form-control" id="ddlPhase">
+                                    <option ></option>
+                                    <option ></option>
                                 </select>
                             </div>
                         </div>
@@ -183,13 +290,62 @@
                         </div>
 
 
-                    </fieldset>
-                </form>
+                        </div>
+                </div>
 
             </div>
 
 
+            <script type="text/javascript">
 
+                $user = $('#ddlUser');
+                $user.html('');
+
+                $peo = $('#ddlPEO');
+                $peo.html('');
+
+                $pma = $('#ddlPMA');
+                $pma.html('');
+
+                $program = $('#ddlProgram');
+                $program.html('');
+
+                $pma = $('#ddlPMA');
+                $pma.html('');
+                
+                for (var i = 0; i < profiles.length; i++) {
+                    var data = profiles[i];
+                    $user.append('<option>' + data[0] + '</option>'); //"Lyndsey Stephens", "ACAT II", "", "PEO", "PEO (1.0)", "PMA-205", "Training Systems", "Development"
+                    
+                }
+
+                $('#ddlUser')
+                    .on('change',
+                        function() {
+                            var selected = $('#ddlUser option:selected').val();
+                            $('#currentUserLabel').html(selected);
+
+                            for (var i = 0; i < profiles.length; i++) {
+                                if (profiles[i].toString().substring(selected)) {
+                                    var data = profiles[i];
+                                    alert(data + "the data is");
+                                    $peo.append('<option id="-1">' + data[4] + '</option>');
+                                    $pma.append('<option id="-1">' + data[5] + '</option>');
+                                    $program.append('<option id="-1">' + data[6] + '</option>');
+
+                                }
+                            }
+                        });
+                
+
+                //for (var i = 0; i < programs.length; i++) {
+                //    var data1 = programs[i];
+                //    $peo.append('<option>' + data1[0] + '</option>');
+                //}
+
+              
+
+            </script>
 
 
 
@@ -200,6 +356,6 @@
 
     </div>
 
-
+</body>
 
 </html>

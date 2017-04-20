@@ -1,6 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Elements xmlns="http://schemas.microsoft.com/sharepoint/">
-	<ListInstance Title="Competency" OnQuickLaunch="TRUE" TemplateType="100" Url="Lists/Competency" Description="Competency List Instance&#xD;&#xA;&#xD;&#xA;" xmlns="http://schemas.microsoft.com/sharepoint/">
+  <ListInstance 
+    Title="Competency" 
+    OnQuickLaunch="TRUE" 
+    TemplateType="100" 
+    Url="Lists/Competency" 
+    Description="Competency List Instance&#xD;&#xA;&#xD;&#xA;" 
+    xmlns="http://schemas.microsoft.com/sharepoint/">-->
     <Data>
       <Rows>
         <Row>

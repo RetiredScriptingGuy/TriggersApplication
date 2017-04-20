@@ -1,0 +1,127 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:mso="urn:schemas-microsoft-com:office:office" xmlns:msdt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+
+    <!--[if gte mso 9]><xml>
+    <mso:CustomDocumentProperties>
+    <mso:_dlc_DocId msdt:dt="string">XCD4ME7X7URU-1497597693-85</mso:_dlc_DocId>
+    <mso:_dlc_DocIdItemGuid msdt:dt="string">56d1617f-72de-4fa2-980f-132a3299f7c0</mso:_dlc_DocIdItemGuid>
+    <mso:_dlc_DocIdUrl msdt:dt="string">http://dev/sites/Trigger/_layouts/15/DocIdRedir.aspx?ID=XCD4ME7X7URU-1497597693-85, XCD4ME7X7URU-1497597693-85</mso:_dlc_DocIdUrl>
+    </mso:CustomDocumentProperties>
+    </xml><![endif]-->
+    <script src="../_layouts/15/MicrosoftAjax.js"></script>
+    <script src="../_layouts/15/sp.runtime.js"></script>
+    <script src="../_layouts/15/sp.js"></script>
+
+
+    <script src="../SiteAssets/TriggersApp/js/vendor/jquery.min.js"></script>
+    <script src="../SiteAssets/TriggersApp/js/vendor/bootstrap.min.js"></script>
+    <script src="../SiteAssets/TriggersApp/js/vendor/jquery.min.js"></script>
+    <script src="../SiteAssets/TriggersApp/js/vendor/jquery.dataTables.min.js"></script>
+    <script src="../SiteAssets/TriggersApp/js/vendor/dataTables.buttons.min.js"></script>
+    <script src="../SiteAssets/TriggersApp/js/vendor/buttons.print.min.js"></script>
+    <script src="../SiteAssets/TriggersApp/js/vendor/buttons.bootstrap.min.js"></script>
+    <script src="../SiteAssets/TriggersApp/js/vendor/buttons.html5.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="../SiteAssets/TriggersApp/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="../SiteAssets/TriggersApp/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="../SiteAssets/TriggersApp/css/buttons.bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="../SiteAssets/TriggersApp/css/buttons.datTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="../SiteAssets/TriggersApp/css/triggers.css" />
+    <link rel="stylesheet" type="text/css" href="../SiteAssets/TriggersApp/css/custom.css" />
+    <div id="triggerbanner" class="container-fluid">
+        <img src="../SiteAssets/TriggersApp/images/triggers_new logo.png" width="100%" />
+    </div>
+    <div class="section">
+        <a id="login" href="Profile.aspx">My Profile</a>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="nav nav-pills">
+                        <li class="active"><a href="MyDashboard.aspx">Home</a></li>
+                        <li><a href="Triggers.aspx">Triggers</a></li>
+                        <li><a href="Events.aspx">Events /Reviews</a></li>
+                        <li><a href="Reports.aspx">Reports</a></li>
+                        <li><a href="Drafts.aspx">Drafts</a></li>
+                        <li><a href="Mitigation.aspx">Mitigation</a></li>
+                        <li><a href="Feedback.aspx">Feedback</a></li>
+                        <li><a href="Acronyms.aspx">Acronyms</a></li>
+                        <li><a href="References.aspx">References </a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</head>
+<body>
+    <div class='outer'>
+        <div class='fullTopHalf'>
+            <div class='fullTopHalf'>
+                <H2>Add Program Specific Event</H2>
+                <div class='quadrant1'>
+                    <div class="form-horizontal">
+                        <!-- Trigger Details -->
+                        <!-- Text tbType-->
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="tbTitle">Title:</label>
+                            <div class="col-lg-8">
+                                <input name="Title" required class="form-control input-md" id="tbTitle" type="text" placeholder="">
+                            </div>
+                        </div>
+                        <!-- Text tbPhase-->
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="tbDueDate">Due Date:</label>
+                            <div class="col-lg-8">
+                                <input name="DueDate" required class="form-control input-md" id="tbDueDate" type="text" placeholder="">
+                            </div>
+                        </div>
+                        <!-- Textarea tbDescription -->
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="tbComments">Comments:</label>
+                            <div class="col-lg-8">
+                                <textarea name="Type" class="form-control" id="tbComments"></textarea>
+                            </div>
+                        </div>
+                        <!-- Multiple Radios -->
+                        <div class="form-group">
+                            <label class="radio-inline">Status:<input type="radio" name="optradio">Complete</label>
+                            <label class="radio-inline"><input type="radio" name="optradio">Not Complete</label>
+                        </div>
+
+                        <!-- Button (Double) -->
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="button1id"></label>
+                            <div class="col-md-8">
+                                <button name="button1id" class="btn btn-success" id="button1id">Add</button>
+                                <button name="button2id" class="btn btn-default" id="button2id">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--HTML user profile data-->
+        <div id="currentuserprofile">
+            <div>
+                <input type="text" id="userID" title="user ID goes here" readonly="readonly">
+            </div>
+            <div>
+                <input type="text" id="userName" title="user name goes here" readonly="readonly">
+            </div>
+            <div>
+                <input type="text" id="userProgram" title="user name goes here" readonly="readonly">
+            </div>
+            <div>
+                <input type="text" id="digestmsg" title="list digest goes here" readonly="readonly">
+            </div>
+            <div>
+                <input type="text" id="error" title="error message goes here" readonly="readonly">
+            </div>
+        </div>
+        <div id="overlay"></div>
+    </div>
+ </body>
+</html>

@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+
+</head>
+<body>
+    <table id="myHTMLTable" border=1 width="90%" align="center">
+        <tr align='left'>
+            <td><B>ID</B></td>
+            <td><B>EmpName</B></td>
+            <td><B>JobTitle</B></td>
+            <td><B>Department</B></td>
+        </tr>
+    </table>
+
+    <SCRIPT type=text/javascript>
+
+getMyListData() ;
+
+function getMyListData()
+{
+        var method = "GetListItems";
+        var webURL =  $().SPServices.SPGetCurrentSite() ;
+        var list = "Events";
+        var fieldsToRead = "<ViewFields>"+"<FieldRef Name='Name' />" +"</ViewFields>";
+        var query = "<Query><OrderBy><FieldRef Name='Title'  Ascending='True' /></OrderBy></Query>";
+
+        $().SPServices
+        ({
+                    operation: method,
+                    async: false,
+                    webURL: webURL,
+                    listName: list,
+                    CAMLViewFields: "<ViewFields Properties='True' />",
+                    CAMLQuery: query,
+                    completefunc: function (xData, Status)
+                     {
+                         $(xData.responseXML).SPFilterNode("z:row").each(function()
+                         {
+                              var ID = $(this).attr("ows_ID");
+                              var Title = $(this).attr("ows_Title");
+                              
+
+                              $("#myHTMLTable").append("<tr align='middle'>" +
+                               "<td align='left'>"+Title+"</td></tr>");
+                           });
+                   }
+          });
+       };
+
+    </SCRIPT>
+</body>
+</html>

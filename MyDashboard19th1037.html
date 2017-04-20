@@ -1,0 +1,413 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:mso="urn:schemas-microsoft-com:office:office" xmlns:msdt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+
+    <!--[if gte mso 9]><xml>
+    <mso:CustomDocumentProperties>
+    <mso:_dlc_DocId msdt:dt="string">XCD4ME7X7URU-1497597693-77</mso:_dlc_DocId>
+    <mso:_dlc_DocIdItemGuid msdt:dt="string">253a5d0b-a60a-457e-91b6-b2011dd9a454</mso:_dlc_DocIdItemGuid>
+    <mso:_dlc_DocIdUrl msdt:dt="string">http://dev/sites/Trigger/_layouts/15/DocIdRedir.aspx?ID=XCD4ME7X7URU-1497597693-77, XCD4ME7X7URU-1497597693-77</mso:_dlc_DocIdUrl>
+    </mso:CustomDocumentProperties>
+    </xml><![endif]-->
+    <script src="../_layouts/15/MicrosoftAjax.js"></script>
+    <script src="../_layouts/15/sp.runtime.js"></script>
+    <script src="../_layouts/15/sp.js"></script>
+    <script src="../_layouts/15/sp.requestexecutor.js"></script>
+
+    <script src="../SiteAssets/TriggersApp/js/vendor/jquery.min.js"></script>
+    <script src="../SiteAssets/TriggersApp/js/vendor/jquery-ui.min.js"></script>
+    <script src="../SiteAssets/TriggersApp/js/vendor/bootstrap.min.js"></script>
+    <script src="../SiteAssets/TriggersApp/js/vendor/jquery.dataTables.min.js"></script>
+    <script src="../SiteAssets/TriggersApp/js/vendor/dataTables.buttons.min.js"></script>
+    <script src="../SiteAssets/TriggersApp/js/vendor/dataTables.select.min.js"></script>
+
+    <script src="../SiteAssets/TriggersApp/js/vendor/buttons.print.min.js"></script>
+    <script src="../SiteAssets/TriggersApp/js/vendor/buttons.bootstrap.min.js"></script>
+    <script src="../SiteAssets/TriggersApp/js/vendor/buttons.html5.min.js"></script>
+    <script src="../SiteAssets/TriggersApp/js/custom/login.js"></script>
+    <script src="../SiteAssets/TriggersApp/js/custom/mydashboard.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="../SiteAssets/TriggersApp/css/jquery-ui.min.css" />
+    <link rel="stylesheet" type="text/css" href="../SiteAssets/TriggersApp/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="../SiteAssets/TriggersApp/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="../SiteAssets/TriggersApp/css/select.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="../SiteAssets/TriggersApp/css/buttons.bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="../SiteAssets/TriggersApp/css/buttons.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="../SiteAssets/TriggersApp/css/triggers.css" />
+
+    <div id="triggerbanner" class="container-fluid">
+        <img src="../SiteAssets/TriggersApp/images/triggers_new logo.png" style="width:100%" />
+    </div>
+    <div class="section">
+        <span id="profileButtons">
+
+            <a id="login" href="Profile.aspx">My Profile</a>
+            <label id="usrProgram"></label>
+            <label id="lastUpdated"></label>
+        </span>
+        <div id="navpills" class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="nav nav-pills">
+                        <li class="active"><a href="MyDashboard.aspx">Home</a></li>
+                        <li><a id="triggersUrl" href="Triggers.aspx">Triggers</a></li>
+                        <li><a id="eventsUrl" href="Events.aspx">Events /Reviews</a></li>
+                        <li><a href="Reports.aspx">Reports</a></li>
+                        <li><a href="Drafts.aspx">Drafts</a></li>
+                        <li><a href="Mitigation.aspx">Mitigation</a></li>
+                        <li><a href="Feedback.aspx">Feedback</a></li>
+                        <li><a href="Acronyms.aspx">Acronyms</a></li>
+                        <li><a href="References.aspx">References </a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</head>
+<body>
+    <!--HTML BODY-->
+    <div class="dashboardouter">
+        <div class='fullTopHalf'>
+            <!--HTML MYPROGRAM ISSUES TABLE-->
+            <H2>My Program Issues</H2><span id="info" class="glyphicon glyphicon-info-sign" title="Click once to add item to the cube, Double-click to open item in edit page"></span>
+            <div class='myprogramissuesquadrant1' style="float: left; width: 60%;">
+                <div>
+                    <label id="ddlfilterlabel" for="ddlfilter">Phase:</label>
+                    <select id="ddlfilter">
+                        <option value="selectall" selected="selected">Select All</option>
+                        <option value="Sustainment">Sustainment</option>
+                        <option value="Development">Development</option>
+                        <option value="Test">Test</option>
+                        <option value="Production">Production</option>
+                        <option value="FleetIntroduction">Fleet Introduction</option>
+                    </select>
+                </div>
+
+                <div class='gridView' style="width: 100%;">
+                    <table class="display" id="events" style="width: 100%;">
+                        <thead>
+                            <tr>
+                                <th>Trigger</th>
+                                <th>Issue</th>
+                                <th>Type</th>
+                                <th>Likelihood</th>
+                                <th>Consequence</th>
+                                <th>Phase</th>
+                                <th>Status</th>
+                                <th>Id</th>
+                                <th>Risk</th>
+                                <th>Severity</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                        <tfoot></tfoot>
+                    </table>
+                </div>
+                <div>
+                    <label id="addtriggertext">Double-click row to open edit page</label>
+                </div>
+
+            </div>
+            <div id="dashboardbuttons">
+                <button type="button" class="btn btn-default" onclick="toppriority()">Top 10</button>
+                <br>
+                <br>
+                <button type="submit" class="btn btn-default" onclick="clearcube()">Clear</button>
+            </div>
+            <!--HTML CUBE-->
+            <div class='eventsquadrant2'>
+                <div id="cube" class='cube'>
+                    <table>
+                        <tr>
+                            <td rowspan=5 style='border: none; transform: rotate(-90deg)'>Likelihood</td>
+                            <td style='text-align: right; border: none; width: 25px;'>5 &nbsp;</td>
+                            <td id='51' style='background-color: #66ff33'></td>
+                            <td id='52' style='background-color: #ffff00'></td>
+                            <td id="53" style='background-color: #e60000'></td>
+                            <td id='54' style='background-color: #e60000'></td>
+                            <td id='55' style='background-color: #e60000'></td>
+                        </tr>
+                        <tr>
+                            <td style='text-align: right; border: none; width: 25px;'>4 &nbsp;</td>
+                            <td id='41' style='background-color: #66ff33'></td>
+                            <td id='42' style='background-color: #ffff00'></td>
+                            <td id='43' style='background-color: #ffff00'></td>
+                            <td id='44' style='background-color: #e60000'></td>
+                            <td id='45' style='background-color: #e60000'></td>
+                        </tr>
+                        <tr>
+                            <td style='text-align: right; border: none; width: 25px;'>3 &nbsp;</td>
+                            <td id='31' style='background-color: #66ff33'></td>
+                            <td id='32' style='background-color: #66ff33'></td>
+                            <td id="33" style='background-color: #ffff00'></td>
+                            <td id="34" style='background-color: #ffff00'></td>
+                            <td id="35" style='background-color: #e60000'></td>
+                        </tr>
+                        <tr>
+                            <td style='text-align: right; border: none; width: 25px;'>2 &nbsp;</td>
+                            <td id='21' style='background-color: #66ff33'></td>
+                            <td id='22' style='background-color: #66ff33'></td>
+                            <td id='23' style='background-color: #66ff33'></td>
+                            <td id="24" style='background-color: #ffff00'></td>
+                            <td id="25" style='background-color: #ffff00'></td>
+                        </tr>
+                        <tr>
+                            <td style='text-align: right; border: none; width: 25px;'>1 &nbsp;</td>
+                            <td id='11' style='background-color: #66ff33'></td>
+                            <td id='12' style='background-color: #66ff33'></td>
+                            <td id='13' style='background-color: #66ff33'></td>
+                            <td id='14' style='background-color: #66ff33'></td>
+                            <td id="15" style='background-color: #ffff00'></td>
+                        </tr>
+                        <tr>
+                            <td style='border: none; height: 25px;'>&nbsp;</td>
+                            <td style='border: none; height: 25px;'>&nbsp;</td>
+                            <td style='vertical-align: top; border: none; height: 25px;'>1</td>
+                            <td style='vertical-align: top; border: none; height: 25px'>2</td>
+                            <td style='vertical-align: top; border: none; height: 25px'>3</td>
+                            <td style='vertical-align: top; border: none; height: 25px'>4</td>
+                            <td style='vertical-align: top; border: none; height: 25px'>5</td>
+                        </tr>
+                        <tr>
+                            <td style='border: none; height: 25px;'>&nbsp;</td>
+                            <td colspan=6 style='border: none; text-align: center; vertical-align: top'>
+                                <br />&nbsp; Consequence
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class='fullBottomHalf' style="width:99%;">
+            <div class='quadrant3'>
+                <H2>Program Risks</H2>
+                <div class='gridView'>
+                    <table id="risks">
+                        <thead>
+                            <tr>
+                                <th>Trigger</th>
+                                <th>Issue</th>
+                                <th>Type</th>
+                                <th>Likelihood</th>
+                                <th>Consequence</th>
+                                <th>Risk</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+                <div>
+                    <label id="addtriggertext">Double-click row to open edit page</label>
+                </div>
+
+            </div>
+            <div class='quadrant4' style="top:-474px;">
+                <H2>Program Events / Reviews</H2>
+                <div class='gridView'>
+                    <table id="reviews">
+                        <thead>
+                            <tr>
+                                <th>Event/Review</th>
+                                <th>Due Date</th>
+                                <th>Status</th>
+                                <th>Date Complete</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+                <div>
+                    <label id="addtriggertext">Double-click row to open edit page</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--HTML DIALOGS-->
+    <div id="footer">
+        <div id="TriggerDetailsDialog" style="background-color:silver">
+            <div class="detailquadrant1" style="float: left;">
+                <table>
+                    <tr>
+                        <td>
+                            <div class="form-horizontal">
+                                <!-- Trigger Details -->
+                                <h2>Trigger Details</h2>
+                                <!-- Text tbType-->
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="DatePrepared">Type:</label>
+                                    <div class="col-md-4">
+                                        <input name="DatePrepared" class="form-control input-md" id="tbType" required="" type="text" placeholder="">
+                                    </div>
+                                </div>
+                                <!-- Text tbPhase-->
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="textinput">Phase:</label>
+                                    <div class="col-md-4">
+                                        <input name="textinput" class="form-control input-md" id="tbPhase" required="" type="text" placeholder="">
+                                    </div>
+                                </div>
+                                <!-- Textarea tbDescription -->
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="tbDescription">Description:</label>
+                                    <div class="col-lg-8">
+                                        <textarea name="Description" class="form-control" id="tbDescription"></textarea>
+                                    </div>
+                                </div>
+                                <!-- Textarea tbMitigation-->
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="Mitigation">Mitigation:</label>
+                                    <div class="col-lg-8">
+                                        <textarea name="NeedForChange" class="form-control" id="tbMitigation"></textarea>
+                                    </div>
+                                </div>
+                                <!-- Text tbMitigationStart-->
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="tbMitigationStart">Mitigation Date:</label>
+                                    <div class="col-md-4">
+                                        <input name="ECPNumber" class="form-control input-md" id="tbMitigationStart" required="" type="text" placeholder="">
+                                    </div>
+                                </div>
+                                <!-- Text tbMitigationEnd-->
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="tbMitigationEnd">Mitigation End:</label>
+                                    <div class="col-md-4">
+                                        <input name="ECPRevision" class="form-control input-md" id="tbMitigationEnd" required="" type="text" placeholder="">
+                                    </div>
+                                </div>
+                                <!-- Text tbStatus-->
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="ECPRevision">Status:</label>
+                                    <div class="col-md-4">
+                                        <input name="ECPRevision" class="form-control input-md" id="tbStatus" required="" type="text" placeholder="">
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class='detailquadrant2' style="float:right;">
+                <table>
+                    <tr>
+                        <td>
+                            <div class='cube'>
+                                <table>
+                                    <tr>
+                                        <td rowspan=5 style='border: none; transform: rotate(-90deg)'>Likelihood</td>
+                                        <td style='text-align: right; border: none; width: 25px;'>5 &nbsp;</td>
+                                        <td id='51' style='background-color: #66ff33'></td>
+                                        <td id='52' style='background-color: #ffff00'></td>
+                                        <td id="53" style='background-color: #e60000'></td>
+                                        <td id='54' style='background-color: #e60000'></td>
+                                        <td id='55' style='background-color: #e60000'></td>
+                                    </tr>
+                                    <tr>
+                                        <td style='text-align: right; border: none; width: 25px;'>4 &nbsp;</td>
+                                        <td id='41' style='background-color: #66ff33'></td>
+                                        <td id='42' style='background-color: #ffff00'></td>
+                                        <td id='43' style='background-color: #ffff00'></td>
+                                        <td id='44' style='background-color: #e60000'></td>
+                                        <td id='45' style='background-color: #e60000'></td>
+                                    </tr>
+                                    <tr>
+                                        <td style='text-align: right; border: none; width: 25px;'>3 &nbsp;</td>
+                                        <td id='31' style='background-color: #66ff33'></td>
+                                        <td id='32' style='background-color: #66ff33'></td>
+                                        <td id="33" style='background-color: #ffff00'></td>
+                                        <td id="34" style='background-color: #ffff00'></td>
+                                        <td id="35" style='background-color: #e60000'></td>
+                                    </tr>
+                                    <tr>
+                                        <td style='text-align: right; border: none; width: 25px;'>2 &nbsp;</td>
+                                        <td id='21' style='background-color: #66ff33'></td>
+                                        <td id='22' style='background-color: #66ff33'></td>
+                                        <td id='23' style='background-color: #66ff33'></td>
+                                        <td id="24" style='background-color: #ffff00'></td>
+                                        <td id="25" style='background-color: #ffff00'></td>
+                                    </tr>
+                                    <tr>
+                                        <td style='text-align: right; border: none; width: 25px;'>1 &nbsp;</td>
+                                        <td id='11' style='background-color: #66ff33'></td>
+                                        <td id='12' style='background-color: #66ff33'></td>
+                                        <td id='13' style='background-color: #66ff33'></td>
+                                        <td id='14' style='background-color: #66ff33'></td>
+                                        <td id="15" style='background-color: #ffff00'></td>
+                                    </tr>
+                                    <tr>
+                                        <td style='border: none; height: 25px;'>&nbsp;</td>
+                                        <td style='border: none; height: 25px;'>&nbsp;</td>
+                                        <td style='vertical-align: top; border: none; height: 25px;'>1</td>
+                                        <td style='vertical-align: top; border: none; height: 25px'>2</td>
+                                        <td style='vertical-align: top; border: none; height: 25px'>3</td>
+                                        <td style='vertical-align: top; border: none; height: 25px'>4</td>
+                                        <td style='vertical-align: top; border: none; height: 25px'>5</td>
+                                    </tr>
+                                    <tr>
+                                        <td style='border: none; height: 25px;'>&nbsp;</td>
+                                        <td colspan=6 style='border: none; text-align: center; vertical-align: top'>
+                                            <br>&nbsp; Consequence
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span>
+                                <!-- Text tbLikelihood-->
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="tbLikelihood" id="lbLikelihood">Likelihood:</label>
+                                    <div class="col-md-4">
+                                        <input name="tbLikelihood" class="form-control input-md" id="tbLikelihood" required="" type="text" placeholder="">
+
+                                    </div>
+                                </div>
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span>
+                                <!-- Text tbConsequence-->
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="tbConsequence" id="lbConsequence">Consequence:</label>
+                                    <div class="col-md-4">
+                                        <input name="tbConsequence" class="form-control input-md" id="tbConsequence" required="" type="text" placeholder="">
+                                    </div>
+                                </div>
+                            </span>
+                        </td>
+                    </tr>
+                </table>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" onclick="closemodal()">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="savemodal()">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--HTML user profile data-->
+    <div id="currentuserprofile">
+        <div>
+            <input type="text" id="userID" title="user ID goes here" readonly="readonly">
+        </div>
+        <div>
+            <input type="text" id="userName" title="user name goes here" readonly="readonly">
+        </div>
+        <div>
+            <input type="text" id="userProgram" title="user program goes here" readonly="readonly">
+        </div>
+        <div>
+            <input type="text" id="digestmsg" title="list digest goes here" readonly="readonly">
+        </div>
+        <div>
+            <input type="text" id="error" title="error message goes here" readonly="readonly">
+        </div>
+    </div>
+    <div id="overlay"></div>
+</body>
+</html>

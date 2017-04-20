@@ -1,0 +1,294 @@
+﻿#titleAreaRow { display: none; }
+
+#sideNavBox { display: none; }
+
+#lastUpdated {
+    margin-right:20px;
+}
+
+#navpills {
+    margin-left: 5px;
+    margin-top: 10px;
+}
+
+#issuedrafts { border: 1px black solid; }
+
+#riskdrafts { border: 1px black solid; }
+
+#triggers { width: 100% !important; }
+
+.triggersquadrant1{
+	width:300px;
+	float:left;
+}
+
+#myprogramevents {
+    color: black !important;
+    float: right;
+    height: auto;
+    margin-left: 100px;
+    margin-right: 0px !important;
+    min-height: 474px;
+    width: 600px;
+}
+
+#overlay {
+    background-color: gray;
+    display: none;
+    height: 100%;
+    left: 0px;
+    opacity: 0.8;
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    z-index: 80;
+}
+
+#TriggerDetailsDialog {
+    background-color: silver;
+    width: 900px;
+}
+
+#TriggerDetailsDialog {
+    background-color: white;
+    border-color: black;
+    border-style: solid;
+    border-width: 10px;
+    display: none;
+    font-family: "Segoe UI";
+    font-size: large;
+    font-weight: bold;
+    left: 532px;
+    overflow: scroll;
+    padding: 50px;
+    position: fixed;
+    text-align: center;
+    top: 50px;
+    z-index: 100;
+}
+
+#addtriggertext { padding-left: 30px; }
+
+#issuesfooter {
+    padding-left: 700px;
+    padding-top: 30px;
+    width: 100%;
+}
+
+#s4-titlerow {
+    display: none !important;
+    padding-top: 0px !important;
+}
+
+#ddlfilter { background-color: yellow; }
+
+#taFeedback {
+    height: 200px;
+    width: 500px;
+}
+
+#dashboardbuttons { float: right; }
+
+#clearcube { width: 112px; }
+
+#events { width: 100% !important; }
+
+.outer {
+    padding-left: 20px;
+    padding-top: 20px;
+    width: 100%;
+}
+
+.dashboardouter {
+    margin-bottom: 600px;
+    padding-left: 20px;
+    padding-top: 20px;
+    width: 100%;
+}
+
+.dashboardouter h2 {
+    background-color: #C0C0C0;
+    border: 1px solid #808080;
+    border-radius: 3px;
+    color: black;
+    text-align: center;
+    width: 100%;
+}
+
+#contentBox { margin: 0px; }
+ 
+
+#fileupload { padding-left: 190px; }
+
+#profileButtons { float: right; }
+
+#lastupdated { padding-right: 20px; }
+
+.outer H2 {
+    background-color: #C0C0C0;
+    border: 1px solid #808080;
+    border-radius: 3px;
+    color: black;
+    text-align: center;
+    width: 100%;
+}
+
+.profileFullTopHalf {
+    background-color: #F0F0F0;
+    border: 1px solid #808080;
+    border-radius: 3px;
+    padding-right: 20px;
+    position: relative;
+    width: 99%;
+    z-index: 1;
+}
+
+.fullTopHalf {
+    background-color: #F0F0F0;
+    border: 1px solid #808080;
+    border-radius: 3px;
+    height: 500px;
+    padding-right: 20px;
+    position: relative;
+    width: 99%;
+    z-index: 1;
+}
+
+	 
+.fullBottomHalf {
+    background-color: white;
+    height: 420px;
+    width: 95%;
+}
+
+.quadrant1 {
+    color: black;
+    height: 400px;
+    position: relative;
+    width: 49%;
+}
+
+.triggersquadrant2 {
+    color: black;
+    float: right;
+    height: 375px;
+    left: 51%;
+    margin-top: -350px;
+    position: relative;
+    width: 49%;
+}
+
+.triggerdescriptionquadrant2 
+{
+    width: 800px;
+    top: -120px;
+    left: 600px;
+    background-color: white;
+    height: 300px;
+    color: black;
+    height: 375px;
+    left: 51%;
+    margin-top: -420px;
+    position: relative;
+    width: 49%;
+}
+
+#issuedescription{
+	font-size:16px;
+} 
+.quadrant2 {
+    color: black;
+    height: 375px;
+    left: 51%;
+    margin-top: -350px;
+    position: relative;
+    width: 49%;
+}
+	
+
+.quadrant3 {
+    background-color: #F0F0F0;
+    border: 1px solid #808080;
+    border-radius: 3px;
+    height: 500px;
+    position: relative;
+    top: 25px;
+    width: 49%;
+}
+
+.quadrant4 {
+    background-color: #F0F0F0;
+    border: 1px;
+    border: 1px solid #808080;
+    border-radius: 3px;
+    height: 500px;
+    left: 51%;
+    margin-right: 10px;
+    padding-left: ;
+    position: relative;
+    top: -474px;
+    width: 49%;
+}
+
+.myprogramissuesquadrant1 {
+    color: black;
+    height: 400px;
+    position: relative;
+    width: 49%;
+}
+
+.triggerdescriptiongridView {
+    height: 100px;
+    width: 600px;
+    position: absolute;
+    top: 130px;
+    background-color: white;
+    border: 1px solid #808080;
+    margin-right: auto;    
+}
+
+.dataTables_scrollHead { height: 37px; }
+
+.triggersgridView {
+    background-color: white;
+    border: 1px solid #808080;
+    margin-right: auto; 
+    width:300px;
+    height:200px;
+}
+
+.issuesgridView {
+    background-color: white;
+    border: 1px solid #808080;
+    height: 400px;
+    margin-right: auto;	
+}
+
+.gridView {
+    background-color: white;
+    border: 1px solid #808080;
+    margin-right: auto;
+    width: 95%;    
+}
+
+.custom-selected { background-color: yellow; }
+
+.cube {
+    height: 350px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5px;
+    width: 500px;
+}
+
+.cube td {
+    border: 1px solid #808080;
+    font-family: verdana;
+    font-size: large;
+    font-weight: bold;
+    height: 50px;
+    text-align: center;
+    width: 50px;
+}
+
+.IssueRow td { cursor: pointer !important; }

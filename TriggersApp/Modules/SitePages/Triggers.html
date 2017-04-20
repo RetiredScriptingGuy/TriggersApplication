@@ -7,15 +7,17 @@
 
     <!--[if gte mso 9]><xml>
     <mso:CustomDocumentProperties>
-    <mso:_dlc_DocId msdt:dt="string">XCD4ME7X7URU-961093073-1641</mso:_dlc_DocId>
-    <mso:_dlc_DocIdItemGuid msdt:dt="string">df85f623-b306-4822-ae3e-588949b65317</mso:_dlc_DocIdItemGuid>
-    <mso:_dlc_DocIdUrl msdt:dt="string">http://dev/sites/Trigger/_layouts/15/DocIdRedir.aspx?ID=XCD4ME7X7URU-961093073-1641, XCD4ME7X7URU-961093073-1641</mso:_dlc_DocIdUrl>
+    <mso:_dlc_DocId msdt:dt="string">XCD4ME7X7URU-1497597693-41</mso:_dlc_DocId>
+    <mso:_dlc_DocIdItemGuid msdt:dt="string">612d8b38-11d8-4a9f-9e0e-5757c5ef35fc</mso:_dlc_DocIdItemGuid>
+    <mso:_dlc_DocIdUrl msdt:dt="string">http://dev/sites/Trigger/_layouts/15/DocIdRedir.aspx?ID=XCD4ME7X7URU-1497597693-41, XCD4ME7X7URU-1497597693-41</mso:_dlc_DocIdUrl>
     </mso:CustomDocumentProperties>
     </xml><![endif]-->
     <script type="text/javascript" src="/_layouts/15/MicrosoftAjax.js"></script>
     <script type="text/javascript" src="/_layouts/15/sp.runtime.js"></script>
     <script type="text/javascript" src="/_layouts/15/sp.js"></script>
 
+
+    <script src="../SiteAssets/TriggersApp/js/jquery.min.js"></script>
     <script src="../SiteAssets/TriggersApp/js/bootstrap.min.js"></script>
 
     <script src="../SiteAssets/TriggersApp/js/jquery.min.js"></script>
@@ -27,8 +29,8 @@
 
 
 
-    <div class="container-fluid">
-        <img src="../SiteAssets/TriggersApp/images/triggers_1a_dropshadow.png" />
+    <div id="triggerbanner" class="container-fluid">
+        <img src="../SiteAssets/TriggersApp/images/triggers_new logo.png" width="100%" />
     </div>
     <div class="section">
         <a id="login" href="Profile.html">My Profile</a>
@@ -36,103 +38,30 @@
             <div class="row">
                 <div class="col-md-12">
                     <ul class="nav nav-pills">
-                        <li>
-                            <a href="Home.html">Home</a>
-                        </li>
+                        <li><a href="MyDashboard.aspx">Home</a></li>
                         <li class="active"><a href="Triggers.aspx">Triggers</a></li>
+                        <li><a href="Events.aspx">Events /Reviews</a></li>
+                        <li><a href="Reports.aspx">Reports</a></li>
+                        <li><a href="Drafts.aspx">Drafts</a></li>
+                        <li><a href="Mitigation.aspx">Mitigation</a></li>
+                        <li><a href="Feedback.aspx">Feedback</a></li>
+                        <li><a href="Print.aspx">Print </a></li>
+                        <li><a href="Acronyms.aspx">Acronyms</a></li>
+                        <li><a href="References.aspx">References </a></li>
 
-                        <li><a href="../SitePages/Events.aspx">Events /Reviews</a></li>
-                        <li><a href="../SitePages/Reports.aspx">Reports</a></li>
-                        <li><a href="../SitePages/Drafts.aspx">Drafts</a></li>
-                        <li><a href="../SitePages/Mitigation.aspx">Mitigation</a></li>
-                        <li><a href="../SitePages/Feedback.aspx">Feedback</a></li>
-                        <li><a href="../SitePages/Print.aspx">Print </a></li>
-                        <li><a href="../SitePages/Acronyms.aspx">Acronyms</a></li>
-                        <li><a href="../SitePages/References.aspx">References </a></li>
                     </ul>
                 </div>
             </div>
         </div>
     </div>
+    <script type="text/javascript">
 
-
-</head>
-<body>
-    <script>
-        $(document).ready(function () {
-            var dataSet1 = [
-		            ["Over-Flying", "Spares Shortfall", "High", "Cost"],
-                    ["Over-Flying", "Depot Throughput", "High", "Schedule"],
-                    ["Over-Flying", "SLEP", "High", "Performance"]
-
-
-            ];
-
-                   var dataSet2 = [
-		             ["Over-Flying", "Spares Shortfall", "High", "Cost"],
-                    ["Over-Flying", "Depot Throughput", "High", "Schedule"],
-                    ["Over-Flying", "SLEP", "High", "Performance"]
-            ];
-
-                   var dataSet3 = [
-		            ["ILA", "1-16-17", "Complete", "1-2-2017"],
-		            ["DAB", "1-16-17", "Complete", "1-2-2017"],
-		            ["SRR", "1-16-17", "Complete", "1-2-2017"]
-
-
-            ];
+     $(document).ready(function() {
 
 
 
-    $('#events')
-                .DataTable({
-                    data:dataSet1,
-                    columns:[
-                       {title: "Trigger"},
-                       {title: "Issue"},
-                       {title: "Severity"},
-                       {title: "Type"}
-                    ],
-                    "searching" : false,
-                    "paging": false,
-                    "info": false,
-                    "initComplete": function () {
-                        var api = this.api();
-                        api.$('td').click(function () {
-                            api.search(this.innerHTML).draw();
-                        });
-                    }
 
-    //                initComplete: function() {
-
-    //    this.api().columns().every( function () {
-    //        var column = this;
-    //        var select = $('<select><option value=""></option></select>')
-    //            .appendTo( $(column.footer()).empty() )
-    //            .on( 'change', function () {
-    //                var val = $.fn.dataTable.util.escapeRegex(
-    //                    $(this).val()
-    //                    );
-    //                column
-    //                    .search( val ? '^'+val+'$': '', true, false )
-    //                    .draw();
-    //                } );
-
-
-
-    //        column.data().unique().sort().each( function ( d, j ) {
-
-    //            select.append('<option value="' + d + '">' + d + '</option>');
-
-    //        } );
-
-    //    } );
-
-    //}  //end of init
-
-        });
-
-                var clientContext;
+        var clientContext;
         var web;
         var list;
         var currentUser;
@@ -152,92 +81,268 @@
 			//  var thisUser = longUserName.substr(startIndex + 1);
              var $element = $("#login") ;
              if($element){
-                 $element.html(longUserName);
-                 $element.attr('href','../SitePages/Profile.html?Name=' + longUserName);
+                $element.attr('href','../SitePages/Profile.html?Name=' + longUserName);
              }
            },
            function(){alert("Request failed")}
            );
 
 
-           var table1 = $('#events').DataTable();
+           
 
 
 
-                $('#events tbody').on('click', 'tr', function(){
-                   if($(this).hasClass('selected')){
-                      $(this).removeClass('selected');
-                   }
-                   else
-                   {
-                      table1.$('tr selected').removeClass('selected');
-                      $(this).addClass('selected');
-                   }
 
-                });
+            var dataSet1 = [
+
+  ["Acquisition Process","No known ability to adapt business rules to peculiar acquisition requirements;  Acquisition Advice Codes assigned as J;  Demand cannot meet Key Performance Parameters and metrics to drive procurements, yet single points of failure and down equipment."  ],
+  ["Age Exploration","No Age Exploration plan"  ],
+  ["ALE Req's","Lack of ALE Commodity Line Managers (CLMs) participation in ALE PM, ALE CCB, RMAG and ALE Lead System Integrator (LSI) System Engineering Group (SEG) meetings;  Requirements Management Advisory Group (RMAG) not fully utilized."  ],
+  ["APN-1","No Plan in place to address APN-1 draw-down and Program Related Logistics requirements"  ],
+  ["Below-the-Line Funding","Insufficient funding;  Inadequate funding;  Funding not identified;  Funding not stable;  Funding has not been obligated."  ],
+  ["Calibration","Calibration data not properly documented;  No calibration requirements defined;  Calibration requirements not funded;  Calibration standards not in place;  Calibration process not defined/documented."  ],
+  ["CDR Readiness","Proceeding into CDR (and other SETR milestones) without all supporting documentation."  ],
+  ["Change in Maintenance","Change in Maintenance provider (CLS/OEM to Organic;  OEM to CLS;  Organic to CLS)."  ],
+  ["CM","Lack of Configuration Management Plan;  Frequent configuration changes;  Aircraft being delivered with deviations & waivers;  PCAs not conducted;  Configuration unstable or has blocks/increments;  CM data (parts lists) not aligned with engineering, logist"  ],
+  ["Contracts","Lack of quantitative requirements identified in RFP (e.g. Log footprint);  Maintenance Planning functions not addressed in the RFP;  Lack of Post Production Planning addressed in contract(s); Government Data Rights to be purchased not specified."  ],
+  ["COTS Supportability","Lack of supportability reviews for COTS items;  Lack of COTS technical data for trainers and data rights limit government web hosting."  ],
+  ["Data CM","Lack of documented configuration of A/C;  Trainers, supply, and manuals do not match."  ],
+  ["Data Management","Inconsistent formats of data being delivered - hard copies, various soft copy formats (Word, PDF, AutoCAD, SolidWorks, etc.)   cause problems for support contractors in maintaining training devices."  ],
+  ["Data Requirements","Data requirements for Supportability unknown or not specified"  ],
+  ["Data Rights","No data rights strategy being executed;  Data rights unknown;  Lack of access to OEM data;  Data rights not purchased;  Intellectual Property (IP) deliverables and associated license rights not purchased."  ],
+  ["Data Transfer","Tech data not transferred from OEM to Organic."  ],
+  ["Depot RTAT","Depot RTAT not meeting Work Load Schedule."  ],
+  ["Depot Stand-Up","Depot Stand-Up requirements not determined;  Lack of FRC engagement;  Lack of Depot Stand-Up funding identified in LRFS;  No depot capabilities established;  Depot not fully stood-up;  Depot capability under-funded, or unfunded;  Depot Stand-Up analyses ("  ],
+  ["DMSMS","Lack of a DMSMS program;  Lack of DMSMS Plan for sustainment;  Lack of execution of a program DMSMS Plan;  Lack of tracking of part numbers, manufacturer codes and engineering drawings as vendors change or go out of business impact ability to perform re-p"  ],
+  ["ECPs","ECPs are NOT fully supported or funded;  ECPs driven by production schedule without regard to planning for sustainment requirements;  Excessive Class II ECPs."  ],
+  ["FIT","No Fleet Introduction Training;  No FIT team in place."  ],
+  ["FMECA","No Failure Modes, Effects, and Corrective Action assessment data."  ],
+  ["FMS","Foreign Military Sales concerns not addressed;  No assessment on FMS strain on product support capacity;  Lack of coordination between PMAs/PEOs addressing international programs with common systems across Program Offices;  International participation not"  ],
+  ["Foreign Support","No host-nation approval for OCONUS support requirements in place."  ],
+  ["FRACAS","Lack of Failure Reporting, Analysis, and Corrective Action System data for SRA/component level parts."  ],
+  ["FST Data","FST lacking sufficient data;  Organic/Commercial repair data not identified and/or not acquired;  Inadequate training system data being captured and/or communicated;"  ],
+  ["FST MOA","Lack of or weak Memorandum of Agreement between FST and PMA."  ],
+  ["IA & Cyber Certs","Unplanned/unbudgeted Information Assurance and Cyber Security Certifications."  ],
+  ["ILS Certs","ILS certs not planned/funded to meet ship availability milestones."  ],
+  ["ILSMS","ILSMS component data trending RED;  CPFH not being executed within established baseline."  ],
+  ["IPSE","ECPs that update test deficiencies do not include all Integrated Product Support Elements (IPSE)."  ],
+  ["ISST/FST","Lack of ISST/FST in place;  Inadequately staffed and funded;  End to end process not defined."  ],
+  ["Issues Management","Maintenance & Logistics/Supportability issues not captured in an authoritative source;  Relying on workarounds during flight test (robbing production, etc.)"  ],
+  ["IUID","Inadequate incorporation of Item Unique Identification (IUID) planning and requirements."  ],
+  ["KTR to OEM","No plan in place with NAVSUP WSS to transition from Prime KTR to OEM and avoid pass through costs."  ],
+  ["LCSP","No Sustainment Strategy (LCSP) defined;  LCSP not reviewed;  Program not executing to plan;  No IMS for PSE deliveries;  IMS not clearly defined/detailed or aligned with LCSP/LRFS for execution;  No ULSS."  ],
+  ["Logs Assessments","Logistics assessments not being observed or deferred during OTTR reviews."  ],
+  ["Logs Design","Logistics not influencing design;  Higher reliability = lower O&S cost and better Fleet readiness;"  ],
+  ["Logs Performance","A/C logistics performance in field not being measured"  ],
+  ["Logs Resourcing","Logistics T&E Resources not assigned/funded/trained;  No Product Support Fleet representative during test;  Lack of training to support testing;  ST&E not staffed or understaffed;  Lack of supportability yellow sheets/deficiency reports."  ],
+  ["LORA","No requirements for Level of Repair Analysis;  LORA requirements unfunded;  Incomplete or under-resourced LORA."  ],
+  ["Low Demand Items","Low/no demand items not being monitored during transition between OEM/WSS/DLA;  No forecasting for items that have no demand."  ],
+  ["LRFS","No LRFS in place;  LRFS incomplete;  LRFS inaccurate."  ],
+  ["M Demo","No Maintainability Demonstration in test."  ],
+  ["Maintenance Plans","Maintenance plans not approved;  Maintenance plans not defined;  No measures of effectiveness in place;  Lack of MP updates based on current reliability performance;  Insufficient MP data;  No RCM;  No SM&R codes."  ],
+  ["MIM","Platform Maintenance Instruction Manual updates not in place to support IOC."  ],
+  ["MTBFs","Overly Optimistic MTBFs based on antecedent systems."  ],
+  ["NAMDRP","Lack of NAMDRP reporting;  No measures of quantity or trends."  ],
+  ["NAMP Compliance","Non-compliance with maintenance management practices as defined by the NAMP (e.g. tool control, maintenance tracking, etc.)"  ],
+  ["NAVFAC Coordination","Unclear or ambiguous demarcation boundaries between NAVFAC facilities and program requirements."  ],
+  ["NETS/CETS","Lack of NETS/CETS tech support."  ],
+  ["NTSP","NTSP development not planned/funded."  ],
+  ["OAP","Ordnance Assessment Program Planning not taking place early in development phase."  ],
+  ["Organic Repair","Organic Repair Strategy undefined;  Not executing to plan."  ],
+  ["Over-Flying","Program exceeding its WSPD utilization rates;  Undue or unplanned burden being placed on the support system (spares pool usage rates, training hours, MMH/FH, etc.);  Program extended beyond design life."  ],
+  ["Parts Tracking","Lack of performance of high demand/high cost parts being tracked."  ],
+  ["Performance Tracking","Inadequate procedures identified to collect/track support system baseline performance against baseline expectations (MTTR, etc.)"  ],
+  ["PPSP","Lack of a Post Production Sustainment Plan."  ],
+  ["Pre-MSA","Lack of logistic input into AoA Pre-MSA."  ],
+  ["Program Change","Design change after CDR without another formal CDR and other SETR events."  ],
+  ["Program Data","Delivery of both Design and Operational Support data lag behind the production of the training devices;  Lack of data rights/improper marking of drawings."  ],
+  ["Quality Escapes","Lack of a remedy for end items that are failing prematurely, or not performing to spec;  Primes and subs experiencing quality escapes."  ],
+  ["R&M Measurement","Lack of ability to measure actual R&M and correlate with predicted R&M;  Entering system/aircraft testing without successful lab testing."  ],
+  ["R&R Data","Repair & refurbishment tech data not available to repair vice build new."  ],
+  ["RAM-C","No RAM-C plan in place."  ],
+  ["RCM","No Reliability Centered Maintenance Plan;  No RCM program in place."  ],
+  ["Readiness","Fleet metrics trending in negative direction;  Flight Line Entitlement gap;  Ready Basic Aircraft gap;  Ready for Tasking Aircraft gap;  Engine requirement below goals;  6.8 Weapons Readiness Analysis process not clearly defined."  ],
+  ["Reliability Data","No feedback from Depot Maintainers on actual reliability or maintainability data."  ],
+  ["Reliability Perf","Component/system not achieving predicted reliability performance."  ],
+  ["Reliability Req's","No Reliability requirements at the subsystem level;  Ensure subsystem/component reliability requirements considered (measure at the subsystem/component vs overall aircraft)."  ],
+  ["Risk Planning","Lack of logistics risk planning."  ],
+  ["SE","Lack of Support Equipment necessary to maintain aircraft and meet flight schedule;  Inadequate, or non-existent support system performance baselines;  SE not budgeted."  ],
+  ["SE/ILS","SE/ILS for SE requirements not properly defined;  Not planned;  Not budgeted;  Not on contract;  Not SERD d;  Lack of production SE to meet deployment schedule of A/C;  Lack of METCAL certification for SE."  ],
+  ["SM&R Codes","Maintenance plan SM&R codes do not match provisioning SM&R codes."  ],
+  ["Software Support","No software support capability established."  ],
+  ["Spares","Spares allocation does not meet requirement;  Insufficient spares in stock to support system/aircraft/training devices/SE/weapons;  Lack of spares availability to support testing;  Overly dependent on production assets to augment spares pool, coupled with"  ],
+  ["SSA","Software Support Activity (SSA) not planned or not funded."  ],
+  ["ST&E","Lack of planning or commitment of resources to ST&E for training systems"  ],
+  ["Staffing","Program office sustaining engineering and logistics not adequately staffed or funded;  Logistics staffing (both organic and prime) not maintained through maturity of logistics products."  ],
+  ["Suitability Prediction","Prediction of low success in OPEVAL for suitability."  ],
+  ["Sundown","No sundown plan or sundown cost projections."  ],
+  ["Support Funding","Lack of in-service support funds."  ],
+  ["Sup-Sus Req's","Lack of supportability/sustainment requirements defined to support in CDD/SRR/AAP/RR programs."  ],
+  ["Sust Engineering","No Sustaining Engineering contract in place;  Sustainment Engineering not adequately staffed or funded."  ],
+  ["Sust Strat Change","Sustainment Strategy changed from initial plan (O-D vice three level or CLS to organic);  Lack of Joint Service sustainment strategy."  ],
+  ["Systems Analysis","Lack of deep dive one-off systems to verify reliability, performance, and cost."  ],
+  ["Systems Safety","No systems safety for Operation and Maintenance."  ],
+  ["Technical Data","TMs/TDP/Data rights not on contract;  Tech pubs still in  red-line  format and/or have not been validated or verified;  Lack of Technical Manual Evaluation Record (TMER) process control documented in the Quality Assurance Surveillance Plan (QASP) causing "  ],
+  ["Test Plans","Lack of formal test plans"  ],
+  ["Tooling","PMA has not strategy to identify disposition of tooling to provide Life-Cycle support."  ],
+  ["Training","No, or inadequate, Fleet training;  Lack of appropriately matured training package for operations/maintenance;  Insufficient training package (i.e. OJT, PPT slides, etc. to conduct Operator, Instructor, Maintenance training) being provided to Fleet."  ],
+  ["Training Procurement","Procurement of trainers, training devices, and/or training hardware not funded/planned;  Training device spares and repair of spares."  ],
+  ["Training Req's","Lack of Front End Analysis (FEA) to derive training requirements;  Lack of training requirements specification document;  LORA for training device subsystems not being adequately addressed in the requirements."  ],
+  ["Training Support","Insufficient Device/Modification drawings are being provided for the support contractor to maintain the training device."  ],
+  ["ULSS","No User's Logistics Support Summary (ULSS)"  ],
+  ["Vendor Quality","Lack of Prime Contractor influence /control on sub-vendors."  ],
+  ["Warranties","Insufficient warranty data/support provided for newly installed devices, major modifications, or contracted major repairs."  ],
+  ["Weapons","Weapons Supply Cataloging (HERO/ESD/PHST/FHC) backlog causing program delay (status Code 9) to establish NALC/NSN to field commodity;  Poor Ordnance Assessment Program Plan execution and reporting."  ]
+
+ ];
+
+    //     $('#triggers').DataTable({
+      //              data: dataSet1
+
+      //               });
+
+
+         //var table1 = $('#Triggers').DataTable();
+
+         //       $('#Triggers tbody').on('click', 'tr', function(){
+         //          if($(this).hasClass('selected')){
+         //              $(this).removeClass('selected');
+         //          }
+         //          else
+         //          {
+         //             table1.$('tr selected').removeClass('selected');
+         //             $(this).addClass('selected');
+         //          }
+
+         //           var data = table1.row(this.rowIndex - 1).data();
+
+         //          updateDescription(data[1]);
+
+         //       });
+
+            //$('#events')
+            //     .DataTable({
+            //         data: dataSet1,
+            //         select: true,
+            //         fixedHeader: true,
+            //         scrollY: 300,
+            //         columnDefs: [
+            //            { "targets": [3], "data": null, "render": function (data, type, row) { return "" + data[5] + data[6] } },
+            //            { "targets": [4, 5, 6], "visible": false, "searchable": false }
+            //         ],
+
+            //         columns: [    //only display In Progress. All others are used for reports
+            //            { name: 'Trigger' },
+            //            { name: 'Issue' },
+            //            { name: 'Severity' },
+            //            { name: 'Risk' },
+            //            { name: 'Likelihood' },
+            //            { name: 'Consequence' },
+            //            { name: 'Status' }
+            //         ],
+            //         "searching": true,
+            //         "paging": true,
+            //         "info": true
+            //     }
+            //         );
 
 
 
-                $('#risks')
-                .DataTable({
-                     data:dataSet2,
-                     columns:[
-                     	{title: "Trigger"},
-                     	{title: "Issue"},
-                     	{title: "Severity"},
-                     	{title: "Type"}
-                     	],
-                       "searching" : false,
-                       "paging": false,
-                       "info": false
-
-                });
-
-                $('#risks tbody').on('click', 'tr', function () {
-                    if ($(this).hasClass('selected')) {
-                        $(this).removeClass('selected');
-                    }
-                    else {
-                        table1.$('tr selected').removeClass('selected');
-                        $(this).addClass('selected');
-                    }
-
-                });
 
 
-				$('#reviews')
-                .DataTable({
-                     data:dataSet3,
-                     columns:[
-                     	{title: "Event/Review"},
-                     	{title: "Due Date"},
-                     	{title: "Status"},
-                     	{title: "Date Completed"}
-                     	],
-                        "searching" : false,
-                        "paging": false,
-                        "info": false
+    //     $('#triggers').DataTable({
+      //              data: dataSet1
 
-                });
+      //               });
 
-				$('#reviews tbody').on('click', 'tr', function () {
-				    if ($(this).hasClass('selected')) {
-				        $(this).removeClass('selected');
-				    }
-				    else {
-				        table1.$('tr selected').removeClass('selected');
-				        $(this).addClass('selected');
-				    }
 
-				});
+         //var table1 = $('#Triggers').DataTable();
 
-	  	 //getMyIssues();
-	  	 //getRisks();
-	  	 //getEvents();
+         //       $('#Triggers tbody').on('click', 'tr', function(){
+         //          if($(this).hasClass('selected')){
+         //              $(this).removeClass('selected');
+         //          }
+         //          else
+         //          {
+         //             table1.$('tr selected').removeClass('selected');
+         //             $(this).addClass('selected');
+         //          }
 
-	  });
+         //           var data = table1.row(this.rowIndex - 1).data();
 
+         //          updateDescription(data[1]);
+
+         //       });
+
+            //$('#events')
+            //     .DataTable({
+            //         data: dataSet1,
+            //         select: true,
+            //         fixedHeader: true,
+            //         scrollY: 300,
+            //         columnDefs: [
+            //            { "targets": [3], "data": null, "render": function (data, type, row) { return "" + data[5] + data[6] } },
+            //            { "targets": [4, 5, 6], "visible": false, "searchable": false }
+            //         ],
+
+            //         columns: [    //only display In Progress. All others are used for reports
+            //            { name: 'Trigger' },
+            //            { name: 'Issue' },
+            //            { name: 'Severity' },
+            //            { name: 'Risk' },
+            //            { name: 'Likelihood' },
+            //            { name: 'Consequence' },
+            //            { name: 'Status' }
+            //         ],
+            //         "searching": true,
+            //         "paging": true,
+            //         "info": true
+            //     }
+            //         );
+
+           // var table1 = $('#triggers').DataTable();
+
+            $('#triggers')
+                   .DataTable({
+                       data: dataSet1,
+                       "columnDefs": [{	"targets":[1],"visible":false,"searchable":false}],
+                       "columns": [
+                           { title: "Trigger" },
+                           { title: "TriggerDescription" }
+                       ],
+                       "searching": false,
+                       "paging": true,
+                       "info": true
+                   });
+
+            $('#triggers tbody').on('click', 'tr', function () {
+                if ($(this).hasClass('selected')) {
+                    $(this).removeClass('selected');
+                }
+                else {
+                    table1.$('tr selected').removeClass('selected');
+                    $(this).addClass('selected');
+                }
+
+                  var rowdata = table1.row(this).data();
+                  alert(rowdata);
+
+                  // showDescription(rowdata[1]);
+
+
+
+            });
+
+ function showDescription(x) {
+              $('#TriggerDescription').text(x);
+
+        }
+
+});
     </script>
+
+</head>
+<body>
     <div>
         <label id="sustainmentlabel" for="sustainmentselect">Phase:</label>
         <select id="sustainmentselect">
@@ -252,69 +357,73 @@
     <div class='outer'>
         <div class='fullTopHalf'>
             <div class='quadrant1'>
-                <h4 style="padding-top:35px;">Triggers</h4>
+                <h2>Triggers</h2>
                 <div class='gridView'>
-                    <ul>
-                        <li>AcQuisition Process</li>
-                        <li>AcQuisition Process2</li>
-                        <li>AcQuisition Process3</li>
-                        <li>AcQuisition Process4</li>
-                        <li>AcQuisition Process5</li>
-                        <li>AcQuisition Process</li>
-                        <li>AcQuisition Process</li>
-                        <li>AcQuisition Process</li>
-                        <li>AcQuisition Process</li>
-                        <li>AcQuisition Process</li>
-                        <li>AcQuisition Process</li>
-                        <li>AcQuisition Process</li>
-                        <li>AcQuisition Process</li>
-                        <li>AcQuisition Process</li>
-                        <li>AcQuisition Process</li>
-                        <li>AcQuisition Process2</li>
-                        <li>AcQuisition Process3</li>
-                        <li>AcQuisition Process4</li>
-                        <li>AcQuisition Process5</li>
-                        <li>AcQuisition Process</li>
-                        <li>AcQuisition Process</li>
-                        <li>AcQuisition Process</li>
-                        <li>AcQuisition Process</li>
-                        <li>AcQuisition Process</li>
-                        <li>AcQuisition Process</li>
-                        <li>AcQuisition Process</li>
-                        <li>AcQuisition Process</li>
-                        <li>AcQuisition Process</li>
-                        <li>AcQuisition Process</li>
-                    </ul>
+                    <table class="display" id="triggers">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Trigger
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
                 </div>
                 <div>
-                    <label>Your trigger not listed? Add another Triggter here"</label>
-                    <a href="../SitePages/AddTrigger.html">Add New Trigger</a>
+                    <label id="addtriggertext">Your trigger not listed? Add another Triggter here"</label>
+                    <a href="AddTrigger.aspx">Add New Trigger</a>
                 </div>
             </div>
-            <div class='quadrant2'>
-                <h4>Trigger Description</h4>
+            <div class='quadrant2' style="top:-420px;">
+                <h2>Trigger Description</h2>
                 <div class='gridView'>
-                    <ul>
-                        <li>Trigger Description Here</li>
-
-                    </ul>
+                    <table class="display" id="TriggerDescription">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Description
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
                 </div>
+
             </div>
         </div>
 
         <div class='fullBottomHalf'>
             <div class='quadrant3'>
-                <H2>Issues</H2>
+                <h2>Issues</h2>
                 <div class='gridView'>
-                    Issues list goes here
+                    <table class="display" id="Issues">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Issues
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
                 </div>
 
 
             </div>
             <div class='quadrant4'>
-                <H2>Issue Description</H2>
+                <h2>Issue Description</h2>
                 <div class='gridView'>
-                    Issue Description
+                    <table class="display" id="IssueDescription">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Description
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
                 </div>
 
             </div>
@@ -324,6 +433,36 @@
 
     </div>
 
+    <!--<div id="issuesfooter" class="form-group" style="width:100%;" >
+
+            <div class="col-md-4">
+                <button name="singlebutton" class="btn btn-primary" id="copybutton" >Copy Selected Issues to My Program Issues/My Program Risks</button>                                                </select>
+                <br />
+                <br />
+                <br />
+
+
+
+                <label id="notlistedtrigger">Issue Not Listed?</label>
+                <button name="singlebutton" class="btn btn-primary" id="singlebutton" onclick="AddNewIssue()">Add New Issue/Risk</button>
+            </div>
+
+
+    </div>-->
+    <!--<div class="gridView" >
+        <table class="display" id="MyList" >
+            <thead>
+                <tr>
+                    <th>
+                        Trigger
+                    </th>
+                </tr>
+            </thead>
+        </table>
+    </div>-->
+
+
+</body>
 
 
 </html>

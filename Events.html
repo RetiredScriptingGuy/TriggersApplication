@@ -1,0 +1,159 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:mso="urn:schemas-microsoft-com:office:office" xmlns:msdt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882">
+<head>
+    <meta charset="utf-8"/>
+    <title></title>
+
+    <!--[if gte mso 9]><xml>
+        <mso:CustomDocumentProperties>
+            <mso:_dlc_DocId msdt:dt="string">XCD4ME7X7URU-1497597693-96</mso:_dlc_DocId>
+            <mso:_dlc_DocIdItemGuid msdt:dt="string">6e10bf18-bafc-48e3-a4cf-f93bc76332b6</mso:_dlc_DocIdItemGuid>
+            <mso:_dlc_DocIdUrl msdt:dt="string">http://dev/sites/Trigger/_layouts/15/DocIdRedir.aspx?ID=XCD4ME7X7URU-1497597693-96, XCD4ME7X7URU-1497597693-96</mso:_dlc_DocIdUrl>
+        </mso:CustomDocumentProperties>
+    </xml><![endif]-->
+    <script src="../_layouts/15/MicrosoftAjax.js"></script>
+    <script src="../_layouts/15/sp.runtime.js"></script>
+    <script src="../_layouts/15/sp.js"></script>
+    <script src="../SiteAssets/TriggersApp/js/vendor/jquery.min.js"></script>
+    <script src="../SiteAssets/TriggersApp/js/vendor/bootstrap.min.js"></script>
+    <script src="../SiteAssets/TriggersApp/js/vendor/jquery.min.js"></script>
+    <script src="../SiteAssets/TriggersApp/js/vendor/jquery.dataTables.min.js"></script>
+    <script src="../SiteAssets/TriggersApp/js/vendor/dataTables.buttons.min.js"></script>
+    <script src="../SiteAssets/TriggersApp/js/vendor/buttons.print.min.js"></script>
+    <script src="../SiteAssets/TriggersApp/js/vendor/buttons.bootstrap.min.js"></script>
+    <script src="../SiteAssets/TriggersApp/js/vendor/buttons.html5.min.js"></script>
+    <script src="../SiteAssets/TriggersApp/js/custom/events.js"></script>
+    <link rel="stylesheet" type="text/css" href="../SiteAssets/TriggersApp/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../SiteAssets/TriggersApp/css/jquery.dataTables.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../SiteAssets/TriggersApp/css/buttons.bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../SiteAssets/TriggersApp/css/buttons.datTables.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../SiteAssets/TriggersApp/css/triggers.css"/>
+    <link rel="stylesheet" type="text/css" href="../SiteAssets/TriggersApp/css/custom.css"/>
+    <div id="triggerbanner" class="container-fluid" style="width:100%;">
+        <img src="../SiteAssets/TriggersApp/images/triggers_new logo.png" />
+    </div>
+    <div class="section">
+        <a id="login" href="Profile.aspx">My Profile</a>
+        <div id="navpills" class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="nav nav-pills">
+                        <li><a href="MyDashboard.aspx">Home</a></li>
+                        <li><a href="Triggers.aspx">Triggers</a></li>
+                        <li class="active"><a href="Events.aspx">Events /Reviews</a></li>
+                        <li><a href="Reports.aspx">Reports</a></li>
+                        <li><a href="Drafts.aspx">Drafts</a></li>
+                        <li><a href="Mitigation.aspx">Mitigation</a></li>
+                        <li><a href="Feedback.aspx">Feedback</a></li>
+                        <li><a href="Acronyms.aspx">Acronyms</a></li>
+                        <li><a href="References.aspx">References </a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</head>
+<body>
+<div>
+    <label id="filter" for="ddlfilter">Phase:</label>
+    <select id="ddlfilter">
+        <option value="selectvalue" selected="selected">Select Value</option>
+        <option value="Sustainment">Sustainment</option>
+        <option value="Development">Development</option>
+        <option value="Test">Test</option>
+        <option value="Production">Production</option>
+        <option value="FleetIntroduction">Fleet Introduction</option>
+    </select>
+</div>
+<div class="outer">
+    <div class="fullTopHalf">
+        <div class="eventsquadrant1" style="float: left;">
+            <h2>All Events/Reviews</h2>
+            <div style="height: 400px; width: 100%;">
+                <table id="events" style="width: 100%;">
+                    <thead>
+                    <tr>
+                        <th>
+                            Event
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+        <div id="dashboardbuttons" style="display: none;">
+            <button type="button" class="btn btn-success" onclick="AddEvent()">Add Event</button>
+            <br>
+            <br>
+            <button type="button" class="btn btn-danger" onclick="RemoveEvent()">Remove</button>
+        </div>
+        <div id="myprogramevents">
+            <h2>My Program Events</h2>
+            <div class="gridView">
+                <table class="display" id="myEvents">
+                    <thead>
+                    <tr>
+                        <th>
+                            Event
+                        </th>
+                        <th>
+                            Due Date
+                        </th>
+                        <th>
+                            Status
+                        </th>
+                        <th>
+                            Date Completed
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="fullBottomHalf" style="display: none;">
+        <div class="quadrant3">
+            <h2>Issues</h2>
+            <div class="gridView" style="height: 350px;">
+                <table class="display" id="Issues">
+                    <thead>
+                    <tr>
+                        <th>
+                            Issues
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+        <div class="quadrant4">
+            <h2>Issue Description</h2>
+            <div class="gridView" style="height: 400px;">
+                <table class="display" id="IssueDescription">
+                    <thead>
+                    <tr>
+                        <th>
+                            Description
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div id="currentuserprofile">
+    <div id="userID">UserID</div>
+    <div id="userName">UserName</div>
+    <div id="userProgram">UserProgram</div>
+    <div id="digestmsg"></div>
+    <div id="error"></div>
+</div>
+</body>
+</html>

@@ -6,6 +6,14 @@
 	    display:none;
   }
 
+ #peocontrols {
+     display:none;
+ }
+
+ #leadershipcontrols {
+     display:none;
+ }
+
  #login{
 	
 	float:right;
@@ -28,6 +36,17 @@
 
 }
 
+#addtriggertext{
+	
+	padding-left:30px;
+}
+
+#issuesfooter{
+	
+	width:100%;
+	padding-left: 700px;
+	padding-top:30px;
+}
 
 #sustainmentlabel{
 	
@@ -40,11 +59,11 @@
 	height: 200px;
 }
      
-	 .outer {
-	     padding-top:20px;
+.outer {
+	padding-top:20px;
 
-	 }
-	 	 
+ }
+ 	 
 	 .outer H2
 	 {
 	 	text-align: center;
@@ -85,8 +104,7 @@
 	 
 	 .quadrant2{
 	    position:relative;
-	    left: 51%;
-	    top: -374px;
+	    left: 51%;	   
 	    margin-right: 0px;
 	 	width:49%;	
 	    height:375px;

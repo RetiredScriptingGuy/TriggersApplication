@@ -1,6 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Elements xmlns="http://schemas.microsoft.com/sharepoint/">
-	<ListInstance Title="ACAT" OnQuickLaunch="TRUE" TemplateType="100" Url="Lists/ACAT" Description="ACAT List Instance" xmlns="http://schemas.microsoft.com/sharepoint/">
+	<ListInstance 
+    Title="ACAT" 
+    OnQuickLaunch="TRUE" 
+    TemplateType="100" 
+    Url="Lists/ACAT" 
+    Description="ACAT List Instance" 
+    xmlns="http://schemas.microsoft.com/sharepoint/">
     <Data>
       <Rows>
         <Row>

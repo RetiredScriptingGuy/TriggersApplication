@@ -7,131 +7,263 @@
 
     <!--[if gte mso 9]><xml>
     <mso:CustomDocumentProperties>
-    <mso:_dlc_DocId msdt:dt="string">XCD4ME7X7URU-1497597693-5</mso:_dlc_DocId>
-    <mso:_dlc_DocIdItemGuid msdt:dt="string">51d164b7-0fbc-4bea-a13c-24b56ef4a09f</mso:_dlc_DocIdItemGuid>
-    <mso:_dlc_DocIdUrl msdt:dt="string">http://dev/sites/Trigger/_layouts/15/DocIdRedir.aspx?ID=XCD4ME7X7URU-1497597693-5, XCD4ME7X7URU-1497597693-5</mso:_dlc_DocIdUrl>
+    <mso:_dlc_DocId msdt:dt="string">XCD4ME7X7URU-1497597693-77</mso:_dlc_DocId>
+    <mso:_dlc_DocIdItemGuid msdt:dt="string">253a5d0b-a60a-457e-91b6-b2011dd9a454</mso:_dlc_DocIdItemGuid>
+    <mso:_dlc_DocIdUrl msdt:dt="string">http://dev/sites/Trigger/_layouts/15/DocIdRedir.aspx?ID=XCD4ME7X7URU-1497597693-77, XCD4ME7X7URU-1497597693-77</mso:_dlc_DocIdUrl>
     </mso:CustomDocumentProperties>
     </xml><![endif]-->
-</head>
-<body>
-    <div class="container-fluid">
-        <img src="../SiteAssets/TriggerApp/images/triggers_1a_dropshadow.png" />
-    </div>
+
 
     <script src="../SiteAssets/TriggersApp/js/jquery.min.js"></script>
     <script src="../SiteAssets/TriggersApp/js/bootstrap.min.js"></script>
-
     <script src="../SiteAssets/TriggersApp/js/jquery.min.js"></script>
     <script src="../SiteAssets/TriggersApp/js/jquery.dataTables.min.js"></script>
-    <link rel="stylesheet" href="../SiteAssets/TriggersApp/css/bootstrap.min.css" />
+    <script src="../SiteAssets/TriggersApp/js/dataTables.buttons.min.js"></script>
+    <script src="../SiteAssets/TriggersApp/js/buttons.print.min.js"></script>
+    <script src="../SiteAssets/TriggersApp/js/buttons.bootstrap.min.js"></script>
+    <script src="../SiteAssets/TriggersApp/js/buttons.html5.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="../SiteAssets/TriggersApp/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="../SiteAssets/TriggersApp/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="../SiteAssets/TriggersApp/css/buttons.bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="../SiteAssets/TriggersApp/css/buttons.datTables.min.css" />
     <link rel="stylesheet" type="text/css" href="../SiteAssets/TriggersApp/css/triggers.css" />
+    <link rel="stylesheet" type="text/css" href="../SiteAssets/TriggersApp/css/custom.css" />
 
-    <script>
-        $(document).ready(function () {
-            var dataSet1 = [
-		            ["Over-Flying", "Spares Shortfall", "High", "Cost"],
-                    ["Over-Flying", "Depot Throughput", "High", "Schedule"],
-                    ["Over-Flying", "SLEP", "High", "Performance"]
 
+
+    <div id="triggerbanner" class="container-fluid">
+        <img src="../SiteAssets/TriggersApp/images/triggers_new logo.png" style="width:100%" />
+    </div>
+    <div class="section">
+        <a id="login" href="Profile.aspx">My Profile</a>
+        <div id="navpills" class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="nav nav-pills">
+                        <li class="active"><a href="MyDashboard.aspx">Home</a></li>
+                        <li><a href="Triggers.aspx">Triggers</a></li>
+                        <li><a href="Events.aspx">Events /Reviews</a></li>
+                        <li><a href="Reports.aspx">Reports</a></li>
+                        <li><a href="Drafts.aspx">Drafts</a></li>
+                        <li><a href="Mitigation.aspx">Mitigation</a></li>
+                        <li><a href="Feedback.aspx">Feedback</a></li>
+                        <li><a href="Print.aspx">Print </a></li>
+                        <li><a href="Acronyms.aspx">Acronyms</a></li>
+                        <li><a href="References.aspx">References </a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</head>
+<body>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+          // dataset one for My Program issues Event, Program, PMA, Last Updated,             Status, likelihood, consequence, type
+                                                //0,       16,    15, PM approval date used  19,  8 ,       6       ,   7  ,     4
+           $('#TriggerDetailsDialog').hide();
+           $('#Overlay').hide();
+
+          // $('#dlg-details').modal({ show: false });
+
+           $('#events').on('click', '.btn-details', function(){
+               // showModalDialog(this);
+                 //showModalDialog
+                 $('#TriggerDetailsDialog').show();
+                 $('#Overlay').show();
+             });
+
+
+
+
+
+
+            var dataSet2 = [
+                ["Over-Flying", "Spares Shortfall", "High", "Cost"],
+                ["Over-Flying", "Depot Throughput", "High", "Schedule"],
+                ["Over-Flying", "SLEP", "High", "Performance"],
+                ["Over-Flying", "Spares Shortfall", "High", "Cost"],
+                ["Over-Flying", "Depot Throughput", "High", "Schedule"],
+                ["Over-Flying", "SLEP", "High", "Performance"],
+                ["Over-Flying", "Spares Shortfall", "High", "Cost"],
+                ["Over-Flying", "Depot Throughput", "High", "Schedule"],
+                ["Over-Flying", "SLEP", "High", "Performance"],
+                ["Over-Flying", "Spares Shortfall", "High", "Cost"],
+                ["Over-Flying", "Depot Throughput", "High", "Schedule"],
+                ["Over-Flying", "SLEP", "High", "Performance"],
+                ["Over-Flying", "Spares Shortfall", "High", "Cost"],
+                ["Over-Flying", "Depot Throughput", "High", "Schedule"],
+                ["Over-Flying", "SLEP", "High", "Performance"],
+                ["Over-Flying", "Spares Shortfall", "High", "Cost"],
+                ["Over-Flying", "Depot Throughput", "High", "Schedule"],
+                ["Over-Flying", "SLEP", "High", "Performance"],
+                ["Over-Flying", "Spares Shortfall", "High", "Cost"],
+                ["Over-Flying", "Depot Throughput", "High", "Schedule"],
+                ["Over-Flying", "SLEP", "High", "Performance"],
+                ["Over-Flying", "Spares Shortfall", "High", "Cost"],
+                ["Over-Flying", "Depot Throughput", "High", "Schedule"],
+                ["Over-Flying", "SLEP", "High", "Performance"],
+                ["Over-Flying", "Spares Shortfall", "High", "Cost"],
+                ["Over-Flying", "Depot Throughput", "High", "Schedule"],
+                ["Over-Flying", "SLEP", "High", "Performance"]
 
             ];
 
-                   var dataSet2 = [
-		             ["Over-Flying", "Spares Shortfall", "High", "Cost"],
-                    ["Over-Flying", "Depot Throughput", "High", "Schedule"],
-                    ["Over-Flying", "SLEP", "High", "Performance"]
+            var dataSet3 = [
+                ["ILA", "1-16-17", "Complete", "1-2-2017"],
+                ["DAB", "1-16-17", "Complete", "1-2-2017"],
+                ["SRR", "1-16-17", "Complete", "1-2-2017"],
+                ["ILA", "1-16-17", "Complete", "1-2-2017"],
+                ["DAB", "1-16-17", "Complete", "1-2-2017"],
+                ["SRR", "1-16-17", "Complete", "1-2-2017"],
+                ["ILA", "1-16-17", "Complete", "1-2-2017"],
+                ["DAB", "1-16-17", "Complete", "1-2-2017"],
+                ["SRR", "1-16-17", "Complete", "1-2-2017"],
+                ["ILA", "1-16-17", "Complete", "1-2-2017"],
+                ["DAB", "1-16-17", "Complete", "1-2-2017"],
+                ["SRR", "1-16-17", "Complete", "1-2-2017"],
+                ["ILA", "1-16-17", "Complete", "1-2-2017"],
+                ["DAB", "1-16-17", "Complete", "1-2-2017"],
+                ["SRR", "1-16-17", "Complete", "1-2-2017"],
+                ["ILA", "1-16-17", "Complete", "1-2-2017"],
+                ["DAB", "1-16-17", "Complete", "1-2-2017"],
+                ["SRR", "1-16-17", "Complete", "1-2-2017"],
+                ["ILA", "1-16-17", "Complete", "1-2-2017"],
+                ["DAB", "1-16-17", "Complete", "1-2-2017"],
+                ["SRR", "1-16-17", "Complete", "1-2-2017"],
+                ["ILA", "1-16-17", "Complete", "1-2-2017"],
+                ["DAB", "1-16-17", "Complete", "1-2-2017"],
+                ["SRR", "1-16-17", "Complete", "1-2-2017"]
+
             ];
 
-                   var dataSet3 = [
-		            ["ILA", "1-16-17", "Complete", "1-2-2017"],
-		            ["DAB", "1-16-17", "Complete", "1-2-2017"],
-		            ["SRR", "1-16-17", "Complete", "1-2-2017"]
+          //  ["Issue","Trigger","Issue Description*","Category","Type","Phase","Likelihood","Consequence","Status","Mitigation 6.0d","Mitigation 6.6","Mitigation 6.7","Mitigation 6.8","Mitigation Date","PEO","PMA","Program","Phase","PM Approver","PM Approval Date","Competency Approver","Competency Approval Date","Admin Approver","Admin Approval Date"  ],
+
+            var dataSet1 = [ ["ALE Management and Support Plans","ALE","Lack of clearly Defined Management and Support Plans","Issue","Cost","Development","2","3","Complete","Provide structure for process improvement and sustained performance.","Work with AIR6.8 ALE personnel to become familiar with ALE processes ","","When a standard requirement is submitted for Logistics Management and Support Plans, the ALE PM and CLMs will attend, or send representative with authority to commit resources, in support of RMAG and SIG processes to provide automated Logistics Management and Support Plan capability within funding and schedule constraints. ","3/6/2017","PEO (1.0)","PMA-205","Training Systems","Development","","","","","",""  ],
+                         ["Calibration","Calibration","Policy and procedures not clear.","Risk","Schedule","Test","5","4","In Progress","","Simple language, short desktop guide to explain CMRS, METRL, and standards. Be sure to engage with the appropriate 6.7 Branch Competency as new or modified equipment is being developed to ensure that calibration Stand-Up processes are understood and are being followed.","Engage with the appropriate 6.7 Branch Competency as new or modified equipment is being developed to ensure that calibration Stand-Up processes are understood and are being followed.","","2/8/2014","PEO (1.0)","PMA-205","Training Systems","Sustainment","","","","","",""  ]
+                         ];
 
 
-            ];
-
-
-
-    $('#events')
+         var eventstable =   $('#events')
                 .DataTable({
-                    data:dataSet1,
-                    columns:[
-                       {title: "Trigger"},
-                       {title: "Issue"},
-                       {title: "Severity"},
-                       {title: "Type"}
+                    data: dataSet1,
+                    buttons: true,
+                    fixedHeader: true,
+                    scrollY:300,
+                    scrollX: true,
+                    columnDefs: [
+                       {	"targets":[24],"data":null,"render":function(data,type,row){return "" + data[6] + data[7] } },
+                       {	"targets":[25],
+                            "data":null,
+                            "defaultContent": '<button type="button" class="btn btn primary btn-details">Edit</button>'},
+
+
+					  {	"targets":[2,3,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23],"visible":false,"searchable":false}
+
+					],
+
+                    columns:[    //filter out any data column completed. All others are used for reports
+
+
+				       {title: 'Issue'},                    //index 0    //column 1
+                       {title: 'Trigger'},                               //column 2
+                       {title: 'Issue Description*'},
+                       {title: 'Category' },
+                       {title: 'Type' },                                 //column 3
+                       {title: 'Phase' },                   ///index 5   //column 4
+				       {title: 'Likelihood'},
+				       {title: 'Consequence'},
+                       {title: 'Status'},                                 //filter out
+                       {title: 'Mitigation 6.0d'},
+                       {title: 'Mitigation 6.6' },          //index 10
+                       {title: 'Mitigation 6.7'},
+                       {title: 'Mitigation 6.8' },
+				       {title: 'Mitigation Date'},
+				       {title: 'PEO'},
+                       {title: 'PMA'},                      //index 15
+                       {title: 'Program'},
+                       {title: 'Phase' },
+                       {title: 'PM Approver' },
+                       {title: 'PM Approval Date' },
+				       {title: 'Competency Approver '},     //index 20
+				       {title: 'Competency Approval Date'},
+                       {title: 'Admin Approver'},
+                       {title: 'Admin Approval Date'},
+                       {title: 'Risk'}
+
                     ],
-                    "searching" : false,
+                    "searching" : true,
                     "paging": false,
-                    "info": false,
-                    "initComplete": function () {
-                        var api = this.api();
-                        api.$('td').click(function () {
-                            api.search(this.innerHTML).draw();
-                        });
-                    }
+                    "info": true
+				     }
+                    );
 
-    //                initComplete: function() {
 
-    //    this.api().columns().every( function () {
-    //        var column = this;
-    //        var select = $('<select><option value=""></option></select>')
-    //            .appendTo( $(column.footer()).empty() )
-    //            .on( 'change', function () {
-    //                var val = $.fn.dataTable.util.escapeRegex(
-    //                    $(this).val()
-    //                    );
-    //                column
-    //                    .search( val ? '^'+val+'$': '', true, false )
-    //                    .draw();
-    //                } );
 
- 
+            eventstable.buttons().container()
+                  .insertBefore( '#events_filter' );
 
-    //        column.data().unique().sort().each( function ( d, j ) {
+        var clientContext;
+        var web;
+        var list;
+        var currentUser;
+        clientContext = SP.ClientContext.get_current();
+        web = clientContext.get_web();
+        clientContext.load(web);
+        currentUser = web.get_currentUser();
+		clientContext.load(currentUser);
 
-    //            select.append('<option value="' + d + '">' + d + '</option>');
 
-    //        } );
+        clientContext.executeQueryAsync(
+           function(){
+              currentUser = web.get_currentUser();
+              var longUserName = currentUser.get_loginName();
+              var $element = $("#login") ;
+              if($element){
+                $element.attr('href','../SitePages/Profile.html?Name=' + longUserName);
+             }
+           },
+           function(){alert("Request failed")}
+           );
 
-    //    } );
 
-    //}  //end of init
 
-        });
 
            var table1 = $('#events').DataTable();
-
-
-
                 $('#events tbody').on('click', 'tr', function(){
                    if($(this).hasClass('selected')){
-                      $(this).removeClass('selected');
-                   }
-                   else
-                   {
+                     $(this).removeClass('selected');
+                  }
+                 else
+                 {
                       table1.$('tr selected').removeClass('selected');
-                      $(this).addClass('selected');
-                   }
+                     $(this).addClass('selected');
+                  }
+                    var rowdata = table1.row(this).data();
+                  updateCube(rowdata[1],rowdata[6],rowdata[7]);
+                   AddTooltip(rowdata[1],rowdata[6],rowdata[7]);
+             });
 
-                });
 
 
 
-                $('#risks')
+         var risktable =  $('#risks')
                 .DataTable({
-                     data:dataSet2,
+                    data:dataSet2,
+                    buttons: true,
+                    fixedHeader: true,
+                    scrollY:300,
                      columns:[
                      	{title: "Trigger"},
                      	{title: "Issue"},
                      	{title: "Severity"},
                      	{title: "Type"}
                      	],
-                       "searching" : false,
+                       "searching" : true,
                        "paging": false,
-                       "info": false
-
+                       "info": true
                 });
 
                 $('#risks tbody').on('click', 'tr', function () {
@@ -142,23 +274,28 @@
                         table1.$('tr selected').removeClass('selected');
                         $(this).addClass('selected');
                     }
-
                 });
 
+                 risktable.buttons().container()
+                  .insertBefore( '#risks_filter' );
 
-				$('#reviews')
+
+
+		var reviewstable =		$('#reviews')
                 .DataTable({
                      data:dataSet3,
+                     buttons: true,
+                     fixedHeader: true,
+                     scrollY:300,
                      columns:[
                      	{title: "Event/Review"},
                      	{title: "Due Date"},
                      	{title: "Status"},
                      	{title: "Date Completed"}
                      	],
-                        "searching" : false,
+                        "searching" : true,
                         "paging": false,
-                        "info": false
-
+                        "info": true
                 });
 
 				$('#reviews tbody').on('click', 'tr', function () {
@@ -169,73 +306,230 @@
 				        table1.$('tr selected').removeClass('selected');
 				        $(this).addClass('selected');
 				    }
-
 				});
 
-	  	 //getMyIssues();
-	  	 //getRisks();
-	  	 //getEvents();
+				 reviewstable.buttons().container()
+                  .insertBefore( '#reviews_filter' );
 
-	  });
+
+
+	  	 $('#riskhelp').tooltip();
+	  	 $('#12').tooltip();
+
+        });  //end of document reaady
+
+
+
+
+      function updateCube(evId,x,y) {
+            var id = "" + "#" + x + y;
+            if ($(id).prop('title') === ""){
+
+                $(id).text("X");
+            }
+            else {
+              updateTooltip(id);
+            }
+        }
+
+   function AddTooltip(eventText,x,y){
+
+        var id = "" + "#" + x + y;
+        if ($(id).prop('title') === "")  {
+           $(id).attr('title',eventText);
+        }
+        else {
+            var titletext = $(id).prop('title');
+          var updatedText =  titletext + " " + eventText;
+          $(id).attr('title',updatedText);
+        }
+      }
+
+
+
+function savemodal(){
+   alert("saved");
+}
+
+
+
+function closemodal(){
+
+}
+
+
+
+function showModalDialog(elBtn){
+   $('#dlg-details').data('btn', elBtn);
+   $('#dlg-details').modal('show');
+}
+
+  function updateTooltip(updateText,x,y){
+        var id = "" + "#" + x + y;
+        var oldTitle = $(id).prop('title');
+
+        var newTitle;
+
+        newTitle.replace(updateText,'');
+        alert(newTitle);
+
+        $(id).attr('title',newTitle);
+
+   }
+
+   function clearcube(){
+    var x = 1;
+    var y = 1;
+
+
+
+
+  $('#11').text("");
+
+  $('#12').text("");
+
+  $('#13').text("");
+
+  $('#14').text("");
+
+  $('#15').text("");
+
+  $('#21').text("");
+
+  $('#22').text("");
+
+  $('#23').text("");
+
+  $('#24').text("");
+
+  $('#25').text("");
+
+  $('#31').text("");
+
+  $('#32').text("");
+
+  $('#33').text("");
+
+  $('#34').text("");
+
+  $('#35').text("");
+
+  $('#41').text("");
+
+  $('#42').text("");
+
+  $('#43').text("");
+
+  $('#44').text("");
+
+  $('#45').text("");
+  $('#51').text("");
+
+  $('#52').text("");
+
+  $('#53').text("");
+
+  $('#54').text("");
+
+  $('#55').text("");
+
+
+
+   }
+
 
     </script>
-
-
     <div class='outer'>
         <div class='fullTopHalf'>
-            <H2>My Program Issues</H2>
-            <div class='quadrant1'>
-                <div class='gridView'>
-                    <table class="display" id="events">
-                        <thead>
-                            <tr>
-                                <th>
-                                    Event
-                                </th>
-                                <th>
-                                    Program
-                                </th>
-                                <th>
-                                    POA
-                                </th>
-                                <th>
-                                    Due Date
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
-                </div>
-            </div>
+            <table>
+                <tr>
+                    <td style="width:60%;">
+                        <H2>My Program Issues</H2>
+                        <div class='quadrant1' style="float:left;width:100%;">
+                            <div class='gridView' style="width:100%;">
+                                <table class="display" id="events" style="width:100%;"></table>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div id="dashboardbuttons">
+                            <button id="top10" type="button" onclick="gettop10();">Top 10 Priority</button>
+                            <br>
+                            <br>
+                            <button id="clearcube" type="submit" onclick=clearcube();>Clear Cube </button>
+                        </div>
+                    </td>
 
+                    <td>
+                        <div class='quadrant2' style="position:static;">
+                            <div class='cube'>
+                                <table>
+                                    <tr>
+                                        <td rowspan=5 style='border: none; transform: rotate(-90deg)'>Likelihood</td>
+                                        <td style='text-align: right; border: none; width: 25px;'>5 &nbsp;</td>
+                                        <td id='51' style='background-color: #66ff33'></td>
+                                        <td id='52' style='background-color: #ffff00'></td>
+                                        <td id="53" style='background-color: #e60000'></td>
+                                        <td id='54' style='background-color: #e60000'></td>
+                                        <td id='55' style='background-color: #e60000'></td>
+                                    </tr>
+                                    <tr>
+                                        <td style='text-align: right; border: none; width: 25px;'>4 &nbsp;</td>
+                                        <td id='41' style='background-color: #66ff33'></td>
+                                        <td id='42' style='background-color: #ffff00'></td>
+                                        <td id='43' style='background-color: #ffff00'></td>
+                                        <td id='44' style='background-color: #e60000'></td>
+                                        <td id='45' style='background-color: #e60000'></td>
+                                    </tr>
+                                    <tr>
+                                        <td style='text-align: right; border: none; width: 25px;'>3 &nbsp;</td>
+                                        <td id='31' style='background-color: #66ff33'></td>
+                                        <td id='32' style='background-color: #66ff33'></td>
+                                        <td id="33" style='background-color: #ffff00'></td>
+                                        <td id="34" style='background-color: #ffff00'></td>
+                                        <td id="35" style='background-color: #e60000'></td>
+                                    </tr>
+                                    <tr>
+                                        <td style='text-align: right; border: none; width: 25px;'>2 &nbsp;</td>
+                                        <td id='21' style='background-color: #66ff33'></td>
+                                        <td id='22' style='background-color: #66ff33'></td>
+                                        <td id='23' style='background-color: #66ff33'></td>
+                                        <td id="24" style='background-color: #ffff00'></td>
+                                        <td id="25" style='background-color: #ffff00'></td>
+                                    </tr>
+                                    <tr>
+                                        <td style='text-align: right; border: none; width: 25px;'>1 &nbsp;</td>
+                                        <td id='11' style='background-color: #66ff33'></td>
+                                        <td id='12' style='background-color: #66ff33'></td>
+                                        <td id='13' style='background-color: #66ff33'></td>
+                                        <td id='14' style='background-color: #66ff33'></td>
+                                        <td id="15" style='background-color: #ffff00'></td>
+                                    </tr>
+                                    <tr>
+                                        <td style='border: none; height: 25px;'>&nbsp;</td>
+                                        <td style='border: none; height: 25px;'>&nbsp;</td>
+                                        <td style='vertical-align: top; border: none; height: 25px;'>1</td>
+                                        <td style='vertical-align: top; border: none; height: 25px'>2</td>
+                                        <td style='vertical-align: top; border: none; height: 25px'>3</td>
+                                        <td style='vertical-align: top; border: none; height: 25px'>4</td>
+                                        <td style='vertical-align: top; border: none; height: 25px'>5</td>
+                                    </tr>
+                                    <tr>
+                                        <td style='border: none; height: 25px;'>&nbsp;</td>
+                                        <td colspan=6 style='border: none; text-align: center; vertical-align: top'>
+                                            <br />&nbsp; Consequence
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
 
-
-
-            <div class='quadrant2'>
-                <div class='cube'>
-
-                    <table>
-                        <tr>
-                            <td rowspan=5 style='border: none; transform: rotate(-90deg)'>Likelihood</td>
-                            <td style='text-align: right; border: none; width: 25px;'>5 &nbsp;</td>
-                            <td id='51' style='background-color: #66ff33'>X</td>
-                            <td id='52' style='background-color: #ffff00'>X</td>
-                            <td style='background-color: #e60000' id='53'>X</td>
-                            <td id='54' style='background-color: #e60000'>X</td>
-                            <td id='55' style='background-color: #e60000'>X</td>
-                        </tr>
-                        <tr><td style='text-align: right; border: none; width: 25px;'>4 &nbsp;</td><td id='41' style='background-color: #66ff33'>X</td><td id='42' style='background-color: #ffff00'>X</td><td style='background-color: #ffff00' id='43'>X</td><td id='44' style='background-color: #e60000'>X</td><td id=45 style='background-color: #e60000'>X</td></tr>
-                        <tr><td style='text-align: right; border: none; width: 25px;'>3 &nbsp;</td><td id='31' style='background-color: #66ff33'>X</td><td id='32' style='background-color: #66ff33'>X</td><td style='background-color: #ffff00'>X</td><td style='background-color: #ffff00'>X</td><td style='background-color: #e60000'>X</td></tr>
-                        <tr><td style='text-align: right; border: none; width: 25px;'>2 &nbsp;</td><td id='21' style='background-color: #66ff33'>X</td><td id='22' style='background-color: #66ff33'>X</td><td id='23' style='background-color: #66ff33'>X</td><td style='background-color: #ffff00'>X</td><td style='background-color: #ffff00'>X</td></tr>
-                        <tr><td style='text-align: right; border: none; width: 25px;'>1 &nbsp;</td><td id='11' style='background-color: #66ff33'>X</td><td id='12' style='background-color: #66ff33'>X</td><td id='13' style='background-color: #66ff33'>X</td><td id='14' style='background-color: #66ff33'>X</td><td style='background-color: #ffff00'>X</td></tr>
-                        <tr><td style='border: none; height: 25px;'>&nbsp;</td><td style='border: none; height: 25px;'>&nbsp;</td><td style='vertical-align: top; border: none; height: 25px;'>1</td><td style='vertical-align: top; border: none; height: 25px'>2</td><td style='vertical-align: top; border: none; height: 25px'>3</td><td style='vertical-align: top; border: none; height: 25px'>4</td><td style='vertical-align: top; border: none; height: 25px'>5</td></tr>
-                        <tr><td style='border: none; height: 25px;'>&nbsp;</td><td colspan=6 style='border: none; text-align: center; vertical-align: top'><br />&nbsp; Consequence</td></tr>
-                    </table>
-                </div>
-            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
         </div>
 
-        <div class='fullBottomHalf'>
+        <div class='fullBottomHalf' style="width:99%;">
             <div class='quadrant3'>
                 <H2>Program Risks</H2>
                 <div class='gridView'>
@@ -249,7 +543,7 @@
                                     Program
                                 </th>
                                 <th>
-                                    POA
+                                    PMA
                                 </th>
                                 <th>
                                     Due Date
@@ -262,7 +556,7 @@
 
 
             </div>
-            <div class='quadrant4'>
+            <div class='quadrant4' style="top:-474px;">
                 <H2>Program Events / Reviews</H2>
                 <div class='gridView'>
                     <table class="display" id="reviews">
@@ -291,6 +585,203 @@
 
     </div>
 
+    <div id="TriggerDetailsDialog">
+        <div class="detailquadrant1" style="float:left;">
+            <table>
+                <tr>
+                    <td>
+                        <div class="form-horizontal">
 
+
+                            <!-- Trigger Details -->
+                            <h2>Trigger Details</h2>
+
+                            <!-- Text tbType-->
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="DatePrepared">Type:</label>
+                                <div class="col-md-4">
+                                    <input name="DatePrepared" class="form-control input-md" id="tbType" required="" type="text" placeholder="">
+                                </div>
+                            </div>
+
+                            <!-- Text tbPhase-->
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="textinput">Phase:</label>
+                                <div class="col-md-8">
+                                    <input name="textinput" class="form-control input-md" id="tbPhase" required="" type="text" placeholder="">
+
+                                </div>
+                            </div>
+                            <!-- Textarea tbDescription -->
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="tbDescription">DESCRIPTION:</label>
+                                <div class="col-md-4">
+                                    <textarea name="Description" class="form-control" id="tbDescription">
+                                        Enter the sites and platforms affected, along with the description of changes.
+                                    </textarea>
+                                </div>
+                            </div>
+
+                            <!-- Textarea tbMitigation-->
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="Mitigation">Mitigation:</label>
+                                <div class="col-md-4">
+                                    <textarea name="NeedForChange" class="form-control" id="tbMitigation"></textarea>
+                                </div>
+                            </div>
+
+
+                            <!-- Text tbMitigationStart-->
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="ECPNumber">Mitigation Date:</label>
+                                <div class="col-md-4">
+                                    <input name="ECPNumber" class="form-control input-md" id="tbMitigationStart" required="" type="text" placeholder="">
+
+                                </div>
+                            </div>
+
+                            <!-- Text tbMitigationEnd-->
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="ECPRevision">Mitigation End:</label>
+                                <div class="col-md-1">
+                                    <input name="ECPRevision" class="form-control input-md" id="tbMitigationEnd" required="" type="text" placeholder="">
+
+                                </div>
+                            </div>
+
+
+                            <!-- Text tbStatus-->
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="ECPRevision">Status:</label>
+                                <div class="col-md-1">
+                                    <input name="ECPRevision" class="form-control input-md" id="tbStatus" required="" type="text" placeholder="ECP Revision">
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </td>
+                </tr>
+
+            </table>
+        </div>
+        <div class='quadrant2' style="position:static;float:right">
+            <table>
+                <tr>
+                    <td>
+                        <div class='cube'>
+                            <table>
+                                <tr>
+                                    <td rowspan=5 style='border: none; transform: rotate(-90deg)'>Likelihood</td>
+                                    <td style='text-align: right; border: none; width: 25px;'>5 &nbsp;</td>
+                                    <td id='51' style='background-color: #66ff33'></td>
+                                    <td id='52' style='background-color: #ffff00'></td>
+                                    <td id="53" style='background-color: #e60000'></td>
+                                    <td id='54' style='background-color: #e60000'></td>
+                                    <td id='55' style='background-color: #e60000'></td>
+                                </tr>
+                                <tr>
+                                    <td style='text-align: right; border: none; width: 25px;'>4 &nbsp;</td>
+                                    <td id='41' style='background-color: #66ff33'></td>
+                                    <td id='42' style='background-color: #ffff00'></td>
+                                    <td id='43' style='background-color: #ffff00'></td>
+                                    <td id='44' style='background-color: #e60000'></td>
+                                    <td id='45' style='background-color: #e60000'></td>
+                                </tr>
+                                <tr>
+                                    <td style='text-align: right; border: none; width: 25px;'>3 &nbsp;</td>
+                                    <td id='31' style='background-color: #66ff33'></td>
+                                    <td id='32' style='background-color: #66ff33'></td>
+                                    <td id="33" style='background-color: #ffff00'></td>
+                                    <td id="34" style='background-color: #ffff00'></td>
+                                    <td id="35" style='background-color: #e60000'></td>
+                                </tr>
+                                <tr>
+                                    <td style='text-align: right; border: none; width: 25px;'>2 &nbsp;</td>
+                                    <td id='21' style='background-color: #66ff33'></td>
+                                    <td id='22' style='background-color: #66ff33'></td>
+                                    <td id='23' style='background-color: #66ff33'></td>
+                                    <td id="24" style='background-color: #ffff00'></td>
+                                    <td id="25" style='background-color: #ffff00'></td>
+                                </tr>
+                                <tr>
+                                    <td style='text-align: right; border: none; width: 25px;'>1 &nbsp;</td>
+                                    <td id='11' style='background-color: #66ff33'></td>
+                                    <td id='12' style='background-color: #66ff33'></td>
+                                    <td id='13' style='background-color: #66ff33'></td>
+                                    <td id='14' style='background-color: #66ff33'></td>
+                                    <td id="15" style='background-color: #ffff00'></td>
+                                </tr>
+                                <tr>
+                                    <td style='border: none; height: 25px;'>&nbsp;</td>
+                                    <td style='border: none; height: 25px;'>&nbsp;</td>
+                                    <td style='vertical-align: top; border: none; height: 25px;'>1</td>
+                                    <td style='vertical-align: top; border: none; height: 25px'>2</td>
+                                    <td style='vertical-align: top; border: none; height: 25px'>3</td>
+                                    <td style='vertical-align: top; border: none; height: 25px'>4</td>
+                                    <td style='vertical-align: top; border: none; height: 25px'>5</td>
+                                </tr>
+                                <tr>
+                                    <td style='border: none; height: 25px;'>&nbsp;</td>
+                                    <td colspan=6 style='border: none; text-align: center; vertical-align: top'>
+                                        <br/>&nbsp; Consequence
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <!-- Text tbLikelihood-->
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="tbLikelihood">Likelihood:</label>
+                            <div class="col-md-1">
+                                <input name="ECPRevision" class="form-control input-md" id="tbLikelihood" required="" type="text" placeholder="ECP Revision">
+
+                            </div>
+                        </div>
+
+                        <!-- Text tbConsequence-->
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="tbConsequence">Consequence:</label>
+                            <div class="col-md-1">
+                                <input name="ECPRevision" class="form-control input-md" id="tbConsequence" required="" type="text" placeholder="ECP Revision">
+
+                            </div>
+                        </div>
+
+                    </td>
+                </tr>
+            </table>
+
+
+           
+        </div>
+
+    </div>
+    <div class="modal fade" id="dlg-details" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"></span></button>
+                    <h4 class="modal-title">Edit record</h4>
+                    <h5></h5>
+                </div>
+                <div class="modal-body">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Save</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+
+
+</body>
+<div id="Overlay">
+</div>
 
 </html>

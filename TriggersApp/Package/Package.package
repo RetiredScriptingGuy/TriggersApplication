@@ -2,6 +2,13 @@
 <package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="6388a575-86c7-4cd0-b4e9-6cfdc89ec167" solutionId="eb8feaee-58c9-40cc-850a-945023fbda26" resetWebServer="false" sharePointProductVersion="15.0" name="TriggersApp" xmlns="http://schemas.microsoft.com/VisualStudio/2008/SharePointTools/PackageModel">
   <features>
     <featureReference itemId="0200ae2c-dc0a-40cb-bb65-23ceea3baaa2" />
-    <featureReference itemId="6fdca816-1874-442b-8a1e-541500a6ac6b" />
+    <featureReference itemId="4426ab36-672f-414f-92c6-534818e07ee7" />
+    <featureReference itemId="1e9a25af-2e45-4c6e-a8b7-a21c2b8a952a" />
+    <featureReference itemId="14661253-18a7-4f1b-ac4c-1e9cc1986ec4" />
+    <featureReference itemId="5f31b4d0-26a6-45ac-93c0-75ee56172e4e" />
+    <featureReference itemId="fd6e8327-3665-4818-9e51-1187fc36cc19" />
+    <featureReference itemId="bdc95a7e-6860-4fe3-acaf-be552ccc7090" />
+    <featureReference itemId="1f9d9174-038c-4513-8ad6-999db1a004c5" />
+    <featureReference itemId="385e72b5-da7e-4be9-af04-7f0d7e7a4db2" />
   </features>
 </package>
