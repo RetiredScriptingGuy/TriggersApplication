@@ -464,7 +464,7 @@ function programSuccessHandler(data) {
         }); //end of each         
 //eliminate duplicate programs in listing
     var usedPrograms = {
-
+    
     };
     $("#ddlProgam > option")
         .each(function() {
@@ -485,48 +485,48 @@ function programErrorHandler(data, errorCode, errorMessage) {
 function LoadACAT(peo, pma, program) {
     var listname = "PEO_PMA_PROGRAM_ACAT";
     var baseUrl = _spPageContextInfo.webAbsoluteUrl;
-    var selectUrl = "/_api/web/Lists/getbyTitle('" +listname + "')/items?";
-    var filterUrl = "&$filter=(Title eq '" +peo + "') and (PMA eq '" +pma + "') and (Program eq '" +program + "')";
-    var fullUrl = baseUrl +selectUrl +filterUrl;
+    var selectUrl = "/_api/web/Lists/getbyTitle('" + listname + "')/items?";
+    var filterUrl = "&$filter=(Title eq '" + peo + "') and (PMA eq '" + pma + "') and (Program eq '" + program + "')";
+    var fullUrl = baseUrl + selectUrl + filterUrl;
     console.log(fullUrl);
     var executor4 = new SP.RequestExecutor(appWebUrl);
     executor4.executeAsync({
-    url: fullUrl,
-    method: "GET",
-    headers: {
+        url: fullUrl,
+        method: "GET",
+        headers: {
             "Accept": "application/json; odata=verbose"
-    },
-    success: acatSuccessHandler,
-    error: acatErrorHandler
+        },
+        success: acatSuccessHandler,
+        error: acatErrorHandler
     });
-    }
+}
 
 function acatSuccessHandler(data) {
     var jsonObject = JSON.parse(data.body);
     var results = jsonObject.d.results;
-  
-     $.each(results,
-            function(index, results) {
-                var optionhtml = "<option value='" + results.ACAT + "'>" + results.ACAT + "</option>";
-                $("#ddlACAT").append(optionhtml);
-            });
-    
-     var usedACATS = {};
-      $("#ddlACAT > option")
-           .each(function() {
-               if (usedACATS[this.value]) {
-                    $(this).remove();
-           } else {
-                usedACATS[this.value]= this.value;
+
+    $.each(results,
+        function(index, results) {
+            var optionhtml = "<option value='" + results.ACAT + "'>" + results.ACAT + "</option>";
+            $("#ddlACAT").append(optionhtml);
+        });
+
+    var usedACATS = {};
+    $("#ddlACAT > option")
+        .each(function() {
+            if (usedACATS[this.value]) {
+                $(this).remove();
+            } else {
+                usedACATS[this.value] = this.value;
             }
         });
-    }
+}
 
 function acatErrorHandler(data, errorCode, errorMessage) {
-    var errMsg = "Error retrieving the acatErrorHandler: " +errorMessage;
+    var errMsg = "Error retrieving the acatErrorHandler: " + errorMessage;
     $("#error").val(errMsg);
-    console.log("Error processing acatErrorHandler" +errorCode +errorMessage);
-    }
+    console.log("Error processing acatErrorHandler" + errorCode + errorMessage);
+}
 
 
 //HELPER FUNCTIONS

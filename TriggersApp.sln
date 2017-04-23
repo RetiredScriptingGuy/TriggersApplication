@@ -8,36 +8,36 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{41DEF62B-AA58-4D06-BCAC-5BBD62034972}"
 	ProjectSection(SolutionItems) = preProject
 		customTrigger.js = customTrigger.js
+		customTrigger2.js = customTrigger2.js
 		DataTables.js = DataTables.js
 		Events.html = Events.html
 		events.js = events.js
 		events2.js = events2.js
 		Feedback20.js = Feedback20.js
-		HTMLPage1.html = HTMLPage1.html
-		HTMLPage2.html = HTMLPage2.html
-		HTMLPage3.html = HTMLPage3.html
-		HTMLPage4.html = HTMLPage4.html
 		..\..\..\..\Users\Administrator.DEVNET\Desktop\jquery.dataTables.js = ..\..\..\..\Users\Administrator.DEVNET\Desktop\jquery.dataTables.js
 		..\..\..\..\Software\SPServices\jquery.SPServices Intellisense.js = ..\..\..\..\Software\SPServices\jquery.SPServices Intellisense.js
 		..\..\..\..\Software\SPServices\jquery.SPServices.d.ts = ..\..\..\..\Software\SPServices\jquery.SPServices.d.ts
 		..\..\..\..\Software\SPServices\jquery.SPServices.js = ..\..\..\..\Software\SPServices\jquery.SPServices.js
 		..\..\..\..\Software\SPServices\jquery.SPServices.min.js = ..\..\..\..\Software\SPServices\jquery.SPServices.min.js
-		loginScript5.js = loginScript5.js
+		MyDashboard1.html = MyDashboard1.html
 		MyDashboard19th1037.html = MyDashboard19th1037.html
 		MyDashboard19th1037.js = MyDashboard19th1037.js
-		MyDashboard708am.js = MyDashboard708am.js
+		MyDashboard23.js = MyDashboard23.js
 		NewProfile.js = NewProfile.js
+		NewProfile3.js = NewProfile3.js
 		NewProfilefromSCMS.js = NewProfilefromSCMS.js
 		Profile19th1037.html = Profile19th1037.html
 		Profile19th1037.js = Profile19th1037.js
 		Profile2Script.js = Profile2Script.js
 		ProfileScript5.js = ProfileScript5.js
 		SampleDialog.js = SampleDialog.js
-		Script2.js = Script2.js
 		Script7.js = Script7.js
 		Script88Dashboard.js = Script88Dashboard.js
-		StyleSheet1.css = StyleSheet1.css
+		SP2013 File Uploader.html = SP2013 File Uploader.html
+		SPServices code example.html = SPServices code example.html
+		Trigger23.css = Trigger23.css
 		Triggers.js = Triggers.js
+		Triggers1.html = Triggers1.html
 	EndProjectSection
 EndProject
 Global

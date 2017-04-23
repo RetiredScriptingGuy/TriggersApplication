@@ -1,466 +1,846 @@
+// JavaScript source code
+//Global variables
+var dataTableEvents = 'undefined';
+var dataTableReviews = 'undefined';
+var dataTableRisks = 'undefined';
+var triggerdetailId = "";
 var appWebUrl = window.location.protocol + "//" + window.location.host + _spPageContextInfo.webServerRelativeUrl;
 var targetSiteUrl = _spPageContextInfo.siteAbsoluteUrl;
-var programitem, peoitem, pmaitem, acatitem, competencyitem;
-var currentUser = "";
-var eTag;
 var digest = "";
+var currentUser = "";
+var listName = "Profiles";
+var lastModifiedDate = "";
+var all = "Select Value";
 
 _spBodyOnLoadFunctionNames.push("myCustomPage");
 
 function myCustomPage() {
-    LoadPrograms();
-    loadPEO();
-    loadPMA();
-    loadACAT();
+    $('#TriggerDetailsDialog').hide();
+    $('#overlay').hide();
+    GetDigest();
 
-    //Get Name of New User
-    var thisUser = getQueryStringParameter("Name");
+    LoadEventsDataTable(all);
+    LoadRisksDataTable();
+    LoadReviewsDataTable();
 
-    GetUserInfo(thisUser);
 
-    currentUser = thisUser;
+    $('#events')
+          .on('dblclick',
+              'tr',
+              function () {
+                  var dialogOptions = {
+                      title: "Edit Trigger",
+                      width: 900,
+                      height: 600,
+                      url: "TriggerDetailsDialog.aspx",
+                      dialogReturnValueCallback: function (dialogResult) {
+                          SP.UI.ModalDialog.RefreshPage(dialogResult);
+                      }
+                  };
 
-    //UPDATE UI  
+                  //  SP.UI.ModalDialog.showModalDialog(options);
 
+                  //var itemid = dataTableEvents.row(this).data().Trigger;
+                  // var itemName = dataTableEvents.row(this).data().ID;
+                  // alert("Open edit dialog or page for item: " + itemName + " and " + itemid);
+                  OpenPopUpPageWithDialogOptions(dialogOptions);
+              });
+
+    $('#risks')
+      .on('dblclick',
+          'tr',
+          function () {
+              var dialogOptions = {
+                  title: "Edit Trigger",
+                  width: 900,
+                  height: 600,
+                  url: "TriggerDetailsDialog.aspx",
+                  dialogReturnValueCallback: function (dialogResult) {
+                      SP.UI.ModalDialog.RefreshPage(dialogResult);
+                  }
+              };
+
+              //  SP.UI.ModalDialog.showModalDialog(options);
+
+              //var itemid = dataTableEvents.row(this).data().Trigger;
+              // var itemName = dataTableEvents.row(this).data().ID;
+              // alert("Open edit dialog or page for item: " + itemName + " and " + itemid);
+              OpenPopUpPageWithDialogOptions(dialogOptions);
+          });
+
+    $('#reviews')
+       .on('dblclick',
+           'tr',
+           function () {
+               var dialogOptions = {
+                   title: "Edit Trigger",
+                   width: 900,
+                   height: 600,
+                   url: "TriggerDetailsDialog.aspx",
+                   dialogReturnValueCallback: function (dialogResult) {
+                       SP.UI.ModalDialog.RefreshPage(dialogResult);
+                   }
+               };
+
+               //  SP.UI.ModalDialog.showModalDialog(options);
+
+               //var itemid = dataTableEvents.row(this).data().Trigger;
+               // var itemName = dataTableEvents.row(this).data().ID;
+               // alert("Open edit dialog or page for item: " + itemName + " and " + itemid);
+               OpenPopUpPageWithDialogOptions(dialogOptions);
+           });
+
+    $('#events')
+        .on('click',
+            'tr',
+            function () {
+                if ($(this).hasClass('selected')) {
+                    $(this).removeClass('selected');
+                    var y = dataTableEvents.row(this).data().Likelihood;
+                    var x = dataTableEvents.row(this).data().Consequence;
+                    console.log("update cube with :" + x + "and" + y);
+                    //var selectedtextid = dataTableEvents.row(this).data().Trigger;
+                    RemoveCubeX(y, x);
+
+
+
+                } else {
+                    dataTableEvents.$('tr selected').removeClass('selected');
+                    $(this).addClass('selected');
+                }
+
+                var likelihooddata = dataTableEvents.row(this).data().Likelihood;
+                var consequencedata = dataTableEvents.row(this).data().Consequence;
+                var textid = dataTableEvents.row(this).data().Trigger;
+
+                updateCube(textid, likelihooddata, consequencedata);
+                AddTooltip(textid, likelihooddata, consequencedata);
+            });
+
+    $('#events')
+        .on('error.dt',
+            function (e, settings, techNote, message) {
+                console.log("An error has been reported by DataTables: ", message);
+            });
+
+
+    $('#clearclube')
+        .on('click',
+            function () {
+                clearcube();
+                // redrawDataTable();
+            });
+
+
+    $("#ddlfilter")
+        .on("change",
+            function () {
+                var filter = $(this).val();
+                //LoadEventsDataTable(filter);
+            });
+
+
+
+
+    //TABLE EVENTS 
+    $('#reviews')
+          .on('click',
+              'tr',
+              function () {
+                  if ($(this).hasClass('selected')) {
+                      $(this).removeClass('selected');
+                  } else {
+                      dataTableReviews.$('tr selected').removeClass('selected');
+                      $(this).addClass('selected');
+                  }
+              });
+
+
+    $('#risks')
+         .on('click',
+          'tr',
+            function () {
+                if ($(this).hasClass('selected')) {
+                    $(this).removeClass('selected');
+                } else {
+                    dataTableRisks.$('tr selected').removeClass('selected');
+                    $(this).addClass('selected');
+                }
+            });
+
+    //BUTTON ROWS - working  dataTableEvents, dataTableRisks, dataTableReviews
+    // dataTableReviews.buttons()
+    //.container()
+    // .insertBefore('#reviews_filter');
+
+    // dataTableRisks.buttons()
+    //  .container()
+    // .insertBefore('#risks_filter');
+
+    //  $('#info').tooltip();
+
+
+
+
+} //end of MyCustomPage---------------------------------------------------------------------------------------
+
+//SETUP PAGE
+function GetDigest() {
+    var scriptbase = targetSiteUrl + "/_layouts/15/";
+    $.getScript(scriptbase + "SP.RequestExecutor.js", retrieveFormDigest);
+}
+
+function retrieveFormDigest() {
+    digest = $("#__REQUESTDIGEST").val();
+    var contextInfoUri = appWebUrl + "/_api/contextinfo";
+    var executor = new SP.RequestExecutor(appWebUrl);
+    executor.executeAsync({
+        url: contextInfoUri,
+        method: "POST",
+        headers: { "Accept": "application/json; odata=verbose" },
+        success: PrepareForm,
+        error: function (data, errorCode, errorMessage) {
+            var errMsg = "Error retrieving the form digest value: " + errorMessage;
+            $("#error").html(errMsg);
+        }
+    });
+}
+
+function PrepareForm(data) {
+    console.log("digest is " + digest);
+    $('#digestmsg').html(digest);
+    retrieveLastModifiedDate();
+
+}
+
+function retrieveLastModifiedDate() {
+
+    var contextInfoUri = appWebUrl + "/_api/web/lastItemModifiedDate";
+    var executor = new SP.RequestExecutor(appWebUrl);
+    executor.executeAsync({
+        url: contextInfoUri,
+        method: "POST",
+        headers: { "Accept": "application/json; odata=verbose" },
+        success: succRetrieveLastModifiedDate,
+        error: function (data, errorCode, errorMessage) {
+            var errMsg = "Error retrieving the last modified date: " + errorMessage;
+            $("#error").html(errMsg);
+        }
+    });
+}
+
+function succRetrieveLastModifiedDate(data) {
+    var month = "";
+    var jsonObject = JSON.parse(data.body);
+    lastModifiedDate = jsonObject.d.LastItemModifiedDate.substring(0, 10);
+    console.log("Last Modified date: " + lastModifiedDate);
+    $("#lastUpdated").text(" | " + "Last Updated: " + lastModifiedDate);
+}
+
+
+function GetUserInfo() {
+    var listname = "Profiles";
+    var username = currentUser;
+    var baseUrl = _spPageContextInfo.webAbsoluteUrl;
+    var selectUrl = "/_api/web/Lists/getbyTitle('" + listname + "')/items?$select=Title,IsLeadership,Program";
+    var filterUrl = "$filter=Title eq '" + username + "'";
+
+    var fullUrl = baseUrl + selectUrl + filterUrl;
+
+    $.ajax({
+        url: fullUrl,
+        type: "GET",
+        dataType: "json",
+        async: false,
+        headers: { "ACCEPT": "application/json;odata=verbose;charset=utf-8" },
+        success: userSuccHandler,
+        error: userErrHandler
+    });
+}
+
+function userSuccHandler(data) {
+    var jsonObject = JSON.parse(data.body);
+    var userID = jsonObject.d.ID;
+    console.log("mydashboard js " + userID);
+    $("#userID").text(userID);
+    var userDisplayName = jsonObject.d.DisplayName;
+    console.log(userDisplayName);
+
+    var usrName = $("#userName").textContent;
+    var usrID = $("#userID").textContent;
+    var usrProg = $("#userProgram").textContent;
+    $("#userName").text(userDisplayName);
+    var userleadership = jsonObject.d.IsLeadership;
+    console.log(userleadership);
+    var userPEO = jsonObject.d.PEO;
+    console.log(userPEO);
+    var userCompetency = jsonObject.d.Competency;
+    console.log(userCompetency);
+    var userPMA = jsonObject.d.PMA;
+    console.log(userPMA);
+    var userACAT = jsonObject.d.ACAT;
+    console.log(userACAT);
+    var userProgram = jsonObject.d.Program;
+    console.log(userProgram);
+    $("#userProgram").text(userProgram);
+    //upper right label
+    $("#usrProgram").text(" |  " + userProgram);
+    var userPhase = jsonObject.d.Phase;
+    console.log(userPhase);
     var $element = $("#login");
     if ($element) {
-        $element.attr("href", "../SitePages/Profile.aspx?Name=" + currentUser);
-    }
-    var element1 = $("#currentUserLabel");
-    if (element1) {
-        element1.html("Logged in as : " + currentUser);
+        $element.attr('href', "../SitePages/Profile.aspx?Name=" + usrName + "&id=" + usrID + "&program=" + usrProg);
     }
 
-    $("#ddlUser").text(currentUser);
-    $("#userName").val(currentUser);
-    $("#digestmsg").val(digest);
-
-
-
-    console.log("Processing UPDATE UI in profile.js for " + thisUser);
-
-
-    AddChangeEvents();
-
-
-
-
+    console.log("finish processing userSuccHandler");
 }
 
-//HELPER FUNCTIONS
-function getQueryStringParameter(paramToRetrieve) {
-    var params = document.URL.split("?")[1].split("&");
-    for (var i = 0; i < params.length; i = i + 1) {
-        var singleParam = params[i].split("=");
-        if (singleParam[0] == paramToRetrieve)
-            return singleParam[1];
-    }
+function userErrHandler(data, errCode, errMessage) {
+    alert("Error: Processing GetUserInfo() on mydashboard. Unable to load profile from SharePoint list " + errMessage);
 }
 
+//LOAD DATATABLES
+//myevents
+function LoadEventsDataTable(x) {
 
-//LOAD USER DATA
+    if (dataTableEvents != 'undefined') {
+        dataTableEvents.destroy();
+    }
+    var listname = "ProgramIssuesAndRisks";
+    var usrProgram = $('#userProgram').text();
+    console.log("LoadEventsDataTable usrProgram is " + usrProgram);
 
-function GetUserInfo(username) {
-    var executor2 = new SP.RequestExecutor(appWebUrl);
-    var listname = "Profiles";
-    var basellUrl = appWebUrl;
-    var selectUrl = "/_api/web/lists/getbytitle('" + listname + "')/items";
-    var filterUrl = "?&" + "$filter=Title eq '" + username + "'";
-    var fullUrl = basellUrl + selectUrl + filterUrl;
-    var requestHeaders = { "accept": "application/json;odata=verbose" };
+    var baseUrl = _spPageContextInfo.webAbsoluteUrl;
+    var selectUrl = "/_api/web/Lists/getbyTitle('" + listname + "')/items?";
+    var filterUrl = "";
+    /*
+    if (selectedfilter == "Select Value") {
+        filterUrl = "$filter=Status eq 'In Progress'";
+    }
 
-    executor2.executeAsync({
+    if (selectedfilter == "Development") {
+        filterUrl = "$filter=(Status eq 'In Progress') and (Phase eq 'Development')";
+    }
+    else if (selectedfilter == "Sustainment") {
+        filterUrl = "$filter=(Status eq 'In Progress') and (Phase eq 'Sustainment')";
+    }
+    else if (selectedfilter == "Test") {
+        filterUrl = "$filter=(Status eq 'In Progress') and (Phase eq 'Test')";
+    }
+    else if (selectedfilter == "Production") {
+        filterUrl = "$filter=(Status eq 'In Progress') and (Phase eq 'Production')";
+    }
+    else if (selectedfilter == "FleetIntroduction") {
+        filterUrl = "$filter=(Status eq 'In Progress') and (Phase eq 'FleetIntroduction')";
+    }
+    */
+
+
+    var fullUrl = baseUrl + selectUrl + filterUrl;
+
+    $.ajax({
         url: fullUrl,
-        method: "GET",
-        headers: requestHeaders,
-        success: successGetUserInfoHandler,
-        error: errorGetUserInfoHandler
+        type: "GET",
+        dataType: "json",
+        headers: { "ACCEPT": "application/json;odata=verbose" },
+        success: mySuccEventsHandler,
+        error: myErrEventsHandler
     });
 }
-function successGetUserInfoHandler(data) {
-    //load the select option for ddlProgram 
-    var jsonObject = JSON.parse(data.body);
-    var results = jsonObject.d.results;
-    var userID, userDisplayName, userLeadership, userPEO, userCompetency, userPMA, userACAT, userProgram, userPhase;
 
-
-    userID = results[0].ID;
-    console.log("userID = " + userID);
-    $("#userID").val(userID);
-    userDisplayName = results[0].Title;
-    console.log("display name = " + userDisplayName);
-    userLeadership = results[0].IsLeadership;
-    console.log("userLeadership  = " + userLeadership);
-    userPEO = results[0].PEO;
-    console.log("userPEO  = " + userPEO);
-    userCompetency = results.Competency;
-    console.log("userCompetency  = " + userCompetency);
-    userPMA = results[0].PMA;
-    console.log("userPMA  = " + userPMA);
-    userACAT = results[0].ACAT;
-    console.log("userACAT  = " + userACAT);
-    userProgram = results[0].Program;
-    console.log("userProgram  = " + userProgram);
-    $("#userProgram").val(userProgram);
-    userPhase = results[0].Phase;
-    console.log("userPhase  = " + userPhase);
-    //populate the drop downs with the values, make them the top values and selected
-
-   if (userLeadership =! null) {
-        var leadershipelement = $('#ddlLeadership');
-        $('#ddlLeadership').append("<option value='-1' selected='selected' >" + userLeadership + "</option>");
+function mySuccEventsHandler(data) {
+    if (dataTableEvents != 'undefined') {
+        dataTableEvents.destroy();
     }
-    if (userCompetency =! null) {
-        var peoCompetencyelement = $('#ddlCompetency');
-        $('#ddlCompetency').append("<option value='-1' selected='selected' >" + userCompetency + "</option>");
+    dataTableEvents = $('#events')
+        .DataTable({
+            initComplete: function () {
+                this.api().columns().every(function () {
+                    var column = this;
+                    var select = $("<select><option value=''></option></select>")
+                                        .appendTo($(column.footer()).empty())
+                                        .on('change',
+                                            function () {
+                                                var val = $.fn.dataTable.util.escapeRegex(
+                                                    $(this).val()
+                                                );
+                                                column
+                                                 .search(val ? '^' + val + '$' : '', true, false)
+                                                     .draw();
+                                            });
+
+                    column.data().unique().sort().each(function (d, j) {
+                        select.append("<option value='" + d + "'>" + d + "</option>")
+                    });
+                });
+                $("#events tfoot tr").insertBefore($('#events thead tr'))
+            },
+
+            "bDestroy": true,
+            "aaData": data.d.results,
+            "aoColumns": [
+                 { "mData": "Trigger" },
+                 { "mData": "Issue" },   //display name is issue                               
+                 { "mData": "Type" },
+                 { "mData": "Likelihood" },
+                 { "mData": "Consequence" },
+                 { "mData": "Phase" },
+                 { "mData": "Status" }
+            ],
+            dom: 'Bfrtip',
+            buttons: true, // ['copy', 'excel', 'pdf', 'print']
+            //  fixedHeader: false,
+            scrollY: 280,
+            //scrollX: true,
+            autoWidth: true,
+            columnDefs: [
+                       {
+                           "targets": [0],
+                           "visible": true
+                       },
+                       {
+
+                           "targets": [1],
+                           "visible": true
+                       },
+                       {
+
+                           "targets": [2],
+                           "visible": true
+                       },
+                       {
+
+                           "targets": [3],
+                           "data": "Likelihood",
+                           "visible": false,
+                           "searchable": false
+                       },
+                       {
+                           "targets": [4],
+                           "data": "Consequence",
+                           "visible": false,
+                           "searchable": false
+                       },
+                       {
+
+                           "targets": [5],
+                           "visible": false,
+                           "searchable": false
+                       },
+                       {
+                           "targets": [6],
+                           "data": "Status",
+                           "visible": false,
+                           "searchable": false
+                       },
+                       {
+                           "targets": [7],
+                           "data": "ID",
+                           "visible": false,
+                           "searchable": false
+                       },
+                       {
+
+                           "targets": [8],
+                           "visible": true,
+                           "render": function (data, type, row) {
+                               return "" + row.Likelihood + row.Consequence;
+                           }
+                       },
+                       {
+
+                           "targets": [9],
+                           "visible": true,
+                           "render": function (data, type, row) {
+                               if (row.Consequence == "5") {
+                                   return "High";
+                               }
+                               else if (row.Consequence == "4") {
+                                   return "Medium";
+                               }
+                               else if (row.Consequence == "3") {
+                                   return "Medium";
+                               }
+                               else if (row.Consequence == "2") {
+                                   return "Low";
+                               }
+                               else if (row.Consequence == "1") {
+                                   return "Low";
+                               }
+                           }
+                       }
+
+            ],
+
+            columns: [
+                         //filter out any data column completed. All others are used for reports
+                    //      { name: 'Trigger' },
+                    //      { name: 'Issue' },                 //index 0    //displayed in column 1
+                   //     { title: 'Issue Description*' },
+                   //     { title: 'Category' },
+                    //      { name: 'Type' }, //displated in column 4 
+                    //      { name: 'Phase' },  ///index 5                               //displayed in column 3  
+                   //       { name: 'Likelihood' },
+                   //       { name: 'Consequence' },
+
+                  //        { name: 'Risk' },
+                  //        { name: 'Status' },                 //filter out completed status
+                   //       { name: 'ID' }
+                   //     { title: 'Mitigation 6.0d' },
+                   //     { title: 'Mitigation 6.6' },          //index 10
+                   //     { title: 'Mitigation 6.7' },
+                   //     { title: 'Mitigation 6.8' },
+                   //     { title: 'Mitigation Date' },
+                   //     { title: 'PEO' },
+                   //     { title: 'PMA' }, //index 15
+                   //     { title: 'Program' },
+                   //       { name: 'Phase' }
+                   //     { title: 'PM Approver' },
+                   //     { title: 'PM Approval Date' },
+                   //     { title: 'Competency Approver ' },     //index 20
+                   //     { title: 'Competency Approval Date' },
+                   //     { title: 'Admin Approver' },
+                   //     { title: 'Admin Approval Date' },
+                                                   //displayed in column 5
+            ],
+            "searching": true,
+            "paging": false,
+            "info": true
+
+        });
+}
+function myErrEventsHandler(data, errCode, errMessage) {
+    alert("Error: myErrEventsHandler " + errMessage);
+    console.log(errMessage);
+}
+
+//myrisks
+function LoadRisksDataTable() {
+    var listname = "ProgramIssuesAndRisks";
+    var usrProgram = $('#userProgram').text();
+    console.log("LoadRisksDataTable usrProgram is " + usrProgram);
+
+    var baseUrl = _spPageContextInfo.webAbsoluteUrl;
+    var selectUrl = "/_api/web/Lists/getbyTitle('" + listname + "')/items?";
+    // var filterUrl = "$filter=Program eq '" + usrProgram + "'";
+    var fullUrl = baseUrl + selectUrl; // + filterUrl;
+
+    $.ajax({
+        url: fullUrl,
+        type: "GET",
+        dataType: "json",
+        headers: { "ACCEPT": "application/json;odata=verbose" },
+        success: mySuccRisksHandler,
+        error: myErrRisksHandler
+    });
+}
+function mySuccRisksHandler(data) {
+    if (dataTableRisks != 'undefined') {
+        dataTableRisks.destroy();
     }
-    if (userPEO =! null) {
-        var peoelement = $('#ddlPEO');
-        $('#ddlPEO').append("<option value='-1' selected='selected' >" + userPEO + "</option>");
-    }
-    var pmaelement = $('#ddlPMA');
-    $('#ddlPMA').append("<option value='-1' selected='selected'>" + userPMA + "</option>");
+    console.log(data.d.results);
+    var myseverity = "High";
+    dataTableRisks = $("#risks")
+        .DataTable({
+            "bDestroy": true,
+            "aaData": data.d.results,
+            "aoColumns": [
+                { "mData": "Title" }, //display name is issue
+                { "mData": "Trigger" },
+                { "mData": "Type" },
+                { "mData": "Likelihood" },
+                { "mData": "Consequence" },
+                { "mData": "Status" }
+            ],
+            //  dom: 'Bfrtip',
+            //  buttons: ['copy', 'excel', 'pdf', 'print'],
+            // fixedHeader: true,
+            scrollY: 300,
+            scrollX: true,
+            //  autoWidth: true,
+            columnDefs: [
+                { //trigger
+                    "targets": [0],
+                    "width": "35%"
 
-    var programelement = $('#ddlProgram');
-    $('#ddlProgram').append("<option value='-1' selected='selected' >" + userProgram + "</option>");
+                },
+                { //issue
+                    "targets": [1],
+                    "width": "15%"
+                },
+                {
+                    //type
+                    "targets": [2],
+                    "width": "20%"
 
-    var acatelement = $('#ddlACAT');
-    $('#ddlACAT').append("<option value='-1' selected='selcted' >" + userACAT + "</option>");
-
-    var phase = $('#ddlPhase');
-    $('#ddlPhase').append("<option value='-1'  selected='selcted' >" + userPhase + "</option>");
-
-    //  store ID in hidden DIV for updates
-    $('#userID').innerHTML(userID);
-
-
-
-
-
-}
-function errorGetUserInfoHandler(data, errCode, errMessage) {
-    alert("login failed: " + data.errorCode + data.errorMessage);
-}
-
-
-//LOAD FORM 
-//Load Programs ddl
-function LoadPrograms() {
-    var executor3 = new SP.RequestExecutor(appWebUrl);
-    var listname = "PEO_PMA_PROGRAM_ACAT";
-    var baseUrl = appWebUrl;
-    var selectUrl = "/_api/web/lists/getbyTitle('" + listname + "')/items";
-    var fullUrl = baseUrl + selectUrl;
-    var requestHeaders = { "ACCEPT": "application/json;odata=verbose;charset=utf-8" };
-
-    executor3.executeAsync({
-        url: fullUrl,
-        method: "GET",
-        headers: requestHeaders,
-        success: successLoadProgramsHandler,
-        error: errorLoadProgramsHandler
-    });
-}
-function successLoadProgramsHandler(data) {
-    var jsonObject = JSON.parse(data.body);
-    var results = jsonObject.d.results;
-    $.each(results,
-        function (index, results) {
-            var optionhtml = '<option value="' + results.Program + '">' + results.Program + "</option>";
-            $("#ddlProgram").append(optionhtml);
-        });
-    //eliminate duplicate programs in listing
-    var usedPrograms = {};
-    $("#ddlProgam > option")
-        .each(function () {
-            if (usedPrograms[this.value]) {
-                $(this).remove();
-            } else {
-                usedPrograms[this.value] = this.value;
-            }
-        });
-}
-function errorLoadProgramsHandler(data, errCode, errMessage) {
-    alert("Error: Unable to load user program. " + data.errorCode + data.errorMessage);
-}
-//Load PEO ddl
-function loadPEO() {
-    var executor4 = new SP.RequestExecutor(appWebUrl);
-    var listname = "PEO_PMA_PROGRAM_ACAT";
-    var baseUrl = appWebUrl;
-    var selectUrl = "/_api/web/lists/getbyTitle('" + listname + "')/items";
-    var fullUrl = baseUrl + selectUrl;
-    var requestHeaders = { "ACCEPT": "application/json;odata=verbose;charset=utf-8" };
-    executor4.executeAsync({
-        url: fullUrl,
-        method: "GET",
-        headers: requestHeaders,
-        success: peoSuccHandler,
-        error: peoErrHandler
-    });
-}
-function peoSuccHandler(data) {
-    var jsonObject = JSON.parse(data.body);
-    var results = jsonObject.d.results;
-    $.each(results,
-        function (index, results) {
-            var optionhtml = '<option value="' + results.Title + '">' + results.Title + "</option>";
-            $("#ddlPEO").append(optionhtml);
-        });
-    //eliminate duplicate PEOs in listing
-    var usedPEOs = {};
-    $("#ddlPEO > option")
-        .each(function () {
-            if (usedPEOs[this.value]) {
-                $(this).remove();
-            } else {
-                usedPEOs[this.value] = this.value;
-            }
-        });
-}
-function peoErrHandler(data, errCode, errMessage) {
-    alert("Error: Unable to load user PEO. " + errMessage);
-}
-
-//Load PMA ddl
-function loadPMA() {
-    var executor5 = new SP.RequestExecutor(appWebUrl);
-    var listname = "PEO_PMA_PROGRAM_ACAT";
-    var baseUrl = appWebUrl + "/_api/web/lists/getbyTitle('" + listname + "')/items";
-    var fullUrl = baseUrl;
-    var requestHeaders = { "ACCEPT": "application/json;odata=verbose;charset=utf-8" };
-    executor5.executeAsync({
-        url: fullUrl,
-        method: "GET",
-        headers: requestHeaders,
-        success: pmaSuccHandler,
-        error: pmaErrHandler
-    });
-}
-function pmaSuccHandler(data) {
-    var jsonObject = JSON.parse(data.body);
-    var results = jsonObject.d.results;
-    $.each(results,
-        function (index, results) {
-            var optionhtml = '<option value="' + results.PMA + '">' + results.PMA + "</option>";
-            $("#ddlPMA").append(optionhtml);
-        });
-    //eliminate duplicate pma in listing
-    var usedPMAs = {};
-    $("#ddlPMA > option")
-        .each(function () {
-            if (usedPMAs[this.value]) {
-                $(this).remove();
-            } else {
-                usedPMAs[this.value] = this.value;
-            }
-        });
-}
-function pmaErrHandler(data, errCode, errMessage) {
-    alert("Error: Unable to load user PMA. " + errMessage);
-}
-
-//Load acat ddl
-function loadACAT() {
-    var executor6 = new SP.RequestExecutor(appWebUrl);
-    var listname = "PEO_PMA_PROGRAM_ACAT";
-    var baseUrl = appWebUrl + "/_api/web/lists/getbyTitle('" + listname + "')/items";
-    var fullUrl = baseUrl;
-    var requestHeaders = { "ACCEPT": "application/json;odata=verbose;charset=utf-8" };
-    executor6.executeAsync({
-        url: fullUrl,
-        method: "GET",
-        headers: requestHeaders,
-        success: acatSuccHandler,
-        error: acatErrHandler
-    });
-}
-function acatSuccHandler(data) {
-    var jsonObject = JSON.parse(data.body);
-    var results = jsonObject.d.results;
-    $.each(results,
-        function (index, results) {
-            var optionhtml = '<option value="' +
-                results.ACAT_x0020_Designation +
-                '">' +
-                results.ACAT_x0020_Designation +
-                "</option>";
-            $("#ddlACAT").append(optionhtml);
-        });
-    //eliminate duplicate PEOs in listing
-    var usedACATs = {};
-    $("#ddlACAT > option")
-        .each(function () {
-            if (usedACATs[this.value]) {
-                $(this).remove();
-            } else {
-                usedACATs[this.value] = this.value;
-            }
-        });
-}
-function acatErrHandler(data, errCode, errMessage) {
-    alert("Error: Unable to load user ACAT. " + errMessage);
-}
-
-//UPDATE PROFILE
-
-function UpdateProfile() {
-    //read all the text values in the form
-    var usertext = $('#ddlUser').find("option:selected").text();
-    var leadership = $('#ddlLeadership').find("option:selected").text();
-    var competency = $('#ddlCompetency').find("option:selected").text();
-    var peo = $('#ddlPEO').find("option:selected").text();
-    var pma = $('#ddlPMA').find("option:selected").text();
-    var program = $('#ddlProgram').find("option:selected").text();
-    var acat = $('#ddlACAT').find("option:selected").text();
-    var phase = $('#ddlPhase').find("option:selected").text();
-}
-
-function updateFieldInfo() {
-}
-
-function CancelProfile() {
-    alert("Your changes have been cancelled");
-}
-
-function AddChangeEvents() {
-
-    $("#ddlLeadership")
-        .on("change",
-            function () {
-                if ($(this).val() === "PEO") {
-                    $("#peocontrols").show();
-                    $('#ddlPEO').prop('disabled', false);
-                    $('#ddlPSM').prop('disabled', true);
-                    $('#ddlPMA').prop('disabled', true);
-                    $('#ddlProgram').prop('disabled', true);
-                    $('#ddlACAT').prop('disabled', true);
-                    $('#ddlPhase').prop('disabled', true);
-                } else {
-                    $("#leadershipcontrols").show();
-                    $("#ddlTier3").prop('disabled', true);
-                    $("#ddlTD").prop('disabled', true);
-                    $("#ddlCompetency").prop('disabled', false);
+                },
+                { //likelihood
+                    "targets": [3],
+                    "data": "Likelihood",
+                    "visible": false,
+                    "searchable": false
+                },
+                { //consequence
+                    "targets": [4],
+                    "data": "Consequence",
+                    "visible": false,
+                    "searchable": false
+                },
+                { //risk   
+                    "targets": [5],
+                    "width": "10%",
+                    "data": null,
+                    "render": function (data, type, row) {
+                        return "" + data.Likelihood + data.Consequence;
+                    }
                 }
-            });
-
-    $("#ddlCompetency")
-       .on("change",
-           function () {
-               var competencyitem = this.value;
-               if (this.value == "Competency") {
-                   $("#ddlTD").prop('disabled', false);
-                   LoadTier3(this.value);
-               }
-           });
-
-
-
-    $("#ddlTD")
-        .on("change",
-            function () {
-                if (this.value == "No") {
-                    $("#ddlTier3").prop('disabled', false);
+                /*
+                 {   //Severity   
+                    "targets": [6],
+                    "width": "10%",
+                    "data": null,
+                    "render": function (data, type, row) {		                   
+                        
+                    }		                
+                },
+                   {  //Status   
+                    "targets": [7],
+                    "width": "10%",
+                    "data": Status,	
+                    "visible": false	                               
                 }
-            });
+                */
+            ],
+            columns: [
+                //filter out any data column completed. All others are used for reports
+                //       { name: 'Trigger' }, //displayed in column 2
+                //      { name: 'Issue' }, //index 0    //displayed in column 1             
+                //     { title: 'Issue Description*' },
+                //     { title: 'Category' },
+                 //    { name: 'Type' }, //displayed in column 3
+                //     { name: 'Phase' },                   ///index 5  //displated in column 4
+                //{ name: 'Likelihood' },
+                //{ name: 'Consequence' },
+                //     { title: 'Mitigation 6.0d' },
+                //     { title: 'Mitigation 6.6' },          //index 10
+                //     { title: 'Mitigation 6.7' },
+                //     { title: 'Mitigation 6.8' },
+                //     { title: 'Mitigation Date' },
+                //     { title: 'PEO' },
+                //     { title: 'PMA' }, //index 15
+                //     { title: 'Program' },
+                //     { title: 'Phase' },
+                //     { title: 'PM Approver' },
+                //     { title: 'PM Approval Date' }
+                //     { title: 'Competency Approver ' },     //index 20
+                //     { title: 'Competency Approval Date' },
+                //     { title: 'Admin Approver' },
+                //     { title: 'Admin Approval Date' },
+                //       { name: 'Risk' } //displayed in column 5
+                //       { name: 'Status' },               //filter out completed status
+                //      { name: 'ID' }
+            ],
+            "searching": true,
+            "paging": false,
+            "info": true
+            // "autoWidth": true
+        });
+}
+function myErrRisksHandler(data, errCode, errMessage) {
+    alert("Error: myErrRiskHandler " + errMessage);
+}
 
-    $("#ddlPSM")
-      .on("change",
-          function () {
+//myreviews
 
-              if (this.value == "Yes") {
-                  $('#ddlPMA').hide();
-                  $('#ddlProgram').hide();
-                  $('#ddlACAT').hide();
-                  $('#ddlPhase').hide();
-              }
-              else {
-                  $('#ddlPMA').prop('disabled', false);
-                  loadPMA(peoitem);
-              }
-          });
+function LoadReviewsDataTable() {
+    var listname = "ProgramIssueAndRisks";
+    var usrProgram = $('#userProgram').text();
+    console.log("LoadReviewsDataTable usrProgram is " + usrProgram);
 
-    $("#ddlProgram")
-      .on("change",
-          function () {
-              $('#ddlACAT').prop('disabled', false);
-              var programitem = (this.value);
-              loadACAT(peoitem, programitem);
-          });
 
-    $("#ddlACAT")
-       .on("change",
-           function () {
-               $('#ddlPhase').prop('disabled', false);
-               var acatitem = (this.value);
-               loadPhase(peoitem, programitem, acatitem);
-           });
+    var ddlstatus = "Completed";
+    var baseUrl = _spPageContextInfo.webAbsoluteUrl;
+    var selectUrl = "/_api/web/Lists/getbyTitle('" + listname + "')/items?";
+    var filterUrl = ""; //"$filter=Program eq '" + usrProgram + "'";
+    var fullUrl = baseUrl + selectUrl + filterUrl;
 
+    $.ajax({
+        url: fullUrl,
+        type: "GET",
+        dataType: "json",
+        headers: { "ACCEPT": "application/json;odata=verbose" },
+        success: mySuccReviewsHandler,
+        error: myErrReviewsHandler
+    });
+}
+
+function mySuccReviewsHandler(data) {
+    if (dataTableReviews != 'undefined') {
+        dataTableReviews.destroy();
+    }
+    dataTableReviews = $('#reviews')
+        .DataTable({
+            "bDestroy": true,
+            "aaData": data.d.results,
+            "aoColumns": [
+
+                 { "mData": "Title" }   //display name is issue
+                // { "mData": "MitigationDate" },  //need to add duedate
+               //  { "mData": "Status" },
+               //  { "mData": "AdminApprovalDate" }
+            ],
+            //   dom: 'Bfrtip',
+            //    buttons: ['copy', 'excel', 'pdf', 'print'],
+            // fixedHeader: true,
+            //     scrollY: 300,
+            //    scrollX: true,
+            autoWidth: true,
+            columnDefs: [
+                       {
+                           //event
+                           "targets": [0],
+                           "visible": true
+
+                       }
+                   /*    {
+                           //DueDate
+                           "targets": [1],
+                           
+                       },
+                       {
+                           //Status
+                           "targets": [2],
+                           "width": "20%"
+                       },
+                       {   //MitigationDate
+                           "targets": [3],
+                           "width": "20%"
+                       }
+                       */
+            ],
+
+            columns: [
+                       //filter out any data column completed. All others are used for reports
+                       //   { name: 'Title' } //filter out completed status                //index 0    //displayed in column 1
+                        //  { name: 'Mitigation Date' },
+                       //   { name: 'Status' },
+                    //    { name: 'Trigger' },                            //displayed in column 2
+
+                   //     { title: 'Issue Description*' },
+                   //     { title: 'Category' },
+                   //       { name: 'Type' },                                //displayed in column 3
+
+                    //      { name: 'Phase' },                   ///index 5  //displated in column 4
+
+                   //     { name: 'Likelihood' },
+                   //     { name: 'Consequence' },
+
+                   //     { title: 'Mitigation 6.0d' },
+                   //     { title: 'Mitigation 6.6' },          //index 10
+                   //     { title: 'Mitigation 6.7' },
+                   //     { title: 'Mitigation 6.8' },
+
+                   //     { title: 'PEO' },
+                   //     { title: 'PMA' }, //index 15
+                   //     { title: 'Program' },
+                   //     { title: 'Phase' },
+                   //     { title: 'PM Approver' },
+                     //     { title: 'PM Approval Date' }
+                   //     { title: 'Competency Approver ' },     //index 20
+                   //     { title: 'Competency Approval Date' },
+                   //     { title: 'Admin Approver' },
+                   //     { title: 'Admin Approval Date' },
+                   //       { name: 'Risk' }                                //displayed in column 5
+            ],
+            "searching": true,
+            "paging": true,
+            "info": true
+
+        });
+}
+function myErrReviewsHandler(data, errCode, errMessage) {
+    alert("Error myErrReviewsHandler " + errMessage);
 }
 
 
-function LoadTier3(x) {
-    var competency = x; // between 1 and 4
-    if (competency == "1") {
-        //value of 1 is 6.0D
-        $("#ddlTier3").append($("<option></option>").attr("value", "611").text("6.1.1"));
-        $("#ddlTier3").append($("<option></option>").attr("value", "612").text("6.1.2"));
-        $("#ddlTier3").append($("<option></option>").attr("value", "613").text("6.1.2"));
-        $("#ddlTier3").append($("<option></option>").attr("value", "621").text("6.2.1"));
-        $("#ddlTier3").append($("<option></option>").attr("value", "622").text("6.2.2"));
-        $("#ddlTier3").append($("<option></option>").attr("value", "623").text("6.2.3"));
-        $("#ddlTier3").append($("<option></option>").attr("value", "631").text("6.3.1"));
-        $("#ddlTier3").append($("<option></option>").attr("value", "633").text("6.3.3"));
-        $("#ddlTier3").append($("<option></option>").attr("value", "634").text("6.3.4"));
-        $("#ddlTier3").append($("<option></option>").attr("value", "635").text("6.3.5"));
-        $("#ddlTier3").append($("<option></option>").attr("value", "641").text("6.4.1"));
-        $("#ddlTier3").append($("<option></option>").attr("value", "642").text("6.4.2"));
-        $("#ddlTier3").append($("<option></option>").attr("value", "643").text("6.4.3"));
+//FUNCTIONS ON PAGE
+function updateCube(labeltext, x, y) {
+    var id = "" + "#" + x + y;
+    if ($(id).prop('title') === "") {
 
-    } else if (competency == "2") { //6.6.1(A)
-        //value of 2 is 6.6
-        $("#ddlTier3").append($("<option></option>").attr("value", "661a").text("6.6.1(A)"));
-        $("#ddlTier3").append($("<option></option>").attr("value", "661b").text("6.6.1(B)"));
-        $("#ddlTier3").append($("<option></option>").attr("value", "662a").text("6.6.2(A)"));
-        $("#ddlTier3").append($("<option></option>").attr("value", "662b").text("6.6.2(B)"));
-        $("#ddlTier3").append($("<option></option>").attr("value", "663u").text("6.6.3(U)"));
-        $("#ddlTier3").append($("<option></option>").attr("value", "663w").text("6.6.3(W)"));
-        $("#ddlTier3").append($("<option></option>").attr("value", "664").text("6.6.4"));
-        $("#ddlTier3").append($("<option></option>").attr("value", "665").text("6.6.5"));
-        $("#ddlTier3").append($("<option></option>").attr("value", "66F").text("6.6F"));
-
-    } else if (competency == "3") {
-        //value of 3 is 6.7
-        $("#ddlTier3").append($("<option></option>").attr("value", "671").text("6.7.1"));
-        $("#ddlTier3").append($("<option></option>").attr("value", "672").text("6.7.2"));
-        $("#ddlTier3").append($("<option></option>").attr("value", "675").text("6.7.5"));
-        $("#ddlTier3").append($("<option></option>").attr("value", "676").text("6.7.6"));
-        $("#ddlTier3").append($("<option></option>").attr("value", "677").text("6.7.7"));
-        $("#ddlTier3").append($("<option></option>").attr("value", "678").text("6.7.8"));
-
-    } else if (competency == "4") {
-        //value of 4 is 6.8
-        $("#ddlTier3").append($("<option></option>").attr("value", "681").text("6.8.1"));
-        $("#ddlTier3").append($("<option></option>").attr("value", "682").text("6.8.2"));
-        $("#ddlTier3").append($("<option></option>").attr("value", "683").text("6.8.3"));
-        $("#ddlTier3").append($("<option></option>").attr("value", "684").text("6.8.4"));
-        $("#ddlTier3").append($("<option></option>").attr("value", "685").text("6.8.5"));
-
-
-
-
+        $(id).text("X");
+    } else {
+        updateTooltip(labeltext);
     }
-}// JavaScript source code
+}
+
+function RemoveCubeX(x, y) {
+    var id = "" + "#" + x + y;
+    $(id).text("");
+}
+function clearcube() {
+    $('#11').text("");
+    $('#12').text("");
+    $('#13').text("");
+    $('#14').text("");
+    $('#15').text("");
+    $('#21').text("");
+    $('#22').text("");
+    $('#23').html("");
+    $('#24').text("");
+    $('#25').text("");
+    $('#31').text("");
+    $('#32').html("");
+    $('#33').text("");
+    $('#34').text("");
+    $('#35').text("");
+    $('#41').text("");
+    $('#42').text("");
+    $('#43').text("");
+    $('#44').text("");
+    $('#45').text("");
+    $('#51').text("");
+    $('#52').text("");
+    $('#53').text("");
+    $('#54').html("");
+    $('#55').text("");
+
+    //var table = $('events').DataTable();
+    dataTableEvents.rows('.selected')
+      .nodes()
+      .to$()
+      .removeClass('selected');
+}
+
+function AddTooltip(eventText, x, y) {
+    var id = "" + "#" + x + y;
+    if ($(id).prop('title') === "") {
+        $(id).attr('title', eventText);
+    } else {
+        var titletext = $(id).prop('title');
+        var updatedText = titletext + " " + eventText;
+        $(id).attr('title', updatedText);
+    }
+}
 
 
 
-
-
-
-
-
-
-
+//SETUP DIALOGS
+function loadTriggerDetails(id) {
+    var executor = new SP.RequestExecutor(appWebUrl);
+    var listname = "ProgramIssuesAndRisks";
+    var fullUrl = appWebUrl + "/_api/web/lists/getbytitle('ProgramIssuesAndRisks')/items(1)";
+    var requestHeaders = {
+        "accept": "application/json;odata=verbose"
+    };
+    executor.executeAsync({
+        url: fullUrl,
+        method: "GET",
+        headers: requestHeaders,
+        success: successTriggerDetailsHandler,
+        error: errorTriggerDetailsHandler
+    });
+}
 
 
 

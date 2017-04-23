@@ -108,9 +108,9 @@ function errorGetProfilerHandler(data) {
 
 
 function myCustomPage() {
-    $("#ddlfilter").append($("<option></option>").attr("value", "test").text("TMRR"));
+    $("#ddlfilter").append($("<option></option>").attr("value", "test").text("Test TMRR"));
     $("#ddlfilter").append($("<option></option>").attr("value", "development").text("EMD"));
-    $("#ddlfilter").append($("<option></option>").attr("value", "production fleet post").text("P&D"));
+    $("#ddlfilter").append($("<option></option>").attr("value", "production post fleet").text(" P&D"));
     $("#ddlfilter").append($("<option></option>").attr("value", "sustainment").text("O&S"));
 
     $("#ddlfilter")
@@ -289,13 +289,9 @@ function LoadTriggersDataTable() {
     var baseUrl = _spPageContextInfo.webAbsoluteUrl;
     var selectUrl = "/_api/web/Lists/getbyTitle('" + listname + "')/items";
     var fullUrl = baseUrl + selectUrl;
-    executor.executeAsync({
-        url: fullUrl,
-        method: "GET",
-        headers: requestHeaders,
-        success: TriggersSuccHandler,
-        error: TriggersErrHandler
-    });
+
+
+    
 }
 
 function TriggersSuccHandler(data) {
@@ -306,68 +302,67 @@ function TriggersSuccHandler(data) {
         .DataTable({
             select: { style: "single" },
             dom: 'Bfrtip',
-            buttons: true, // ['copy', 'excel', 'pdf', 'print']
+            buttons: true,// ['copy', 'excel', 'pdf', 'print']
             "aaData": data.d,
             "aoColumns": [
                 { "mData": "Title" },
-                { "mData": "Trigger Description" },
+                { "mData": "TriggerDescription" },
                 { "mData": "Development" },
                 { "mData": "Test" },
                 { "mData": "Production" },
-                { "mData": "Fleet Introduction" },
-                { "mData": "Post Production" },
+                { "mData": "FleetIntroduction" },
+                { "mData": "PostProduction" },
                 { "mData": "Sustainment" }
             ],
             scrollY: 300,
             columnDefs: [
-            { //trigger title
-                "targets": [0],
-                "visible": true,
-                "searchable": false
-                "data": "Title"
-
-}
-
+                {   //trigger title
+                    "targets": [0],
+                    "visible": true,
+                    "searchable": false
+                    
+                }
+                
                 ,
                 {   //trigger description
                     "targets": [1],
                     "visible": false,
                     "searchable": false
                 }
-
+                
                 ,
                 {   //dev
                     "targets": [2],
                     "visible": false,
                     "searchable": true
                 },
-
+                
                 {    //test
                     "targets": [3],
-                    "visible": false,
+                    "visible": false,                  
                     "searchable": true
                 },
                 {   //production
                     "targets": [4],
-                    "visible": false,
+                    "visible": false,               
                     "searchable": true
                 },
                 {   //fleet introduction
                     "targets": [5],
-                    "visible": false,
+                    "visible": false,                  
                     "searchable": true
                 },
                 {   //postproduction
                     "targets": [6],
-                    "visible": false,
+                    "visible": false,                  
                     "searchable": true
                 },
                 {   //sustainment
                     "targets": [7],
-                    "visible": false,
+                    "visible": false,               
                     "searchable": true
                 }
-
+                
 
             ],
             columns: [
@@ -398,7 +393,7 @@ function LoadIssuesDataTable() {
     var requestHeaders = { "accept": "application/json;odata=verbose" };
     var listname = "ProgramIssuesAndRisks";
     var baseUrl = _spPageContextInfo.webAbsoluteUrl;
-    var selectUrl = "/_api/web/Lists/getbyTitle('" + listname + "')/items";
+    var selectUrl = "/_api/web/Lists/getbyTitle('" + listname + "'')/items";
     var fullUrl = baseUrl + selectUrl;
     executor.executeAsync({
         url: fullUrl,

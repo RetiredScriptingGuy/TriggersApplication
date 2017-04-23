@@ -53,30 +53,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Features\Feature1\Feature1.feature">
-      <FeatureId>{4426ab36-672f-414f-92c6-534818e07ee7}</FeatureId>
-    </None>
-    <None Include="Features\Feature2\Feature2.feature">
-      <FeatureId>{1e9a25af-2e45-4c6e-a8b7-a21c2b8a952a}</FeatureId>
-    </None>
-    <None Include="Features\Feature3\Feature3.feature">
-      <FeatureId>{14661253-18a7-4f1b-ac4c-1e9cc1986ec4}</FeatureId>
-    </None>
-    <None Include="Features\Feature4\Feature4.feature">
-      <FeatureId>{5f31b4d0-26a6-45ac-93c0-75ee56172e4e}</FeatureId>
-    </None>
-    <None Include="Features\Feature5\Feature5.feature">
-      <FeatureId>{fd6e8327-3665-4818-9e51-1187fc36cc19}</FeatureId>
-    </None>
-    <None Include="Features\Feature6\Feature6.feature">
-      <FeatureId>{bdc95a7e-6860-4fe3-acaf-be552ccc7090}</FeatureId>
-    </None>
-    <None Include="Features\Feature7\Feature7.feature">
-      <FeatureId>{1f9d9174-038c-4513-8ad6-999db1a004c5}</FeatureId>
-    </None>
-    <None Include="Features\Feature8\Feature8.feature">
-      <FeatureId>{385e72b5-da7e-4be9-af04-7f0d7e7a4db2}</FeatureId>
-    </None>
     <None Include="Features\TriggersContent\TriggersContent.feature">
       <FeatureId>{0200ae2c-dc0a-40cb-bb65-23ceea3baaa2}</FeatureId>
     </None>
@@ -143,30 +119,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Features\Feature1\Feature1.Template.xml">
-      <DependentUpon>Feature1.feature</DependentUpon>
-    </Content>
-    <Content Include="Features\Feature2\Feature2.Template.xml">
-      <DependentUpon>Feature2.feature</DependentUpon>
-    </Content>
-    <Content Include="Features\Feature3\Feature3.Template.xml">
-      <DependentUpon>Feature3.feature</DependentUpon>
-    </Content>
-    <Content Include="Features\Feature4\Feature4.Template.xml">
-      <DependentUpon>Feature4.feature</DependentUpon>
-    </Content>
-    <Content Include="Features\Feature5\Feature5.Template.xml">
-      <DependentUpon>Feature5.feature</DependentUpon>
-    </Content>
-    <Content Include="Features\Feature6\Feature6.Template.xml">
-      <DependentUpon>Feature6.feature</DependentUpon>
-    </Content>
-    <Content Include="Features\Feature7\Feature7.Template.xml">
-      <DependentUpon>Feature7.feature</DependentUpon>
-    </Content>
-    <Content Include="Features\Feature8\Feature8.Template.xml">
-      <DependentUpon>Feature8.feature</DependentUpon>
-    </Content>
     <Content Include="Features\TriggersContent\TriggersContent.Template.xml">
       <DependentUpon>TriggersContent.feature</DependentUpon>
     </Content>

@@ -1,0 +1,218 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:mso="urn:schemas-microsoft-com:office:office" xmlns:msdt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+
+    <!--[if gte mso 9]><xml>
+        <mso:CustomDocumentProperties>
+            <mso:_dlc_DocId msdt:dt="string">XCD4ME7X7URU-1497597693-96</mso:_dlc_DocId>
+            <mso:_dlc_DocIdItemGuid msdt:dt="string">6e10bf18-bafc-48e3-a4cf-f93bc76332b6</mso:_dlc_DocIdItemGuid>
+            <mso:_dlc_DocIdUrl msdt:dt="string">http://dev/sites/Trigger/_layouts/15/DocIdRedir.aspx?ID=XCD4ME7X7URU-1497597693-96, XCD4ME7X7URU-1497597693-96</mso:_dlc_DocIdUrl>
+        </mso:CustomDocumentProperties>
+    </xml><![endif]-->
+    <script src="../_layouts/15/MicrosoftAjax.js"></script>
+    <script src="../_layouts/15/sp.runtime.js"></script>
+    <script src="../_layouts/15/sp.js"></script>
+    <script src="../_layouts/15/sp.requestexecutor.js"></script>
+
+    <script src="../SiteAssets/TriggersApp/js/vendor/jquery.min.js"></script>
+    <script src="../SiteAssets/TriggersApp/js/vendor/bootstrap.min.js"></script>
+    <script src="../SiteAssets/TriggersApp/js/vendor/jquery.min.js"></script>
+    <script src="../SiteAssets/TriggersApp/js/vendor/jquery.dataTables.min.js"></script>
+    <script src="../SiteAssets/TriggersApp/js/vendor/dataTables.buttons.min.js"></script>
+    <script src="../SiteAssets/TriggersApp/js/vendor/buttons.print.min.js"></script>
+    <script src="../SiteAssets/TriggersApp/js/vendor/buttons.bootstrap.min.js"></script>
+    <script src="../SiteAssets/TriggersApp/js/vendor/buttons.html5.min.js"></script>
+    <script src="../SiteAssets/TriggersApp/js/custom/events.js"></script>
+    <link rel="stylesheet" type="text/css" href="../SiteAssets/TriggersApp/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="../SiteAssets/TriggersApp/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="../SiteAssets/TriggersApp/css/buttons.bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="../SiteAssets/TriggersApp/css/buttons.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="../SiteAssets/TriggersApp/css/triggers.css" />
+    <div id="triggerbanner" class="container-fluid" style="width:100%;">
+        <img src="../SiteAssets/TriggersApp/images/triggers_new logo.png" />
+    </div>
+    <div class="section">
+        <div id="navpills" class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="nav nav-pills">
+                        <li><a href="MyDashboard.aspx">Home</a></li>
+                        <li><a href="Triggers.aspx">Triggers</a></li>
+                        <li class="active"><a href="Events.aspx">Events /Reviews</a></li>
+                        <li><a href="Reports.aspx">Reports</a></li>
+                        <li><a href="Drafts.aspx">Drafts</a></li>
+                        <li><a href="Mitigation.aspx">Mitigation</a></li>
+                        <li><a href="Feedback.aspx">Feedback</a></li>
+                        <li><a href="Acronyms.aspx">Acronyms</a></li>
+                        <li><a href="References.aspx">References </a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <span id="profileButtons">
+            <a id="login" href="Profile.aspx">My Profile</a>
+            <label id="usrProgram">User Program |</label>
+            <label id="lastUpdated">Last Modified </label>
+        </span>
+    </div>
+</head>
+<body>
+<div>
+    <label id="filter" for="ddlfilter">Phase:</label>
+    <select id="ddlfilter">
+        <option value="selectvalue" selected="selected">Select Value</option>
+        <option value="Sustainment">Sustainment</option>
+        <option value="Development">Development</option>
+        <option value="Test">Test</option>
+        <option value="Production">Production</option>
+        <option value="FleetIntroduction">Fleet Introduction</option>
+    </select>
+</div>
+
+
+    <div class='outer'>
+        <div class='fullTopHalf'>
+            <H2>My Program Issues</H2>
+            <div class='quadrant1'>
+                <div class='gridView'>
+                    <table class="display" id="events">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Event
+                                </th>
+                                <th>
+                                    Program
+                                </th>
+                                <th>
+                                    POA
+                                </th>
+                                <th>
+                                    Due Date
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+
+
+
+
+            <div class='quadrant2'>
+                <div class='cube'>
+
+                    <table>
+                        <tr>
+                            <td rowspan=5 style='border: none; transform: rotate(-90deg)'>Likelihood</td>
+                            <td style='text-align: right; border: none; width: 25px;'>5 &nbsp;</td>
+                            <td id='51' style='background-color: #66ff33'>X</td>
+                            <td id='52' style='background-color: #ffff00'>X</td>
+                            <td style='background-color: #e60000' id='53'>X</td>
+                            <td id='54' style='background-color: #e60000'>X</td>
+                            <td id='55' style='background-color: #e60000'>X</td>
+                        </tr>
+                        <tr><td style='text-align: right; border: none; width: 25px;'>4 &nbsp;</td><td id='41' style='background-color: #66ff33'>X</td><td id='42' style='background-color: #ffff00'>X</td><td style='background-color: #ffff00' id='43'>X</td><td id='44' style='background-color: #e60000'>X</td><td id=45 style='background-color: #e60000'>X</td></tr>
+                        <tr><td style='text-align: right; border: none; width: 25px;'>3 &nbsp;</td><td id='31' style='background-color: #66ff33'>X</td><td id='32' style='background-color: #66ff33'>X</td><td style='background-color: #ffff00'>X</td><td style='background-color: #ffff00'>X</td><td style='background-color: #e60000'>X</td></tr>
+                        <tr><td style='text-align: right; border: none; width: 25px;'>2 &nbsp;</td><td id='21' style='background-color: #66ff33'>X</td><td id='22' style='background-color: #66ff33'>X</td><td id='23' style='background-color: #66ff33'>X</td><td style='background-color: #ffff00'>X</td><td style='background-color: #ffff00'>X</td></tr>
+                        <tr><td style='text-align: right; border: none; width: 25px;'>1 &nbsp;</td><td id='11' style='background-color: #66ff33'>X</td><td id='12' style='background-color: #66ff33'>X</td><td id='13' style='background-color: #66ff33'>X</td><td id='14' style='background-color: #66ff33'>X</td><td style='background-color: #ffff00'>X</td></tr>
+                        <tr><td style='border: none; height: 25px;'>&nbsp;</td><td style='border: none; height: 25px;'>&nbsp;</td><td style='vertical-align: top; border: none; height: 25px;'>1</td><td style='vertical-align: top; border: none; height: 25px'>2</td><td style='vertical-align: top; border: none; height: 25px'>3</td><td style='vertical-align: top; border: none; height: 25px'>4</td><td style='vertical-align: top; border: none; height: 25px'>5</td></tr>
+                        <tr><td style='border: none; height: 25px;'>&nbsp;</td><td colspan=6 style='border: none; text-align: center; vertical-align: top'><br />&nbsp; Consequence</td></tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class='fullBottomHalf'>
+            <div class='quadrant3'>
+                <H2>Program Risks</H2>
+                <div class='gridView'>
+                    <table class="display" id="risks">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Event
+                                </th>
+                                <th>
+                                    Program
+                                </th>
+                                <th>
+                                    POA
+                                </th>
+                                <th>
+                                    Due Date
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+
+
+            </div>
+            <div class='quadrant4'>
+                <H2>Program Events / Reviews</H2>
+                <div class='gridView'>
+                    <table class="display" id="reviews">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Event
+                                </th>
+                                <th>
+                                    Program
+                                </th>
+                                <th>
+                                    POA
+                                </th>
+                                <th>
+                                    Due Date
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- Button (Double) -->
+    <div class="form-group">
+        <label class="col-md-4 control-label" for="addevent"></label>
+        <div class="col-md-8">
+            <button name="addevent" class="btn btn-success" id="addEvent">Add Program Specific Event</button>
+            <button name="button2id" class="btn btn-default" id="editEvent">Edit Event / Review Details</button>
+        </div>
+    </div>
+
+
+
+    <!--HTML user profile data-->
+    <div id="currentuserprofile">
+        <div>
+            <input type="text" id="userID" title="user ID goes here" readonly="readonly">
+        </div>
+        <div>
+            <input type="text" id="userName" title="user name goes here" readonly="readonly">
+        </div>
+        <div>
+            <input type="text" id="userProgram" title="user program goes here" readonly="readonly">
+        </div>
+        <div>
+            <input type="text" id="digestmsg" title="list digest goes here" readonly="readonly">
+        </div>
+        <div>
+            <input type="text" id="error" title="error message goes here" readonly="readonly">
+        </div>
+    </div>
+    <div id="overlay"></div>
+</body>
+</html>

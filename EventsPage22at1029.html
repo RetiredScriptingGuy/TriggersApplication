@@ -7,47 +7,46 @@
 
     <!--[if gte mso 9]><xml>
     <mso:CustomDocumentProperties>
-    <mso:_dlc_DocId msdt:dt="string">XCD4ME7X7URU-1497597693-72</mso:_dlc_DocId>
-    <mso:_dlc_DocIdItemGuid msdt:dt="string">5076fd41-99d4-4539-942d-aeac89a297a4</mso:_dlc_DocIdItemGuid>
-    <mso:_dlc_DocIdUrl msdt:dt="string">http://dev/sites/Trigger/_layouts/15/DocIdRedir.aspx?ID=XCD4ME7X7URU-1497597693-72, XCD4ME7X7URU-1497597693-72</mso:_dlc_DocIdUrl>
+    <mso:_dlc_DocId msdt:dt="string">XCD4ME7X7URU-1497597693-96</mso:_dlc_DocId>
+    <mso:_dlc_DocIdItemGuid msdt:dt="string">6e10bf18-bafc-48e3-a4cf-f93bc76332b6</mso:_dlc_DocIdItemGuid>
+    <mso:_dlc_DocIdUrl msdt:dt="string">http://dev/sites/Trigger/_layouts/15/DocIdRedir.aspx?ID=XCD4ME7X7URU-1497597693-96, XCD4ME7X7URU-1497597693-96</mso:_dlc_DocIdUrl>
     </mso:CustomDocumentProperties>
     </xml><![endif]-->
-
     <script src="../_layouts/15/MicrosoftAjax.js"></script>
     <script src="../_layouts/15/sp.runtime.js"></script>
     <script src="../_layouts/15/sp.js"></script>
+
 
     <script src="../SiteAssets/TriggersApp/js/vendor/jquery.min.js"></script>
     <script src="../SiteAssets/TriggersApp/js/vendor/bootstrap.min.js"></script>
     <script src="../SiteAssets/TriggersApp/js/vendor/jquery.min.js"></script>
     <script src="../SiteAssets/TriggersApp/js/vendor/jquery.dataTables.min.js"></script>
     <script src="../SiteAssets/TriggersApp/js/vendor/dataTables.buttons.min.js"></script>
-    <script src="../SiteAssets/TriggersApp/js/vendor/dataTable.select.min.js"></script>
     <script src="../SiteAssets/TriggersApp/js/vendor/buttons.print.min.js"></script>
     <script src="../SiteAssets/TriggersApp/js/vendor/buttons.bootstrap.min.js"></script>
     <script src="../SiteAssets/TriggersApp/js/vendor/buttons.html5.min.js"></script>
-    <script src="../SiteAssets/TriggersApp/js/custom/customtrigger.js"></script>
+    <script src="../SiteAssets/TriggersApp/js/custom/events.js"></script>
 
     <link rel="stylesheet" type="text/css" href="../SiteAssets/TriggersApp/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="../SiteAssets/TriggersApp/css/jquery.dataTables.min.css" />
-    <link rel="stylesheet" type="text/css" href="../SiteAssets/TriggersApp/css/select.dataTables.min.css" />
     <link rel="stylesheet" type="text/css" href="../SiteAssets/TriggersApp/css/buttons.bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="../SiteAssets/TriggersApp/css/buttons.datTables.min.css" />
     <link rel="stylesheet" type="text/css" href="../SiteAssets/TriggersApp/css/triggers.css" />
     <link rel="stylesheet" type="text/css" href="../SiteAssets/TriggersApp/css/custom.css" />
 
+
     <div id="triggerbanner" class="container-fluid">
         <img src="../SiteAssets/TriggersApp/images/triggers_new logo.png" width="100%" />
     </div>
     <div class="section">
-        <a id="login" href="Profile.html">My Profile</a>
+        <a id="login" href="Profile.aspx">My Profile</a>
         <div id="navpills" class="container">
             <div class="row">
                 <div class="col-md-12">
                     <ul class="nav nav-pills">
                         <li><a href="MyDashboard.aspx">Home</a></li>
-                        <li class="active"><a href="Triggers.aspx">Triggers</a></li>
-                        <li><a href="Events.aspx">Events /Reviews</a></li>
+                        <li><a href="Triggers.aspx">Triggers</a></li>
+                        <li class="active"><a href="Events.aspx">Events /Reviews</a></li>
                         <li><a href="Reports.aspx">Reports</a></li>
                         <li><a href="Drafts.aspx">Drafts</a></li>
                         <li><a href="Mitigation.aspx">Mitigation</a></li>
@@ -61,8 +60,10 @@
     </div>
 </head>
 <body>
+    <br>
+    <br>
     <div>
-        <label id="ddlfilterlabel" for="ddlfilter">Phase:</label>
+        <label id="filter" for="ddlfilter">Phase:</label>
         <select id="ddlfilter">
             <option value="selectvalue" selected="selected">Select Value</option>
             <option value="Sustainment">Sustainment</option>
@@ -72,105 +73,76 @@
             <option value="FleetIntroduction">Fleet Introduction</option>
         </select>
     </div>
+
     <div class='outer'>
         <div class='fullTopHalf'>
-            <div class='triggersquadrant1'>
-                <h2>Triggers</h2>
-                <div class='triggersgridView'>
-                    <table class="display" id="triggers">
+            <div class='eventsquadrant1'>
+
+                <h2>All Events/Reviews</h2>
+                <div>
+                    <table class="display" id="events">
                         <thead>
                             <tr>
                                 <th>
-                                    Trigger
-                                </th>
-                                <th>
-                                    Trigger Description
+                                    Event
                                 </th>
                             </tr>
                         </thead>
                         <tbody></tbody>
                     </table>
                 </div>
-                <div>
-                    <label id="addtriggertext">Your trigger not listed? Add another trigger here:"</label>
-                    <a href="AddTrigger.aspx">Add New Trigger</a>
-                </div>
+
+
+
+
+
             </div>
-            <div class='triggerdescriptionquadrant2'>
-                <h2>Trigger Description</h2>
-                <div class='triggerdescriptiongridView' >
-                    <table class="display" id="TriggerDescription">
+            <div id="dashboardbuttons">
+                <button type="button" class="btn btn-success" onclick="AddEvent()">Add Event</button>
+                <br>
+                <br>
+                <button type="button" class="btn btn-danger" onclick="RemoveEvent()">Remove</button>
+
+            </div>
+
+
+
+            <div id="myprogramevents">
+                <h2>My Program Events</h2>
+                <div class='gridView'>
+                    <table class="display" id="myEvents">
                         <thead>
                             <tr>
                                 <th>
-                                    Description
+                                    Event
+                                </th>
+                                <th>
+                                    Due Date
+                                </th>
+                                <th>
+                                    Status
+                                </th>
+                                <th>
+                                    Date Completed
                                 </th>
                             </tr>
                         </thead>
                         <tbody></tbody>
                     </table>
                 </div>
-                <div>
-                    <label id="addtriggertext">Clear the description area here:"</label>
-                    <a href="#" onclick="clearDescriptionTable()">Clear</a>
-                </div>
             </div>
+
+
+
         </div>
-        <div class='fullBottomHalf'>
-            <div class='quadrant3'>
-                <h2>Issues</h2>
-                <div class='issuesgridView'>
-                    <table class="display" id="issues" style="width:100%;">
-                        <thead>
-                            <tr>
-                                <th>
-                                    Issues
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
-                </div>
-            </div>
-            <div class='quadrant4'>
-                <h2>Issue Description</h2>
-                <div class='gridView' style="height:400px;">
-                    <table class="display" id="IssueDescription">
-                        <thead>
-                            <tr>
-                                <th>
-                                    Description
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
-                </div>
-                <div>
-                    <label id="addtriggertext">Clear the description area here:"</label>
-                    <a href="#" onclick="clearIssuesDescriptionTable()">Clear</a>
-                </div>
-           </div>
-            <div class='triggersquadrant5'>
-                <h2>Triggers</h2>
-                    <div class='mitigationgridView'>
-                        <table class="display" id="mitigation">
-                            <thead>
-                                <tr>
-                                    <th>
-                                        Trigger
-                                    </th>
-                                    <th>
-                                        Trigger Description
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody></tbody>
-                        </table>
-                    </div>
-           </div>
-       </div>
-   </div>
+
+
+
+
+    </div>
+
+
+
     <div id="currentuserprofile">
         <div id="userID">UserID</div>
         <div id="userName">UserName</div>
@@ -178,5 +150,9 @@
         <div id="digestmsg"></div>
         <div id="error"></div>
     </div>
+
+
 </body>
+
+
 </html>

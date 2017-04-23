@@ -11,48 +11,89 @@ var listName = "Profiles";
 var lastModifiedDate = "";
 var all = "Select Value";
 
+
 _spBodyOnLoadFunctionNames.push("myCustomPage");
 
 function myCustomPage() {
-    SP.SOD.executeOrDelayUntilScriptLoaded(initialize, 'sp.ui.dialog.js');
     $('#TriggerDetailsDialog').hide();
     $('#overlay').hide();
-    GetDigest();
 
+
+
+
+    $("#ddlfilter").append($("<option></option>").attr("value", "selectall").text("Select All"));
+    $("#ddlfilter").append($("<option></option>").attr("value", "test").text("TMRR"));
+    $("#ddlfilter").append($("<option></option>").attr("value", "development").text("EMD"));
+    $("#ddlfilter").append($("<option></option>").attr("value", "production").text("P&D"));
+    $("#ddlfilter").append($("<option></option>").attr("value", "sustainment").text("O&S"));
+
+    GetDigest();
     LoadEventsDataTable(all);
     LoadRisksDataTable();
     LoadReviewsDataTable();
 
 
+
+
+
     $('#events')
           .on('dblclick',
               'tr',
-              function () {
+              function (triggerIssue, triggerID, triggerType, triggerDescription, triggerMitigation, mitigationDate, mitigationEnd, status) {
+                  /*
+                   var triggerId =  dataTableEvents.row(this).data().Id;
+                   var triggerType =  dataTableEvents.row(this).data().Type;
+                   var triggerDescription =   dataTableEvents.row(this).data().Description;
+                   var triggerMitigation = dataTableEvents.row(this).data().Phase;
+                   var mitigationDate =  dataTableEvents.row(this).data().Status;
+ 
+ 
+                   var tri
+ 
+                    */
+
                   var dialogOptions = {
-                      title: "Edit Trigger",
-                      width: 900,
-                      height: 600,
                       url: "TriggerDetailsDialog.aspx",
-                      dialogReturnValueCallback: function (dialogResult) {
-                          SP.UI.ModalDialog.RefreshPage(dialogResult);
-                      }
+                      title: "Edit Issue",
+                      autoSize: true,
+
+                      args: {
+                          "TriggerID": triggerId,
+                          "Type": triggerType,
+                          "Description": triggerDescription,
+                          "Mitigation": triggerMitigation,
+                          "MitigationDate": mitigationDate,
+                          "MitigationEnd": mitigationEnd,
+                          "Status": status
+                      },
+
+                      dialogReturnValueCallback:
+                           function (dialogResult) {
+                               SP.UI.ModalDialog.RefreshPage(dialogResult);
+                           }
                   };
 
-                  //  SP.UI.ModalDialog.showModalDialog(options);
+                  // SP.UI.ModalDialog.get_childDialog().get_args()['SomeVarName'];
+                  SP.UI.ModalDialog.showModalDialog(options);
 
                   //var itemid = dataTableEvents.row(this).data().Trigger;
                   // var itemName = dataTableEvents.row(this).data().ID;
                   // alert("Open edit dialog or page for item: " + itemName + " and " + itemid);
-                  OpenPopUpPageWithDialogOptions(dialogOptions);
+                  //  OpenPopUpPageWithDialogOptions(dialogOptions);
+
               });
+
+
 
     $('#risks')
       .on('dblclick',
           'tr',
           function () {
+
               var dialogOptions = {
                   title: "Edit Trigger",
                   width: 900,
+
                   height: 600,
                   url: "TriggerDetailsDialog.aspx",
                   dialogReturnValueCallback: function (dialogResult) {
@@ -72,9 +113,20 @@ function myCustomPage() {
        .on('dblclick',
            'tr',
            function () {
+               var triggerId = $("#userID").val();
                var dialogOptions = {
                    title: "Edit Trigger",
                    width: 900,
+                   args: {
+                       "TriggerID": triggerId,
+                       "Type": triggerType,
+                       "Description": triggerDescription,
+                       "Mitigation": triggerMitigation,
+                       "MitigationDate": mitigationDate,
+                       "MitigationEnd": mitigationEnd,
+                       "Status": status
+                   },
+
                    height: 600,
                    url: "TriggerDetailsDialog.aspx",
                    dialogReturnValueCallback: function (dialogResult) {
@@ -98,7 +150,17 @@ function myCustomPage() {
                     $(this).removeClass('selected');
                     var y = dataTableEvents.row(this).data().Likelihood;
                     var x = dataTableEvents.row(this).data().Consequence;
-                    console.log("update cube with :" + x + "and" + y);
+                    $("#risks >tbody:last-child").after("<tr>" +
+                                                 " <td>row(this).data().Title<td>" +
+                                                 " <td>row(this).data().Trigger<td>" +
+                                                 " <td>row(this).data().Likilihood<td>" +
+                                                "  <td>row(this).data().Type<td>" +
+                                             " </tr>");
+
+
+
+
+
                     //var selectedtextid = dataTableEvents.row(this).data().Trigger;
                     RemoveCubeX(y, x);
 
@@ -131,12 +193,27 @@ function myCustomPage() {
                 // redrawDataTable();
             });
 
+    $('reloadDataTable')
+    .on('click',
+      function () {
+          location.reload();
+      });
+
+
 
     $("#ddlfilter")
-        .on("change",
+        .on('change',
             function () {
-                var filter = $(this).val();
-                //LoadEventsDataTable(filter);
+                var filter = this.value
+                if (filter == "selectall") {
+                    window.location.reload();
+                }
+                else {
+                    dataTableEvents
+                        .column(5)
+                        .search(this.value)
+                        .draw();
+                }
             });
 
 
@@ -179,6 +256,7 @@ function myCustomPage() {
 
     //  $('#info').tooltip();
 
+    ShowCube();
 
 
 
@@ -237,12 +315,11 @@ function succRetrieveLastModifiedDate(data) {
     $("#lastUpdated").text(" | " + "Last Updated: " + lastModifiedDate);
 }
 
-
 function GetUserInfo() {
     var listname = "Profiles";
     var username = currentUser;
     var baseUrl = _spPageContextInfo.webAbsoluteUrl;
-    var selectUrl = "/_api/web/Lists/getbyTitle('" + listname + "')/items?$select=Title,IsLeadership,Program";
+    var selectUrl = "/_api/web/Lists/getbyTitle('" + listname + "')/items";
     var filterUrl = "$filter=Title eq '" + username + "'";
 
     var fullUrl = baseUrl + selectUrl + filterUrl;
@@ -261,38 +338,38 @@ function GetUserInfo() {
 function userSuccHandler(data) {
     var jsonObject = JSON.parse(data.body);
     var userID = jsonObject.d.ID;
-    console.log("mydashboard js " + userID);
+
     $("#userID").text(userID);
     var userDisplayName = jsonObject.d.DisplayName;
-    console.log(userDisplayName);
 
-    var usrName = $("#userName").textContent;
-    var usrID = $("#userID").textContent;
-    var usrProg = $("#userProgram").textContent;
+
+    var usrName = $("#userName").val();
+    var usrID = $("#userID").val();
+    var usrProg = $("#userProgram").val();
     $("#userName").text(userDisplayName);
     var userleadership = jsonObject.d.IsLeadership;
-    console.log(userleadership);
+
     var userPEO = jsonObject.d.PEO;
-    console.log(userPEO);
+
     var userCompetency = jsonObject.d.Competency;
-    console.log(userCompetency);
+
     var userPMA = jsonObject.d.PMA;
-    console.log(userPMA);
+
     var userACAT = jsonObject.d.ACAT;
-    console.log(userACAT);
+
     var userProgram = jsonObject.d.Program;
-    console.log(userProgram);
+
     $("#userProgram").text(userProgram);
     //upper right label
     $("#usrProgram").text(" |  " + userProgram);
     var userPhase = jsonObject.d.Phase;
-    console.log(userPhase);
+
     var $element = $("#login");
     if ($element) {
         $element.attr('href', "../SitePages/Profile.aspx?Name=" + usrName + "&id=" + usrID + "&program=" + usrProg);
     }
 
-    console.log("finish processing userSuccHandler");
+
 }
 
 function userErrHandler(data, errCode, errMessage) {
@@ -309,35 +386,13 @@ function LoadEventsDataTable(x) {
     }
     var listname = "ProgramIssuesAndRisks";
     var usrProgram = $('#userProgram').text();
-    console.log("LoadEventsDataTable usrProgram is " + usrProgram);
-
     var baseUrl = _spPageContextInfo.webAbsoluteUrl;
-    var selectUrl = "/_api/web/Lists/getbyTitle('" + listname + "')/items?";
-    var filterUrl;
-    /*
-    if (selectedfilter == "Select Value") {
-        filterUrl = "$filter=Status eq 'In Progress'";
-    }
-
-    if (selectedfilter == "Development") {
-        filterUrl = "$filter=(Status eq 'In Progress') and (Phase eq 'Development')";
-    }
-    else if (selectedfilter == "Sustainment") {
-        filterUrl = "$filter=(Status eq 'In Progress') and (Phase eq 'Sustainment')";
-    }
-    else if (selectedfilter == "Test") {
-        filterUrl = "$filter=(Status eq 'In Progress') and (Phase eq 'Test')";
-    }
-    else if (selectedfilter == "Production") {
-        filterUrl = "$filter=(Status eq 'In Progress') and (Phase eq 'Production')";
-    }
-    else if (selectedfilter == "FleetIntroduction") {
-        filterUrl = "$filter=(Status eq 'In Progress') and (Phase eq 'FleetIntroduction')";
-    }
-    */
+    var selectUrl = "/_api/web/Lists/getbyTitle('" + listname + "')/items";
 
 
-    var fullUrl = baseUrl + selectUrl + filterUrl;
+
+
+    var fullUrl = baseUrl + selectUrl;
 
     $.ajax({
         url: fullUrl,
@@ -355,6 +410,31 @@ function mySuccEventsHandler(data) {
     }
     dataTableEvents = $('#events')
         .DataTable({
+            /*
+                     initComplete: function () {
+                           this.api().columns().every(function () {
+                               var column = this;
+                               var select = $("<select><option value=''></option></select>")
+                                                   .appendTo($(column.footer()).empty())
+                                                   .on('change', 
+                                                       function () {
+                                                           var val = $.fn.dataTable.util.escapeRegex(
+                                                               $(this).val()
+                                                           );
+                                                           column
+                                                            .search(val ?'^' + val + '$' : '', true, false)
+                                                                .draw();
+                                                           });
+           
+                                                  column.data().unique().sort().each(function (d, j) {
+                                                   select.append("<option value='" + d + "'>" + d + "</option>")
+                               } );
+                           } );
+                        
+                       },
+                    
+                   */
+
             "bDestroy": true,
             "aaData": data.d.results,
             "aoColumns": [
@@ -366,34 +446,12 @@ function mySuccEventsHandler(data) {
                  { "mData": "Phase" },
                  { "mData": "Status" }
             ],
-            //    dom: 'Bfrtip',
-            //    buttons: ['copy', 'excel', 'pdf', 'print'],
+            dom: 'Bfrtip',
+            buttons: true, // ['copy', 'excel', 'pdf', 'print']
             //  fixedHeader: false,
-            // scrollY: 300,
+            scrollY: 280,
             //scrollX: true,
             autoWidth: true,
-            /*
-                   initComplete: function () {
-                       this.api().columns.every(function () {
-                           var column = this;
-                           var select = $('<select><option value=""></option></select>')
-                                               .appendTo($(column.footer()).empty())
-                                               .on('change', function () {
-                                       var val = $.fn.dataTable.util.escapeRegex(
-                                           $(this).val()
-                                         );
-                           column  
-                                .search(val ? '^' + val + '$' : '', true, false)
-                                .draw();
-                            });
-       
-                           column.data().unique().sort().each(function (d, j) {
-                               select.append('<option value="' + d + '">' + d + '</option>');
-                           });
-                       });
-       
-                   },
-            */
             columnDefs: [
                        {
                            "targets": [0],
@@ -445,9 +503,32 @@ function mySuccEventsHandler(data) {
                            "targets": [8],
                            "visible": true,
                            "render": function (data, type, row) {
-                               return "" + data.Likelihood + data.Consequence;
+                               return "" + row.Likelihood + row.Consequence;
+                           }
+                       },
+                       {
+
+                           "targets": [9],
+                           "visible": true,
+                           "render": function (data, type, row) {
+                               if (row.Consequence == "5") {
+                                   return "High";
+                               }
+                               else if (row.Consequence == "4") {
+                                   return "Medium";
+                               }
+                               else if (row.Consequence == "3") {
+                                   return "Medium";
+                               }
+                               else if (row.Consequence == "2") {
+                                   return "Low";
+                               }
+                               else if (row.Consequence == "1") {
+                                   return "Low";
+                               }
                            }
                        }
+
             ],
 
             columns: [
@@ -488,19 +569,20 @@ function mySuccEventsHandler(data) {
         });
 }
 function myErrEventsHandler(data, errCode, errMessage) {
-    alert("Error: myErrEventsHandler " + errMessage);
-    console.log(errMessage);
+    console.log("Error: myErrEventsHandler " + errMessage);
+
 }
 
 //myrisks
 function LoadRisksDataTable() {
     var listname = "ProgramIssuesAndRisks";
-    var usrProgram = $('#userProgram').text();
+    var usrProgram = $('#userProgram').val();
+
     console.log("LoadRisksDataTable usrProgram is " + usrProgram);
 
     var baseUrl = _spPageContextInfo.webAbsoluteUrl;
-    var selectUrl = "/_api/web/Lists/getbyTitle('" + listname + "')/items?";
-    // var filterUrl = "$filter=Program eq '" + usrProgram + "'";
+    var selectUrl = "/_api/web/Lists/getbyTitle('" + listname + "')/items";
+    // var filterUrl = "?$filter=Program eq '" + usrProgram + "'";
     var fullUrl = baseUrl + selectUrl; // + filterUrl;
 
     $.ajax({
@@ -523,33 +605,36 @@ function mySuccRisksHandler(data) {
             "bDestroy": true,
             "aaData": data.d.results,
             "aoColumns": [
-                { "mData": "Title" }, //display name is issue
+                { "mData": "Issue" }, //display name is issue
                 { "mData": "Trigger" },
                 { "mData": "Type" },
                 { "mData": "Likelihood" },
                 { "mData": "Consequence" },
-                { "mData": "Status" }
+                { "mData": "Status" },
+                { "mData": "ID" }
+
             ],
-            //  dom: 'Bfrtip',
-            //  buttons: ['copy', 'excel', 'pdf', 'print'],
+            dom: 'Bfrtip',
+            buttons: true, // ['copy', 'excel', 'pdf', 'print']
             // fixedHeader: true,
             scrollY: 300,
-            scrollX: true,
-            //  autoWidth: true,
+            // scrollX: true,
+            autoWidth: false,
             columnDefs: [
-                { //trigger
-                    "targets": [0],
-                    "width": "35%"
-
-                },
                 { //issue
+                    "targets": [0],
+                    "visible": true
+                },
+                { //trigger
                     "targets": [1],
-                    "width": "15%"
+                    "visible": true
+
                 },
                 {
                     //type
                     "targets": [2],
-                    "width": "20%"
+                    "visible": true
+
 
                 },
                 { //likelihood
@@ -566,39 +651,59 @@ function mySuccRisksHandler(data) {
                 },
                 { //risk   
                     "targets": [5],
-                    "width": "10%",
                     "data": null,
                     "render": function (data, type, row) {
-                        return "" + data.Likelihood + data.Consequence;
+                        return "" + row.Likelihood + row.Consequence;
                     }
-                }
-                /*
-                 {   //Severity   
-                    "targets": [6],
-                    "width": "10%",
-                    "data": null,
-                    "render": function (data, type, row) {		                   
-                        
-                    }		                
                 },
+
+                 {   //Severity   
+                     "targets": [6],
+                     "width": "10%",
+                     "data": null,
+                     "render": function (data, type, row) {
+                         if (row.Consequence == "5") {
+                             return "High";
+                         }
+                         else if (row.Consequence == "4") {
+                             return "Medium";
+                         }
+                         else if (row.Consequence == "3") {
+                             return "Medium";
+                         }
+                         else if (row.Consequence == "2") {
+                             return "Low";
+                         }
+                         else if (row.Consequence == "1") {
+                             return "Low";
+                         }
+                     }
+                 },
                    {  //Status   
-                    "targets": [7],
-                    "width": "10%",
-                    "data": Status,	
-                    "visible": false	                               
-                }
-                */
+                       "targets": [7],
+                       "visible": false
+                   }
+                   ,
+                   {  //ID   
+                       "targets": [8],
+                       "visible": false
+                   }
+
+
             ],
             columns: [
                 //filter out any data column completed. All others are used for reports
-                //       { name: 'Trigger' }, //displayed in column 2
-                //      { name: 'Issue' }, //index 0    //displayed in column 1             
+                //must be in the order they are displayed in the HTML
+
+                       { name: 'Issue' }, //displayed in column 2      
+                       { name: 'Trigger' }, //index 0    //displayed in column 1 
+
                 //     { title: 'Issue Description*' },
                 //     { title: 'Category' },
-                 //    { name: 'Type' }, //displayed in column 3
+                       { name: 'Type' }, //displayed in column 3
                 //     { name: 'Phase' },                   ///index 5  //displated in column 4
-                //{ name: 'Likelihood' },
-                //{ name: 'Consequence' },
+                       { name: 'Likelihood' },
+                       { name: 'Consequence' },
                 //     { title: 'Mitigation 6.0d' },
                 //     { title: 'Mitigation 6.6' },          //index 10
                 //     { title: 'Mitigation 6.7' },
@@ -614,9 +719,9 @@ function mySuccRisksHandler(data) {
                 //     { title: 'Competency Approval Date' },
                 //     { title: 'Admin Approver' },
                 //     { title: 'Admin Approval Date' },
-                //       { name: 'Risk' } //displayed in column 5
-                //       { name: 'Status' },               //filter out completed status
-                //      { name: 'ID' }
+                       { name: 'Risk' },//displayed in column 5
+                       { name: 'Status' },             //filter out completed status
+                       { name: 'ID' }
             ],
             "searching": true,
             "paging": false,
@@ -625,13 +730,13 @@ function mySuccRisksHandler(data) {
         });
 }
 function myErrRisksHandler(data, errCode, errMessage) {
-    alert("Error: myErrRiskHandler " + errMessage);
+    console.log("Error: myErrRiskHandler line 712 " + data + errCode + errMessage);
 }
 
 //myreviews
 
 function LoadReviewsDataTable() {
-    var listname = "ProgramIssueAndRisks";
+    var listname = "ProgramIssuesAndRisks";
     var usrProgram = $('#userProgram').text();
     console.log("LoadReviewsDataTable usrProgram is " + usrProgram);
 
@@ -662,82 +767,74 @@ function mySuccReviewsHandler(data) {
             "aaData": data.d.results,
             "aoColumns": [
 
-                 { "mData": "Title" }   //display name is issue
-                // { "mData": "MitigationDate" },  //need to add duedate
-               //  { "mData": "Status" },
-               //  { "mData": "AdminApprovalDate" }
+                 { "mData": "Title" },   //display name is issue
+                 { "mData": "MitigationDate" },  //need to add duedate
+                 { "mData": "Status" },
+                 { "mData": "AdminApprovalDate" }
             ],
-         //   dom: 'Bfrtip',
-        //    buttons: ['copy', 'excel', 'pdf', 'print'],
+            dom: 'Bfrtip',
+            buttons: ['copy', 'excel', 'pdf', 'print'],
             // fixedHeader: true,
-       //     scrollY: 300,
-        //    scrollX: true,
-            autoWidth: true,
+            scrollY: 300,
+            //    scrollX: true,
+            //  autoWidth: true,
             columnDefs: [
                        {
                            //event
                            "targets": [0],
-                           "visible":true
-
-                       }
-                   /*    {
+                           "visible": true
+                       },
+                       {
                            //DueDate
-                           "targets": [1],
-                           
+                           "targets": [1]
                        },
                        {
                            //Status
-                           "targets": [2],
-                           "width": "20%"
+                           "targets": [2]
+
                        },
                        {   //MitigationDate
-                           "targets": [3],
-                           "width": "20%"
+                           "targets": [3]
+
                        }
-                       */
+
             ],
-
             columns: [
-                       //filter out any data column completed. All others are used for reports
-                       //   { name: 'Title' } //filter out completed status                //index 0    //displayed in column 1
-                        //  { name: 'Mitigation Date' },
-                       //   { name: 'Status' },
-                    //    { name: 'Trigger' },                            //displayed in column 2
-
+                   //filter out any data column completed. All others are used for reports
+                   //     { name: 'Title' } //filter out completed status                
+                   //     { name: 'Mitigation Date' },
+                   //     { name: 'Status' },
+                   //     { name: 'Trigger' },                           
                    //     { title: 'Issue Description*' },
                    //     { title: 'Category' },
-                   //       { name: 'Type' },                                //displayed in column 3
-
-                    //      { name: 'Phase' },                   ///index 5  //displated in column 4
-
+                   //     { name: 'Type' },                                
+                   //     { name: 'Phase' },                  
                    //     { name: 'Likelihood' },
                    //     { name: 'Consequence' },
-
                    //     { title: 'Mitigation 6.0d' },
-                   //     { title: 'Mitigation 6.6' },          //index 10
+                   //     { title: 'Mitigation 6.6' },          
                    //     { title: 'Mitigation 6.7' },
                    //     { title: 'Mitigation 6.8' },
-
                    //     { title: 'PEO' },
                    //     { title: 'PMA' }, //index 15
                    //     { title: 'Program' },
                    //     { title: 'Phase' },
                    //     { title: 'PM Approver' },
-                     //     { title: 'PM Approval Date' }
-                   //     { title: 'Competency Approver ' },     //index 20
+                   //     { title: 'PM Approval Date' }
+                   //     { title: 'Competency Approver ' },    
                    //     { title: 'Competency Approval Date' },
                    //     { title: 'Admin Approver' },
                    //     { title: 'Admin Approval Date' },
-                   //       { name: 'Risk' }                                //displayed in column 5
+                 //       { name: 'Risk' }                               
             ],
             "searching": true,
-            "paging": true,
-            "info": true
-          
+            "paging": false,
+            "info": false
+
         });
 }
 function myErrReviewsHandler(data, errCode, errMessage) {
-    alert("Error myErrReviewsHandler " + errMessage);
+    console.log("Error myErrReviewsHandler line 818 " + errMessage);
 }
 
 
@@ -745,13 +842,11 @@ function myErrReviewsHandler(data, errCode, errMessage) {
 function updateCube(labeltext, x, y) {
     var id = "" + "#" + x + y;
     if ($(id).prop('title') === "") {
-
         $(id).text("X");
     } else {
         updateTooltip(labeltext);
     }
 }
-
 function RemoveCubeX(x, y) {
     var id = "" + "#" + x + y;
     $(id).text("");
@@ -788,11 +883,7 @@ function clearcube() {
       .nodes()
       .to$()
       .removeClass('selected');
-
-
-
 }
-
 function AddTooltip(eventText, x, y) {
     var id = "" + "#" + x + y;
     if ($(id).prop('title') === "") {
@@ -803,18 +894,8 @@ function AddTooltip(eventText, x, y) {
         $(id).attr('title', updatedText);
     }
 }
+function DisplayTop10() {
 
-//function updateTooltip(updateText, x, y) {
-//    var id = "" + "#" + x + y;
-//    var oldTitle = $(id).prop('title');
-//    var newTitle = "";
-//    newTitle.replace(updateText, '');
-//    alert(newTitle);
-//    $(id).attr('title', newTitle);
-//}
-
-function redrawDataTable() {
-    //add code here to redraw the first datatable
 }
 
 //SETUP DIALOGS
@@ -837,35 +918,6 @@ function loadTriggerDetails(id) {
     });
 }
 
-function successTriggerDetailsHandler(data) {
-    //var id = d.ID;
-    //console.log("successTriggerDetailsHandler ID" + ID);
-    //var type = d.Type;
-    //  console.log("successTriggerDetailsHandler type " + type);
-    // var phase = d.Phase;
-    // console.log("successTriggerDetailsHandler phase " + phase);
-    // var description = d.Description;
-    // var mitigation = d.Mitigation;
-    // var mitigationStart = d.MitigationStart;
-    // var mitigationEnd = d.MitigationEnd;
-    // var status = d.Status;
-    // var likelihood = d.Likelihood;
-    // var consequence = d.Consequence;
-    //$('#tbType').val(data.d.type);
-    //  $('#tbID').val(id);
-    //  $('#tbPhase').val(phase );
-    //$('#TriggerDetailsDialog').dialog({
-    //    autoOpen: true,
-    //    title: "Edit Event",
-    //    width: 900,
-    //    height: 600,
-    //    buttons: {
-    //        "Update": function () { }, "Cancel": function () {
-    //            $(this).dialog("close");
-    //        }
-    //    }
-    //});
-}
 
 function errorTriggerDetailsHandler(data, errorCode, errorMessage) {
     alert("failed : " + errorCode + errorMessage);
@@ -882,39 +934,12 @@ function closemodal() {
     // jQuery('#overlay').hide();
 }
 
-function CaptureData() {
-    //var $dlg = $(this);
-    //		 var $tr    = $($dlg.data('btn')).closest('tr');
-    //	 var $table = $($dlg.data('btn')).closest('table');
-    //	 var data   = $table.DataTable().row($tr).data();
-    //var type = $('#tbType').val();
-    //var phase = $('#tbType').val();
-    //var description = $('#tbType').val();
-    //var mitigation = $('#tbType').val();
-    //var mitigationStart = $('#tbType').val();
-    //var mitigationEnd = $('#tbType').val();
-    //var status = $('#tbType').val();
-    //var likelihood = $('#tbType').val();
-    //var consequence = $('#tbType').val();
+function ShowCube() {
+    document.getElementById('dashboardquadrant2').style.visibility = 'visible';
 
 }
 
-//function showModalDialog(elBtn) {
-//    $('#dlg-details').data('btn', elBtn);
-//    $('#dlg-details').modal('show');
-//}
 
-SP.SOD.executeOrDelayUntilScriptLoaded(initialize, 'sp.ui.dialog.js');
 
-function initialize() {
 
-    var options = {
-        title: "Issue Details",
-        width: 600,
-        height:400,
-        URL: "TriggersDetailsDialog.aspx",
-        dialogReturnValueCallback: onCloseCallback
-};
 
-SP.UI.ModalDialog.showModalDialog(options);
-}

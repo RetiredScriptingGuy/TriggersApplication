@@ -3,7 +3,7 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:mso="urn:schemas-microsoft-com:office:office" xmlns:msdt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882">
 <head>
     <meta charset="utf-8" />
-    <title>Triggers</title>
+    <title></title>
 
     <!--[if gte mso 9]><xml>
         <mso:CustomDocumentProperties>
@@ -41,28 +41,46 @@
         <img src="../SiteAssets/TriggersApp/images/triggers_new logo.png" width="100%" />
     </div>
     <div class="section">
+        <span id="profileButtons">
+            <a id="login" href="Profile.aspx">My Profile</a>
+            <label id="usrProgram"></label>
+            <label id="lastUpdated"></label>
+        </span>
         <div id="navpills" class="container">
             <div class="row">
                 <div class="col-md-12">
                     <ul class="nav nav-pills">
-                        <li><a href="MyDashboard.aspx">MyDashboard</a></li>
-                        <li class="active"><a href="Triggers.aspx">Triggers</a></li>
-                        <li><a href="Events.aspx">Events /Reviews</a></li>
-                        <li><a href="Reports.aspx">Reports</a></li>
-                        <li><a href="Drafts.aspx">Drafts</a></li>
-                        <li><a href="Mitigation.aspx">Mitigation</a></li>
-                        <li><a href="Feedback.aspx">Feedback</a></li>
-                        <li><a href="Acronyms.aspx">Acronyms</a></li>
-                        <li><a href="References.aspx">References </a></li>
+                        <li>
+                            <a href="MyDashboard.aspx">Home</a>
+                        </li>
+                        <li class="active">
+                            <a href="Triggers.aspx">Triggers</a>
+                        </li>
+                        <li>
+                            <a href="Events.aspx">Events /Reviews</a>
+                        </li>
+                        <li>
+                            <a href="Reports.aspx">Reports</a>
+                        </li>
+                        <li>
+                            <a href="Drafts.aspx">Drafts</a>
+                        </li>
+                        <li>
+                            <a href="Mitigation.aspx">Mitigation</a>
+                        </li>
+                        <li>
+                            <a href="Feedback.aspx">Feedback</a>
+                        </li>
+                        <li>
+                            <a href="Acronyms.aspx">Acronyms</a>
+                        </li>
+                        <li>
+                            <a href="References.aspx">References </a>
+                        </li>
                     </ul>
                 </div>
             </div>
         </div>
-        <span id="profileButtons">
-            <a id="login" href="Profile.aspx">My Profile</a>
-            <label id="usrProgram">User Program | </label>
-            <label id="lastUpdated">Last Modified </label>
-        </span>
     </div>
 </head>
 <body>
@@ -74,7 +92,7 @@
     </div>
     <div class="outer">
         <div class="fullTopHalf">
-            <div id="triggersquadrant1">
+            <div class="triggersquadrant1">
                 <h2>Triggers</h2>
                 <div class="triggersgridView">
                     <table class="display" id="triggers">
@@ -96,7 +114,7 @@
                     <a href="AddTrigger.aspx">Add New Trigger</a>
                 </div>
             </div>
-            <div id="triggerdescriptionquadrant2">
+            <div class="triggerdescriptionquadrant2">
                 <h2>Trigger Description</h2>
                 <div class="triggerdescriptiongridView">
                     <table class="display" id="TriggerDescription">

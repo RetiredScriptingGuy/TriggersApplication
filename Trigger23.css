@@ -1,4 +1,6 @@
-﻿#titleAreaRow { display: none; }
+﻿/*  HEADER */
+
+#titleAreaRow { display: none; }
 
 #sideNavBox { display: none; }
 
@@ -15,22 +17,92 @@
 
 #riskdrafts { border: 1px black solid; }
 
+/*  DASHBOARD */
+
+#myprogramissuesquadrant1{
+	float:left;
+	width:60%;
+}
+
+#dashboardbuttons {     
+	 display:inline-block;
+	 padding-left:15px;
+	 position:absolute;
+	 margin-left:500px;
+ }
+ 
+ #dashboardquadrant2{
+    position:absolute;
+	margin-left:1150px;
+ }
+
+
+
+/*  TRIGGERS */
+
 #triggers { width: 100% !important; }
 
-.triggersquadrant1{
-	width:300px;
-	float:left;
+#triggersquadrant1{
+	width: 23%;
+	display:inline-block;
+	position:absolute;
 }
 
-#myprogramevents {
-    color: black !important;
-    float: right;
-    height: auto;
-    margin-left: 100px;
-    margin-right: 0px !important;
-    min-height: 474px;
-    width: 600px;
+ 
+#triggerdescriptionquadrant2 {
+    width: 800px;
+    padding-top: 0px;
+    left: 600px;
+    height: 300px;
+    color: black;
+    height: 375px;   
+    width: 70%;   
+    float:right;
 }
+
+
+
+/* EVENTS */
+
+ #eventdashboardbuttons { 
+   
+	 display:inline-block;
+	 padding-left:15px;
+	 position:absolute;
+	 margin-left:400px;
+
+ }
+
+ 
+ #eventdescriptionquadrant2 {
+    width: 800px;
+    padding-top: 0px;
+    left: 600px;
+    height: 300px;
+    color: black;
+    height: 375px;   
+    width: 70%;
+    float:right;
+   
+}
+
+
+
+#triggerslogin{
+	float:right;
+	padding-right:20px;
+}
+
+.issuedescriptiongridView{
+	
+	height:200px;
+	 background-color: white;
+    border: 1px solid #808080;
+    margin-right: auto;
+    width: 95%;    
+
+}
+
 
 #overlay {
     background-color: gray;
@@ -87,11 +159,21 @@
     width: 500px;
 }
 
-#dashboardbuttons { float: right; }
+
+
+#eventbuttons{	
+     border:1px black solid;
+     padding-left:50px;
+}
+
 
 #clearcube { width: 112px; }
 
-#events { width: 100% !important; }
+#events { 
+width: 100% !important; 
+border:1px solid black;
+
+}
 
 .outer {
     padding-left: 20px;
@@ -168,6 +250,14 @@
     width: 49%;
 }
 
+ #peocontrols {
+     display:none;
+ }
+
+ #leadershipcontrols {
+     display:none;
+ }
+ 
 .triggersquadrant2 {
     color: black;
     float: right;
@@ -178,20 +268,22 @@
     width: 49%;
 }
 
-.triggerdescriptionquadrant2 
-{
-    width: 800px;
-    top: -120px;
-    left: 600px;
-    background-color: white;
-    height: 300px;
+.eventsquadrant2 {
     color: black;
     height: 375px;
     left: 51%;
-    margin-top: -420px;
-    position: relative;
-    width: 49%;
+    margin-top: -370px;
+    margin-right: -100px;
 }
+.eventsquadrant1 {
+    color: black;
+    height: 375px;
+    left: 51%;
+    margin-top: -370px;
+    margin-right: -100px;
+}
+
+
 
 #issuedescription{
 	font-size:16px;
@@ -216,6 +308,17 @@
     width: 49%;
 }
 
+#triggersquadrant3 {
+    background-color: #F0F0F0;
+    border: 1px solid #808080;
+    border-radius: 3px;
+    height: 500px;
+    position: relative;
+    top: 25px;
+    width: 470px;
+}
+
+
 .quadrant4 {
     background-color: #F0F0F0;
     border: 1px;
@@ -230,31 +333,67 @@
     width: 49%;
 }
 
-.myprogramissuesquadrant1 {
-    color: black;
-    height: 400px;
+#triggersquadrant4 {
+    background-color: #F0F0F0;
+    border: 1px;
+    border: 1px solid #808080;
+    border-radius: 3px;
+    left: 51%;
+    margin-right: 10px;    
     position: relative;
+    top: -474px;
     width: 49%;
 }
 
+
+#triggersquadrant5 {
+    background-color: #F0F0F0;
+    border: 1px;
+    border: 1px solid #808080;
+    border-radius: 3px;
+    margin-right: 10px;
+    float: right;
+    top: -450px;
+    height: 200px;
+    border: black;
+    width: 49%;
+    position: relative;
+}
+
+#currentuserprofile{	
+	bottom:0px;
+	margin-bottom:0px;
+}
+
+#myprogramevents {
+    background-color: #F0F0F0;
+    border-radius: 3px;
+    border: 1px;
+    border: 1px solid #808080;
+
+    color: black !important;
+    float: right;
+    height: auto;
+    margin-left: 100px;
+    margin-right: 10px !important;
+    min-height: 460px;
+    width: 60%;
+}
+
 .triggerdescriptiongridView {
-    height: 100px;
-    width: 600px;
-    position: absolute;
+    height: 200px;
     top: 130px;
     background-color: white;
-    border: 1px solid #808080;
-    margin-right: auto;    
 }
+
+
 
 .dataTables_scrollHead { height: 37px; }
 
 .triggersgridView {
     background-color: white;
     border: 1px solid #808080;
-    margin-right: auto; 
-    width:300px;
-    height:200px;
+    margin-right: auto;   
 }
 
 .issuesgridView {

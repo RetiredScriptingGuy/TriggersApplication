@@ -19,34 +19,34 @@
         var fileName = parts[parts.length - 1];
 
         var reader = new FileReader();
-        reader.onload = function (e) {
+        reader.onload = function(e) {
             addItem(e.target.result, fileName);
-        }
-        reader.onerror = function (e) {
+        };
+        reader.onerror = function(e) {
             alert(e.target.error);
-        }
+        };
         reader.readAsArrayBuffer(file);
 
         function addItem(buffer, fileName) {
             var call = uploadDocument(buffer, fileName);
-            call.done(function (data, textStatus, jqXHR) {
+            call.done(function(data, textStatus, jqXHR) {
                 var call2 = getItem(data.d);
-                call2.done(function (data, textStatus, jqXHR) {
+                call2.done(function(data, textStatus, jqXHR) {
                     var item = data.d;
                     var call3 = updateItemFields(item);
-                    call3.done(function (data, textStatus, jqXHR) {
+                    call3.done(function(data, textStatus, jqXHR) {
                         var div = jQuery("#message");
                         div.text("Item added");
                     });
-                    call3.fail(function (jqXHR, textStatus, errorThrown) {
+                    call3.fail(function(jqXHR, textStatus, errorThrown) {
                         failHandler(jqXHR, textStatus, errorThrown);
                     });
                 });
-                call2.fail(function (jqXHR, textStatus, errorThrown) {
+                call2.fail(function(jqXHR, textStatus, errorThrown) {
                     failHandler(jqXHR, textStatus, errorThrown);
                 });
             });
-            call.fail(function (jqXHR, textStatus, errorThrown) {
+            call.fail(function(jqXHR, textStatus, errorThrown) {
                 failHandler(jqXHR, textStatus, errorThrown);
             });
         }
@@ -54,7 +54,8 @@
         function uploadDocument(buffer, fileName) {
             var url = String.format(
                 "{0}/_api/Web/Lists/getByTitle('Shared Documents')/RootFolder/Files/Add(url='{1}', overwrite=true)",
-                _spPageContextInfo.webAbsoluteUrl, fileName);
+                _spPageContextInfo.webAbsoluteUrl,
+                fileName);
             var call = jQuery.ajax({
                 url: url,
                 type: "POST",
@@ -88,7 +89,8 @@
             var call = jQuery.ajax({
                 url: _spPageContextInfo.webAbsoluteUrl +
                     "/_api/Web/Lists/getByTitle('Shared Documents')/Items(" +
-                    item.Id + ")",
+                    item.Id +
+                    ")",
                 type: "POST",
                 data: JSON.stringify({
                     "__metadata": { type: "SP.Data.Project_x0020_DocumentsItem" },
@@ -114,11 +116,10 @@
     }
 
 
-
 </script>
 <body>
-    <input id="getFile" type="file" /><br />
-    <input id="displayName" type="text" value="Enter a unique name" /><br />
-    <input id="addFileButton" type="button" value="Upload" onclick="uploadFile()" />
+<input id="getFile" type="file"/><br/>
+<input id="displayName" type="text" value="Enter a unique name"/><br/>
+<input id="addFileButton" type="button" value="Upload" onclick="uploadFile()"/>
 </body>
 </html>

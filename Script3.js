@@ -1,3 +1,4 @@
+// JavaScript source code
 //Global variables
 var dataTableEvents = 'undefined';
 var dataTableReviews = 'undefined';
@@ -69,6 +70,8 @@ function myCustomPage() {
                  */
               });
 
+
+
     $('#risks')
       .on('dblclick',
           'tr',
@@ -123,10 +126,10 @@ function myCustomPage() {
                     var y = dataTableEvents.row(this).data().Likelihood;
                     var x = dataTableEvents.row(this).data().Consequence;
                     $("#risks >tbody:last-child").after("<tr>" +
-                                                 " <td>row(this).data.Title<td>" +
-                                                 " <td>row(this).data.Trigger<td>" +
-                                                 " <td>row(this).data.Likilihood<td>" +
-                                                "  <td>row(this).data.Type<td>" +
+                                                 " <td>row(this).data().Title<td>" +
+                                                 " <td>row(this).data().Trigger<td>" +
+                                                 " <td>row(this).data().Likilihood<td>" +
+                                                "  <td>row(this).data().Type<td>" +
                                              " </tr>");
 
 
@@ -181,7 +184,10 @@ function myCustomPage() {
                     window.location.reload();
                 }
                 else {
-                    dataTableEvents.search(filter).draw();
+                    dataTableEvents
+                        .column(5)
+                        .search(this.value)
+                        .draw();
                 }
             });
 
@@ -287,7 +293,7 @@ function GetUserInfo() {
     var listname = "Profiles";
     var username = currentUser;
     var baseUrl = _spPageContextInfo.webAbsoluteUrl;
-    var selectUrl = "/_api/web/Lists/getbyTitle('" + listname + "')/items?$select=Title,IsLeadership,Program";
+    var selectUrl = "/_api/web/Lists/getbyTitle('" + listname + "')/items";
     var filterUrl = "$filter=Title eq '" + username + "'";
 
     var fullUrl = baseUrl + selectUrl + filterUrl;
@@ -337,7 +343,7 @@ function userSuccHandler(data) {
         $element.attr('href', "../SitePages/Profile.aspx?Name=" + usrName + "&id=" + usrID + "&program=" + usrProg);
     }
 
-    UpdateUrls();
+    UpdateUrls(userName, userID, userProg);
 
     console.log("finish processing userSuccHandler");
 }
@@ -402,6 +408,28 @@ function mySuccEventsHandler(data) {
     }
     dataTableEvents = $('#events')
         .DataTable({
+            initComplete: function () {
+                this.api().columns().every(function () {
+                    var column = this;
+                    var select = $("<select><option value=''></option></select>")
+                                        .appendTo($(column.footer()).empty())
+                                        .on('change',
+                                            function () {
+                                                var val = $.fn.dataTable.util.escapeRegex(
+                                                    $(this).val()
+                                                );
+                                                column
+                                                 .search(val ? '^' + val + '$' : '', true, false)
+                                                     .draw();
+                                            });
+
+                    column.data().unique().sort().each(function (d, j) {
+                        select.append("<option value='" + d + "'>" + d + "</option>")
+                    });
+                });
+                $("#events tfoot tr").insertBefore($('#events thead tr'))
+            },
+
             "bDestroy": true,
             "aaData": data.d.results,
             "aoColumns": [
@@ -414,34 +442,11 @@ function mySuccEventsHandler(data) {
                  { "mData": "Status" }
             ],
             dom: 'Bfrtip',
-            buttons: ['copy', 'excel', 'pdf', 'print'],
+            buttons: true, // ['copy', 'excel', 'pdf', 'print']
             //  fixedHeader: false,
             scrollY: 280,
             //scrollX: true,
             autoWidth: true,
-            
-                   initComplete: function () {
-                       this.api().columns().every(function () {
-                           var column = this;
-                           var select = $("<select><option value=''></option></select>")
-                                               .appendTo($(column.footer()).empty())
-                                               .on('change', 
-                                                   function () {
-                                                       var val = $.fn.dataTable.util.escapeRegex(
-                                                           $(this).val()
-                                                       );
-                                                       column
-                                                        .search(val ?'^' + val + '$' : '', true, false)
-                                                            .draw();
-                                                       });
-       
-                                              column.data().unique().sort().each(function (d, j) {
-                                               select.append("<option value='" + d + "'>" + d + "</option>")
-                           } );
-                       } );
-                    $("#events tfoot tr").insertBefore($('#events thead tr'))
-                   },
-            
             columnDefs: [
                        {
                            "targets": [0],
@@ -567,7 +572,7 @@ function myErrEventsHandler(data, errCode, errMessage) {
 function LoadRisksDataTable() {
     var listname = "ProgramIssuesAndRisks";
     var usrProgram = $('#userProgram').val();
-   
+
     console.log("LoadRisksDataTable line 570 usrProgram is " + usrProgram);
 
     var baseUrl = _spPageContextInfo.webAbsoluteUrl;
@@ -602,8 +607,8 @@ function mySuccRisksHandler(data) {
                 { "mData": "Consequence" },
                 { "mData": "Status" }
             ],
-            //  dom: 'Bfrtip',
-            //  buttons: ['copy', 'excel', 'pdf', 'print'],
+            dom: 'Bfrtip',
+            buttons: true, // ['copy', 'excel', 'pdf', 'print']
             // fixedHeader: true,
             scrollY: 300,
             scrollX: true,
@@ -611,17 +616,17 @@ function mySuccRisksHandler(data) {
             columnDefs: [
                 { //trigger
                     "targets": [0],
-                  
+
 
                 },
                 { //issue
                     "targets": [1],
-                   
+
                 },
                 {
                     //type
                     "targets": [2],
-                   
+
 
                 },
                 { //likelihood
@@ -638,7 +643,7 @@ function mySuccRisksHandler(data) {
                 },
                 { //risk   
                     "targets": [5],
-                   
+
                     "data": null,
                     "render": function (data, type, row) {
                         return "" + row.Likelihood + row.Consequence;
@@ -669,8 +674,8 @@ function mySuccRisksHandler(data) {
                  },
                    {  //Status   
                        "targets": [7],
-                      
-                      
+
+
                        "visible": false
                    }
 
@@ -700,7 +705,7 @@ function mySuccRisksHandler(data) {
                 //     { title: 'Competency Approval Date' },
                 //     { title: 'Admin Approver' },
                 //     { title: 'Admin Approval Date' },
-                       { name: 'Risk' } ,//displayed in column 5
+                       { name: 'Risk' },//displayed in column 5
                        { name: 'Status' }              //filter out completed status
                 //      { name: 'ID' }
             ],
@@ -711,7 +716,7 @@ function mySuccRisksHandler(data) {
         });
 }
 function myErrRisksHandler(data, errCode, errMessage) {
-    console.log("Error: myErrRiskHandler line 712 " + data + errCode+  errMessage);
+    console.log("Error: myErrRiskHandler line 712 " + data + errCode + errMessage);
 }
 
 //myreviews
@@ -767,18 +772,18 @@ function mySuccReviewsHandler(data) {
                        },
                        {
                            //DueDate
-                           "targets": [1]                          
+                           "targets": [1]
                        },
                        {
                            //Status
                            "targets": [2]
-                       
+
                        },
                        {   //MitigationDate
                            "targets": [3]
-                       
-                    }
-                   
+
+                       }
+
             ],
             columns: [
                        //filter out any data column completed. All others are used for reports
@@ -880,7 +885,7 @@ function AddTooltip(eventText, x, y) {
     }
 }
 function DisplayTop10() {
-    
+
 }
 //function updateTooltip(updateText, x, y) {
 //    var id = "" + "#" + x + y;
@@ -985,23 +990,25 @@ function CaptureData() {
 
 
 function UpdateUrls(u, i, p) {
-    /*var paramusr = u;
+    var paramusr = u;
     var paramid = i;
     var paramprog = p;
-       
-       //triggers
-       var $trigelement = $("#triggersUrl");
-       if ($trigelement){
-           $trigelement.attr('href', "../SitePages/Triggers.aspx?Name=" + paramusr + "&id=" + paramid + "&program=" + paramprog);
-       }
-       
-       //events    
-        ar $eventelement = $("#eventsUrl");
-       if ($eventelement){
-           $eventelement.attr('href', "../SitePages/Events.aspx?Name=" + paramusr + "&id=" + paramid + "&program=" + paramprog);
-       }
-     */
 
+    //triggers
+    var $trigelement = $("#triggersUrl");
+    if ($trigelement) {
+        $trigelement.attr("data-name", paramusr);
+        $trigelement.attr("data-id", paramid);
+        $trigelement.attr("data-program", paraprog);
+    }
+
+    //events    
+    var $eventelement = $("#eventsUrl");
+    if ($eventelement) {
+        $eventelement.attr("data-name", paramusr);
+        $eventelement.attr("data-id", paramid);
+        $eventelement.attr("data-program", paraprog);
+    }
 }
 
 
