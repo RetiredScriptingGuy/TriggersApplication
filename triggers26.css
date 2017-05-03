@@ -1,0 +1,457 @@
+﻿/*  HEADER */
+#overlay{ display:none;}
+
+#s4-titlerow {
+    display: none !important;
+    padding-top: 0px !important;
+}
+
+#btnTop10 { display:none; }
+
+#titleAreaRow { display: none; }
+
+#sideNavBox { display: none; }
+
+#lastUpdated {margin-right:20px; }
+
+#navpills {
+    margin-left: 5px;
+    margin-top: 10px;
+}
+
+#issuedrafts { border: 1px black solid; }
+
+#riskdrafts { border: 1px black solid; }
+
+.profilebox{	
+	bottom:0px;
+	margin-bottom:0px;
+	display:block;
+	float:left;
+}
+
+
+/*  DASHBOARD */
+
+#myprogramissuesquadrant1{
+    display:inline-block;
+	width:60%;
+}
+
+#dashboardbuttons {     
+	 display:inline-block;
+	 padding-left:15px;
+	 position:absolute;
+	 margin-left:500px;
+}
+
+ #dashboardquadrant2 {display: inline-block; }
+
+.cube {
+    height: 350px;   
+    width: 500px;
+}
+
+.cube td {
+    border: 1px solid #808080;
+    font-family: verdana;
+    font-size: large;
+    font-weight: bold;
+    height: 50px;
+    text-align: center;
+    width: 50px;
+}
+
+
+
+
+/*  TRIGGERS */
+
+#triggerslogin{
+	float:right;
+	padding-right:20px;
+}
+
+
+#triggers { width: 100% !important; }
+
+#triggersquadrant1{
+	width: 23%;
+	display:inline-block;
+	position:absolute;
+}
+
+#clearcube { width: 112px; }
+ 
+#triggerdescriptionquadrant2 {
+    width: 800px;
+    padding-top: 0px;
+    left: 600px;
+    height: 300px;
+    color: black;
+    height: 375px;   
+    width: 70%;   
+    float:right;
+}
+
+#copyIssueButton{ display:block; }
+
+/* EVENTS */
+
+#eventquadrant1{
+    color: black;
+    height: 375px;
+    left: 51%;    
+    width:400px;
+    display:inline-block;
+    background-color: white;
+}
+
+ #eventdashboardbuttons { 
+   
+	 display:inline-block;
+	 padding-left:30px;
+	 position:absolute;	
+ }
+
+ 
+ #eventdescriptionquadrant2 {
+    width: 800px;
+    padding-top: 0;
+    left: 600px;
+    height: 300px;
+    color: black;
+    height: 375px;   
+    width: 70%;
+    float:right;
+}
+
+#myEventDescription{
+ background-color: white;
+    border: 1px solid #808080;
+    margin-right: auto;
+    width: 95%;   
+}
+
+
+
+.eventsquadrant1 {
+    color: black;
+    height: 375px;
+    left: 51%;
+    margin-top: -370px;
+    margin-right: -100px;
+    width:300px;
+    display:inline-block;
+}
+
+
+.eventsquadrant2 {
+    color: black;
+    height: 375px;
+    left: 51%;
+    margin-top: -370px;
+    margin-right: -100px;
+}
+
+
+.issuedescriptiongridView{
+	
+	height:200px;
+	 background-color: white;
+    border: 1px solid #808080;
+    margin-right: auto;
+    width: 95%;    
+}
+
+.mitigationgridView{
+	height:200px;
+	background-color: white;
+    border: 1px solid #808080;
+    margin-right: auto;
+    width: 95%;  
+}
+
+
+#overlay {
+    background-color: gray;
+    display: none;
+    height: 100%;
+    left: 0;
+    opacity: 0.8;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 80;
+}
+
+#TriggerDetailsDialog {
+    background-color: silver;
+    width: 900px;
+}
+
+#TriggerDetailsDialog {
+    background-color: white;
+    border-color: black;
+    border-style: solid;
+    border-width: 10px;
+    display: none;
+    font-family: "Segoe UI";
+    font-size: large;
+    font-weight: bold;
+    left: 532px;
+    overflow: scroll;
+    padding: 50px;
+    position: fixed;
+    text-align: center;
+    top: 50px;
+    z-index: 100;
+}
+
+#addtriggertext { padding-left: 30px; }
+
+#issuesfooter {
+    padding-left: 700px;
+    padding-top: 30px;
+    width: 100%;
+}
+
+
+#ddlfilter { background-color: yellow; }
+
+#taFeedback {
+    height: 200px;
+    width: 500px;
+}
+
+#eventbuttons{	
+     border:1px black solid;
+     padding-left:50px;
+}
+
+#events { 
+width: 100% !important; 
+border:1px solid black;
+
+}
+
+.outer {
+    padding-left: 20px;
+    padding-top: 20px;
+    width: 100%;
+}
+
+.dashboardouter {
+    margin-bottom: 600px;
+    padding-left: 20px;
+    padding-top: 20px;
+    width: 100%;
+}
+
+.dashboardouter h2 {
+    background-color: #C0C0C0;
+    border: 1px solid #808080;
+    border-radius: 3px;
+    color: black;
+    text-align: center;
+    width: 100%;
+}
+
+#contentBox { margin: 0px; }
+ 
+
+#fileupload { padding-left: 190px; }
+
+#profileButtons { float: right; }
+
+#lastupdated { padding-right: 20px; }
+
+/* ALL PAGES */
+
+.outer H2 {
+    background-color: #C0C0C0;
+    border: 1px solid #808080;
+    border-radius: 3px;
+    color: black;
+    text-align: center;
+    width: 100%;
+}
+
+.profileFullTopHalf {
+    background-color: #F0F0F0;
+    border: 1px solid #808080;
+    border-radius: 3px;
+    padding-right: 20px;
+    position: relative;
+    width: 99%;
+    z-index: 1;
+}
+
+.fullTopHalf {
+    background-color: #F0F0F0;
+    border: 1px solid #808080;
+    border-radius: 3px;
+    height: 500px;
+    padding-right: 20px;
+    position: relative;
+    width: 99%;
+    z-index: 1;
+}
+
+	 
+.fullBottomHalf {
+    background-color: white;
+    height: 420px;
+    width: 95%;
+}
+
+.quadrant1 {
+    color: black;
+    height: 400px;
+    position: relative;
+    width: 49%;
+}
+
+ #peocontrols {
+     display:none;
+ }
+
+ #leadershipcontrols {
+     display:none;
+ }
+ 
+.triggersquadrant2 {
+    color: black;
+    float: right;
+    height: 375px;
+    left: 51%;
+    margin-top: -350px;
+    position: relative;
+    width: 49%;
+}
+
+#issuedescription{
+	font-size:16px;
+} 
+
+.quadrant2 {
+    color: black;
+    height: 375px;
+    left: 51%;
+    margin-top: -350px;
+    position: relative;
+    width: 49%;
+}
+
+.quadrant3 {
+    background-color: #F0F0F0;
+    border: 1px solid #808080;
+    border-radius: 3px;
+    height: 500px;
+    position: relative;
+    top: 25px;
+    width: 49%;
+}
+
+#triggersquadrant3 {
+    background-color: #F0F0F0;
+    border: 1px solid #808080;
+    border-radius: 3px;
+    height: 500px;
+    position: relative;
+    top: 25px;
+    width: 470px;
+}
+
+
+.quadrant4 {
+    background-color: #F0F0F0;
+    border: 1px;
+    border: 1px solid #808080;
+    border-radius: 3px;
+    height: 500px;
+    left: 51%;
+    margin-right: 10px;
+    padding-left: ;
+    position: relative;
+    top: -474px;
+    width: 49%;
+}
+
+#triggersquadrant4 {
+    background-color: #F0F0F0;   
+    border: 1px solid #808080;
+    border-radius: 3px;
+    left: 51%;
+    margin-right: 10px;    
+    position: relative;
+    top: -474px;
+    width: 49%;
+}
+
+
+#triggersquadrant5 {
+    background-color: #F0F0F0;
+    border: 1px;
+    border: 1px solid #808080;
+    border-radius: 3px;
+    margin-right: 10px;
+    float: right;
+    top: -450px;
+    width: 49%;
+    position: relative;
+}
+
+#currentuserprofile{	
+	bottom:0px;
+	margin-bottom:0px;
+	display:block;
+	float:left;
+}
+
+#myprogramevents {
+    background-color: #F0F0F0;
+    border-radius: 3px;
+    border: 1px;
+    border: 1px solid #808080;
+    color: black !important;
+    float: right;
+    height: auto;
+    margin-left: 100px;
+    margin-right: 10px !important;
+    min-height: 460px;
+    width: 60%;
+}
+
+.triggerdescriptiongridView {
+    height: 200px;
+    top: 130px;
+    background-color: white;
+}
+
+.dataTables_scrollHead { height: 37px; }
+
+.triggersgridView {
+    background-color: white;
+    border: 1px solid #808080;
+    margin-right: auto;   
+}
+
+.issuesgridView {
+    background-color: white;
+    border: 1px solid #808080;
+    height: 400px;
+    margin-right: auto;	
+}
+
+.gridView {
+    background-color: white;
+    border: 1px solid #808080;
+    margin-right: auto;
+    width: 95%;    
+}
+
+.custom-selected { background-color: yellow; }
+
+
+.IssueRow td { cursor: pointer !important; }

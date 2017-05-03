@@ -156,18 +156,21 @@
                 <div class="mitigationgridView">
                     <table class="display" id="mitigation">
                         <thead>
-                            <tr>
-                                <th>
-                                    Nothing here yet
-                                </th>
-                                <th>
+                        <tr>
+                            <th>
+                                Nothing here yet
+                            </th>
+                            <th>
 
-                                </th>
-                            </tr>
+                            </th>
+                        </tr>
                         </thead>
                         <tbody></tbody>
                     </table>
                 </div>
+            </div>
+            <div id="dashboardbuttons">
+                <button type="button" class="btn btn-default" onclick="CopySelectedIssueDialog()">Copy Selected Issues to My Program Issues / Program Risks</button>
             </div>
         </div>
     </div>
@@ -193,6 +196,26 @@
         </div>
 
     </div>
-    <div id="overlay"></div>
+<div id="overlay"></div>
+<div class="modal" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dissmiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                   
+
+                </button>
+                <h4 class="modal-title">Do you love dandlylions?</h4>
+            </div>
+            <div class="modal-body">
+                <h2>this is the modal body</h2>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dissmiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

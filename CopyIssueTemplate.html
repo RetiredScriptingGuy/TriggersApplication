@@ -1,0 +1,171 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <div class="form-horizontal">
+        <div>
+
+            <!-- Form Name -->
+            <div>Form Name</div>
+
+            <!-- Text input-->
+            <div class="control-group">
+                <label class="control-label" for="Trigger Title">Trigger:</label>
+                <div class="controls">
+                    <input name="Trigger Title" class="input-medium" id="Trigger Title" type="text" placeholder="Trigger Title">
+
+                </div>
+            </div>
+
+            <!-- Text input-->
+            <div class="control-group">
+                <label class="control-label" for="IssueTitle">Issue:</label>
+                <div class="controls">
+                    <input name="IssueTitle" class="input-medium" id="IssueTitle" type="text" placeholder="Issue Title">
+
+                </div>
+            </div>
+
+            <!-- Text input-->
+            <div class="control-group">
+                <label class="control-label" for="IssuePhase">Phase</label>
+                <div class="controls">
+                    <input name="IssuePhase" class="input-medium" id="IssuePhase" type="text" placeholder="Phase here">
+
+                </div>
+            </div>
+
+            <!-- Text input-->
+            <div class="control-group">
+                <label class="control-label" for="IssueTitleInput">Title:</label>
+                <div class="controls">
+                    <input name="IssueTitleInput" class="input-large" id="IssueTitleInput" type="text" placeholder="">
+
+                </div>
+            </div>
+
+            <!-- Select Basic -->
+            <div class="control-group">
+                <label class="control-label" for="IssueType">Type</label>
+                <div class="controls">
+                    <select name="IssueType" class="input-medium" id="IssueType">
+                        <option>Cost</option>
+                        <option>Performance</option>
+                        <option>Technology</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Textarea -->
+            <div class="control-group">
+                <label class="control-label" for="IssueDescription">Description</label>
+                <div class="controls">
+                    <textarea name="IssueDescription" id="IssueDescription"></textarea>
+                </div>
+            </div>
+
+            <!-- Textarea -->
+            <div class="control-group">
+                <label class="control-label" for="IssueMitigation">Mitigation</label>
+                <div class="controls">
+                    <textarea name="IssueMitigation" id="IssueMitigation"></textarea>
+                </div>
+            </div>
+
+            <!-- Text input-->
+            <div class="control-group">
+                <label class="control-label" for="MitigationDate">Mitigation Date:</label>
+                <div class="controls">
+                    <input name="MitigationDate" class="input-medium" id="MitigationDate" type="text" placeholder="">
+
+                </div>
+            </div>
+
+            <!-- Text input-->
+            <div class="control-group">
+                <label class="control-label" for="MitigationEnd">Mitigation End:</label>
+                <div class="controls">
+                    <input name="MitigationEnd" class="input-medium" id="MitigationEnd" type="text" placeholder="">
+
+                </div>
+            </div>
+
+            <!-- Select Basic -->
+            <div class="control-group">
+                <label class="control-label" for="IssueStatus">Status</label>
+                <div class="controls">
+                    <select name="IssueStatus" class="input-medium" id="IssueStatus">
+                        <option>In Progress</option>
+                        <option>Complete</option>
+                    </select>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class='cube'>
+        <table>
+            <tr>
+                <td rowspan=5 style='border: none; transform: rotate(-90deg)'>Likelihood</td>
+                <td style='text-align: right; border: none; width: 25px;'>5 &nbsp;</td>
+                <td id='51' style='background-color: #66ff33'></td>
+                <td id='52' style='background-color: #ffff00'></td>
+                <td id="53" style='background-color: #e60000'></td>
+                <td id='54' style='background-color: #e60000'></td>
+                <td id='55' style='background-color: #e60000'></td>
+            </tr>
+            <tr>
+                <td style='text-align: right; border: none; width: 25px;'>4 &nbsp;</td>
+                <td id='41' style='background-color: #66ff33'></td>
+                <td id='42' style='background-color: #ffff00'></td>
+                <td id='43' style='background-color: #ffff00'></td>
+                <td id='44' style='background-color: #e60000'></td>
+                <td id='45' style='background-color: #e60000'></td>
+            </tr>
+            <tr>
+                <td style='text-align: right; border: none; width: 25px;'>3 &nbsp;</td>
+                <td id='31' style='background-color: #66ff33'></td>
+                <td id='32' style='background-color: #66ff33'></td>
+                <td id="33" style='background-color: #ffff00'></td>
+                <td id="34" style='background-color: #ffff00'></td>
+                <td id="35" style='background-color: #e60000'></td>
+            </tr>
+            <tr>
+                <td style='text-align: right; border: none; width: 25px;'>2 &nbsp;</td>
+                <td id='21' style='background-color: #66ff33'></td>
+                <td id='22' style='background-color: #66ff33'></td>
+                <td id='23' style='background-color: #66ff33'></td>
+                <td id="24" style='background-color: #ffff00'></td>
+                <td id="25" style='background-color: #ffff00'></td>
+            </tr>
+            <tr>
+                <td style='text-align: right; border: none; width: 25px;'>1 &nbsp;</td>
+                <td id='11' style='background-color: #66ff33'></td>
+                <td id='12' style='background-color: #66ff33'></td>
+                <td id='13' style='background-color: #66ff33'></td>
+                <td id='14' style='background-color: #66ff33'></td>
+                <td id="15" style='background-color: #ffff00'></td>
+            </tr>
+            <tr>
+                <td style='border: none; height: 25px;'>&nbsp;</td>
+                <td style='border: none; height: 25px;'>&nbsp;</td>
+                <td style='vertical-align: top; border: none; height: 25px;'>1</td>
+                <td style='vertical-align: top; border: none; height: 25px'>2</td>
+                <td style='vertical-align: top; border: none; height: 25px'>3</td>
+                <td style='vertical-align: top; border: none; height: 25px'>4</td>
+                <td style='vertical-align: top; border: none; height: 25px'>5</td>
+            </tr>
+            <tr>
+                <td style='border: none; height: 25px;'>&nbsp;</td>
+                <td colspan=6 style='border: none; text-align: center; vertical-align: top'>
+                    <br />&nbsp; Consequence
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

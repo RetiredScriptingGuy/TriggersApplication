@@ -150,7 +150,7 @@ function retrieveFormDigest() {
         url: contextInfoUri,
         method: "POST",
         headers: { "Accept": "application/json; odata=verbose" },
-        success: PrepareForm,
+        success: UpdateLastModified,
         error: function (data, errorCode, errorMessage) {
             var errMsg = "Error retrieving the form digest value: " + errorMessage;
             $("#error").val(errMsg);
@@ -158,7 +158,7 @@ function retrieveFormDigest() {
     });
 }
 
-function PrepareForm(data) {
+function UpdateLastModified(data) {
     console.log("digest is " + digest);
     $('#digestmsg').val(digest);
     retrieveLastModifiedDate();

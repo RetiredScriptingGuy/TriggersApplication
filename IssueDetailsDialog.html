@@ -1,0 +1,239 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:mso="urn:schemas-microsoft-com:office:office" xmlns:msdt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882">
+
+<head>
+
+    <!--[if gte mso 9]><xml>
+    <mso:CustomDocumentProperties>
+    <mso:_dlc_DocId msdt:dt="string">XCD4ME7X7URU-1497597693-123</mso:_dlc_DocId>
+    <mso:_dlc_DocIdItemGuid msdt:dt="string">b4db8e6d-6d8d-48a3-abd0-e67cae2dda62</mso:_dlc_DocIdItemGuid>
+    <mso:_dlc_DocIdUrl msdt:dt="string">http://dev/sites/Trigger/_layouts/15/DocIdRedir.aspx?ID=XCD4ME7X7URU-1497597693-123, XCD4ME7X7URU-1497597693-123</mso:_dlc_DocIdUrl>
+    </mso:CustomDocumentProperties>
+    </xml><![endif]-->
+
+    <script src="../_layouts/15/MicrosoftAjax.js"></script>
+    <script src="../_layouts/15/sp.runtime.js"></script>
+    <script src="../_layouts/15/sp.js"></script>
+    <script src="../_layouts/15/sp.requestexecutor.js"></script>
+
+    <script src="../SiteAssets/TriggersApp/js/vendor/jquery.min.js"></script>
+    <script src="../SiteAssets/TriggersApp/js/vendor/jquery.dataTables.min.js"></script>
+    <script src="../SiteAssets/TriggersApp/js/vendor/dataTables.buttons.min.js"></script>
+    <script src="../SiteAssets/TriggersApp/js/vendor/dataTables.select.min.js"></script>
+    <script src="../SiteAssets/TriggersApp/js/vendor/buttons.print.min.js"></script>
+    <script src="../SiteAssets/TriggersApp/js/vendor/buttons.bootstrap.min.js"></script>
+    <script src="../SiteAssets/TriggersApp/js/vendor/buttons.html5.min.js"></script>
+    <script src="../SiteAssets/TriggersApp/js/custom/customtrigger.js"></script>
+    <script src="../SiteAssets/TriggersApp/js/vendor/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="../SiteAssets/TriggersApp/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="../SiteAssets/TriggersApp/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="../SiteAssets/TriggersApp/css/select.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="../SiteAssets/TriggersApp/css/buttons.bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="../SiteAssets/TriggersApp/css/buttons.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="../SiteAssets/TriggersApp/css/triggers.css" />
+    <link rel="stylesheet" type="text/css" href="../SiteAssets/TriggersApp/css/custom.css" />
+
+
+    <script type="text/javascript" src="../SiteAssets/TriggersApp/js/vendor/bootstrap-datepicker.js"></script>
+    <link rel="stylesheet" type="text/css" href="../SiteAssets/TriggersApp/css/jbootstrap-datepicker.css" />
+
+    <script type="text/javascript">
+
+
+
+function instaiateMyDatePicker(){
+     $('#tbMitigationStart').datetimepicker({
+     		format: 'MM/DD/YYYY'});
+     $('#tbMitigationEnd').datetimepicker({
+     		format: 'MM/DD/YYYY'});
+}
+
+    </script>
+</head>
+<body>
+    <div class="modal" id="CopyIssue">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">Test Title</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-horizontal">
+                        <!-- Trigger Details -->
+                        <h2>Issue Details</h2>
+                        <!-- Text tbType-->
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="DatePrepared">Type:</label>
+                            <div class="col-md-4">
+                                <select name="DatePrepared" class="form-control input-md" id="tbType" required="" type="text">
+                                    <option>Cost</option>
+                                    <option>Schedule</option>
+                                    <option>Performance</option>
+                                </select>
+
+                            </div>
+                        </div>
+                        <!-- Text tbPhase-->
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="textinput">Phase:</label>
+                            <div class="col-md-4">
+                                <select name="textinput" class="form-control input-md" id="tbPhase" required="">
+                                    <option>EMD</option>
+                                    <option>TMRR</option>
+                                    <option>P&amp;D</option>
+                                    <option>O&amp;S</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!-- Textarea tbDescription -->
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="tbDescription">Description:</label>
+                            <div class="col-lg-8">
+                                <textarea name="Description" class="form-control" id="tbDescription"></textarea>
+                            </div>
+                        </div>
+                        <!-- Textarea tbMitigation-->
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="Mitigation">Mitigation:</label>
+                            <div class="col-lg-8">
+                                <textarea name="NeedForChange" class="form-control" id="tbMitigation"></textarea>
+                            </div>
+                        </div>
+                        <!-- Text tbMitigationStart-->
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="tbMitigationStart">Mitigation Date:</label>
+                            <div class="col-md-4">
+                                <input type='text' name="MitigationDate" class="form-control" id="tbMitigationStart" />
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </div>
+                        </div>
+                        <!-- Text tbMitigationEnd-->
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="tbMitigationEnd">Mitigation End:</label>
+                            <div class="col-md-4">
+                                <input type="text" name="MitigationEnd" class="form-control" id="tbMitigationEnd" />
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </div>
+                        </div>
+                        <!-- Text tbStatus-->
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="ECPRevision">Status:</label>
+                            <div class="col-md-4">
+                                <select name="ECPRevision" class="form-control input-md" id="tbStatus" required="">
+                                    <option value="InProgress">Not Complete</option>
+                                    <option value="complete">Complete</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class='cube'>
+                        <table>
+                            <tr>
+                                <td rowspan=5 style='border: none; transform: rotate(-90deg)'>Likelihood</td>
+                                <td style='text-align: right; border: none; width: 25px;'>5 &nbsp;</td>
+                                <td id='51' style='background-color: #66ff33'></td>
+                                <td id='52' style='background-color: #ffff00'></td>
+                                <td id="53" style='background-color: #e60000'></td>
+                                <td id='54' style='background-color: #e60000'></td>
+                                <td id='55' style='background-color: #e60000'></td>
+                            </tr>
+                            <tr>
+                                <td style='text-align: right; border: none; width: 25px;'>4 &nbsp;</td>
+                                <td id='41' style='background-color: #66ff33'></td>
+                                <td id='42' style='background-color: #ffff00'></td>
+                                <td id='43' style='background-color: #ffff00'></td>
+                                <td id='44' style='background-color: #e60000'></td>
+                                <td id='45' style='background-color: #e60000'></td>
+                            </tr>
+                            <tr>
+                                <td style='text-align: right; border: none; width: 25px;'>3 &nbsp;</td>
+                                <td id='31' style='background-color: #66ff33'></td>
+                                <td id='32' style='background-color: #66ff33'></td>
+                                <td id="33" style='background-color: #ffff00'></td>
+                                <td id="34" style='background-color: #ffff00'></td>
+                                <td id="35" style='background-color: #e60000'></td>
+                            </tr>
+                            <tr>
+                                <td style='text-align: right; border: none; width: 25px;'>2 &nbsp;</td>
+                                <td id='21' style='background-color: #66ff33'></td>
+                                <td id='22' style='background-color: #66ff33'></td>
+                                <td id='23' style='background-color: #66ff33'></td>
+                                <td id="24" style='background-color: #ffff00'></td>
+                                <td id="25" style='background-color: #ffff00'></td>
+                            </tr>
+                            <tr>
+                                <td style='text-align: right; border: none; width: 25px;'>1 &nbsp;</td>
+                                <td id='11' style='background-color: #66ff33'></td>
+                                <td id='12' style='background-color: #66ff33'></td>
+                                <td id='13' style='background-color: #66ff33'></td>
+                                <td id='14' style='background-color: #66ff33'></td>
+                                <td id="15" style='background-color: #ffff00'></td>
+                            </tr>
+                            <tr>
+                                <td style='border: none; height: 25px;'>&nbsp;</td>
+                                <td style='border: none; height: 25px;'>&nbsp;</td>
+                                <td style='vertical-align: top; border: none; height: 25px;'>1</td>
+                                <td style='vertical-align: top; border: none; height: 25px'>2</td>
+                                <td style='vertical-align: top; border: none; height: 25px'>3</td>
+                                <td style='vertical-align: top; border: none; height: 25px'>4</td>
+                                <td style='vertical-align: top; border: none; height: 25px'>5</td>
+                            </tr>
+                            <tr>
+                                <td style='border: none; height: 25px;'>&nbsp;</td>
+                                <td colspan=6 style='border: none; text-align: center; vertical-align: top'>
+                                    <br />&nbsp; Consequence
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <!-- Text tbLikelihood-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="tbLikelihood" id="lbLikelihood">Likelihood:</label>
+                        <div class="col-md-4">
+                            <select name="tbLikelihood" class="form-control input-md" id="tbLikelihood" required="">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select>
+                        </div>
+                    </div>
+                    <!-- Text tbConsequence-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="tbConsequence" id="lbConsequence">Consequence:</label>
+                        <div class="col-md-4">
+                            <select name="tbConsequence" class="form-control input-md" id="tbConsequence" required="">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="#" onclick="window.frameElement.cancelPopUp(); return false;">Close</a>
+                        <a href="#" onclick="window.frameElement.commitPopUp(); return false;">Save</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" onclick="closemodal()">Close</button>
+            <button type="button" class="btn btn-primary" onclick="savemodal()">Save</button>
+        </div>
+    </div>
+  
+
+
+    <div id="overlay"></div>
+
+
+</body>
+
+</html>

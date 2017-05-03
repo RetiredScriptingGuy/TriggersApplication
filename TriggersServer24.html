@@ -1,0 +1,402 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:mso="urn:schemas-microsoft-com:office:office" xmlns:msdt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882">
+<head>
+    <meta charset="utf-8" />
+    <title>Triggers</title>
+
+    <!--[if gte mso 9]><xml>
+        <mso:CustomDocumentProperties>
+            <mso:_dlc_DocId msdt:dt="string">QHE7NZYZZWMM-1666467377-41</mso:_dlc_DocId>
+            <mso:_dlc_DocIdItemGuid msdt:dt="string">f9ffaa00-16b8-4489-909a-00b0cd292d7c</mso:_dlc_DocIdItemGuid>
+            <mso:_dlc_DocIdUrl msdt:dt="string">https://myteam.navair.navy.mil/air/triggers/_layouts/15/DocIdRedir.aspx?ID=QHE7NZYZZWMM-1666467377-41, QHE7NZYZZWMM-1666467377-41</mso:_dlc_DocIdUrl>
+        </mso:CustomDocumentProperties>
+    </xml><![endif]-->
+
+    <script src="../_layouts/15/MicrosoftAjax.js"></script>
+    <script src="../_layouts/15/sp.runtime.js"></script>
+    <script src="../_layouts/15/sp.js"></script>
+    <script src="../_layouts/15/sp.requestexecutor.js"></script>
+
+    <script src="../SiteAssets/TriggersApp/js/vendor/jquery.min.js"></script>
+    <script src="../SiteAssets/TriggersApp/js/vendor/jquery.dataTables.min.js"></script>
+    <script src="../SiteAssets/TriggersApp/js/vendor/dataTables.buttons.min.js"></script>
+    <script src="../SiteAssets/TriggersApp/js/vendor/dataTables.select.min.js"></script>
+    <script src="../SiteAssets/TriggersApp/js/vendor/buttons.print.min.js"></script>
+    <script src="../SiteAssets/TriggersApp/js/vendor/buttons.bootstrap.min.js"></script>
+    <script src="../SiteAssets/TriggersApp/js/vendor/buttons.html5.min.js"></script>
+    <script src="../SiteAssets/TriggersApp/js/vendor/bootstrap.min.js"></script>
+    <script src="../SiteAssets/TriggersApp/js/custom/customtrigger.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="../SiteAssets/TriggersApp/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="../SiteAssets/TriggersApp/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="../SiteAssets/TriggersApp/css/select.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="../SiteAssets/TriggersApp/css/buttons.bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="../SiteAssets/TriggersApp/css/buttons.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="../SiteAssets/TriggersApp/css/triggers.css" />
+
+
+    <div id="triggerbanner" class="container-fluid">
+        <img src="../SiteAssets/TriggersApp/images/triggers_new logo.png" width="100%" />
+    </div>
+    <div class="section">
+        <div id="navpills" class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="nav nav-pills">
+                        <li><a href="MyDashboard.aspx">MyDashboard</a></li>
+                        <li class="active"><a href="Triggers.aspx">Triggers</a></li>
+                        <li><a href="Events.aspx">Events /Reviews</a></li>
+                        <li><a href="Reports.aspx">Reports</a></li>
+                        <li><a href="Drafts.aspx">Drafts</a></li>
+                        <li><a href="Mitigation.aspx">Mitigation</a></li>
+                        <li><a href="Feedback.aspx">Feedback</a></li>
+                        <li><a href="Acronyms.aspx">Acronyms</a></li>
+                        <li><a href="Resources.aspx">Resources </a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <span id="profileButtons">
+            <a id="login" href="Profile.aspx">My Profile</a>
+            <label id="usrProgram">User Program | </label>
+            <label id="lastUpdated">Last Modified </label>
+        </span>
+    </div>
+</head>
+<body>
+    <div>
+        <label id="ddlfilterlabel" for="ddlfilter">Phase:</label>
+        <select id="ddlfilter">
+            <option value="selectall" selected="selected">Select All</option>
+        </select>
+    </div>
+    <div class="outer">
+        <div class="fullTopHalf">
+            <div id="triggersquadrant1">
+                <h2>Triggers</h2>
+                <div class="triggersgridView">
+                    <table class="display" id="triggers">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Trigger
+                                </th>
+                                <th>
+                                    Trigger Description
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+                <div>
+                    <label id="addtriggertext">Your trigger not listed? Add another trigger here:"</label>
+                    <a href="AddTrigger.aspx">Add New Trigger</a>
+                </div>
+            </div>
+            <div id="triggerdescriptionquadrant2">
+                <h2>Trigger Description</h2>
+                <div class="triggerdescriptiongridView">
+                    <table class="display" id="TriggerDescription">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Description
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+                <div>
+                    <label id="addtriggertext">Clear the description area here:"</label>
+                    <a href="#" onclick="clearDescriptionTable()">Clear</a>
+                </div>
+            </div>
+        </div>
+        <div class="fullBottomHalf">
+            <div id="triggersquadrant3">
+                <h2>Issues</h2>
+                <div class="issuesgridView">
+                    <table class="display" id="issues" style="width: 100%;">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Issues
+                                </th>
+                                <th>
+                                    Issue Description
+                                </th>
+                                <th>
+                                    Trigger
+                                </th>
+                                <th>
+                                    Mitigation 6.0d
+                                </th>
+                                <th>
+                                    Mitigation 6.6
+                                </th>
+                                <th>
+                                    Mitigation 6.7
+                                </th>
+                                <th>
+                                    Mitigation 6.8
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+            <div id="triggersquadrant4">
+                <h2>Issue Description</h2>
+                <div class="issuedescriptiongridView">
+                    <table class="display" id="IssueDescription">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Description
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+                <div>
+                    <label id="addtriggertext">Clear the description area here:"</label>
+                    <a href="#" onclick="clearIssuesDescriptionTable()">Clear</a>
+                </div>
+            </div>
+            <div id="triggersquadrant5">
+                <h2>Mitigations</h2>
+                <div class="mitigationgridView">
+                    <table class="display" id="MitigationDescription">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Description
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+                <div>
+                    <label id="mitigationtext">Clear the description area here:"</label>
+                    <a href="#" onclick="clearMitigationDescriptionTable()">Clear</a>
+                </div>
+
+            </div>
+            <div id="dashboardbuttons">
+                <button id="copyIssueButton" type="button" class="btn btn-default" onclick="CopySelectedIssueDialog()">Copy Selected Issues to My Program Issues / Program Risks</button>
+                <label id="issuenotlistedtext">Issue Not Listed?"</label><a href="#" onclick="newIssueDialog()">Add New Issue / Risk</a>
+            </div>
+
+        </div>
+    </div>
+    <!--HTML user profile data-->
+    <div class="profilebox">
+        <div>
+            <input type="text" id="userID" title="user ID goes here" readonly="readonly">
+        </div>
+        <div>
+            <input type="text" id="userName" title="user name goes here" readonly="readonly">
+        </div>
+        <div>
+            <input type="text" id="userProgram" title="user program goes here" readonly="readonly">
+        </div>
+        <div>
+            <input type="text" id="digestmsg" title="list digest goes here" readonly="readonly">
+        </div>
+        <div>
+            <input type="text" id="error" title="error message goes here" readonly="readonly">
+        </div>
+        <div>
+            <input type="text" id="userAdmin" title="is user admin goes here" readonly="readonly">
+        </div>
+    </div>
+
+    <div class="modal" id="CopyIssue">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Test Title</h4>
+            </div>
+            <div class="modal-body">
+                <div id="TriggerDetailsDialog" style="background-color: silver">
+                    <div class="detailquadrant1" style="float: left;">
+                        <table>
+                            <tr>
+                                <td>
+                                    <div class="form-horizontal">
+                                        <!-- Trigger Details -->
+                                        <h2>Trigger Details</h2>
+                                        <!-- Text tbType-->
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label" for="DatePrepared">Type:</label>
+                                            <div class="col-md-4">
+                                                <input name="DatePrepared" class="form-control input-md" id="tbType" required="" type="text">
+                                            </div>
+                                        </div>
+                                        <!-- Text tbPhase-->
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label" for="textinput">Phase:</label>
+                                            <div class="col-md-4">
+                                                <input name="textinput" class="form-control input-md" id="tbPhase" required="" type="text">
+                                            </div>
+                                        </div>
+                                        <!-- Textarea tbDescription -->
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label" for="tbDescription">Description:</label>
+                                            <div class="col-lg-8">
+                                                <textarea name="Description" class="form-control" id="tbDescription"></textarea>
+                                            </div>
+                                        </div>
+                                        <!-- Textarea tbMitigation-->
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label" for="Mitigation">Mitigation:</label>
+                                            <div class="col-lg-8">
+                                                <textarea name="NeedForChange" class="form-control" id="tbMitigation"></textarea>
+                                            </div>
+                                        </div>
+                                        <!-- Text tbMitigationStart-->
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label" for="tbMitigationStart">Mitigation Date:</label>
+                                            <div class="col-md-4">
+                                                <input name="ECPNumber" class="form-control input-md" id="tbMitigationStart" required="" type="text">
+                                            </div>
+                                        </div>
+                                        <!-- Text tbMitigationEnd-->
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label" for="tbMitigationEnd">Mitigation End:</label>
+                                            <div class="col-md-4">
+                                                <input name="ECPRevision" class="form-control input-md" id="tbMitigationEnd" required="" type="text">
+                                            </div>
+                                        </div>
+                                        <!-- Text tbStatus-->
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label" for="ECPRevision">Status:</label>
+                                            <div class="col-md-4">
+                                                <input name="ECPRevision" class="form-control input-md" id="tbStatus" required="" type="text">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class='detailquadrant2' style="float: right;">
+                        <table>
+                            <tr>
+                                <td>
+                                    <div class='cube'>
+                                        <table>
+                                            <tr>
+                                                <td rowspan=5 style='border: none; transform: rotate(-90deg)'>Likelihood</td>
+                                                <td style='text-align: right; border: none; width: 25px;'>5 &nbsp;</td>
+                                                <td id='51' style='background-color: #66ff33'></td>
+                                                <td id='52' style='background-color: #ffff00'></td>
+                                                <td id="53" style='background-color: #e60000'></td>
+                                                <td id='54' style='background-color: #e60000'></td>
+                                                <td id='55' style='background-color: #e60000'></td>
+                                            </tr>
+                                            <tr>
+                                                <td style='text-align: right; border: none; width: 25px;'>4 &nbsp;</td>
+                                                <td id='41' style='background-color: #66ff33'></td>
+                                                <td id='42' style='background-color: #ffff00'></td>
+                                                <td id='43' style='background-color: #ffff00'></td>
+                                                <td id='44' style='background-color: #e60000'></td>
+                                                <td id='45' style='background-color: #e60000'></td>
+                                            </tr>
+                                            <tr>
+                                                <td style='text-align: right; border: none; width: 25px;'>3 &nbsp;</td>
+                                                <td id='31' style='background-color: #66ff33'></td>
+                                                <td id='32' style='background-color: #66ff33'></td>
+                                                <td id="33" style='background-color: #ffff00'></td>
+                                                <td id="34" style='background-color: #ffff00'></td>
+                                                <td id="35" style='background-color: #e60000'></td>
+                                            </tr>
+                                            <tr>
+                                                <td style='text-align: right; border: none; width: 25px;'>2 &nbsp;</td>
+                                                <td id='21' style='background-color: #66ff33'></td>
+                                                <td id='22' style='background-color: #66ff33'></td>
+                                                <td id='23' style='background-color: #66ff33'></td>
+                                                <td id="24" style='background-color: #ffff00'></td>
+                                                <td id="25" style='background-color: #ffff00'></td>
+                                            </tr>
+                                            <tr>
+                                                <td style='text-align: right; border: none; width: 25px;'>1 &nbsp;</td>
+                                                <td id='11' style='background-color: #66ff33'></td>
+                                                <td id='12' style='background-color: #66ff33'></td>
+                                                <td id='13' style='background-color: #66ff33'></td>
+                                                <td id='14' style='background-color: #66ff33'></td>
+                                                <td id="15" style='background-color: #ffff00'></td>
+                                            </tr>
+                                            <tr>
+                                                <td style='border: none; height: 25px;'>&nbsp;</td>
+                                                <td style='border: none; height: 25px;'>&nbsp;</td>
+                                                <td style='vertical-align: top; border: none; height: 25px;'>1</td>
+                                                <td style='vertical-align: top; border: none; height: 25px'>2</td>
+                                                <td style='vertical-align: top; border: none; height: 25px'>3</td>
+                                                <td style='vertical-align: top; border: none; height: 25px'>4</td>
+                                                <td style='vertical-align: top; border: none; height: 25px'>5</td>
+                                            </tr>
+                                            <tr>
+                                                <td style='border: none; height: 25px;'>&nbsp;</td>
+                                                <td colspan=6 style='border: none; text-align: center; vertical-align: top'>
+                                                    <br/>&nbsp; Consequence
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span>
+                                            <!-- Text tbLikelihood-->
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label" for="tbLikelihood" id="lbLikelihood">Likelihood:</label>
+                                                <div class="col-md-4">
+                                                    <input name="tbLikelihood" class="form-control input-md" id="tbLikelihood" required="" type="text">
+
+                                                </div>
+                                            </div>
+                                        </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span>
+                                            <!-- Text tbConsequence-->
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label" for="tbConsequence" id="lbConsequence">Consequence:</label>
+                                                <div class="col-md-4">
+                                                    <input name="tbConsequence" class="form-control input-md" id="tbConsequence" required="" type="text" placeholder="">
+                                                </div>
+                                            </div>
+                                        </span>
+                                </td>
+                            </tr>
+                        </table>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" onclick="closemodal()">Close</button>
+                            <button type="button" class="btn btn-primary" onclick="savemodal()">Save</button>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+        <div id="overlay"></div>
+</body>
+</html>

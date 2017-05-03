@@ -19,11 +19,11 @@
 
     <script src="../SiteAssets/TriggersApp/js/vendor/jquery.min.js"></script>
     <script src="../SiteAssets/TriggersApp/js/vendor/jquery-ui.min.js"></script>
-    <script src="../SiteAssets/TriggersApp/js/vendor/bootstrap.min.js"></script>
+
     <script src="../SiteAssets/TriggersApp/js/vendor/jquery.dataTables.min.js"></script>
     <script src="../SiteAssets/TriggersApp/js/vendor/dataTables.buttons.min.js"></script>
     <script src="../SiteAssets/TriggersApp/js/vendor/dataTables.select.min.js"></script>
-
+    <script src="../SiteAssets/TriggersApp/js/vendor/bootstrap.min.js"></script>
     <script src="../SiteAssets/TriggersApp/js/vendor/buttons.print.min.js"></script>
     <script src="../SiteAssets/TriggersApp/js/vendor/buttons.bootstrap.min.js"></script>
     <script src="../SiteAssets/TriggersApp/js/vendor/buttons.html5.min.js"></script>
@@ -31,52 +31,13 @@
     <script src="../SiteAssets/TriggersApp/js/custom/mydashboard.js"></script>
 
     <link rel="stylesheet" type="text/css" href="../SiteAssets/TriggersApp/css/jquery-ui.min.css" />
-    <link rel="stylesheet" type="text/css" href="../SiteAssets/TriggersApp/css/bootstrap.min.css" />
+
     <link rel="stylesheet" type="text/css" href="../SiteAssets/TriggersApp/css/jquery.dataTables.min.css" />
     <link rel="stylesheet" type="text/css" href="../SiteAssets/TriggersApp/css/select.dataTables.min.css" />
     <link rel="stylesheet" type="text/css" href="../SiteAssets/TriggersApp/css/buttons.bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="../SiteAssets/TriggersApp/css/buttons.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="../SiteAssets/TriggersApp/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="../SiteAssets/TriggersApp/css/triggers.css" />
-
-    <style type="text/css">
-        .auto-style1 {
-            display: block;
-            width: 352%;
-            height: 108px;
-            padding: 6px 12px;
-            font-size: 14px;
-            line-height: 1.42857143;
-            color: #555;
-            background-color: #fff;
-            background-image: none;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-            box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-            -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
-            -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-            transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-        }
-        .auto-style2 {
-            display: block;
-            width: 351%;
-            height: 90px;
-            padding: 6px 12px;
-            font-size: 14px;
-            line-height: 1.42857143;
-            color: #555;
-            background-color: #fff;
-            background-image: none;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-            box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-            -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
-            -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-            transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-            margin-bottom: 27;
-        }
-    </style>
 
     <div id="triggerbanner" class="container-fluid">
         <img src="../SiteAssets/TriggersApp/images/triggers_new logo.png" style="width:100%" />
@@ -88,13 +49,13 @@
                     <ul class="nav nav-pills">
                         <li class="active"><a href="MyDashboard.aspx">My Dashboard</a></li>
                         <li><a id="triggersUrl" href="Triggers.aspx">Triggers</a></li>
-                        <li><a id="eventsUrl" href="Events.aspx">Events /Reviews</a></li>
+                        <li><a id="eventsUrl" href="Events.aspx">Events/Reviews</a></li>
                         <li><a href="Reports.aspx">Reports</a></li>
                         <li><a href="Drafts.aspx">Drafts</a></li>
                         <li><a href="Mitigation.aspx">Mitigation</a></li>
                         <li><a href="Feedback.aspx">Feedback</a></li>
                         <li><a href="Acronyms.aspx">Acronyms</a></li>
-                        <li><a href="References.aspx">References </a></li>
+                        <li><a href="Resources.aspx">Resources </a></li>
                     </ul>
                 </div>
             </div>
@@ -111,7 +72,7 @@
     <div class="dashboardouter">
         <div class='fullTopHalf'>
             <!--HTML MYPROGRAM ISSUES TABLE-->
-            <H2>My Program Issues</H2><span id="info" class="glyphicon glyphicon-info-sign" title="Click once to add item to the cube, Double-click to open item in edit page"></span>
+            <H2>My Program Issues</H2><img alt="infoicon" src="../SiteAssets/TriggersApp/images/info.png" />
             <div id='myprogramissuesquadrant1'>
                 <div>
                     <label id="ddlfilterlabel" for="ddlfilter">Phase:</label>
@@ -122,8 +83,8 @@
                     <table class="display" id="events" style="width: 100%;">
                         <thead>
                             <tr>
-                                <th>Trigger</th>
                                 <th>Issue</th>
+                                <th>Trigger</th>
                                 <th>Type</th>
                                 <th>Likelihood</th>
                                 <th>Consequence</th>
@@ -138,13 +99,9 @@
                         <tfoot></tfoot>
                     </table>
                 </div>
-                <div>
-                    <label id="addtriggertext">Double-click row to open edit page</label>
-                </div>
-
             </div>
             <div id="dashboardbuttons">
-                <button type="button" class="btn btn-default" onclick="toppriority()">Top 10</button>
+                <button id="btnTop10" type="button" class="btn btn-default" onclick="toppriority()">Top 10</button>
                 <br>
                 <br>
                 <button type="submit" class="btn btn-default" onclick="clearcube()">Clear</button>
@@ -154,7 +111,7 @@
                 <div id="cube" class='cube'>
                     <table>
                         <tr>
-                            <td rowspan=5 style='border: none; transform: rotate(-90deg)'>Likelihood</td>
+                            <td rowspan=5 style='border: none; transform: rotate(-90deg)'>Likelihood <img alt='infoicon' src='../SiteAssets/TriggersApp/images/info.png' /></td>
                             <td style='text-align: right; border: none; width: 25px;'>5 &nbsp;</td>
                             <td id='51' style='background-color: #66ff33'></td>
                             <td id='52' style='background-color: #ffff00'></td>
@@ -206,7 +163,8 @@
                         <tr>
                             <td style='border: none; height: 25px;'>&nbsp;</td>
                             <td colspan=6 style='border: none; text-align: center; vertical-align: top'>
-                                <br />&nbsp; Consequence
+                                <br />&nbsp; Consequence <img alt="infoicon" src="../SiteAssets/TriggersApp/images/info.png">
+
                             </td>
                         </tr>
                     </table>
@@ -232,10 +190,6 @@
                         <tbody></tbody>
                     </table>
                 </div>
-                <div>
-                    <label id="addtriggertext">Double-click row to open edit page</label>
-                </div>
-
             </div>
             <div class='quadrant4' style="top:-474px;">
                 <H2>Program Events / Reviews</H2>
@@ -252,15 +206,12 @@
                         <tbody></tbody>
                     </table>
                 </div>
-                <div>
-                    <label id="addtriggertext">Double-click row to open edit page</label>
-                </div>
             </div>
         </div>
     </div>
     <!--HTML DIALOGS-->
     <div id="footer">
-        <div id="TriggerDetailsDialog" style="background-color:silver">
+        <div id="IssuesDetailsDialog" style="background-color:silver">
             <div class="detailquadrant1" style="float: left;">
                 <table>
                     <tr>
@@ -272,28 +223,28 @@
                                 <div class="form-group">
                                     <label class="col-md-4 control-label" for="DatePrepared">Type:</label>
                                     <div class="col-md-4">
-                                        <input name="DatePrepared" class="form-control input-md" id="tbType" required="" type="text" placeholder="" style="width: 239%">
+                                        <input name="DatePrepared" class="form-control input-md" id="tbType" required="" type="text" placeholder="">
                                     </div>
                                 </div>
                                 <!-- Text tbPhase-->
                                 <div class="form-group">
                                     <label class="col-md-4 control-label" for="textinput">Phase:</label>
                                     <div class="col-md-4">
-                                        <input name="textinput" class="form-control input-md" id="tbPhase" required="" type="text" placeholder="" style="width: 239%">
+                                        <input name="textinput" class="form-control input-md" id="tbPhase" required="" type="text" placeholder="">
                                     </div>
                                 </div>
                                 <!-- Textarea tbDescription -->
                                 <div class="form-group">
                                     <label class="col-md-4 control-label" for="tbDescription">Description:</label>
                                     <div class="col-lg-8">
-                                        <textarea name="Description" class="auto-style2" id="tbDescription"></textarea>
+                                        <textarea name="Description" class="form-control" id="tbDescription"></textarea>
                                     </div>
                                 </div>
                                 <!-- Textarea tbMitigation-->
                                 <div class="form-group">
                                     <label class="col-md-4 control-label" for="Mitigation">Mitigation:</label>
                                     <div class="col-lg-8">
-                                        <textarea name="NeedForChange" class="auto-style1" id="tbMitigation"></textarea>
+                                        <textarea name="NeedForChange" class="form-control" id="tbMitigation"></textarea>
                                     </div>
                                 </div>
                                 <!-- Text tbMitigationStart-->
@@ -424,7 +375,7 @@
         </div>
     </div>
     <!--HTML user profile data-->
-    <div id="currentuserprofile">
+    <div class="profilebox">
         <div>
             <input type="text" id="userID" title="user ID goes here" readonly="readonly">
         </div>
@@ -439,6 +390,9 @@
         </div>
         <div>
             <input type="text" id="error" title="error message goes here" readonly="readonly">
+        </div>
+        <div>
+            <input type="text" id="userAdmin" title="user is an admin goes here" readonly="readonly">
         </div>
     </div>
     <div id="overlay"></div>
