@@ -1,0 +1,544 @@
+﻿<script src="../_layouts/15/MicrosoftAjax.js"></script>
+<script src="../_layouts/15/sp.runtime.js"></script>
+<script src="../_layouts/15/sp.js"></script>
+<script src="../_layouts/15/sp.requestexecutor.js"></script>
+
+<script src="../SiteAssets/TriggersApp/js/vendor/jquery.min.js"></script>
+<script src="../SiteAssets/TriggersApp/js/vendor/jquery.dataTables.min.js"></script>
+<script src="../SiteAssets/TriggersApp/js/vendor/dataTables.buttons.min.js"></script>
+<script src="../SiteAssets/TriggersApp/js/vendor/dataTables.select.min.js"></script>
+<script src="../SiteAssets/TriggersApp/js/vendor/buttons.print.min.js"></script>
+<script src="../SiteAssets/TriggersApp/js/vendor/buttons.bootstrap.min.js"></script>
+<script src="../SiteAssets/TriggersApp/js/vendor/buttons.html5.min.js"></script>
+<script src="../SiteAssets/TriggersApp/js/vendor/bootstrap.min.js"></script>
+<script src="../SiteAssets/TriggersApp/js/custom/customtrigger.js"></script>
+
+<link rel="stylesheet" type="text/css" href="../SiteAssets/TriggersApp/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../SiteAssets/TriggersApp/css/jquery.dataTables.min.css" />
+<link rel="stylesheet" type="text/css" href="../SiteAssets/TriggersApp/css/select.dataTables.min.css" />
+<link rel="stylesheet" type="text/css" href="../SiteAssets/TriggersApp/css/buttons.bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../SiteAssets/TriggersApp/css/buttons.dataTables.min.css" />
+<link rel="stylesheet" type="text/css" href="../SiteAssets/TriggersApp/css/triggers.css" />
+
+
+<div id="triggerbanner" class="container-fluid">
+    <img src="../SiteAssets/TriggersApp/images/triggers_new logo.png" width="100%" />
+</div>
+<div class="section">
+    <div id="navpills" class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="nav nav-pills">
+                    <li><a href="MyDashboard.aspx">MyDashboard</a></li>
+                    <li class="active"><a href="Triggers.aspx">Triggers</a></li>
+                    <li><a href="Events.aspx">Events /Reviews</a></li>
+                    <li><a href="Reports.aspx">Reports</a></li>
+                    <li><a href="Drafts.aspx">Drafts</a></li>
+                    <li><a href="Mitigation.aspx">Mitigation</a></li>
+                    <li><a href="Feedback.aspx">Feedback</a></li>
+                    <li><a href="Acronyms.aspx">Acronyms</a></li>
+                    <li><a href="Resources.aspx">Resources </a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <span id="profileButtons">
+        <a id="login" href="Profile.aspx">My Profile</a>
+        <label id="usrProgram">User Program | </label>
+        <label id="lastUpdated">Last Modified </label>
+    </span>
+</div>
+<div>
+    <div>
+        <label id="ddlfilterlabel" for="ddlfilter">Phase:</label>
+        <select id="ddlfilter">
+            <option value="selectall" selected="selected">Select All</option>
+        </select>
+    </div>
+    <div class="outer">
+        <div class="fullTopHalf">
+            <div id="triggersquadrant1">
+                <h2>Triggers</h2>
+                <div class="triggersgridView">
+                    <table class="display" id="triggers">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Trigger
+                                </th>
+                                <th>
+                                    Trigger Description
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+                <div>
+                    <label id="addtriggertext">Your trigger not listed? Add another trigger here:"</label>
+                    <a href="AddTrigger.aspx">Add New Trigger</a>
+                </div>
+            </div>
+            <div id="triggerdescriptionquadrant2">
+                <h2>Trigger Description</h2>
+                <div class="triggerdescriptiongridView">
+                    <table class="display" id="TriggerDescription">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Description
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+                <div>
+                    <label id="addtriggertext">Clear the description area here:"</label>
+                    <a href="#" onclick="clearDescriptionTable()">Clear</a>
+                </div>
+            </div>
+        </div>
+        <div class="fullBottomHalf">
+            <div id="triggersquadrant3">
+                <h2>Issues</h2>
+                <div class="issuesgridView">
+                    <table class="display" id="issues" style="width: 100%;">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Issues
+                                </th>
+                                <th>
+                                    Issue Description
+                                </th>
+                                <th>
+                                    Trigger
+                                </th>
+                                <th>
+                                    Mitigation 6.0d
+                                </th>
+                                <th>
+                                    Mitigation 6.6
+                                </th>
+                                <th>
+                                    Mitigation 6.7
+                                </th>
+                                <th>
+                                    Mitigation 6.8
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+            <div id="triggersquadrant4">
+                <h2>Issue Description</h2>
+                <div class="issuedescriptiongridView">
+                    <table class="display" id="IssueDescription">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Description
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+                <div>
+                    <label id="addtriggertext">Clear the description area here:"</label>
+                    <a href="#" onclick="clearIssuesDescriptionTable()">Clear</a>
+                </div>
+            </div>
+            <div id="triggersquadrant5">
+                <h2>Mitigations</h2>
+                <div class="mitigationgridView">
+                    <table class="display" id="MitigationDescription">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Description
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+                <div>
+                    <label id="mitigationtext">Clear the description area here:"</label>
+                    <a href="#" onclick="clearMitigationDescriptionTable()">Clear</a>
+                </div>
+
+            </div>
+            <div id="triggercopydashboardbuttons">
+                <button id="copyIssueButton" type="button" class="btn btn-default" data-toggle="modal" data-target="#CopyIssue" data-id="diaIssueDescription" data-issuetitle="daiIssueTitle">Copy Selected Issues to My Program Issues / Program Risks</button>
+                <label id="issuenotlistedtext">Issue Not Listed?"</label><a href="#" onclick="ShowAddTriggerDialog()">Add New Issue / Risk</a>
+            </div>
+
+        </div>
+    </div>
+    <!--HTML user profile data-->
+    <div class="profilebox">
+        <div>
+            <input type="text" id="userID" title="user ID goes here" readonly="readonly">
+        </div>
+        <div>
+            <input type="text" id="userName" title="user name goes here" readonly="readonly">
+        </div>
+        <div>
+            <input type="text" id="userProgram" title="user program goes here" readonly="readonly">
+        </div>
+        <div>
+            <input type="text" id="digestmsg" title="list digest goes here" readonly="readonly">
+        </div>
+        <div>
+            <input type="text" id="error" title="error message goes here" readonly="readonly">
+        </div>
+        <div>
+            <input type="text" id="userAdmin" title="is user admin goes here" readonly="readonly">
+        </div>
+    </div>
+
+    <!--HTML Copy Issue Diaglog-->
+
+    <div class="modal" id="CopyIssue" data-triiggertitle="diaTriggerTitle">
+        <div class="modal-dialog" style="background-color:silver;">
+            <div class="modal-content" style="width:1200px;background-color:silver;">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">Copy Issues to my Program Issues / Program Risks</h4>
+                </div>
+                <div class="modal-body" style="background-color:silver;">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-horizontal">
+
+                                <!-- Issue Details -->
+                                <div class="form-group">
+                                    <div class="col-lg-8">
+
+                                        <span>
+                                            <label id="TriggerTitle">Trigger: innerHTML</label>
+                                            <label id="IssueTitle">Issue: innerHTML</label>
+                                        </span>
+                                        <br>
+                                        <span>
+                                            <label id="IssuePhase">Phase: innerHTML</label>
+                                        </span>
+                                    </div>
+                                </div>
+
+
+                                <!-- Textarea tbIssueTitle-->
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="tbIssueTitle">Title:</label>
+                                    <div class="col-lg-8">
+                                        <textarea name="tbIssueTitle" class="form-control" id="tbIssueTitle"></textarea>
+                                    </div>
+                                </div>
+
+
+                                <!-- Text tbType-->
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="tbIssueType">Type:</label>
+                                    <div class="col-md-4">
+                                        <select name="tbIssueType" class="form-control input-md" id="tbIssueType" required="" type="text">
+                                            <option>Select Type</option>
+                                            <option>Cost</option>
+                                            <option>Schedule</option>
+                                            <option>Performance</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- Textarea taIssueDescription-->
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="tbIssueDescription">Description:</label>
+                                    <div class="col-lg-8">
+                                        <textarea name="tbIssueDescription" class="form-control" id="tbIssueDescription"></textarea>
+                                    </div>
+                                </div>
+
+                                <!-- Textarea taIssueMitigation-->
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="taIssueMitigation">Mitigation:</label>
+                                    <div class="col-lg-8">
+                                        <textarea name="NeedForChange" class="form-control" id="taIssueMitigation"></textarea>
+                                    </div>
+                                </div>
+                                <!-- Text tbMitigationStart-->
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="tbMitigationStart">Mitigation Date:</label>
+                                    <div class="col-md-4">
+                                        <input type='text' name="MitigationDate" class="form-control" id="tbMitigationStart" value="">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+
+                                    </div>
+                                </div>
+                                <!-- Text tbMitigationEnd-->
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="tbMitigationEnd">Mitigation End:</label>
+                                    <div class="col-md-4">
+                                        <input type="text" name="MitigationEnd" class="form-control" id="tbMitigationEnd">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </div>
+                                </div>
+                                <!-- Text tbIssueStatus-->
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="tbIssueStatus">Status:</label>
+                                    <div class="col-md-4">
+                                        <select name="ECPRevision" class="form-control input-md" id="tbIssueStatus" required="">
+                                            <option value="InProgress">Not Complete</option>
+                                            <option value="complete">Complete</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cols-md-6" style="display:inline-table">
+                            <table>
+                                <tr>
+                                    <td>
+                                        <div class='cube'>
+                                            <table>
+                                                <tr>
+                                                    <td rowspan=5 style='border: none; transform: rotate(-90deg)'>Likelihood</td>
+                                                    <td style='text-align: right; border: none; width: 25px;'>5 &nbsp;</td>
+                                                    <td id='51' style='background-color: #66ff33'></td>
+                                                    <td id='52' style='background-color: #ffff00'></td>
+                                                    <td id="53" style='background-color: #e60000'></td>
+                                                    <td id='54' style='background-color: #e60000'></td>
+                                                    <td id='55' style='background-color: #e60000'></td>
+                                                </tr>
+                                                <tr>
+                                                    <td style='text-align: right; border: none; width: 25px;'>4 &nbsp;</td>
+                                                    <td id='41' style='background-color: #66ff33'></td>
+                                                    <td id='42' style='background-color: #ffff00'></td>
+                                                    <td id='43' style='background-color: #ffff00'></td>
+                                                    <td id='44' style='background-color: #e60000'></td>
+                                                    <td id='45' style='background-color: #e60000'></td>
+                                                </tr>
+                                                <tr>
+                                                    <td style='text-align: right; border: none; width: 25px;'>3 &nbsp;</td>
+                                                    <td id='31' style='background-color: #66ff33'></td>
+                                                    <td id='32' style='background-color: #66ff33'></td>
+                                                    <td id="33" style='background-color: #ffff00'></td>
+                                                    <td id="34" style='background-color: #ffff00'></td>
+                                                    <td id="35" style='background-color: #e60000'></td>
+                                                </tr>
+                                                <tr>
+                                                    <td style='text-align: right; border: none; width: 25px;'>2 &nbsp;</td>
+                                                    <td id='21' style='background-color: #66ff33'></td>
+                                                    <td id='22' style='background-color: #66ff33'></td>
+                                                    <td id='23' style='background-color: #66ff33'></td>
+                                                    <td id="24" style='background-color: #ffff00'></td>
+                                                    <td id="25" style='background-color: #ffff00'></td>
+                                                </tr>
+                                                <tr>
+                                                    <td style='text-align: right; border: none; width: 25px;'>1 &nbsp;</td>
+                                                    <td id='11' style='background-color: #66ff33'></td>
+                                                    <td id='12' style='background-color: #66ff33'></td>
+                                                    <td id='13' style='background-color: #66ff33'></td>
+                                                    <td id='14' style='background-color: #66ff33'></td>
+                                                    <td id="15" style='background-color: #ffff00'></td>
+                                                </tr>
+                                                <tr>
+                                                    <td style='border: none; height: 25px;'>&nbsp;</td>
+                                                    <td style='border: none; height: 25px;'>&nbsp;</td>
+                                                    <td style='vertical-align: top; border: none; height: 25px;'>1</td>
+                                                    <td style='vertical-align: top; border: none; height: 25px'>2</td>
+                                                    <td style='vertical-align: top; border: none; height: 25px'>3</td>
+                                                    <td style='vertical-align: top; border: none; height: 25px'>4</td>
+                                                    <td style='vertical-align: top; border: none; height: 25px'>5</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style='border: none; height: 25px;'>&nbsp;</td>
+                                                    <td colspan=6 style='border: none; text-align: center; vertical-align: top'>
+                                                        <br />&nbsp; Consequence
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span>
+                                            <!-- Text tbLikelihood-->
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label" for="tbIssueLikelihood" id="lbLikelihood">Likelihood:</label>
+                                                <div class="col-md-4">
+                                                    <select name="tbLikelihood" class="form-control input-md" id="tbIssueLikelihood" required="">
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                        <option>4</option>
+                                                        <option>5</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span>
+                                            <!-- Text tbConsequence-->
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label" for="tbIssueConsequence" id="lbConsequence">Consequence:</label>
+                                                <div class="col-md-4">
+                                                    <select name="tbConsequence" class="form-control input-md" id="tbIssueConsequence" required="">
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                        <option>4</option>
+                                                        <option>5</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+                    </div> <!--end div class="row" -->
+                    <!--<div class="modal-footer">
+                             <a href="#" onclick="window.frameElement.cancelPopUp(); return false;">Close</a>
+                             <a href="#" onclick="window.frameElement.commitPopUp(); return false;">Save</a>
+                    </div>-->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Add New Trigger Diaglog-->
+    <div class="modal" id="AddTriggerDialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+
+                    </button>
+                    <h4 class="modal-title">Add Trigger</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="detailquadrant1" style="float: left;">
+                        <div class="form-horizontal">
+                            <!-- Trigger Details -->
+                            <h2>Trigger Details</h2>
+                            <!-- Text tbType-->
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="tbTitle">Title:</label>
+                                <div class="col-lg-8">
+                                    <input name="Title" required class="form-control input-md" id="tbTitle" type="text" placeholder="">
+                                </div>
+                            </div>
+                            <!-- Text tbPhase-->
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="tbDescription">Description:</label>
+                                <div class="col-md-8">
+                                    <input name="Description" required class="form-control input-md" id="tbDescription" type="text" placeholder="">
+                                </div>
+                            </div>
+                            <!-- Textarea tbDescription -->
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="tbDescription">Type:</label>
+                                <div class="col-lg-8">
+                                    <select name="Type" class="form-control" id="tbType">
+
+                                        <option value="selectvalue" selected="selected">Select Value</option>
+                                        <option value="Cost">Cost</option>
+                                    </select>
+
+                                </div>
+                            </div>
+                            <!-- Textarea tbMitigation-->
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="tbPhase">Phase:</label>
+                                <div class="col-lg-8">
+                                    <select name="Phase" class="form-control" id="tbPhase">
+                                        <option value="selectvalue" selected="selected">Select Value</option>
+                                        <option value="Sustainment">Sustainment</option>
+                                        <option value="Development">Development</option>
+                                        <option value="Test">Test</option>
+                                        <option value="Production">Production</option>
+                                        <option value="FleetIntroduction">Fleet Introduction</option>
+                                    </select>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="btn-group">
+                                <a href="#" class="btn btn-success" onclick="AddTrigger()">Add</a>
+                                <a href="#" class="btn btn-default" onclick="CancelTrigger()">Cancel</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--HTML user profile data-->
+    <div class="profilebox">
+        <div>
+            <input type="text" id="userID" title="user ID goes here" readonly="readonly">
+        </div>
+        <div>
+            <input type="text" id="userName" title="user name goes here" readonly="readonly">
+        </div>
+        <div>
+            <input type="text" id="userProgram" title="user program goes here" readonly="readonly">
+        </div>
+        <div>
+            <input type="text" id="digestmsg" title="list digest goes here" readonly="readonly">
+        </div>
+        <div>
+            <input type="text" id="error" title="error message goes here" readonly="readonly">
+        </div>
+    </div>
+    <div id="overlay"></div>
+
+    <!--Dialog Data-->
+    <div class="DialogData">
+        <div>
+            <input type="text" id="dialogTriggerTitle" title="dialog trigger title goes here" readonly="readonly">
+        </div>
+        <div>
+            <input type="text" id="dialogTriggerDescription" title="dialog trigger description goes here" readonly="readonly">
+        </div>
+        <div>
+            <input type="text" id="dialogTriggerPhase" title="dialog trigger phase goes here" readonly="readonly">
+        </div>
+        <div>
+            <input type="text" id="dialogIssueType" title="dialog trigger phase goes here" readonly="readonly">
+        </div>
+        <div>
+            <input type="text" id="dialogIssueDescription" title="dialog trigger phase goes here" readonly="readonly">
+        </div>
+        <div>
+            <input type="text" id="dialogIssueMitigation" title="dialog trigger phase goes here" readonly="readonly">
+        </div>
+        <div>
+            <input type="text" id="dialogIssueLikelihood" title="dialog trigger phase goes here" readonly="readonly">
+        </div>
+        <div>
+            <input type="text" id="dialogIssueConsequence" title="dialog trigger phase goes here" readonly="readonly">
+        </div>
+
+    </div>
+
+  

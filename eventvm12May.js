@@ -1,6 +1,5 @@
 //global variables
 var dataTableEvents = 'undefined';
-var dtMyEvents = 'undefined';
 var appWebUrl = window.location.protocol + "//" + window.location.host + _spPageContextInfo.webServerRelativeUrl;
 var targetSiteUrl = _spPageContextInfo.siteAbsoluteUrl;
 var digest = "";
@@ -45,7 +44,13 @@ function onRequestSucceeded() {
         thisUser = "kris.white";
         console.log("user is system, but changing to Kris.white for testing");
     }
-    
+
+
+    $("#ddlfilter").append($("<option></option>").attr("value", "selectall").text("Select All"));
+    $("#ddlfilter").append($("<option></option>").attr("value", "test").text("TMRR"));
+    $("#ddlfilter").append($("<option></option>").attr("value", "development").text("E&MD"));
+    $("#ddlfilter").append($("<option></option>").attr("value", "production").text("P&D"));
+    $("#ddlfilter").append($("<option></option>").attr("value", "sustainment").text("O&S"));
 
     getProfile(thisUser);
     currentUser = thisUser;
@@ -109,13 +114,6 @@ function errorGetProfilerHandler(data) {
 
 
 function myCustomPage() {
-    $("#ddlfilter").append($("<option></option>").attr("value", "all").text("Select All"));
-    $("#ddlfilter").append($("<option></option>").attr("value", "test").text("TMRR"));
-    $("#ddlfilter").append($("<option></option>").attr("value", "development").text("E&MD"));
-    $("#ddlfilter").append($("<option></option>").attr("value", "production").text("Production P&D"));
-    $("#ddlfilter").append($("<option></option>").attr("value", "postproduction").text("Post Production P&D"));
-    $("#ddlfilter").append($("<option></option>").attr("value", "fleetintroduction").text("Fleet Introduction P&D"));
-    $("#ddlfilter").append($("<option></option>").attr("value", "sustainment").text("Sustainment O&S"));
 
     $('#ddlfilter')
          .on('change',
@@ -133,7 +131,7 @@ function myCustomPage() {
 
 
 
-    $("#btEditEvent").on(
+    $("#btnEditEvent").on(
        'click', function () {
            showEditDialog();
 
@@ -141,18 +139,9 @@ function myCustomPage() {
 
     $("#btnAddProgram").on(
      'click', function () {
-         showAddProgramDialog();
-         $("#tbAddDialogStatus").val("Program Saved");
+         showEditDialog();
 
      });
-
-    $("#btnSaveEvent").on(
-   'click', function () {
-       alert("Event saved to My Program Events on Dashboard");
-       $("#tbEventStatus").val("Event Saved");
-
-   });
-
 
     $("#events").on(
     		'draw.dt', function () {
@@ -166,12 +155,43 @@ function myCustomPage() {
     		    });
     		});
 
+    //   LoadEventsDataTable(filter);
+
+
+    // alert("select a phase from the filter in the upper left");
+
+
+    //var clientContext;
+    //var web;
+    //var currentUser;
+
+    //clientContext = SP.ClientContext.get_current();
+    //web = clientContext.get_web();
+    //clientContext.load(web);
+    //currentUser = web.get_currentUser();
+    //clientContext.load(currentUser);
+
+
+    //clientContext.executeQueryAsync(
+    //    function () {
+    //        currentUser = web.get_currentUser();
+    //        var longUserName = currentUser.get_loginName();
+    //        var startIndex = longUserName.lastIndexOf('\\');
+    //        var thisUser = longUserName.substr(startIndex + 1);
+    //        var $element = $("#login");
+    //        if ($element) {
+    //            $element.attr("href", "../SitePages/Profile.aspx?Name=" + thisUser);
+    //        }
+    //    },
+    //    function () { alert("Request failed") }
+    //);
+
+    //GetUserInfo(currentUser);
+    // var filter = $("#userPhase").val();
+    //  $('#ddlfilter').val(filter);
 
     LoadEventsDataTable();
     LoadMyProgramEventsDataTable();
-
-    $("#tbEventDueDate").datepicker();
-    $("#tbProgramDueDate").datepicker();
 
 
     $('#events tbody')
@@ -188,22 +208,6 @@ function myCustomPage() {
             $('#selectedRow').val(eventID);
 
         });
-
-    $('#myProgramEvents tbody')
-    .on('click', 'tr', function () {
-        if ($(this).hasClass('selected')) {
-            $(this).removeClass('selected');
-        }
-        else {
-            dtMyEvents.$('tr selected').removeClass('selected');
-            $(this).addClass('selected');
-        }
-
-        var programTitle = dtMyEvents.row(this).data().Title;
-        $('#tbProgramTitle').val(programTitle);
-        $("#tbEventTitle").val(programTitle);
-    });
-
 }
 
 function LoadEventsDataTable(selectedfilter) {
@@ -257,16 +261,14 @@ function EventsSuccHandler(data) {
             buttons: true,
             "aaData": data.d.results,
             "aoColumns": [
-              { "mData": "Title" },
+              { "mData": "MajorProgramKeyEventsProducts" },
               { "mData": "Development" },
               { "mData": "Test" },
               { "mData": "Production" },
               { "mData": "FleetIntroduction" },
               { "mData": "PostProduction" },
               { "mData": "Sustainment" },
-              { "mData": "ID" },
-              { "mData": "Status" },
-
+              { "mData": "ID" }
             ],
 
             fixedHeader: true,
@@ -316,14 +318,7 @@ function EventsSuccHandler(data) {
                         "targets": [7],
                         "visible": false,
                         "searchable": false
-                    },
-                    {
-                        //Status
-                        "targets": [8],
-                        "visible": false,
-                        "searchable": false
                     }
-
             ],
             columns: [
                 { name: "MajorProgramKeyEventsProducts" }
@@ -456,10 +451,10 @@ function succRetrieveLastModifiedDate(data) {
 
 function GetEvent(eventID) {
     var listname = "ProgramEvents";
-    var executor8 = new SP.RequestExecutor(appWebUrl);
-    var baseUrl = appWebUrl + "/_api/web/lists/getbytitle('" + listname + "')/items(" + eventID + ")";
-
-    var fullUrl = baseUrl;
+    var executor8 = new SP.RequestExecutor(appweburl);
+    var baseUrl = appweburl + "/_api/web/lists/getbytitle('" + listname + "')/items?";
+    var filterUrl = "&$filter = ID eq '" + eventID + "'";
+    var fullUrl = baseUrl + filterUrl;
     var requestHeaders = { "accept": "application/json;odata=verbose" };
 
     executor8.executeAsync({
@@ -472,171 +467,47 @@ function GetEvent(eventID) {
 }
 function successGetEventHandler(data) {
     var jsonObject = JSON.parse(data.body);
-    var results = jsonObject.d;
+    var results = jsonObject.d.results;
 
-    eventTitle = results.Title;
-    $("#tbEventTitle").val(eventTitle);
-    eventPMO = results.PMO;
-    eventPMA = results.PMA;
-    eventProgram = results.Program;
-    eventILA = results.ILA;
-    eventReqDocs = results.RequiredDocuments;
-    eventDev = results.Development;
-    eventTest = results.Test;
-    eventProduction = results.Production;
-    eventPostProduction = results.PostProduction;
-    eventFleetIntroduction = results.FleetIntroduction;
-    eventSustainment = results.Sustainment;
-    console.log(eventID, eventTitle, eventPMO, eventProgram);
+    $.each(jsonObject.d.results, function (index, results) {
+        eventID = results.ID;
+        eventTitle = results.Title;
+        eventPMO = results.PMO;
+        eventPMA = results.PMA;
+        eventProgram = results.Program;
+        eventILA = results.ILA;
+        eventReqDocs = results.RequiredDocuments;
+        eventDev = results.Development;
+        eventTest = results.Development;
+        eventProduction = results.Development;
+        eventPostProduction = results.Development;
+        eventFleetIntroduction = results.Development;
+        eventSustainment = results.Development;
 
+    });
 
 }
 function errorGetEventHandler(data, errorCode, errorMessage) {
     console.log("Event not loaded");
 }
 
-
-function LoadMyProgramEventsDataTable() {
-    if (dtMyEvents != 'undefined') {
-        dtMyEvents.destroy();
-    }
-    // var selectedfilter = $('#ddlfilter option:selected').val();
-    var listname = "MyProgramEvents";
-    var baseUrl = _spPageContextInfo.webAbsoluteUrl;
-    var selectUrl = "/_api/web/Lists/getbyTitle('" + listname + "')/items?";
-    /*
-  var filterUrl = "";
-     if (selectedfilter == "development") {
-         filterUrl = "$filter=Development eq 'Y'";
-     }
-     else if (selectedfilter == "sustainment") {
-         filterUrl = "$filter=Sustainment eq 'Y'";
-     }
-     else if (selectedfilter == "test") {
-         filterUrl = "$filter=Test eq 'Y'";
-     }
-     else if (selectedfilter == "production") {
-         filterUrl = "$filter=Production eq 'Y'";
-     }
-     else if (selectedfilter == "productionfleetpost") {
-         filterUrl = "$filter=(FleetIntroduction eq 'Y') and (Production eq 'Y') and (PostProduction eq 'Y')";
-     }
- */
-    // var listname = "MyProgramEvents";
-    var executor11 = new SP.RequestExecutor(appWebUrl);
-    var fullUrl = appWebUrl + "/_api/web/lists/getbytitle('" + listname + "')/items?";
-    var requestHeaders = { "accept": "application/json;odata=verbose" };
-
-    executor11.executeAsync({
-        url: fullUrl,
-        method: "GET",
-        headers: requestHeaders,
-        success: successGetMyEventHandler,
-        error: errorGetMyEventHandlercol 
-    });
-}
-
-function successGetMyEventHandler(data) {
-    if (dtMyEvents != 'undefined') {
-        dtMyEvents.destroy();
-    }
-
-    dtMyEvents = $("#myProgramEvents")
-
-        .DataTable({
-            "bDestroy": true,
-            select: { style: "single" },
-            dom: 'Bfrtip',
-            buttons: true,
-            // "aaData": data.d,
-            // "aoColumns": [
-            //   { "mData": "Title" },
-            //    { "mData": "Development" },
-            //   { "mData": "Test" },
-            //    { "mData": "Production" },
-            //    { "mData": "FleetIntroduction" },
-            //   { "mData": "PostProduction" },
-            //    { "mData": "Sustainment" },
-            //    { "mData": "ID" }
-            //   ],
-
-            fixedHeader: true,
-            scrollY: 400,
-            scrollX: true
-            /*
-               columnDefs: [
-                     {
-                         //MajorProgramKeyEventsProducts
-                         "targets": [0],
-                         "visible": true,
-                         "searchable": true
-                     },
-                     {
-                         //Due Date
-                         "targets": [1],
-                         "visible": true,
-                         "searchable": true
-                     },
-                      {   //status
-                          "targets": [2],
-                          "visible": true,
-                          "searchable": true
-                      },
-                      {   //date completed
-                          "targets": [3],
-                          "visible": true,
-                          "searchable": true
-                      }
-                     
-                 ]
-              //   columns: [
-                //     { name: "Event" }
-                 //    { name: "Due Date" },
-                 //    { name: "Status" },
-                  //   { name: "Date Completed" }
-                    // { name: "FleetIntroduction" },
-                   //  { name: "PostProduction" },
-                    // { name: "Sustainment" }  
-              //   ],
-                 
-                // "searching": true,
-                // "paging": false,
-                // "info": false
-               */
-        });
-
-
-}
-
-function errorGetMyEventHandler(data, errCode, errMessage) {
-    console.log("Error: " + errMessage);
-}
-
-function showEditDialog() {
-    $('#EditEventDialog').modal();
-}
-
-function showAddProgramDialog() {
-    $('#AddProgramDialog').modal();
-}
-
 function CopyEvent() {
-    var selectedeventID = $("#selectedRow").val();
+    var selectedeventID = $("#selectedrow");
 
     GetEvent(selectedeventID);
     AddEventToMyProgramEvents();
 }
 
 function AddEventToMyProgramEvents() {
-    dtMyEvents.row.add([eventTitle]).draw();
+
 }
 
-function LoadEventsDataTable(selectedfilter) {
-    if (dataTableEvents !== 'undefined') {
-        dataTableEvents.destroy();
+function LoadMyProramEventsDataTable() {
+    if (myProgramEventsDataTable !== 'undefined') {
+        myProgramEventsDataTable.destroy();
     }
     // var selectedfilter = $('#ddlfilter option:selected').val();
-    var listname = "ProgramEvents";
+    var listname = "MyProgramEvents";
     var baseUrl = _spPageContextInfo.webAbsoluteUrl;
     var selectUrl = "/_api/web/Lists/getbyTitle('" + listname + "')/items?";
     var filterUrl = "";
@@ -656,16 +527,17 @@ function LoadEventsDataTable(selectedfilter) {
         filterUrl = "$filter=(FleetIntroduction eq 'Y') and (Production eq 'Y') and (PostProduction eq 'Y')";
     }
 
-    var fullUrl = baseUrl + selectUrl + filterUrl;
+    var listname = "MyProgramEvents";
+    var executor9 = new SP.RequestExecutor(appweburl);
+    var fullUrl = appweburl + "/_api/web/lists/getbytitle('" + listname + "')/items?";
+    var requestHeaders = { "accept": "application/json;odata=verbose" };
 
-    var fullUrl = baseUrl + selectUrl;
-    $.ajax({
+    executor9.executeAsync({
         url: fullUrl,
-        type: "GET",
-        dataType: "json",
-        headers: { "ACCEPT": "application/json;odata=verbose" },
-        success: EventsSuccHandler,
-        error: EventsErrHandler
+        method: "GET",
+        headers: requestHeaders,
+        success: successGetEventHandler,
+        error: errorGetEventHandler
     });
 }
 
@@ -674,7 +546,7 @@ function EventsSuccHandler(data) {
         dataTableEvents.destroy();
     }
 
-    dataTableEvents = $("#events")
+    dataTableEvents = $("#myProgramEvents")
         .DataTable({
             "bDestroy": true,
             select: { style: "single" },
@@ -682,16 +554,14 @@ function EventsSuccHandler(data) {
             buttons: true,
             "aaData": data.d.results,
             "aoColumns": [
-              { "mData": "Title" },
+              { "mData": "MajorProgramKeyEventsProducts" },
               { "mData": "Development" },
               { "mData": "Test" },
               { "mData": "Production" },
               { "mData": "FleetIntroduction" },
               { "mData": "PostProduction" },
               { "mData": "Sustainment" },
-              { "mData": "ID" },
-              { "mData": "Status" },
-
+              { "mData": "ID" }
             ],
 
             fixedHeader: true,
@@ -741,14 +611,7 @@ function EventsSuccHandler(data) {
                         "targets": [7],
                         "visible": false,
                         "searchable": false
-                    },
-                    {
-                        //Status
-                        "targets": [8],
-                        "visible": false,
-                        "searchable": false
                     }
-
             ],
             columns: [
                 { name: "MajorProgramKeyEventsProducts" }
@@ -769,4 +632,10 @@ function EventsErrHandler(data, errCode, errMessage) {
     console.log("Error: " + errMessage);
 }
 
+function showEditDialog() {
+    $('#EditEventDialog').modal();
+}
 
+function showProgramDialog() {
+    $('#AddProgramDialog').modal();
+}

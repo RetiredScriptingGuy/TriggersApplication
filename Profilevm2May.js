@@ -12,7 +12,6 @@ var itemType = "";
 var phaseitem = "";
 var TDitem = "";
 var Tier3item = "";
-
 var currentUser = "";
 var eTag;
 var digest = "";
@@ -21,7 +20,7 @@ var lastModifiedDate = "";
 _spBodyOnLoadFunctionNames.push("myCustomPage");
 
 function myCustomPage() {
-    $('#statuspanel').hide();
+    $("#statuspanel").hide();
 
     GetDigest();
 
@@ -84,10 +83,10 @@ function getQueryStringParameter(paramToRetrieve) {
 function GetUserInfo(username) {
     var executor2 = new SP.RequestExecutor(appWebUrl);
     var listname = "Profiles";
-    var basellUrl = appWebUrl;
-    var selectUrl = "/_api/web/lists/getbytitle('" + listname + "')/items";
-    var filterUrl = "?&" + "$filter=Title eq '" + username + "'";
-    var fullUrl = basellUrl + selectUrl + filterUrl;
+    var baseUrl = appWebUrl;
+    var selectUrl = "/_api/web/lists/getbytitle('" + listname + "')/items?";
+    var filterUrl = "&" + "$filter=Title eq '" + username + "'";
+    var fullUrl = baseUrl + selectUrl + filterUrl;
     var requestHeaders = { "accept": "application/json;odata=verbose" };
 
     executor2.executeAsync({
@@ -102,20 +101,20 @@ function successGetUserInfoHandler(data) {
     //load the select option for ddlProgram 
     var jsonObject = JSON.parse(data.body);
     var results = jsonObject.d.results;
-    var userID,
-        userDisplayName,
-        userAdmin,
-        userPEO,
-        userCompetency,
-        userPMA,
-        userACAT,
-        userProgram,
-        userPhase,
-        userProfileType,
-        userTD,
-        userTier3,
-        userPEOL,
-        userPSM;
+    var userID;
+    var userDisplayName;
+    var userAdmin;
+    var userPEO;
+    var userCompetency;
+    var userPMA;
+    var userACAT;
+    var userProgram;
+    var userPhase;
+    var userProfileType;
+    var userTD;
+    var userTier3;
+    var userPEOL;
+    var userPSM;
 
 
     userID = results[0].ID;
@@ -150,34 +149,24 @@ function successGetUserInfoHandler(data) {
     console.log("userPhase  = " + userPhase);
     userPSM = results[0].PSM;
     console.log("userPSM = " + userPSM);
-    if (userProgram == "NA" || userProgram == "null") {
-        $("#userProgram").val(userProgram);
-    } else {
-        $("#userProgram").val(userCompetency);
-    }
-
     $("#usrProgram").text(userProgram);
-    if (userPSM == "Yes" || userTD == "Yes") {
+    if (userPSM === "Yes" || userTD === "Yes") {
         userAdmin = "Yes";
     }
-    if (userPSM == "Yes" || userTD == "Yes") {
-        userAdmin == "Yes";
-    }
-
-    if (userAdmin == "Yes") {
+    if (userAdmin === "Yes") {
         userProgram = "ALL";
         userPhase = "NA";
         userACAT = "NA";
         userTier3 = "NA";
     }
-    if (userTD == "Yes") {
+    if (userTD === "Yes") {
         userTier3 = "NA";
         userAdmin = "Yes";
         userProgram = "ALL";
         userPhase = "NA";
         userACAT = "NA";
     }
-    if (userPEOL == "Yes") {
+    if (userPEOL === "Yes") {
         userPMA = "NA";
         userPSM = "NA";
         userCompetency = "NA";
@@ -189,13 +178,13 @@ function successGetUserInfoHandler(data) {
         userACAT = "NA";
     }
 
-    if (userProfileType == "PEO") {
+    if (userProfileType === "PEO") {
         userTD = "NA";
         userTier3 = "NA";
         userCompetency = "NA";
     }
 
-    if (userProfileType == "Competency") {
+    if (userProfileType === "Competency") {
         userPMA = "NA";
         userPSM = "NA";
         userProgram = "NA";
@@ -209,37 +198,37 @@ function successGetUserInfoHandler(data) {
     if (userProfileType == null) {
         userProfileType = "Your profile was missing info. Select a Type";
     }
-    var UserProfileTypeelement = $('#ddlType');
+    var UserProfileTypeelement = $("#ddlType");
     $('#ddlType').val(userProfileType);
 
-    if (userCompetency == null && userProfileType == "Competency") {
+    if (userCompetency == null && userProfileType === "Competency") {
         userCompetency = "Your profile was missing info. Select a Competency";
     }
-    //var peoCompetencyelement = $('#ddlCompetency');
-    $('#ddlCompetency').val(userCompetency);
+    var peoCompetencyelement = $('#ddlCompetency');
+    $("#ddlCompetency").val(userCompetency);
 
-    $('#ddlTD').val(userTD);
+    $("#ddlTD").val(userTD);
 
-    $('ddlTier3').val(userTier3);
+    $("ddlTier3").val(userTier3);
 
 
-    //var peoelement = $('#ddlPEO');
-    $('#ddlPEO').val(userPEO);
+    var peoelement = $('#ddlPEO');
+    $("#ddlPEO").val(userPEO);
 
-    // var pmaelement = $('#ddlPMA');
-    $('#ddlPMA').val(userPMA);
+    var pmaelement = $('#ddlPMA');
+    $("#ddlPMA").val(userPMA);
 
-    // var programelement = $('#ddlProgram');
-    $('#ddlProgram').val(userProgram);
+    var programelement = $('#ddlProgram');
+    $("#ddlProgram").val(userProgram);
 
-    //var acatelement = $('#ddlACAT');
-    $('#ddlACAT').val(userACAT);
+    var acatelement = $('#ddlACAT');
+    $("#ddlACAT").val(userACAT);
 
-    //var phaseelement = $('#ddlPhase');
-    $('#ddlPhase').val(userPhase);
+    var phaseelement = $('#ddlPhase');
+    $("#ddlPhase").val(userPhase);
 
-    if (userProfileType == "PEO") {
-        $("#peocontrols").show()
+    if (userProfileType === "PEO") {
+        $("#peocontrols").show();
         $("#leadershipcontrols").hide();
     } else {
         $("#peocontrols").hide();
@@ -249,7 +238,7 @@ function successGetUserInfoHandler(data) {
 
 }
 function errorGetUserInfoHandler(data, errCode, errMessage) {
-    $('#tbStatus').text("login failed: " + data.errorCode + data.errorMessage);
+    $("#tbStatus").text("login failed: " + data.errorCode + data.errorMessage);
 
 }
 
@@ -403,11 +392,7 @@ function acatSuccHandler(data) {
     var results = jsonObject.d.results;
     $.each(results,
         function (index, results) {
-            var optionhtml = '<option value="' +
-                results.ACAT +
-                '">' +
-                results.ACAT +
-                "</option>";
+            var optionhtml = '<option value="' + results.ACAT + '">' + results.ACAT + "</option>";
             $("#ddlACAT").append(optionhtml);
         });
     //eliminate duplicate PEOs in listing
@@ -524,7 +509,6 @@ function AddChangeEvents() {
        .on("change",
            function () {
                peol = (this.value);
-
                if (this.value == "Yes") {
                    $("#peosubgroup1").hide();
                    peoitem = "NA";
@@ -669,7 +653,7 @@ function retrieveFormDigest() {
 }
 function UpdateLastModified(data) {
     console.log("digest is " + digest);
-    $('#digestmsg').val(digest);
+    $("#digestmsg").val(digest);
     retrieveLastModifiedDate();
 
 }
@@ -717,7 +701,9 @@ function UpdateUser() {
         updateTD = $('#ddlTD option:selected').text();
         if (updateTD == "Yes") {
             $("#userAdmin").val("Yes");
+            updateLeadership = "Yes";
             $("#userProgram").val("ALL COMPETENCY");
+            updateProgram = "ALL";
             updateTier3 = "NA";
             updateCompetency = "NA";
 
@@ -738,9 +724,9 @@ function UpdateUser() {
     }
 
     if (updateUserProfileType == "PEO") {
-        updatePEOL = $('#ddlPEOL option:selected').text();
+        updatePEOL = $("#ddlPEOL option:selected").text();
         if (updatePEOL == "Yes") {
-            $("userAdmin").val("Yes");
+            $("#userAdmin").val("Yes");
             $("#userProgram").val("ALL");
             updatePEO = "NA";
             updatePSM = "NA";
@@ -759,7 +745,7 @@ function UpdateUser() {
                 updatePhase = "NA";
             }
             if (updatePSM == "No") {
-                $("userAdmin").val("No");
+                $("#userAdmin").val("No");
                 updatePEO = $('#ddlPEO option:selected').text();
                 updateProgram = $('#ddlProgram option:selected').text();
                 $("#userProgram").val(updateProgram);
@@ -772,10 +758,10 @@ function UpdateUser() {
         updateTier3 = "NA";
     }
 
-    updateLeadership = $("userAdmin").val();
+    updateLeadership = $("#userAdmin").val();
 
     var listname = "Profiles";
-    var executor = new SP.RequestExecutor(appWebUrl);
+    var executor8 = new SP.RequestExecutor(appWebUrl);
     var baseUrl = appWebUrl;
     var selectUrl = "/_api/web/lists/getbytitle('" + listname + "')/items('" + updateuserID + "')";
     var fullUrl = baseUrl + selectUrl;
@@ -807,7 +793,7 @@ function UpdateUser() {
     };
 
 
-    executor.executeAsync({
+    executor8.executeAsync({
         url: fullUrl,
         method: "POST",
         body: requestBody,
@@ -818,14 +804,14 @@ function UpdateUser() {
 }
 function successItemAddedHandler(data) {
 
-    console.log("Updated completed successfully!");
+    alert.log("Updated completed successfully!");
     $("#tbStatus").text("Profile Updated");
 }
 
 function errorItemAddedHandler(data, errorCode, errorMessage) {
     var jsonObject = JSON.parse(data.body);
     var errMsg = "Error: " + jsonObject.error.message.value;
-    console.log(errMsg);
+    alert.log(errMsg);
     $("#tbStatus").text("failed : " + errorCode + errorMessage);
 }
 

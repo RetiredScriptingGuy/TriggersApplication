@@ -1,0 +1,344 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+
+
+    <script src="../_layouts/15/MicrosoftAjax.js"></script>
+    <script src="../_layouts/15/sp.runtime.js"></script>
+    <script src="../_layouts/15/sp.js"></script>
+    <script src="../_layouts/15/sp.requestexecutor.js"></script>
+
+
+    <script src="../SiteAssets/TriggersApp/js/vendor/jquery.min.js"></script>
+    <script src="../SiteAssets/TriggersApp/js/vendor/bootstrap.min.js"></script>
+    <script src="../SiteAssets/TriggersApp/js/vendor/jquery.min.js"></script>
+    <script src="../SiteAssets/TriggersApp/js/vendor/jquery.dataTables.min.js"></script>
+    <script src="../SiteAssets/TriggersApp/js/vendor/dataTables.buttons.min.js"></script>
+    <script src="../SiteAssets/TriggersApp/js/vendor/dataTables.select.min.js"></script>
+    <script src="../SiteAssets/TriggersApp/js/vendor/buttons.print.min.js"></script>
+    <script src="../SiteAssets/TriggersApp/js/vendor/buttons.bootstrap.min.js"></script>
+    <script src="../SiteAssets/TriggersApp/js/vendor/buttons.html5.min.js"></script>
+    <script src="../SiteAssets/TriggersApp/js/custom/events.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="../SiteAssets/TriggersApp/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="../SiteAssets/TriggersApp/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="../SiteAssets/TriggersApp/css/select.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="../SiteAssets/TriggersApp/css/buttons.bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="../SiteAssets/TriggersApp/css/buttons.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="../SiteAssets/TriggersApp/css/triggers.css" />
+</head>
+<body>
+    <div id="triggerbanner" class="container-fluid">
+        <img src="../SiteAssets/TriggersApp/images/triggers_new logo.png" width="100%" />
+    </div>
+    <div class="section">
+        <div id="navpills" class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="nav nav-pills">
+                        <li><a href="MyDashboard.aspx">My Dashboard</a></li>
+                        <li><a href="Triggers.aspx">Triggers</a></li>
+                        <li class="active"><a href="Events.aspx">Events /Reviews</a></li>
+                        <li><a href="Reports.aspx">Reports</a></li>
+                        <li><a href="Drafts.aspx">Drafts</a></li>
+                        <li><a href="Mitigation.aspx">Mitigation</a></li>
+                        <li><a href="Feedback.aspx">Feedback</a></li>
+                        <li><a href="Acronyms.aspx">Acronyms</a></li>
+                        <li><a href="Resources.aspx">References </a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <span id="profileButtons">
+            <a id="login" href="Profile.aspx">My Profile</a>
+            <label id="usrProgram">User Program | </label>
+            <label id="lastUpdated">Last Modified </label>
+        </span>
+    </div>
+    <br>
+    <br>
+    <div>
+        <label id="filter" for="ddlfilter">Phase:</label>
+        <select id="ddlfilter">
+            <option value="selectvalue" selected="selected">Select Value</option>
+        </select>
+    </div>
+
+    <div class='outer'>
+
+
+        <div class="fullTopHalf">
+            <div id="eventquadrant1">
+                <h2>All Events/Reviews</h2>
+                <div class="eventgridView">
+                    <table class="display" id="events">
+                        <thead>
+                            <tr>
+                                <th>
+                                    MajorProgramKeyEventProducts
+                                </th>
+                                <th>
+                                    Development
+                                </th>
+                                <th>
+                                    Test
+                                </th>
+                                <th>
+                                    Production
+                                </th>
+                                <th>
+                                    FleetIntroduction
+                                </th>
+                                <th>
+                                    PostProduction
+                                </th>
+                                <th>
+                                    Sustainment
+                                </th>
+                                <th>
+                                    ID
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+
+            </div>
+            <div id="eventdashboardbuttons">
+                <button type="button" class="btn btn-success" id="btnAdd" onclick="AddEvent()">Add Event &gt;</button>
+                <br>
+                <br>
+                <button type="button" class="btn btn-warning" id="btnRemove" onclick="RemoveEvent()">&lt; Remove</button>
+
+            </div>
+            <div id="eventdescriptionquadrant2">
+                <h2>My Program Events</h2>
+                <div id="eventMyEventgridView">
+                    <table class="display" id="myProgramEvents">
+                        <thead>
+                            <tr>
+                                <th>
+                                    MajorProgramKeyEventProducts
+                                </th>
+                                <th>
+                                    Development
+                                </th>
+                                <th>
+                                    Test
+                                </th>
+                                <th>
+                                    Production
+                                </th>
+                                <th>
+                                    FleetIntroduction
+                                </th>
+                                <th>
+                                    PostProduction
+                                </th>
+                                <th>
+                                    Sustainment
+                                </th>
+                                <th>
+                                    ID
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="btn-group">
+                        <button id="btnAddProgram" type="button" class="btn btn-primary">Add Program Specific Event</button>
+                        <button id="btEditEvent" type="button" class="btn btn-primary">Edit Selected Event</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+
+
+        <div class="profilebox">
+            <div>
+                <input type="text" id="userID" title="user ID goes here" readonly="readonly">
+            </div>
+            <div>
+                <input type="text" id="userName" title="user name goes here" readonly="readonly">
+            </div>
+            <div>
+                <input type="text" id="userProgram" title="user program goes here" readonly="readonly">
+            </div>
+            <div>
+                <input type="text" id="userPhase" title="user phase goes here" readonly="readonly">
+            </div>
+
+            <div>
+                <input type="text" id="digestmsg" title="list digest goes here" readonly="readonly">
+            </div>
+            <div>
+                <input type="text" id="error" title="error message goes here" readonly="readonly">
+            </div>
+            <div>
+                <input type="text" id="userAdmin" title="is user admin" readonly="readonly">
+            </div>
+            <div>
+                <input type="text" id="selectedRow" title="is selectedRow" readonly="readonly">
+            </div>
+
+        </div>
+
+        <!--Add New Trigger Diaglog-->
+        <div class="modal" id="AddProgramDialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Add Program</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="detailquadrant1" style="float: left;">
+                            <div class="form-horizontal">
+
+                                <!-- tbProgramTitle-->
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="tbProgramTitle">Title:</label>
+                                    <div class="col-lg-8">
+                                        <input id="tbProgramTitle" name="Title" class="form-control col-md-4" type="text">
+                                    </div>
+                                </div>
+
+                                <!-- tbProgramPhase-->
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="tbProgramPhase">Phase:</label>
+                                    <div class="col-md-8">
+                                        <input id="tbProgramPhase" name="Phase" class="form-control col-md-4" id="tbProgramPhase" type="text">
+                                    </div>
+                                </div>
+
+                                <!-- tbProgramDueDate-->
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="tbProgramDueDate">Due Date:</label>
+                                    <div class="col-md-8">
+                                        <input id="tbProgramDueDate" name="DueDate" class="form-control col-md-4" id="tbProgramDueDate" type="text">
+                                    </div>
+                                </div>
+
+                                <!-- tbProgramStatus-->
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="tbProgramStatus">Status:</label>
+                                    <div class="col-md-8">
+                                        <select id="tbProgramStatus" name="Status" class="form-control col-md-4" id="tbProgramStatus" type="text">
+                                            <option>Select Value</option>
+                                            <option>Complete</option>
+                                            <option>Not Complete</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                           
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="btn-group">
+                                    <button id="btnAddTrigger" type="button" class="btn btn-primary">Add</button>
+                                    <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                            <!--Status -->
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="tbAddDialogStatus">Status:</label>
+                                <div class="col-lg-8">
+                                    <input id="tbAddDialogStatus" name="Title" required class="form-control col-md-4" type="text" placeholder="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Add New Trigger Diaglog-->
+        <div class="modal" id="EditEventDialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Edit Event</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="detailquadrant1" style="float: left;">
+                            <div class="form-horizontal">
+
+                                <!-- tbEventTitle-->
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="tbEventTitle">Title:</label>
+                                    <div class="col-lg-8">
+                                        <input id="tbEventTitle" name="Title" class="form-control col-md-4" type="text">
+                                    </div>
+                                </div>
+
+                                <!-- tbEventPhase-->
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="tbEventPhase">Phase:</label>
+                                    <div class="col-md-8">
+                                        <input id="tbEventPhase" name="Phase" class="form-control col-md-4" id="tbEventPhase" type="text">
+                                    </div>
+                                </div>
+
+                                <!-- tbEventDueDate-->
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="tbEventDueDate">Due Date:</label>
+                                    <div class="col-md-8">
+                                        <input id="tbEventDueDate" name="DueDate" class="form-control col-md-4" id="tbEventDueDate" type="text">
+                                    </div>
+                                </div>
+
+                                <!-- tbEventStatus-->
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="tbEventStatus">Status:</label>
+                                    <div class="col-md-8">
+                                        <select id="tbEventStatus" name="Status" class="form-control col-md-4" id="tbEventStatus" type="text">
+                                            <option>Select Value</option>
+                                            <option>Complete</option>
+                                            <option>Not Complete</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="btn-group">
+                                    <button id="btnSaveEvent" type="button" class="btn btn-primary">Save</button>
+                                    <button type="button" class="btn btn-success" data-dismiss="modal">Cancel</button>
+                                </div>
+                            </div>
+                            <!--Status -->
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="tbEventStatus">Status:</label>
+                                <div class="col-lg-8">
+                                    <input id="tbEventStatus" name="Status" required class="form-control col-md-4" type="text">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+</div>
+</body>
+</html>

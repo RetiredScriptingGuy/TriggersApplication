@@ -35,9 +35,9 @@
     function getProfile(user) {
         var executor2 = new SP.RequestExecutor(appWebUrl);
         var listname = "Profiles";
-        var basellUrl = appWebUrl + "/_api/web/lists/getbytitle('" + listname + "')/items";
+        var baseUrl = appWebUrl + "/_api/web/lists/getbytitle('" + listname + "')/items";
         var filterUrl = "?$select=Title,Program,ID&$filter=Title eq '" + user + "'";
-        var fullUrl = basellUrl + filterUrl;
+        var fullUrl = baseUrl + filterUrl;
         var requestHeaders = { "accept": "application/json;odata=verbose" };
         executor2.executeAsync({
             url: fullUrl,

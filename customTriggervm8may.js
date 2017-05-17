@@ -19,7 +19,6 @@ var uCompetency;
 var uAdmin;
 var uName;
 var uPhase;
-var uType;
 
 
 
@@ -71,59 +70,126 @@ function getProfile(user) {
 }
 function successGetProfileHandler(data) {
     var jsonObject = JSON.parse(data.body);
+    
+
     $.each(jsonObject.d, function (index, results) {
-        uType = results[0].UserProfileType;
-        if (uType === "PEO") {
-            uProgram = results[0].Program;
-            $("#userProgram").val(uProgram);
-        } else {
-            uCompetency = jsonObject.d.Competency;
-        }
-        uAdmin = results[0].IsLeadership;
-        if (uType === "Competency" && uAdmin === "Yes") {
-            $("#userProgram").val("ALL");
-        }
-        if (uType === "Competency" && uAdmin === "No") {
-            $("#userProgram").val(uCompetency);
-        }
+    //    uType = results[0].UserProfileType;
+    //    if (uType === "PEO") {
+    //        uProgram = results[0].Program;
+    //        $("#userProgram").val(uProgram);
+    //    } else {
+    //        uCompetency = results[0].Competency;
+    //    }
+    //    uAdmin = results[0].IsLeadership;
+    //    if (uType === "Competency" && uAdmin === "Yes") {
+    //        $("#userProgram").val("ALL");
+    //    }
+    //    if (uType === "Competency" && uAdmin === "No") {
+    //        $("#userProgram").val(uCompetency);
+    //    }
 
-        uID = results[0].ID;
-        uName = results[0].Title;
+    //    uID = results[0].ID;
+    //    $("#userID").val(uID);
 
-        $("#userAdmin").val(uAdmin);
-        console.log("processing login js GetProfile... for " + uName);
-        currentUser = uName;
-        uPhase = results[0].Phase;
-        $("#userPhase").val(uPhase);
-        $("#tbCopyIssuePhase").val(uPhase);
-        $("#tbAddIssuePhase").val(uPhase);
+    //    uName = results[0].Title;
+
+    //    $("#userAdmin").val(uAdmin);
+    //    console.log("processing login js GetProfile... for " + uName);
+    //    currentUser = uName;
+    //    uPhase = results[0].Phase;
+    //    $("#userPhase").val(uPhase);
+    //    //UPDATE UI
+        
+    //    $("#userName").val(currentUser);
+
+    //    if (uAdmin === "Yes") {
+    //        $("#userProgram").val("All");
+    //        $("#userPhase").val("ALL");
+    //        $("#userAdmin").val("Yes");
+    //    }
+    //    if (uAdmin === "No" && uType === "PEO") {
+    //        $("#userPhase").val(uPhase);
+    //        $("#userAdmin").val("No");
+    //    }
+    //    //We need to get the value again to determine if they have Competency
+    //    var programtext = $("#userProgram").val();
+    //    var $element = $("#login");
+    //    if ($element) {
+    //        $element.attr('href', "../SitePages/Profile.aspx?Name=" + uName +
+    //                                                  "&ProfileId=" + uID +
+    //                                                    "&program=" + programtext);
+    //    }
+
+    //    $("#userName").val(currentUser);
+       
+    //    $("#userProgram").val(uProgram);       
+    //    programtext = $("#userProgram").val();
+    //    $("#usrProgram").text(" |  " + programtext);
+
+
+    //});
+   
+ 
+    var uType = results[0].UserProfileType;
+    if (uType === "PEO") {
+        uProgram = results[0].Program;
+        $("#userProgram").val(uProgram);
+    } else {
+        uCompetency = jsonObject.d.Competency;
+    }
+    uAdmin = results[0].IsLeadership;
+    if (uType === "Competency" && uAdmin === "Yes") {
+        $("#userProgram").val("ALL");
+    }
+    if (uType === "Competency" && uAdmin === "No") {
+        $("#userProgram").val(uCompetency);
+    }
+
+    uID = results[0].ID;
+    uName = results[0].Title;
+
+    $("#userAdmin").val(uAdmin);
+    console.log("processing login js GetProfile... for " + uName);
+    currentUser = uName;
+    uPhase = results[0].Phase;
+    $("#userPhase").val(uPhase);
     });//end of data for each
+      
+
+//UPDATE UI
+      
+$("#userName").val(currentUser);
+
+if (uAdmin === "Yes") {
+    $("#userProgram").val("All");
+    $("#userPhase").val("ALL");
+    $("#userAdmin").val("Yes");
+}
+if (uAdmin === "No" && uType === "PEO") {
+    $("#userPhase").val(uPhase);
+    $("#userAdmin").val("No");
+}
+//We need to get the value again to determine if they have Competency
+var programtext = $("#userProgram").val();
+var $element = $("#login");
+if ($element) {
+    $element.attr('href', "../SitePages/Profile.aspx?Name=" + uName +
+                                              "&ProfileId=" + uID +
+                                                "&program=" + programtext);
+}
+
+$("#userName").val(currentUser);
+        
+$("#userProgram").val(uProgram);
+alert(uProgram);
+programtext = $("#userProgram").val();
+$("#usrProgram").text(" |  " + programtext);
 
 
-    //UPDATE UI      
-    $("#userID").val(uID);
-    $("#userName").val(currentUser);
-    if (uAdmin === "Yes") {
-        $("#userProgram").val("All");
-        $("#userPhase").val("ALL");
-        $("#userAdmin").val("Yes");
-    }
-    if (uAdmin === "No" && uType === "PEO") {
-        $("#userPhase").val(uPhase);
-        $("#userAdmin").val("No");
-    }
-    //We need to get the value again to determine if they have Competency
-    var programtext = $("#userProgram").val();
-    var $element = $("#login");
-    if ($element) {
-        $element.attr('href', "../SitePages/Profile.aspx?Name=" + uName +
-                                                  "&ProfileId=" + uID +
-                                                    "&program=" + programtext);
-    }
-    $("#userName").val(currentUser);
-    $("#userProgram").val(uProgram);
-    programtext = $("#userProgram").val();
-    $("#usrProgram").text(" |  " + programtext);
+  
+
+
+
 } //end of success
 function errorGetProfileHandler(data) {
     console.log("login failed: " + data.errorCode + data.errorMessage);
@@ -133,9 +199,6 @@ function errorGetProfileHandler(data) {
 
 
 function myCustomPage() {
-    if (uAdmin == "Yes") {
-        $("#ddlfilter").append($("<option></option>").attr("value", "selectall").text("Select All"));
-    }
     $("#ddlfilter").append($("<option></option>").attr("value", "test").text("TMRR"));
     $("#ddlfilter").append($("<option></option>").attr("value", "development").text("E&MD"));
     $("#ddlfilter").append($("<option></option>").attr("value", "production").text("Production P&D"));
@@ -148,38 +211,31 @@ function myCustomPage() {
           function () {
               var colnumber = 0;
               var filter = this.value;
+
+
               if (filter === "selectall") {
                   window.location.reload();
               }
               if (filter === "development") {
                   colnumber = 2;
-                  LoadTriggerDataTableByPhase(filter);
-
               }
               if (filter === "test") {
                   colnumber = 3;
-                  LoadTriggerDataTableByPhase(filter);
-
               }
               if (filter === "production") {
                   colnumber = 4;
-                  LoadTriggerDataTableByPhase(filter);
-
               }
               if (filter === "fleet introduction") {
                   colnumber = 5;
-                  LoadTriggerDataTableByPhase(filter);
               }
               if (filter === "post production") {
                   colnumber = 6;
-                  LoadTriggerDataTableByPhase(filter);
               } if (filter === "sustainment") {
                   colnumber = 7;
-                  LoadTriggerDataTableByPhase(filter);
               };
 
               var dialogCopyPhase = filter;
-              $("#tbCopyIssuePhase").val(dialogCopyPhase);
+              $(".modal-body #tbCopyIssuePhase").val(dialogCopyPhase);
 
 
               dataTableTriggers
@@ -201,104 +257,139 @@ function myCustomPage() {
 
 
     LoadTriggersDataTable();
+    //  LoadIssuesDataTable();
 
     //EVENTS
     $("#triggers tbody")
         .on("click", "tr", function () {
-            var triggerfilter = dataTableTriggers.row(this).data().Title;  //trigger title
+
+
+
             var rowtriggerdata = dataTableTriggers.row(this).data().TriggerDescription;
+            console.log("processing triggers tbody " + rowtriggerdata);
+            showTriggerDescription(rowtriggerdata);
+            $("#tbCopyIssueDescriptionTitle").val(rowtriggerdata);
+
+
+
+            var triggerfilter = dataTableTriggers.row(this).data().Title;
             $("#tbCopyTriggerTitle").val(triggerfilter);
             $("#tbAddTriggerTitle").val(triggerfilter);
+            var diaTriggerTitle = triggerfilter;
+            var daiIssueTitle = rowtriggerdata;
+
+            var diaIssueDescription = rowtriggerdata;
+            console.log("my_id_value : " + diaTriggerTitle);
+            $(".modal-body #tbCopyIssueTitle").val(daiIssueTitle);
+
+            $(".modal-body #tbCopyIssueDescription").val(diaIssueDescription);
+            var copyPhase = $("#userPhase").val();
+            $(".modal-body #tbCopyIssuePhase").val(copyPhase);
+            //redraw issues with just the associated trigger
+
+            //dataTableIssues
+            //.columns(3)
+            // .search(rowtrigger)
+            // .draw();
+
+            //var y = dataTableTriggers.row(this).data().Title;
+
+            // $("#Issues >tbody:last-child").after("<tr><td>" + row(this).data().Title + "<td></tr>");
+
             LoadIssuesDataTable(triggerfilter);
-            showTriggerDescription(rowtriggerdata);
+
         });
+
+
+    $("#TriggerDescription tbody")
+        .on("click",
+            "tr",
+            function () {
+
+                if ($(this).hasClass("selected")) {
+                    $(this).removeClass("selected");
+                } else {
+                    dataTableTriggers.$("tr selected").removeClass("selected");
+                    $(this).addClass("selected");
+                }
+            });
 
     $("#issues tbody")
         .on("click",
             "tr",
             function () {
-                var rowissuetitle = dataTableIssues.row(this).data().Title;
+
+                if ($(this).hasClass("selected")) {
+                    $(this).removeClass("selected");
+                } else {
+                    dataTableIssues.$("tr selected").removeClass("selected");
+                    $(this).addClass("selected");
+                }
+
                 var rowissuedata = dataTableIssues.row(this).data().IssueDescription;
                 var mit60ddata = dataTableIssues.row(this).data().Mitigation60d;
                 var mit66data = dataTableIssues.row(this).data().Mitigation66;
                 var mit67data = dataTableIssues.row(this).data().Mitigation67;
                 var mit68data = dataTableIssues.row(this).data().Mitigation68;
+
+                console.log("Issue Description is " + rowissuedata);
                 showIssueDescription(rowissuedata);
                 showMitigationDescription(mit60ddata, mit66data, mit67data, mit68data);
-                $("#tbCopyIssueTitle").val(rowissuedata);
-                $("#tbCopyIssueDescription").val(rowissuedata);
-                $("#taCopyMitigation60d").val(mit60ddata);
-                $("#taCopyMitigation66").val(mit66data);
-                $("#taCopyMitigation67").val(mit67data);
-                $("#taCopyMitigation68").val(mit68data);
+
+                var diaIssueDescription = rowissuedata;
+                console.log("diaIssueDescription : " + diaIssueDescription);
+                $(".modal-body #tbIssueDescription").val(diaIssueDescription);
+                $(".modal-body #taCopyMitigation60d").val(mit60ddata);
+                $(".modal-body #taCopyMitigation66").val(mit66data);
+                $(".modal-body #taCopyMitigation67").val(mit67data);
+                $(".modal-body #taCopyMitigation68").val(mit68data);
+
+
+
             });
 
-    //Copy form, Save button
-    $("#btnCopyTo")
-      .on("click",
-          function () {
-              var list = $("#ddlCopyTo").val();
-              if (list == "Select List") {
-                  $("#tbCopyStatusArea").val("You must select a category");
-              } else {
-                  CopyTo();
-              }
-          });
+    $("#btnAddTrigger")
+       .on("click",
+           function () {
+               AddTrigger();
+           });
 
-
-
-    //Copy form, SaveAndContinue button
-    $("#btnSaveAndContinue")
-      .on("click",
-          function () {
-              var list = $("#ddlCopyTo").val();
-              if (list == "Select List") {
-                  $("#tbCopyStatusArea").val("You must select a category");
-              } else {
-                  //for the copy form
-                  SaveAndContinue();
-              }
-          });
-
-    //Add form, Save button
     $("#btnAddTo")
       .on("click",
           function () {
-              var list = $("#ddlAddTo").val();
-              if (list == "Select List") {
-                  $("#tbAddStatusArea").val("You must select a category");
-              } else {
-                  AddTo(list);
-              }
+              AddTo();
           });
 
-    //Add form, SaveAndContinue button
-    $("#btnAddSaveAndContinue").on("click", function () {
-        var list = $("#ddlAddTo").val();
-        if (list == "Select List") {
-            $("#tbAddStatusArea").val("You must select a category");
-        } else {
-            //for a blank form
-            AddSaveAndContinue();
-        }
-    });
+    $("#btnSaveAndContinue")
+      .on("click",
+          function () {
+              //for the copy form
+              SaveAndContinue();
+          });
 
-    $("#btnAddIssue").on("click", function () { // for a blank form
-        var list = $("#ddlAddTo").val();
-        if (list == "Select List") {
-            $("#tbAddStatusArea").val("You must select a category");
-        } else {
-            AddTo(list);
-        }
-    });
+
+    $("#btnAddSaveAndContinue")
+      .on("click",
+          function () {
+              //for a blank form
+              AddSaveAndContinue();
+          });
+
+    $("#btnAddIssue")
+     .on("click",
+         function () {
+             AddTo();
+         });
 
     $("#btnAddCancel")
-       .on("click",
+   .on("click",
        function () {
-           $("#tbAddStausArea").val("");
-           $("#tbCopyStausArea").val("");
            window.location.replace("Triggers.aspx");
+
        });
+
+
+
 
     GetDigest();
 
@@ -367,9 +458,9 @@ function errRetrieveLastModifiedDate(data, errorCode, errorMessage) {
 
 //Executor4 Load and filter Trigger Table based on user program and phase
 function LoadTriggersDataTable() {
-    // if (dataTableTriggers != "undefined") {
-    //     dataTableTriggers.destroy();
-    // }
+    if (dataTableTriggers != "undefined") {
+        dataTableTriggers.destroy();
+    }
     listname = "Triggers";
     var filterUrl = "";
 
@@ -380,12 +471,12 @@ function LoadTriggersDataTable() {
         filterUrl = "$top=1000";  //limit list to just 1000
     }
     if (uAdmin === "No" && uType === "PEO") {
-        filterUrl = "$filter=Program eq '" + uProgram + "'&$top=1000";
+        filterUrl = "&$filter=Program eq '" + uProgram + "'&$top=1000";
         alert(uProgram);
     }
     //filter by Competency
     if (uAdmin === "No" && uType === "Competency") {
-        filterUrl = "$filter=Program eq '" + uCompetency + "'&$top=1000";
+        filterUrl = "&$filter=Program eq '" + uCompetency + "'&$top=1000";
         alert(uCompetency);
     }
 
@@ -493,8 +584,8 @@ function TriggersSuccHandler(data) {
                 { name: "Sustainment" }
             ],
             "searching": true,
-            "paging": true,
-            "info": true
+            "paging": false,
+            "info": false
         });
 
 
@@ -506,6 +597,7 @@ function TriggersErrHandler(data, errCode, errMessage) {
 }
 
 //Executor5 Loads Issues based on the Trigger selected
+//Executor5 Loads Issues based on the Trigger selected
 function LoadIssuesDataTable(filter) {
     if (dataTableIssues !== "undefined") {
         dataTableIssues.destroy();
@@ -513,21 +605,24 @@ function LoadIssuesDataTable(filter) {
     var executor5 = new SP.RequestExecutor(appWebUrl);
     var baseUrl = appWebUrl;
     var filterUrl = "";
-    listname = "ProgramIssuesAndRisks";
+    var listname = "ProgramIssuesAndRisks";
     var selectUrl = "/_api/web/Lists/getbyTitle('" + listname + "')/items?";
-    filterUrl = "$filter=Trigger eq '" + filter + "'";
+    filterUrl = "&$filter=Trigger eq '" + filter + "'";
     var fullUrl = baseUrl + selectUrl + filterUrl;
     var requestHeaders = { "accept": "application/json;odata=verbose" };
-    $.ajax({
+    executor5.executeAsync({
         url: fullUrl,
-        type: "GET",
-        dataType: "json",
+        method: "GET",
         headers: requestHeaders,
         success: IssuesSuccHandler,
         error: IssuesErrHandler
     });
 }
+
 function IssuesSuccHandler(data) {
+    if (dataTableIssues !== "undefined") {
+        dataTableIssues.destroy();
+    }
     dataTableIssues = $("#issues")
         .DataTable({
             "bDestroy": true,
@@ -543,6 +638,7 @@ function IssuesSuccHandler(data) {
                 { "mData": "Mitigation68" }
             ],
             dom: 'Bfrtip',
+            //buttons: ['copy', 'excel', 'pdf', 'print'],
             buttons: true,
             fixedHeader: true,
             scrollY: 300,
@@ -567,43 +663,43 @@ function IssuesSuccHandler(data) {
                      "visible": false,
                      "searchable": false
                  },
-                 {
-                     //Mitigation 6.0d
-                     "targets": [3],
-                     "visible": false,
-                     "searchable": true
-                 },
+                     {
+                         //Mitigation 6.0d
+                         "targets": [3],
+                         "visible": false,
+                         "searchable": true
+                     },
                 {
-                    //Mitigation 66
+                    //Mitigation 6.6
                     "targets": [4],
                     "visible": false,
                     "searchable": true
                 },
                  {
-                     //Mitigation 67
+                     //Mitigation 6.7
                      "targets": [5],
                      "visible": false,
                      "searchable": true
                  },
                 {
-                    //Mitigation 68
+                    //Mitigation 6.8
                     "targets": [6],
                     "visible": false,
                     "searchable": true
                 }
             ],
             columns: [
-                { name: "Title" },
-                { name: "IssueDescription" },
-                { name: "Trigger" },
-                { name: "Mitigation 60d" },
-                { name: "Mitigation 66" },
-                { name: "Mitigation 67" },
-                { name: "Mitigation 68" }
+                { title: "Title" },
+                { title: "IssueDescription*" },
+                { title: "Trigger" },
+                { title: "Mitigation 60d" },
+                { title: "Mitigation 66" },
+                { title: "Mitigation 67" },
+                { title: "Mitigation 68" }
             ],
             "searching": true,
-            "true": false,
-            "true": false
+            "paging": false,
+            "info": false
         });
 }
 function IssuesErrHandler(data, errCode, errMessage) {
@@ -697,7 +793,7 @@ function GetUserInfo(username) {
     var listname = "Profiles";
     var baseUrl = appWebUrl;
     var selectUrl = "/_api/web/lists/getbytitle('" + listname + "')/items?";
-    var filterUrl = "$filter=Title eq '" + username + "'";
+    var filterUrl = "&$filter=Title eq '" + username + "'";
     var fullUrl = baseUrl + selectUrl + filterUrl;
     var requestHeaders = { "accept": "application/json;odata=verbose" };
 
@@ -748,6 +844,9 @@ function errorGetUserInfoHandler(data, errCode, errMessage) {
 
 function CopySelectedIssueDialog() {
     $('#CopyIssue').modal();
+    $("#btnNotFinished").hide();
+    $("#btnFinished").hide();
+
 }
 
 function ShowAddTriggerDialog() {
@@ -861,9 +960,9 @@ function CopyToRisks() {
     var mitigation68 = $('#taCopyMitigation68').val();
     var mitigationStartDate = $('#tbCopyMitigationStart').val();
     var mitigationEndDate = $('#tbCopyMitigationEnd').val();
-    var status = $('#ddlCopyIssueStatus').val();
-    var likelihood = $('#tbCopyIssueLikelihood').val();
-    var consequence = $('#tbCopyIssueConsequence').val();
+    var status = $('#tbCopyIssueStatus').val();
+    var likelihood = $('#tbCopyIssueLikelihood option:selected').val();
+    var consequence = $('#tbCopyIssueConsequence option:selected').val();
     var executor8 = new SP.RequestExecutor(appWebUrl);
     var fullUrl = appWebUrl + "/_api/web/lists/getbytitle('" + listname + "')/items";
     var itemType = GetItemTypeForListName(listname);
@@ -892,22 +991,24 @@ function CopyToRisks() {
         "content-length": requestBody.length,
         "Content-Type": "application/json;odata=verbose"
     };
+    $("#tbCopyStatus").show();
+    $("#tbCopyStatus").val("Processing...");
 
     executor8.executeAsync({
         url: fullUrl,
         method: "POST",
         body: requestBody,
         headers: requestHeaders,
-        success: successCopyToRiskHandler,
-        error: errorCopyToRiskHandler
+        success: successAddToRiskHandler,
+        error: errorAddToRiskHandler
     });
 }
-function successCopyToRiskHandler() {
-    $("#tbCopyStatusArea").val("Copied to My Program Risk");
+function successAddToRiskHandler() {
+    $("#CopyIssue #tbCopyStatus").val("My Program Risk updated. You can close this window or add another item");
     console.log("My Program Risk updated");
 }
-function errorCopyToRiskHandler(data, errorCode, errorMessage) {
-    $("#tbCopyStatusArea").val("Copied to My Program Risk failed " + errorCode + errorMessage);
+function errorAddToRiskHandler(data, errorCode, errorMessage) {
+    $("#tbCopyStatus").val("My Program Risk failed " + errorCode + errorMessage);
     console.log(errorCode + errorMessage);
 }
 
@@ -927,7 +1028,7 @@ function CopyToIssues() {
     var mitigation68 = $('#taCopyMitigation68').val();
     var mitigationStartDate = $('#tbCopyMitigationStart').val();
     var mitigationEndDate = $('#tbCopyMitigationEnd').val();
-    var status = $('#ddlCopyIssueStatus').val();
+    var status = $('#tbCopyIssueStatus').val();
     var likelihood = $('#tbCopyIssueLikelihood').val();
     var consequence = $('#tbCopyIssueConsequence').val();
     var executor9 = new SP.RequestExecutor(appWebUrl);
@@ -966,21 +1067,23 @@ function CopyToIssues() {
         success: successCopyToIssuesHandler,
         error: errorCopyToIssuesHandler
     });
-
+    $("#tbCopyStatus").show();
+    $("#tbCopyStatus").val("Processing...");
+    $("#CopyIssue #tbCopyStatus").val("My Program Issues updated.");
 }
 function successCopyToIssuesHandler() {
-    $("#tbCopyStatusArea").val("Copied to My Program Issues.");
+    $("#CopyIssue #tbCopyStatus").val("My Program Issues updated. You can close this window or add another item");
     console.log("My Program Issues updated");
 }
 function errorCopyToIssuesHandler(data, errorCode, errorMessage) {
-    $("tbCopyStatusArea").val("My Program Issues failed " + errorCode + errorMessage);
+    $("#CopyIssue #tbCopyStatus").val("My Program Issues failed " + errorCode + errorMessage);
     console.log(errorCode + errorMessage);
 }
 
 //Executor10
 //Add to Risk from empty dialog
 function AddToRisks() {
-    var actionlist = list;
+    listname = list;
     var action = "add";
     var listname = "MyProgramRisks";
     var trigger = $('#tbAddTriggerTitle').val();
@@ -994,7 +1097,7 @@ function AddToRisks() {
     var mitigation68 = $('#taAddMitigation68').val();
     var mitigationStartDate = $('#tbAddMitigationStart').val();
     var mitigationEndDate = $('#tbAddMitigationEnd').val();
-    var status = $('#ddlAddStatus').val();
+    var status = $('#tbAddStatus').val();
     var likelihood = $('#tbAddIssueLikelihood option:selected').val();
     var consequence = $('#tbAddIssueConsequence option:selected').val();
     var executor10 = new SP.RequestExecutor(appWebUrl);
@@ -1034,12 +1137,17 @@ function AddToRisks() {
         success: successAddToRiskHandler,
         error: errorAddToRiskHandler
     });
+    $("#tbAddStatus").show();
+    $("#tbAddStatus").val("Processing...");
+    $("#tbAddStatus").val("My Program Risk Added.");
+
+
 }
 function successAddToRiskHandler() {
-    $("#tbAddStatusArea").val("My Program Risk updated");
+    $("#tbAddStatus").val("My Program Risk updated");
 }
 function errorAddToRiskHandler(data, errorCode, errorMessage) {
-    $("#tbAddStatusArea").val("My Program Risk failed " + errorCode + errorMessage);
+    $("#tbAddStatus").val("My Program Risk failed " + errorCode + errorMessage);
     console.log(errorCode + errorMessage);
 }
 
@@ -1059,7 +1167,7 @@ function AddToIssues() {
     var mitigation68 = $('#taAddMitigation68').val();
     var mitigationStartDate = $('#tbAddMitigationStart').val();
     var mitigationEndDate = $('#tbAddMitigationEnd').val();
-    var status = $('#ddlAddIssueStatus').val();
+    var status = $('#tbAddIssueStatus').val();
     var likelihood = $('#tbAddIssueLikelihood option:selected').val();
     var consequence = $('#tbAddIssueConsequence option:selected').val();
     var executor11 = new SP.RequestExecutor(appWebUrl);
@@ -1099,15 +1207,15 @@ function AddToIssues() {
         success: successAddToIssuesHandler,
         error: errorAddToIssuesHandler
     });
-
-
+    $("#tbAddStatus").show();
+    $("#tbAddStatus").val("Processing...");
 
 }
 function successAddToIssuesHandler() {
-    $("#tbAddStatusArea").val("My Program Issues updated");
+    $("#tbAddStatus").val("My Program Issues updated");
 }
 function errorAddToIssuesHandler(data, errorCode, errorMessage) {
-    $("#tbAddStatusArea").val("My Program Issues failed " + errorCode + errorMessage);
+    $("#tbAddStatus").val("My Program Issues failed " + errorCode + errorMessage);
     console.log(errorCode + errorMessage);
 }
 
@@ -1133,6 +1241,8 @@ function SaveToDrafts(dtype, action) {
     var status = "";
     var likelihood = "";
     var consequence = "";
+
+
     if (action == "add") {
         // Read contents of the Add Dialog
         trigger = $('#tbAddTriggerTitle').val();
@@ -1146,7 +1256,7 @@ function SaveToDrafts(dtype, action) {
         mitigation68 = $('#taAddMitigation68').val();
         mitigationStartDate = $('#tbAddMitigationStart').val();
         mitigationEndDate = $('#tbAddMitigationEnd').val();
-        status = $('#ddlAddIssueStatus option:selected').val();
+        status = $('#tbAddIssueStatus option:selected').val();
         likelihood = $('#tbAddIssueLikelihood option:selected').val();
         consequence = $('#tbAddIssueConsequence option:selected').val();
     }
@@ -1163,10 +1273,11 @@ function SaveToDrafts(dtype, action) {
         mitigation68 = $('#taCopyMitigation68').val();
         mitigationStartDate = $('#tbCopyMitigationStart').val();
         mitigationEndDate = $('#tbCopyMitigationEnd').val();
-        status = $('#ddlCopyIssueStatus option:selected').val();
+        status = $('#tbCopyIssueStatus option:selected').val();
         likelihood = $('#tbCopyIssueLikelihood option:selected').val();
         consequence = $('#tbCopyIssueConsequence option:selected').val();
     }
+
     if (status == "Select Value") {
         status = "";
     }
@@ -1179,6 +1290,8 @@ function SaveToDrafts(dtype, action) {
     if (consequence == "Select Value") {
         consequence = "";
     }
+
+
 
     var executor12 = new SP.RequestExecutor(appWebUrl);
     var fullUrl = appWebUrl + "/_api/web/lists/getbytitle('" + listname + "')/items";
@@ -1219,12 +1332,12 @@ function SaveToDrafts(dtype, action) {
     });
 
     if (action == "copy") {
-
-        $("#tbCopyStatusArea").val("Draft Saved to My Program Drafts");
+        $("#tbCopyStatus").show();
+        $("#tbCopyStatus").val("Processing...");
     }
     if (action == "add") {
-
-        $("#tbAddStatusArea").val("Draft Saved to My Program Drafts");
+        $("#tbAddStatus").show();
+        $("#tbAddStatus").val("Processing...");
     }
 
 
@@ -1232,47 +1345,58 @@ function SaveToDrafts(dtype, action) {
 }
 function successSaveToDraftsHandler(data, action) {
     if (action == "copy") {
-
-        $("#tbCopyStatusArea").val("Draft Saved to My Program Drafts");
+        $("#tbCopyStatus").show();
+        $("#tbCopyStatus").val("My Drafts updated");
     }
     if (action == "add") {
-
-        $("#tbAddStatusArea").val("Draft Saved to My Program Drafts");
+        $("#tbAddStatus").show();
+        $("#tbAddStatus").val("My Drafts updated");
     }
 }
 function errorSaveToDraftsHandler(data, action, errorCode, errorMessage) {
     if (action == "copy") {
-
-        $("#tbCopyStatusArea").val("My Drafts was not updated " + errorCode + errorMessage);
+        $("#tbCopyStatus").show();
+        $("#tbCopyStatus").val("My Drafts was not updated " + errorCode + errorMessage);
     }
     if (action == "add") {
-
-        $("#tbAddStatusArea").val("My Drafts was not updated " + errorCode + errorMessage);
+        $("#tbAddStatus").show();
+        $("#tbAddStatus").val("My Drafts was not updated " + errorCode + errorMessage);
     }
     console.log(errorCode + errorMessage);
 }
 
 //User press the Save Button on the Copy form
 function CopyTo() {
-    var list = $("#CopyIssue #ddlCopyTo").find("option:selected").text();
+    // $("#btnNotFinished").show();
+    // $("#btnFinished").show();
+    var list = $("#CopyIssue #ddlCopyTo").val();
     if (list == "Risk") {
         CopyToRisks();
     }
     if (list == "Issue") {
         CopyToIssues();
     }
+    if (list == "Select List") {
+        $("#tbCopyStatus").val("You must select a category");
+    }
+    //  $("#tbCopyStatus").val("Successfully Added! ");
 }
 
 
-function AddTo(action) {
-
-    if (action == "Risk") {
+function AddTo() {
+    // $("#btnNotFinished").show();
+    // $("#btnFinished").show();
+    var list = $("#AddIssueDialog #ddlCopyTo").val();
+    if (list == "Risk") {
         AddToRisks();
     }
-    if (action == "Issue") {
+    if (list == "Issue") {
         AddToIssues();
     }
-
+    if (list == "Select List") {
+        $("#tbAddStatus").val("You must select a category");
+    }
+    //  $("#tbAddStatus").val("Successfully Added! ");
 }
 
 
@@ -1288,171 +1412,4 @@ function AddSaveAndContinue() {
 }
 
 
-//Executor4 Load and filter Trigger Table based on user program and phase
-function LoadTriggersDataTableByPhase(phase) {
-    if (dataTableTriggers != "undefined") {
-        dataTableTriggers.destroy();
-    }
-    listname = "Triggers";
-    var filterUrl = "";
-    var filterPhase = "";
 
-    //check if Admin? They will see all triggers
-    if (phase == "development") {
-        filterPhase = "$filter=Development eq '" + Y + "'";
-    }
-    if (phase == "test") {
-        filterPhase = "$filter=test eq '" + Y + "'";
-    }
-    if (phase == "production") {
-        filterPhase = "$filter=production eq '" + Y + "'";
-    }
-    if (phase == "postproduction") {
-        filterPhase = "$filter=postproduction eq '" + Y + "'";
-    }
-    if (phase == "fleetintroduction") {
-        filterPhase = "$filter=fleetintroduction eq '" + Y + "'";
-    }
-    if (phase == "sustainment") {
-        filterPhase = "$filter=sustainment eq '" + Y + "'";
-    }
-
-    //dont filter any programs if Admin             
-    if (uAdmin === "Yes") {
-        filterProgram = "$top=1000";  //limit list to just 1000
-        filterPhase = "and (Phase eq '" + phase + "')&$top=1000";
-        filterUrl = filterProgram + filterPhase;
-
-    }
-    if (uAdmin === "No" && uType === "PEO") {
-        filterProgram = "$filter=Program eq '" + uProgram + "'";
-        filterPhase = "and (Phase eq '" + phase + "')&$top=1000";
-        filterUrl = filterProgram + filterPhase;
-    }
-    //filter by Competency
-    if (uAdmin === "No" && uType === "Competency") {
-        filterProgram = "$filter=Program eq '" + uCompetency + "'";
-        filterPhase = "and (Phase eq '" + phase + "')&$top=1000";
-        filterUrl = filterProgram + filterPhase;
-    }
-
-    console.log("uProgram is" + uProgram);
-
-    var executor4 = new SP.RequestExecutor(appWebUrl);
-    var baseUrl = appWebUrl;
-    var selectUrl = "/_api/web/Lists/getbyTitle('" + listname + "')/items?";
-
-    var fullUrl = baseUrl + selectUrl + filterUrl;
-    var requestHeaders = { "accept": "application/json;odata=verbose" };
-    var listname = "Triggers";
-    var usrProgram = $('#userProgram').val();
-    var baseUrl = _spPageContextInfo.webAbsoluteUrl;
-    var selectUrl = "/_api/web/Lists/getbyTitle('" + listname + "')/items";
-    var fullUrl = baseUrl + selectUrl;
-    $.ajax({
-        url: fullUrl,
-        type: "GET",
-        dataType: "json",
-        headers: requestHeaders,
-        success: TriggersSuccHandler,
-        error: TriggersErrHandler
-    });
-}
-
-function TriggersSuccHandler(data) {
-    if (dataTableTriggers != "undefined") {
-        dataTableTriggers.destroy();
-    }
-    dataTableTriggers = $("#triggers")
-        .DataTable({
-            "bDestroy": true,
-            select: { style: "single" },
-            dom: 'Bfrtip',
-            buttons: true,
-            "aaData": data.d.results,
-            "aoColumns": [
-                { "mData": "Title" },
-                { "mData": "TriggerDescription" },
-                { "mData": "Development" },
-                { "mData": "Test" },
-                { "mData": "Production" },
-                { "mData": "FleetIntroduction" },
-                { "mData": "PostProduction" },
-                { "mData": "Sustainment" }
-            ],
-            scrollY: 300,
-            columnDefs: [
-
-                {   //trigger title
-                    "targets": [0],
-                    "visible": true,
-                    "searchable": true
-                }
-                ,
-                {   //trigger description
-                    "targets": [1],
-                    "visible": false,
-                    "searchable": false
-                }
-                ,
-                {   //dev
-                    "targets": [2],
-                    "visible": false,
-                    "searchable": true
-                },
-
-                {    //test
-                    "targets": [3],
-                    "visible": false,
-                    "searchable": true
-                },
-                {   //production
-                    "targets": [4],
-                    "visible": false,
-                    "searchable": true
-                },
-                {   //fleet introduction
-                    "targets": [5],
-                    "visible": false,
-                    "searchable": true
-                },
-                {   //postproduction
-                    "targets": [6],
-                    "visible": false,
-                    "searchable": true
-                },
-                {   //sustainment
-                    "targets": [7],
-                    "visible": false,
-                    "searchable": true
-                }
-
-
-            ],
-            columns: [
-                { name: "Title" },
-                { name: "TriggerDescription" },
-                { name: "Development" },
-                { name: "Test" },
-                { name: "Production" },
-                { name: "FleetIntroduction" },
-                { name: "PostProduction" },
-                { name: "Sustainment" }
-            ],
-            "searching": true,
-            "paging": false,
-            "info": false
-        });
-
-
-
-}
-
-function TriggersErrHandler(data, errCode, errMessage) {
-    console.log("Error: " + errMessage);
-}
-
-function ResetForm() {
-    window.location.reload();
-
-}

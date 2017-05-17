@@ -1,6 +1,7 @@
 //global variables
 var dataTableTriggers = "undefined";
 var dataTableIssues = "undefined";
+
 var appWebUrl = window.location.protocol + "//" + window.location.host + _spPageContextInfo.webServerRelativeUrl;
 var targetSiteUrl = _spPageContextInfo.siteAbsoluteUrl;
 var digest = "";
@@ -11,6 +12,7 @@ var eTag;
 var clientContext;
 var website;
 var currentUser;
+var lastModifiedDate;
 
 SP.SOD.executeFunc('sp.js', 'SP.ClientContext', sharePointReady);
 
@@ -26,7 +28,7 @@ function onRequestSucceeded() {
     var longUserName = currentUser.get_loginName();
     var startIndex = longUserName.lastIndexOf('\\');
     var thisUser = longUserName.substr(startIndex + 1);
-    if (thisUser = "system") {
+    if (thisUser == "system") {
         thisUser = "kris.white";
         console.log("user is system, but changing to Kris.white for testing");
     }
@@ -81,24 +83,13 @@ function successGetProfilerHandler(data) {
         $("#userID").val(uID);
         $("#userProgram").val(uProgram);
         var programtext = $("#userProgram").val();
-        $("#usrProgram").text(" |  " + uProgram);
+        $("#usrProgram").text(" |  " + programtext);
 
 
     });
 
 
-    if (jsonObject.d.results.length === 0) {
-        $('#overlay').show();
 
-        if (window.confirm("No profile found for : " + currentUser + ". Please click OK to setup a profile or cancel to return to the home page")) {
-            alert("Setup a profile now?");
-            $('#overlay').hide();
-            window.location = appWebUrl + "/SitePages/NewProfile.aspx?Name=" + currentUser;
-        }
-        else {
-            window.location = "http://www.google.com";
-        }
-    }
 } //end of success
 function errorGetProfilerHandler(data) {
     alert("login failed: " + data.errorCode + data.errorMessage);
@@ -108,16 +99,17 @@ function errorGetProfilerHandler(data) {
 
 
 function myCustomPage() {
-    $("#ddlfilter").append($("<option></option>").attr("value", "test").text("Test TMRR"));
+    $("#ddlfilter").append($("<option></option>").attr("value", "test").text("TMRR"));
     $("#ddlfilter").append($("<option></option>").attr("value", "development").text("EMD"));
-    $("#ddlfilter").append($("<option></option>").attr("value", "production post fleet").text(" P&D"));
-    $("#ddlfilter").append($("<option></option>").attr("value", "sustainment").text("O&S"));
+    $("#ddlfilter").append($("<option></option>").attr("value", "production").text("Production P&D"));
+    $("#ddlfilter").append($("<option></option>").attr("value", "sustainment").text("Sustainment O&S"));
 
     $("#ddlfilter")
       .on('change',
           function () {
               var colnumber = 0;
               var filter = this.value;
+
 
               if (filter === "selectall") {
                   window.location.reload();
@@ -141,6 +133,10 @@ function myCustomPage() {
                   colnumber = 6;
               };
 
+              var diaIssuePhase = filter;
+              $(".modal-body #taIssuePhas").val(diaIssuePhase);
+
+
               dataTableTriggers
                       .column(colnumber)
                       .search("Y")
@@ -160,30 +156,44 @@ function myCustomPage() {
 
 
     LoadTriggersDataTable();
-    LoadIssuesDataTable();
+    //  LoadIssuesDataTable();
 
     //EVENTS
     $("#triggers tbody")
         .on("click", "tr", function () {
 
+
+
             var rowtriggerdata = dataTableTriggers.row(this).data().TriggerDescription;
             console.log("processing triggers tbody " + rowtriggerdata);
             showTriggerDescription(rowtriggerdata);
+            $("#issueTriggerDescription").val(rowtriggerdata);
 
-            alert(dataTableTriggers.row(this).data().Title);
 
+
+            var triggerfilter = dataTableTriggers.row(this).data().Title;
+            $("#dialogTriggerTitle").val(triggerfilter);
+
+            var diaTriggerTitle = triggerfilter;
+            var daiIssueTitle = rowtriggerdata;
+
+            var diaIssueDescription = rowtriggerdata;
+            console.log("my_id_value : " + diaTriggerTitle);
+            $(".modal-body #tbIssueTitle").val(daiIssueTitle);
+
+            $(".modal-body #tbIssueDescription").val(diaIssueDescription);
             //redraw issues with just the associated trigger
 
-            dataTableIssues
-                  .columns(3)
-                 .search(rowtrigger)
-                 .draw();
+            //dataTableIssues
+            //.columns(3)
+            // .search(rowtrigger)
+            // .draw();
 
-            var y = dataTableTriggers.row(this).data().Title;
+            //var y = dataTableTriggers.row(this).data().Title;
 
-            $("#Issues >tbody:last-child").after("<tr><td>" + row(this).data().Title + "<td></tr>");
+            // $("#Issues >tbody:last-child").after("<tr><td>" + row(this).data().Title + "<td></tr>");
 
-
+            LoadIssuesDataTable(triggerfilter);
 
         });
 
@@ -214,19 +224,35 @@ function myCustomPage() {
                 }
 
                 var rowissuedata = dataTableIssues.row(this).data().IssueDescription;
+                var mit60ddata = dataTableIssues.row(this).data().Mitigation60d;
+                var mit66data = dataTableIssues.row(this).data().Mitigation66;
+                var mit67data = dataTableIssues.row(this).data().Mitigation67;
+                var mit68data = dataTableIssues.row(this).data().Mitigation68;
+
                 console.log("Issue Description is " + rowissuedata);
                 showIssueDescription(rowissuedata);
+                showMitigationDescription(mit60ddata, mit66data, mit67data, mit68data);
+
+                var diaIssueDescription = rowissuedata;
+                console.log("diaIssueDescription : " + diaIssueDescription);
+                $(".modal-body #tbIssueDescription").val(diaIssueDescription);
+                $(".modal-body #taIssueMitigation60d").val(mit60ddata);
+                $(".modal-body #taIssueMitigation66").val(mit66data);
+                $(".modal-body #taIssueMitigation67").val(mit67data);
+                $(".modal-body #taIssueMitigation68").val(mit68data);
+
+
+
             });
 
-    // GetDigest();
-    //$("#ddlfilter")
-    //    .on("change",
-    //        function () {
-    //            var filter = $(this).val();
-    //            loadTriggerDataTable(filter);
-    //        });
+    $("#btnAddTrigger")
+       .on("click",
+           function () {
+               AddTrigger();
+           });
 
-    //  alert("select a phase from the filter in the upper left");
+
+    GetDigest();
 
 }//end of my custom page
 
@@ -244,7 +270,7 @@ function retrieveFormDigest() {
         url: contextInfoUri,
         method: "POST",
         headers: { "Accept": "application/json; odata=verbose" },
-        success: UpdateLastModified,
+        success: PrepareForm,
         error: function (data, errorCode, errorMessage) {
             var errMsg = "Error retrieving the form digest value: " + errorMessage;
             $("#error").val(errMsg);
@@ -252,7 +278,7 @@ function retrieveFormDigest() {
     });
 }
 
-function UpdateLastModified(data) {
+function PrepareForm(data) {
     console.log("digest is " + digest);
     $('#digestmsg').val(digest);
     retrieveLastModifiedDate();
@@ -283,15 +309,25 @@ function succRetrieveLastModifiedDate(data) {
 }
 
 function LoadTriggersDataTable() {
-    var executor = new SP.RequestExecutor(appWebUrl);
+    if (dataTableTriggers != "undefined") {
+        dataTableTriggers.destroy();
+    }
+
+
     var requestHeaders = { "accept": "application/json;odata=verbose" };
     var listname = "Triggers";
+    var usrProgram = $('#userProgram').val();
     var baseUrl = _spPageContextInfo.webAbsoluteUrl;
     var selectUrl = "/_api/web/Lists/getbyTitle('" + listname + "')/items";
     var fullUrl = baseUrl + selectUrl;
-
-
-    
+    $.ajax({
+        url: fullUrl,
+        type: "GET",
+        dataType: "json",
+        headers: requestHeaders,
+        success: TriggersSuccHandler,
+        error: TriggersErrHandler
+    });
 }
 
 function TriggersSuccHandler(data) {
@@ -300,10 +336,11 @@ function TriggersSuccHandler(data) {
     }
     dataTableTriggers = $("#triggers")
         .DataTable({
+            "bDestroy": true,
             select: { style: "single" },
             dom: 'Bfrtip',
             buttons: true,// ['copy', 'excel', 'pdf', 'print']
-            "aaData": data.d,
+            "aaData": data.d.results,
             "aoColumns": [
                 { "mData": "Title" },
                 { "mData": "TriggerDescription" },
@@ -316,58 +353,55 @@ function TriggersSuccHandler(data) {
             ],
             scrollY: 300,
             columnDefs: [
+
                 {   //trigger title
                     "targets": [0],
                     "visible": true,
                     "searchable": false
-                    
                 }
-                
                 ,
                 {   //trigger description
                     "targets": [1],
                     "visible": false,
                     "searchable": false
                 }
-                
                 ,
                 {   //dev
                     "targets": [2],
                     "visible": false,
                     "searchable": true
                 },
-                
+
                 {    //test
                     "targets": [3],
-                    "visible": false,                  
+                    "visible": false,
                     "searchable": true
                 },
                 {   //production
                     "targets": [4],
-                    "visible": false,               
+                    "visible": false,
                     "searchable": true
                 },
                 {   //fleet introduction
                     "targets": [5],
-                    "visible": false,                  
+                    "visible": false,
                     "searchable": true
                 },
                 {   //postproduction
                     "targets": [6],
-                    "visible": false,                  
+                    "visible": false,
                     "searchable": true
                 },
                 {   //sustainment
                     "targets": [7],
-                    "visible": false,               
+                    "visible": false,
                     "searchable": true
                 }
-                
+
 
             ],
             columns: [
-                { name: "Title" }
-                /*
+                { name: "Title" },
                 { name: "TriggerDescription" },
                 { name: "Development" },
                 { name: "Test" },
@@ -375,12 +409,13 @@ function TriggersSuccHandler(data) {
                 { name: "FleetIntroduction" },
                 { name: "PostProduction" },
                 { name: "Sustainment" }
-                */
             ],
             "searching": true,
             "paging": false,
             "info": false
         });
+
+
 
 }
 
@@ -388,16 +423,22 @@ function TriggersErrHandler(data, errCode, errMessage) {
     alert("Error: " + errMessage);
 }
 
-function LoadIssuesDataTable() {
-    var executor = new SP.RequestExecutor(appWebUrl);
-    var requestHeaders = { "accept": "application/json;odata=verbose" };
+function LoadIssuesDataTable(filter) {
+    if (dataTableIssues != "undefined") {
+        dataTableIssues.destroy();
+    }
+
     var listname = "ProgramIssuesAndRisks";
+    var usrProgram = $('#userProgram').val();
+    var requestHeaders = { "accept": "application/json;odata=verbose" };
+
     var baseUrl = _spPageContextInfo.webAbsoluteUrl;
-    var selectUrl = "/_api/web/Lists/getbyTitle('" + listname + "'')/items";
+    var selectUrl = "/_api/web/Lists/getbyTitle('" + listname + "')/items";
     var fullUrl = baseUrl + selectUrl;
-    executor.executeAsync({
+    $.ajax({
         url: fullUrl,
-        method: "GET",
+        type: "GET",
+        dataType: "json",
         headers: requestHeaders,
         success: IssuesSuccHandler,
         error: IssuesErrHandler
@@ -409,44 +450,82 @@ function IssuesSuccHandler(data) {
     }
     dataTableIssues = $("#issues")
         .DataTable({
+            "bDestroy": true,
             select: { style: "single" },
-
-            "aaData": data.d,
+            "aaData": data.d.results,
             "aoColumns": [
                 { "mData": "Title" },
                 { "mData": "IssueDescription" },
-                { "mData": "Trigger" }
-
+                { "mData": "Trigger" },
+                 { "mData": "Mitigation60d" },
+                { "mData": "Mitigation66" },
+                { "mData": "Mitigation67" },
+                 { "mData": "Mitigation68" }
             ],
             dom: 'Bfrtip',
-            buttons: ['copy', 'excel', 'pdf', 'print'],
-            // buttons: true,
+            //buttons: ['copy', 'excel', 'pdf', 'print'],
+            buttons: true,
             fixedHeader: true,
             scrollY: 300,
             scrollX: true,
             columnDefs: [
                 {
+                    //Title issue
                     "targets": [0],
                     "visible": true,
                     "searchable": true
                 },
 
                 {
+                    //Issue description
                     "targets": [1],
-                    "visible": true,
+                    "visible": false,
                     "searchable": false
                 },
                  {
+                     //trigger
                      "targets": [2],
-                     "visible": true,
+                     "visible": false,
+                     "searchable": false
+                 },
+                     {
+                         //Mitigation 6.0d
+                         "targets": [3],
+                         "visible": false,
+                         "searchable": true
+                     },
+
+                {
+                    //Mitigation 6.6
+                    "targets": [4],
+                    "visible": false,
+                    "searchable": true
+                },
+                 {
+                     //Mitigation 6.7
+                     "targets": [5],
+                     "visible": false,
                      "searchable": true
-                 }
+                 },
+                {
+                    //Mitigation 6.8
+                    "targets": [6],
+                    "visible": false,
+                    "searchable": true
+                }
+
 
             ],
             columns: [
-                { title: "IssueTitle" },
+                { title: "Title" },
                 { title: "IssueDescription*" },
-                { title: "Trigger" }
+                { title: "Trigger" },
+                { title: "Mitigation 60d" },
+                { title: "Mitigation 66" },
+                { title: "Mitigation 67" },
+                { title: "Mitigation 68" }
+
+
             ],
             "searching": true,
             "paging": false,
@@ -466,13 +545,23 @@ function clearDescriptionTable() {
 }
 
 function clearIssuesDescriptionTable() {
-    var oTable2 = $("#IssueDescription").DataTable({});
+    var oTable2 = $("#IssueDescription").DataTable({
+        scrollY: 400,
+        scrollX: true
+    });
     oTable2
        .clear()
         .destroy();
+}
 
+function clearMitigationDescriptionTable() {
 
-
+    var oTable3 = $("#MitigationDescription").DataTable({
+        scrollY: 200
+    });
+    oTable3
+       .clear()
+        .destroy();
 }
 
 
@@ -497,6 +586,32 @@ function showIssueDescription(issdesc) {
     $("#IssueDescription").append("<tr class='added'><td>----------------------------</td></tr>");
 
 }
+
+function showMitigationDescription(mit60ddata, mit66data, mit67data, mit68data) {
+    var oTable3 = $("#MitigationDescription").DataTable({});
+    oTable3
+       .clear()
+       .destroy();
+
+    console.log(mit60ddata, mit66data, mit67data, mit68data);
+    if (mit60ddata) {
+        $("#MitigationDescription").append("<tr class='added'><td>Mitigation 6.0d: " + mit60ddata + "</td>/tr>");
+        $("#MitigationDescription").append("<tr class='added'><td>----------------------------</td></tr>");
+    }
+    if (mit66data) {
+        $("#MitigationDescription").append("<tr class='added'><td>Mitigation 6.6" + mit66data + "</td>/tr>");
+        $("#MitigationDescription").append("<tr class='added'><td>----------------------------</td></tr>");
+    }
+    if (mit67data) {
+        $("#MitigationDescription").append("<tr class='added'><td>Mitigation 6.7d" + mit67data + "</td>/tr>");
+        $("#MitigationDescription").append("<tr class='added'><td>----------------------------</td></tr>");
+    }
+    if (mit68data) {
+        $("#MitigationDescription").append("<tr class='added'><td>Mitigation 6.8d" + mit68data + "</td>/tr>");
+        $("#MitigationDescription").append("<tr class='added'><td>----------------------------</td></tr>");
+    }
+}
+
 
 
 function GetUserInfo(username) {
@@ -547,3 +662,116 @@ function successGetUserInfoHandler(data) {
 function errorGetUserInfoHandler(data, errCode, errMessage) {
     console.log("login failed: " + data.errorCode + data.errorMessage);
 }
+
+
+function CopySelectedIssueDialog() {
+    $('#CopyIssue').modal();
+}
+
+function ShowAddTriggerDialog() {
+    $('#AddTriggerDialog').modal();
+}
+
+function AddTrigger() {
+    $("#tbAddDialogStatus").hide();
+
+    var dialogtriggertitle;
+    var dialogtriggerdescription;
+    var dialogtriggercbdevepment;
+    var dialogtriggercbtest;
+    var dialogtriggercbproduction;
+    var dialogtriggercbpostproduction;
+    var dialogtriggercbfleet;
+    var dialogtriggercbsustainment;
+    
+
+    dialogtriggertitle = $("#tbAddDialogTriggerTitle").val();
+    dialogtriggerdescription = $("#tbAddDialogTriggerDescription").val();
+
+    if ($("#cbDevelopment").is(':checked')) {
+        dialogtriggercbdevepment = "True";
+    } else {
+        dialogtriggercbdevepment = "False";
+    }
+
+    if ($("#cbTest").is(':checked')) {
+        dialogtriggercbtest = "True";
+    } else {
+        dialogtriggercbtest = "False";
+    }
+
+    if ($("#cbProduction").is(':checked')) {
+        dialogtriggercbproduction = "True";
+    } else {
+        dialogtriggercbproduction = "False";
+    }
+
+    if ($("#cbPostProduction").is(':checked')) {
+        dialogtriggercbpostproduction = "True";
+    } else {
+        dialogtriggercbpostproduction = "False";
+    }
+
+    if ($("#cbFleetIntroduction").is(':checked')) {
+        dialogtriggercbfleet = "True";
+    } else {
+        dialogtriggercbfleet = "False";
+    }
+
+    if ($("#cbSustainment").is(':checked')) {
+        dialogtriggercbsustainment = "True";
+    } else {
+        dialogtriggercbsustainment = "False";
+    }
+
+    var listname = "Triggers";
+
+    var executor = new SP.RequestExecutor(appweburl);
+    var fullUrl = appWebUrl + "/_api/web/lists/getbytitle('" + listname + "')/items";
+    var itemType = GetItemTypeForListName(listname);
+    var requestBody = JSON.stringify({
+        '__metadata': { 'type': itemType },
+        'Title': dialogtriggertitle,
+        'TriggerDescription': dialogtriggerdescription,
+        'Development': dialogtriggercbdevepment,
+        'Test': dialogtriggercbtest,
+        'Production': dialogtriggercbproduction,
+        'FleetIntroduction': dialogtriggercbfleet,
+        'PostProduction': dialogtriggercbpostproduction,
+        'Sustainment': dialogtriggercbsustainment
+    });
+
+    var requestHeaders = {
+        "accept": "application/json;odata=verbose",
+        "X-RequestDigest": digest,
+        "X-HTTP-METHOD": "POST",
+        "content-length": requestBody.length,
+        "Content-Type": "application/json;odata=verbose"
+    };
+
+    executor.executeAsync({
+        url: fullUrl,
+        method: "POST",
+        body: requestBody,
+        headers: requestHeaders,
+        success: successItemAddedHandler,
+        error: errorItemAddedHandler
+    });
+}
+
+function successItemAddedHandler() {
+    $("#tbAddDialogStatus").show();
+    $("#tbAddDialogStatus").val("Trigger Added");
+
+}
+
+function errorItemAddedHandler(data, errorCode, errorMessage) {
+    alert("Fialed to add Trigger : " + errorCode + errorMessage);
+}
+
+function GetItemTypeForListName(list) {
+    return "SP.Data." + list.charAt(0).toUpperCase() + list.split(" ").join(" ").slice(1) + "ListItem";
+}
+
+
+

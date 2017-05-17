@@ -47,9 +47,9 @@ function onRequestFailed(sender, args) {
 function getProfile(user) {
     var executor2 = new SP.RequestExecutor(appWebUrl);
     var listname = "Profiles";
-    var basellUrl = appWebUrl + "/_api/web/lists/getbytitle('" + listname + "')/items";
+    var baseUrl = appWebUrl + "/_api/web/lists/getbytitle('" + listname + "')/items";
     var filterUrl = "?$select=Title,Program,ID&$filter=Title eq '" + user + "'";
-    var fullUrl = basellUrl + filterUrl;
+    var fullUrl = baseUrl + filterUrl;
     console.log(fullUrl);
     var requestHeaders = { "accept": "application/json;odata=verbose" };
 

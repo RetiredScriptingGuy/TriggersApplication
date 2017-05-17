@@ -54,61 +54,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Features\TriggersContent\TriggersContent.feature">
-      <FeatureId>{0200ae2c-dc0a-40cb-bb65-23ceea3baaa2}</FeatureId>
-    </None>
     <None Include="key.snk" />
-    <None Include="List definitions\ACAT\SharePointProjectItem.spdata">
-      <SharePointProjectItemId>{cb93d038-07f9-4b57-99f8-fab927c3a6c6}</SharePointProjectItemId>
-    </None>
-    <None Include="List definitions\Competency\SharePointProjectItem.spdata">
-      <SharePointProjectItemId>{942b4255-03ae-4f9e-9589-2ff96fa042e1}</SharePointProjectItemId>
-    </None>
-    <None Include="List definitions\Events\SharePointProjectItem.spdata">
-      <SharePointProjectItemId>{8719dc82-ede9-42c8-b570-3b8961cb7e65}</SharePointProjectItemId>
-    </None>
-    <None Include="List definitions\Issues\SharePointProjectItem.spdata">
-      <SharePointProjectItemId>{14e32c91-7001-4d85-aa97-0159e7653c32}</SharePointProjectItemId>
-    </None>
-    <None Include="List definitions\Permissions\SharePointProjectItem.spdata">
-      <SharePointProjectItemId>{5c97e003-2bc1-45a7-a858-3c5c7ebf2df3}</SharePointProjectItemId>
-    </None>
-    <None Include="List definitions\Phases\SharePointProjectItem.spdata">
-      <SharePointProjectItemId>{7fe6ff63-1d02-42d9-a4ca-9d8bb3f53513}</SharePointProjectItemId>
-    </None>
-    <None Include="List definitions\Program\SharePointProjectItem.spdata">
-      <SharePointProjectItemId>{14c2315c-00c4-4026-aff5-9ddb6d8fe7aa}</SharePointProjectItemId>
-    </None>
-    <None Include="List definitions\Triggers\SharePointProjectItem.spdata">
-      <SharePointProjectItemId>{fc704ac2-ac95-4577-b810-bd91170665f7}</SharePointProjectItemId>
-    </None>
-    <None Include="List instances\ACAT\SharePointProjectItem.spdata">
-      <SharePointProjectItemId>{28d3da85-286f-4a68-acbf-79fdd8556c27}</SharePointProjectItemId>
-    </None>
-    <None Include="List instances\Competency\SharePointProjectItem.spdata">
-      <SharePointProjectItemId>{cfdd3d43-3469-4b39-8b71-970adce13607}</SharePointProjectItemId>
-    </None>
-    <None Include="List instances\Events\SharePointProjectItem.spdata">
-      <SharePointProjectItemId>{4994814e-b58e-4671-90a9-fdad45ec53fc}</SharePointProjectItemId>
-    </None>
-    <None Include="List instances\Issues\SharePointProjectItem.spdata">
-      <SharePointProjectItemId>{655ee328-a25b-4d99-b6ba-40e33dc6c9c4}</SharePointProjectItemId>
-    </None>
-    <None Include="List instances\Permissions\SharePointProjectItem.spdata">
-      <SharePointProjectItemId>{98195729-0b4b-47f7-92af-024e1617d38e}</SharePointProjectItemId>
-    </None>
-    <None Include="List instances\Phases\SharePointProjectItem.spdata">
-      <SharePointProjectItemId>{b1974786-f5ae-4783-b511-a749a9e3fae8}</SharePointProjectItemId>
-    </None>
-    <None Include="List instances\Program\SharePointProjectItem.spdata">
-      <SharePointProjectItemId>{3355a234-34fa-4e99-8e71-f7cefb25aecc}</SharePointProjectItemId>
-    </None>
-    <None Include="List instances\Triggers\SharePointProjectItem.spdata">
-      <SharePointProjectItemId>{3a3b713b-83a7-483f-b376-6be5a0ecb174}</SharePointProjectItemId>
-    </None>
-    <None Include="Modules\SiteAssets\SharePointProjectItem.spdata">
-      <SharePointProjectItemId>{de00ebde-a583-4406-9bee-55438b40e182}</SharePointProjectItemId>
-    </None>
     <None Include="Modules\SitePages\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{e5c9045b-d5e4-4b17-bbd5-7bd155a5e752}</SharePointProjectItemId>
     </None>
@@ -120,70 +66,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Features\TriggersContent\TriggersContent.Template.xml">
-      <DependentUpon>TriggersContent.feature</DependentUpon>
-    </Content>
-    <Content Include="List definitions\ACAT\Elements.xml" />
-    <Content Include="List definitions\ACAT\Schema.xml" />
-    <Content Include="List definitions\Competency\Elements.xml" />
-    <Content Include="List definitions\Competency\Schema.xml" />
-    <Content Include="List definitions\Events\Elements.xml" />
-    <Content Include="List definitions\Events\Schema.xml" />
-    <Content Include="List definitions\Issues\Elements.xml" />
-    <Content Include="List definitions\Issues\Schema.xml" />
-    <Content Include="List definitions\Permissions\Elements.xml" />
-    <Content Include="List definitions\Permissions\Schema.xml" />
-    <Content Include="List definitions\Phases\Elements.xml" />
-    <Content Include="List definitions\Phases\Schema.xml" />
-    <Content Include="List definitions\Program\Elements.xml" />
-    <Content Include="List definitions\Program\Schema.xml" />
-    <Content Include="List definitions\Triggers\Elements.xml" />
-    <Content Include="List definitions\Triggers\Schema.xml" />
-    <Content Include="List instances\ACAT\Elements.xml" />
-    <Content Include="List instances\Competency\Elements.xml" />
-    <Content Include="List instances\Events\Elements.xml" />
-    <Content Include="List instances\Issues\Elements.xml" />
-    <Content Include="List instances\Permissions\Elements.xml" />
-    <Content Include="List instances\Phases\Elements.xml" />
-    <Content Include="List instances\Program\Elements.xml" />
-    <Content Include="List instances\Triggers\Elements.xml" />
-    <Content Include="Modules\SiteAssets\Elements.xml" />
-    <Content Include="Modules\SiteAssets\TriggersApp\css\AltMasterPage.css" />
-    <Content Include="Modules\SiteAssets\TriggersApp\css\bootstrap.min.css" />
-    <Content Include="Modules\SiteAssets\TriggersApp\css\buttons.bootstrap.min.css" />
-    <Content Include="Modules\SiteAssets\TriggersApp\css\buttons.dataTables.min.css" />
-    <Content Include="Modules\SiteAssets\TriggersApp\css\buttons.jqueryui.css" />
-    <Content Include="Modules\SiteAssets\TriggersApp\css\buttons.jqueryui.min.css" />
-    <Content Include="Modules\SiteAssets\TriggersApp\css\jquery.dataTables.min.css" />
-    <Content Include="Modules\SiteAssets\TriggersApp\css\triggers.css" />
-    <Content Include="Modules\SiteAssets\TriggersApp\css\triggers.old.css" />
-    <Content Include="Modules\SiteAssets\TriggersApp\images\ExcelIcon.png" />
-    <Content Include="Modules\SiteAssets\TriggersApp\images\HelpIcon.png" />
-    <Content Include="Modules\SiteAssets\TriggersApp\images\PrinterIcon.png" />
-    <Content Include="Modules\SiteAssets\TriggersApp\images\sort_asc.png" />
-    <Content Include="Modules\SiteAssets\TriggersApp\images\sort_asc_disabled.png" />
-    <Content Include="Modules\SiteAssets\TriggersApp\images\sort_both.png" />
-    <Content Include="Modules\SiteAssets\TriggersApp\images\sort_desc.png" />
-    <Content Include="Modules\SiteAssets\TriggersApp\images\sort_desc_disabled.png" />
-    <Content Include="Modules\SiteAssets\TriggersApp\images\triggers_1a_dropshadow.png" />
-    <Content Include="Modules\SiteAssets\TriggersApp\js\angular-route.min.js" />
-    <Content Include="Modules\SiteAssets\TriggersApp\js\angular.min.js" />
-    <Content Include="Modules\SiteAssets\TriggersApp\js\bootstrap.min.js" />
-    <Content Include="Modules\SiteAssets\TriggersApp\js\buttons.bootstrap.js" />
-    <Content Include="Modules\SiteAssets\TriggersApp\js\buttons.jqueryui.js" />
-    <Content Include="Modules\SiteAssets\TriggersApp\js\buttons.print.min.js" />
-    <Content Include="Modules\SiteAssets\TriggersApp\js\custom.js" />
-    <Content Include="Modules\SiteAssets\TriggersApp\js\dataTables.buttons.min.js" />
-    <Content Include="Modules\SiteAssets\TriggersApp\js\jquery-ui.min.js" />
-    <Content Include="Modules\SiteAssets\TriggersApp\js\jquery.dataTables.min.js" />
-    <Content Include="Modules\SiteAssets\TriggersApp\js\jquery.json2html.js" />
-    <Content Include="Modules\SiteAssets\TriggersApp\js\jquery.min.js" />
-    <Content Include="Modules\SiteAssets\TriggersApp\js\json2html.js" />
-    <Content Include="Modules\SiteAssets\TriggersApp\js\listMethods.js" />
-    <Content Include="Modules\SiteAssets\TriggersApp\js\moment.js" />
-    <Content Include="Modules\SiteAssets\TriggersApp\js\triggers.js" />
-    <Content Include="Modules\SiteAssets\TriggersApp\js\triggers2.js" />
-    <Content Include="Modules\SiteAssets\TriggersApp\triggers.txt" />
     <Content Include="Modules\SitePages\Acronyms.aspx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -267,6 +149,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Other Imported Files\Triggers.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Features\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

@@ -48,10 +48,10 @@ function getQueryStringParameter(paramToRetrieve) {
 function GetUserInfo(username) {
     var executor2 = new SP.RequestExecutor(appWebUrl);
     var listname = "Profiles";
-    var basellUrl = appWebUrl + "/_api/web/lists/getbytitle('" + listname + "')/items";
+    var baseUrl = appWebUrl + "/_api/web/lists/getbytitle('" + listname + "')/items";
     var selectUrl = "?$select=Title,IsLeadership,PEO,PMA,Program,DisplayName,Competency,Phase,ACAT";
     var filterUrl = "&" + "$filter=Title eq '" + username + "'";
-    var fullUrl = basellUrl + selectUrl + filterUrl;
+    var fullUrl = baseUrl + selectUrl + filterUrl;
     var requestHeaders = { "accept": "application/json;odata=verbose" };
 
     executor2.executeAsync({
@@ -175,8 +175,8 @@ function errorGetUserInfoHandler(data, errCode, errMessage) {
 function LoadPrograms() {
     var executor3 = new SP.RequestExecutor(appWebUrl);
     var listname = "Programs";
-    var basellUrl = appWebUrl + "/_api/web/lists/getbyTitle('" + listname + "')/items";
-    var fullUrl = basellUrl;
+    var baseUrl = appWebUrl + "/_api/web/lists/getbyTitle('" + listname + "')/items";
+    var fullUrl = baseUrl;
     var requestHeaders = { "ACCEPT": "application/json;odata=verbose;charset=utf-8" };
 
     executor3.executeAsync({
@@ -213,8 +213,8 @@ function errorLoadProgramsHandler(data, errCode, errMessage) {
 function loadPEO() {
     var executor4 = new SP.RequestExecutor(appWebUrl);
     var listname = "PEO";
-    var basellUrl = appWebUrl + "/_api/web/lists/getbyTitle('" + listname + "')/items";
-    var fullUrl = basellUrl;
+    var baseUrl = appWebUrl + "/_api/web/lists/getbyTitle('" + listname + "')/items";
+    var fullUrl = baseUrl;
     var requestHeaders = { "ACCEPT": "application/json;odata=verbose;charset=utf-8" };
 
     executor4.executeAsync({
@@ -251,8 +251,8 @@ function peoErrHandler(data, errCode, errMessage) {
 function loadPMA() {
     var executor5 = new SP.RequestExecutor(appWebUrl);
     var listname = "PMA";
-    var basellUrl = appWebUrl + "/_api/web/lists/getbyTitle('" + listname + "')/items";
-    var fullUrl = basellUrl;
+    var baseUrl = appWebUrl + "/_api/web/lists/getbyTitle('" + listname + "')/items";
+    var fullUrl = baseUrl;
     var requestHeaders = { "ACCEPT": "application/json;odata=verbose;charset=utf-8" };
 
     executor5.executeAsync({
@@ -288,8 +288,8 @@ function pmaErrHandler(data, errCode, errMessage) {
 function loadACAT() {
     var executor6 = new SP.RequestExecutor(appWebUrl);
     var listname = "ACAT";
-    var basellUrl = appWebUrl + "/_api/web/lists/getbyTitle('" + listname + "')/items";
-    var fullUrl = basellUrl;
+    var baseUrl = appWebUrl + "/_api/web/lists/getbyTitle('" + listname + "')/items";
+    var fullUrl = baseUrl;
     var requestHeaders = { "ACCEPT": "application/json;odata=verbose;charset=utf-8" };
 
     executor6.executeAsync({
